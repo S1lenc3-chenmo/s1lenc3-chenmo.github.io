@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>高校战役CTF部分writeup</title>
+    <url>/2020/03/11/%E9%AB%98%E6%A0%A1%E6%88%98%E5%BD%B9CTF%E9%83%A8%E5%88%86writeup/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>打了两天的比赛，小做了几道题，不可谓不充实。虽然找不到工作，也要继续学习。</p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="简单的misc"><a href="#简单的misc" class="headerlink" title="简单的misc"></a>简单的misc</h2><p>用010editor打开photo.jpg，在最底部看到zip格式，</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311151648233.png" alt="image-20200311151648233"></p>
+<p>直接改后缀解压，得到摩斯密码，解密是flag.zip的密码，输入后得到base64加密的flag。</p>
+<p>解密即可。flag{Th1s_is_FlaG_you_aRE_rigHT}</p>
+<h2 id="隐藏的信息"><a href="#隐藏的信息" class="headerlink" title="隐藏的信息"></a>隐藏的信息</h2><p>拿到一个残缺的二维码，看这个二维码很别扭，用Stegsolve.jar翻转了颜色之后，看上去舒服多了，然后补定位符，奈何手残，总是补不好，于是放弃，然后我再压缩包右击了一下7z解压，无意发现这个压缩包是假密码，拿到了一个wav文件，使用百度找了好多类似的题，用Audacity分析频谱发现开始和结束有问题，把音量调到最大，开始的部分还是听不到，但是最后可以听出是拨号音，（看过柯南，一下就猜出这是要猜电话号码），结合百度，才发现和DTFM有关。这里给出一篇参考文章：<a href="https://hebin.me/2017/09/10/西普ctf-beyond/" target="_blank" rel="noopener">https://hebin.me/2017/09/10/%E8%A5%BF%E6%99%AEctf-beyond/</a></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153008620.png" alt="image-20200311153008620"></p>
+<p>然后可以得到一串数字187485618521，但是提交不对，感觉还是和那个二维码有关，</p>
+<p>strings命令找到：<img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153154593.png" alt="image-20200311153154593"></p>
+<p>看来要base64加密,最后得出flag{MTg3NDg1NjE4NTIx}</p>
+<h2 id="ez-mem-amp-usb"><a href="#ez-mem-amp-usb" class="headerlink" title="ez_mem&amp;usb"></a>ez_mem&amp;usb</h2><p>从来不刷杂项题，所以都是靠百度做，拿到一个数据pcap文件，分析流量，过滤http协议，找到上传的文件。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153716210.png" alt="image-20200311153716210"></p>
+<p>发现一个40M的数据包，那肯定传文件了，把文件dump出来，直接解压，得到一个vmem文件，百度一波，这是要内存取证，萌新参考：<a href="https://www.cnblogs.com/0x4D75/p/11161822.html" target="_blank" rel="noopener">https://www.cnblogs.com/0x4D75/p/11161822.html</a></p>
+<p>思路是，filescan+grep找到和flag字符匹配的文件，还真有一个flag.img，将flag.img dump出来，然后直接7z解压，需要密码，于是找到内存镜像中的cmd命令，有密码给出。</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 filescan | grep flag</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line"><span class="number">0x0000000001155f90</span>      <span class="number">1</span>      <span class="number">0</span> R--rwd \Device\HarddiskVolume1\Documents <span class="keyword">and</span> Settings\Administrator\flag.img</span><br><span class="line"></span><br><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 dumpfiles -Q 0x1155f90 -D ./output</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line">DataSectionObject <span class="number">0x01155f90</span>   None   \Device\HarddiskVolume1\Documents <span class="keyword">and</span> Settings\Administrator\flag.img</span><br><span class="line"></span><br><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 cmdscan</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line">**************************************************</span><br><span class="line"><span class="symbol">CommandProcess:</span> csrss.exe <span class="symbol">Pid:</span> <span class="number">464</span></span><br><span class="line"><span class="symbol">CommandHistory:</span> <span class="number">0x556bb8</span> <span class="symbol">Application:</span> cmd.exe <span class="symbol">Flags:</span> Allocated, Reset</span><br><span class="line"><span class="symbol">CommandCount:</span> <span class="number">2</span> <span class="symbol">LastAdded:</span> <span class="number">1</span> <span class="symbol">LastDisplayed:</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">FirstCommand:</span> <span class="number">0</span> <span class="symbol">CommandCountMax:</span> <span class="number">50</span></span><br><span class="line"><span class="symbol">ProcessHandle:</span> <span class="number">0x504</span></span><br><span class="line">Cmd <span class="comment">#0 @ 0x3609ea0: passwd:weak_auth_top100</span></span><br><span class="line">Cmd <span class="comment">#1 @ 0x5576d0: start wireshark</span></span><br><span class="line">Cmd <span class="comment">#13 @ 0x9f009f: ??</span></span><br><span class="line">Cmd <span class="comment">#41 @ 0x9f003f: ?\?????????</span></span><br></pre></td></tr></table></figure>
+
+<p>压缩包里是一个usbdata，查了一下这个脚本，解密即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">usb_codes = &#123;</span><br><span class="line">   <span class="number">0x04</span>:<span class="string">"aA"</span>, <span class="number">0x05</span>:<span class="string">"bB"</span>, <span class="number">0x06</span>:<span class="string">"cC"</span>, <span class="number">0x07</span>:<span class="string">"dD"</span>, <span class="number">0x08</span>:<span class="string">"eE"</span>, <span class="number">0x09</span>:<span class="string">"fF"</span>,</span><br><span class="line">   <span class="number">0x0A</span>:<span class="string">"gG"</span>, <span class="number">0x0B</span>:<span class="string">"hH"</span>, <span class="number">0x0C</span>:<span class="string">"iI"</span>, <span class="number">0x0D</span>:<span class="string">"jJ"</span>, <span class="number">0x0E</span>:<span class="string">"kK"</span>, <span class="number">0x0F</span>:<span class="string">"lL"</span>,</span><br><span class="line">   <span class="number">0x10</span>:<span class="string">"mM"</span>, <span class="number">0x11</span>:<span class="string">"nN"</span>, <span class="number">0x12</span>:<span class="string">"oO"</span>, <span class="number">0x13</span>:<span class="string">"pP"</span>, <span class="number">0x14</span>:<span class="string">"qQ"</span>, <span class="number">0x15</span>:<span class="string">"rR"</span>,</span><br><span class="line">   <span class="number">0x16</span>:<span class="string">"sS"</span>, <span class="number">0x17</span>:<span class="string">"tT"</span>, <span class="number">0x18</span>:<span class="string">"uU"</span>, <span class="number">0x19</span>:<span class="string">"vV"</span>, <span class="number">0x1A</span>:<span class="string">"wW"</span>, <span class="number">0x1B</span>:<span class="string">"xX"</span>,</span><br><span class="line">   <span class="number">0x1C</span>:<span class="string">"yY"</span>, <span class="number">0x1D</span>:<span class="string">"zZ"</span>, <span class="number">0x1E</span>:<span class="string">"1!"</span>, <span class="number">0x1F</span>:<span class="string">"2@"</span>, <span class="number">0x20</span>:<span class="string">"3#"</span>, <span class="number">0x21</span>:<span class="string">"4$"</span>,</span><br><span class="line">   <span class="number">0x22</span>:<span class="string">"5%"</span>, <span class="number">0x23</span>:<span class="string">"6^"</span>, <span class="number">0x24</span>:<span class="string">"7&amp;"</span>, <span class="number">0x25</span>:<span class="string">"8*"</span>, <span class="number">0x26</span>:<span class="string">"9("</span>, <span class="number">0x27</span>:<span class="string">"0)"</span>,</span><br><span class="line">   <span class="number">0x2C</span>:<span class="string">"  "</span>, <span class="number">0x2D</span>:<span class="string">"-_"</span>, <span class="number">0x2E</span>:<span class="string">"=+"</span>, <span class="number">0x2F</span>:<span class="string">"[&#123;"</span>, <span class="number">0x30</span>:<span class="string">"]&#125;"</span>,  <span class="number">0x32</span>:<span class="string">"#~"</span>,</span><br><span class="line">   <span class="number">0x33</span>:<span class="string">";:"</span>, <span class="number">0x34</span>:<span class="string">"'\""</span>,  <span class="number">0x36</span>:<span class="string">",&lt;"</span>,  <span class="number">0x37</span>:<span class="string">".&gt;"</span>, <span class="number">0x4f</span>:<span class="string">"&gt;"</span>, <span class="number">0x50</span>:<span class="string">"&lt;"</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">key = [<span class="number">0x09</span>,<span class="number">0x0F</span>,<span class="number">0x04</span>,<span class="number">0x0A</span>,<span class="number">0x2F</span>,<span class="number">0x23</span>,<span class="number">0x26</span>,<span class="number">0x1F</span>,<span class="number">0x27</span>,<span class="number">0x27</span>,<span class="number">0x25</span>,<span class="number">0x20</span>,<span class="number">0x22</span>,<span class="number">0x24</span>,<span class="number">0x25</span>,<span class="number">0x21</span>,<span class="number">0x08</span>,<span class="number">0x06</span>,<span class="number">0x20</span>,<span class="number">0x08</span>,<span class="number">0x07</span>,<span class="number">0x25</span>,<span class="number">0x07</span>,<span class="number">0x1F</span>,<span class="number">0x04</span>,<span class="number">0x23</span>,<span class="number">0x21</span>,<span class="number">0x08</span>,<span class="number">0x24</span>,<span class="number">0x20</span>,<span class="number">0x09</span>,<span class="number">0x08</span>,<span class="number">0x26</span>,<span class="number">0x1E</span>,<span class="number">0x20</span>,<span class="number">0x06</span>,<span class="number">0x27</span>,<span class="number">0x30</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(key)):</span><br><span class="line">    flag += usb_codes[key[i]][<span class="number">0</span>]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{69200835784ec3ed8d2a64e73fe913c0}</p>
+<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1>]]></content>
+      <categories>
+        <category>CTF赛题writeup</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树</title>
+    <url>/2020/03/10/%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="1-二叉树性质"><a href="#1-二叉树性质" class="headerlink" title="1. 二叉树性质"></a>1. 二叉树性质</h3><ul>
+<li>二叉树最多有两个子树。</li>
+<li>二叉树第i层最多有$2^{i-1}$个节点</li>
+<li>深度为k的二叉树至多有$2^k-1$个节点</li>
+<li>对任一二叉树，叶子节点为n0，度为2的节点为n2，则n0=n2+1</li>
+<li>包含n个结点的二叉树的高度至少为$log_2(n+1)$。</li>
+</ul>
+<h3 id="2-二叉树分类"><a href="#2-二叉树分类" class="headerlink" title="2. 二叉树分类"></a>2. 二叉树分类</h3><ul>
+<li>完全二叉树——叶子节点都在最底下两层，最后一层的叶子节点都靠左排列，并且除了最后一层，其他层的节点个数都要达到最大，这种二叉树叫作完全二叉树。</li>
+<li>满二叉树——叶子节点全都在最底层，除了叶子节点之外，每个节点都有左右两个子节点，这种二叉树就叫作满二叉树，他是一种特殊的完全二叉树。</li>
+<li>平衡二叉树——平衡二叉树又被称为AVL树（区别于AVL算法），它是一棵二叉排序树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</li>
+</ul>
+<h3 id="3-二叉树的遍历"><a href="#3-二叉树的遍历" class="headerlink" title="3. 二叉树的遍历"></a>3. 二叉树的遍历</h3><ul>
+<li>前序遍历<pre class="mermaid">graph LR
+结点-->左子树
+左子树-->右子树</pre></li>
+<li>中序遍历  <pre class="mermaid">graph LR
+左子树-->结点
+结点-->右子树</pre></li>
+<li>后序遍历  <pre class="mermaid">graph LR
+左子树-->右子树
+右子树-->结点</pre></li>
+<li>层次遍历  <pre class="mermaid">graph LR
+第一层-->第二层
+第二层-->...
+... -->第K层</pre>
+
+
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android逆向基础</title>
+    <url>/2020/03/10/Android%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>apk是一个压缩文件，后缀改为zip可以解压出来。</p>
+<p><strong>AndroidMainfest.xml</strong></p>
+<p>一些配置清单，名字、版本、权限、引用的库文件等等。找一个apk看看这个文件，就什么都懂了。</p>
+<p><strong>META-INF目录</strong></p>
+<p>存放签名信息，android程序生成release版本的apk需要签名，加密信息应该就保存的这里了。</p>
+<p><strong>res目录</strong></p>
+<p>存放各种资源文件。最终被映射到Android工程中的R文件中，对各种资源会生成对应ID。逆向android主要是找strings.xml，便于定位关键字符串。一般在values文件夹中，layout文件夹是存放的应用界面布局。</p>
+<p><strong>lib目录</strong></p>
+<p>存放依赖的native库文件，.so文件是C/C++写的。可以根据特定目录确定是什么架构的。.so文件在逆向中应用挺多。</p>
+<p><strong>assets目录</strong></p>
+<p>印象不是很深，我在之前CTF题中没有使用过这个目录。和res有点相似。</p>
+<p><strong>resources.arsc</strong></p>
+<p>编译后的二进制资源文件的索引。应该就是程序运行，然后从这个文件根据对应ID找到对应的res资源文件。</p>
+<p><strong>classes.dex文件</strong></p>
+<p>java字节码文件，这个文件很重要，可以用jeb等转换成java源码。说到这就不得不提一下几个文件的转换了。</p>
+<p> <img src="/2020/03/10/Android逆向基础/clipboard-1583806782413.png" alt="img"></p>
+<p>baksmali.jar和smali.jar有时候java自带的老出问题，我是从网上下载的。<a href="https://bitbucket.org/JesusFreke/smali/downloads/" target="_blank" rel="noopener">https://bitbucket.org/JesusFreke/smali/downloads/</a></p>
+<p>当然敲命令有点费事，可以去吾爱的爱盘下载android逆向工具包。</p>
+<p><strong>Activity 的主要方法</strong></p>
+<p><strong>onClick</strong></p>
+<p>CrackMe类型的题目，重点关注这个方法。</p>
+<p><strong>init和onCreate</strong></p>
+<p>Activity创建时的初始化函数</p>
+<p><strong>BuildConfig和R</strong></p>
+<p>编译时自动添加的资源类，不常用</p>
+<p><strong>Native层与so</strong></p>
+<p>Android原生代码，Linux中的执行代码，C/C++写的，底层是ARM汇编，很重要。</p>
+<p><strong>JNI_ONLOAD</strong></p>
+<p>这个函数是Dalvik虚拟机加载库时的初始化函数。</p>
+<p><strong>动态调试Smali代码演示</strong></p>
+<p>使用adb install xxxxxx.apk</p>
+<p>安装apk。</p>
+<p>拖入apk到jeb中，Ctrl+B下断点。</p>
+<p> 使用adb shell am start -D -n com.droider.crackme0201/.MainActivity   让程序处于等待调试状态</p>
+<p>然后点 调试器-&gt;开始</p>
+<p>附加。断点设在点击事件后。</p>
+<p>然后正常执行app，就会在指定断点处断下来。</p>
+<p>可以查看局部变量。</p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard-1583806831184.png" alt="img"></p>
+<p>在VM 终端中可以执行指令：</p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard-1583806844916.png" alt="img"></p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard-1583806852913.png" alt="img"></p>
+<p>还有很多用法，我也不会用。</p>
+<p>判断跳转:</p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard.png" alt="![img](D:/有道笔记/数据/qq20118A67A04314627D0DF4F3B9EFF13F/7d45d1529d4c41eead3e0d46a2c8f067/clipboard.png)"></p>
+<p>用APKIDE修改 if-nez 为 if-eqz。</p>
+<p>APK破解成功。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android动态调试</title>
+    <url>/2020/03/10/Android%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Android动态调试支持"><a href="#Android动态调试支持" class="headerlink" title="Android动态调试支持"></a>Android动态调试支持</h1><ul>
+<li>dalvik实现了JDWP(Java Debug wire Protocol,Java调试有线协议)，可直接使用支持此协议的调试器来调试Android程序。</li>
+<li>dalvik为JDWP的实现加入了DDM(Dalvik Debug Monitor,Dalvik调试监视器)。具体的实现有DDMS(Dalvik Debug Monitor Server,调试监视器服务)和Eclipse ADT插件。</li>
+<li>系统属性ro.debuggable为1时所有程序都会开启调试(adb shell getprop ro.debuggable检查)，若为0，则会判断AndroidManifest.xml中的debuggable属性。</li>
+</ul>
+<h1 id="DDMS的使用"><a href="#DDMS的使用" class="headerlink" title="DDMS的使用"></a>DDMS的使用</h1><p>Logcat、文件浏览、Method Profiling等。</p>
+<p>Logcat视图相当于<code>adb logcat -s com.droider.jnimethods:V</code></p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">adb logcat -s TagName:<span class="keyword">Type</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="定位关键代码"><a href="#定位关键代码" class="headerlink" title="定位关键代码"></a>定位关键代码</h1><h2 id="代码注入法"><a href="#代码注入法" class="headerlink" title="代码注入法"></a>代码注入法</h2><p>通过Log输出定位关键代码，甚至破解程序。</p>
+<h2 id="栈跟踪法"><a href="#栈跟踪法" class="headerlink" title="栈跟踪法"></a>栈跟踪法</h2><figure class="highlight smali"><table><tr><td class="code"><pre><span class="line">java代码：</span><br><span class="line">   <span class="built_in"> new </span>Exception(<span class="string">"print trace"</span>).printStackTrace();</span><br><span class="line">smali代码:</span><br><span class="line">   <span class="built_in"> new-instance </span>v0, <span class="class">Ljava/lang/Exception;</span></span><br><span class="line">   <span class="built_in"> const-string </span>v1, <span class="string">"print trace"</span></span><br><span class="line">   <span class="built_in"> invoke-direct </span>&#123;v0, v1&#125;, <span class="class">Ljava/lang/Exception;</span>-&gt;&lt;init&gt;(<span class="class">Ljava/lang/String;</span>)V</span><br><span class="line">   <span class="built_in"> invoke-virtual </span>&#123;v0&#125;, <span class="class">Ljava/lang/Exception;</span>-&gt;printStackTrace()V</span><br></pre></td></tr></table></figure>
+
+<p>栈跟踪信息是WARN级别的log</p>
+<h2 id="Method-Profiling"><a href="#Method-Profiling" class="headerlink" title="Method Profiling"></a>Method Profiling</h2><p>相当于Ollydbg的trace功能，跟踪信息。</p>
+<p>通过方法设置跟踪的开始和停止：</p>
+<p><img src="/2020/03/10/Android动态调试/image-20200311221443847.png" alt="image-20200311221443847"></p>
+<p>smali代码如下：</p>
+<p><img src="/2020/03/10/Android动态调试/image-20200311221616231.png" alt="image-20200311221616231"></p>
+<p>此方法会在文件下生成trace文件，可以使用SDK目录下的traceview工具打开，使用此方法还需要有SD卡写入权限。</p>
+<h1 id="IDA调试原生程序"><a href="#IDA调试原生程序" class="headerlink" title="IDA调试原生程序"></a>IDA调试原生程序</h1><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">启动android_server文件</span><br><span class="line">转发端口 adb forward tcp:<span class="number">23946</span> tcp:<span class="number">23946</span></span><br><span class="line">设置等待调试 adb <span class="keyword">shell</span> <span class="keyword">am</span> start -D -n 包名/类名</span><br><span class="line">IDA attach进程</span><br><span class="line">jdb附加 jdb -connect <span class="keyword">com</span>.<span class="keyword">sun</span>.jdi.SocketAttach:<span class="built_in">hostname</span>=localhost,port=<span class="number">8700</span></span><br><span class="line">列出进程 <span class="keyword">ps</span> -aux</span><br><span class="line">杀死进程 kill -s <span class="number">9</span> PID (其中-s <span class="number">9</span> 制定了传递给进程的信号是９。强制、尽快终止进程。)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AndroidNDK逆向</title>
+    <url>/2020/03/10/AndroidNDK%E9%80%86%E5%90%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="原生C程序逆向分析"><a href="#原生C程序逆向分析" class="headerlink" title="原生C程序逆向分析"></a>原生C程序逆向分析</h2><p>.plt段主要是用于函数重定位的。<br>.text段就是程序代码段。</p>
+<ul>
+<li>反汇编。<br>  objdump -S filename  </li>
+</ul>
+<p>本以为这节不用记录，感觉都能看懂，汇编看多了就会了，但是竟然发现了惊天大秘密。看下边：<br><img src="/2020/03/10/AndroidNDK逆向/image-20200310102238328.png" alt="image-20200310102238328"><br>一直以为PC是指下一条指令，但是在这里ADDLS这条指令，我发现怎么都不可能按照正常逻辑执行，我郁闷了1个小时，终于找到了源头。<br>[<a href="https://blog.csdn.net/lee244868149/article/details/49488575]" target="_blank" rel="noopener">https://blog.csdn.net/lee244868149/article/details/49488575]</a>  </p>
+<p>PC需要取指、译码、执行三步，每次取指完就指向下一条指令即PC+4。然后取指完后又指向下一条指令，即PC+8。<br><img src="/2020/03/10/AndroidNDK逆向/image-20200310102307647.png" alt="image-20200310102307647"></p>
+<p>所以第一条指令执行的时候，PC=PC+8.</p>
+<h5 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h5><h4 id="编译优化"><a href="#编译优化" class="headerlink" title="编译优化"></a>编译优化</h4><p>gcc -O 可以进行优化。5个等级0,1,2,3,s  </p>
+<h2 id="C-逆向分析"><a href="#C-逆向分析" class="headerlink" title="C++逆向分析"></a>C++逆向分析</h2><p>C++是神，分析不来。。。awsl</p>
+<h2 id="JNI-API逆向分析"><a href="#JNI-API逆向分析" class="headerlink" title="JNI API逆向分析"></a>JNI API逆向分析</h2><p>JNINativeInterface:  </p>
+<pre><code>JNI本地接口，一个接口函数指针表，有JNI接口的函数指针。  </code></pre><p>JNIInvokeInterface:</p>
+<pre><code>JNI调用接口，有3个保留项，5个函数指针。  </code></pre><p><img src="/2020/03/10/AndroidNDK逆向/image-20200310102327161.png" alt="image-20200310102327161"><br>JNIEnv结构体的第一个字段就是JNINativeInterface，IDA分析时不会识别API，将函数的第一个参数类型改为JNIEnv类型就可以识别了，或者导入JNIEnv结构体。<br>对照着结构体看，可以知道IDA中相对寄存器的偏移处就是API函数。  </p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android静态分析</title>
+    <url>/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="IDA破解实例-定位关键代码"><a href="#IDA破解实例-定位关键代码" class="headerlink" title="IDA破解实例-定位关键代码"></a>IDA破解实例-定位关键代码</h3><h5 id="搜索特征字符串"><a href="#搜索特征字符串" class="headerlink" title="搜索特征字符串"></a>搜索特征字符串</h5><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> ctrl+s定位<span class="built_in">string</span>s段</span><br><span class="line"><span class="number">2.</span> alt+t快捷键搜索文本字符串</span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索API"><a href="#搜索API" class="headerlink" title="搜索API"></a>搜索API</h5><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 定位到code段</span><br><span class="line"><span class="number">2.</span> 搜索API名称</span><br></pre></td></tr></table></figure>
+
+<h5 id="搜索方法名"><a href="#搜索方法名" class="headerlink" title="搜索方法名"></a>搜索方法名</h5><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line">在<span class="keyword">Exports</span>窗口中搜索方法名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>if-eqz的opcode是0x38<br>if-nez的opcode是0x39<br>return的opcode是0x0f</p>
+</blockquote>
+<h5 id="修改dex，替换apk中的dex"><a href="#修改dex，替换apk中的dex" class="headerlink" title="修改dex，替换apk中的dex"></a>修改dex，替换apk中的dex</h5><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 使用dexFixer更新checksum</span><br><span class="line"><span class="number">2.</span> 将修改后的dex重新放回apk包里</span><br><span class="line"><span class="number">3.</span> 删除META-INF文件夹</span><br><span class="line"><span class="number">4.</span> 对apk重签名即可安装</span><br></pre></td></tr></table></figure>
+
+<h5 id="终止程序"><a href="#终止程序" class="headerlink" title="终止程序"></a>终止程序</h5><ul>
+<li><p>Context的finish()方法</p>
+</li>
+<li><p>android.os.Process的killProcess()方法</p>
+</li>
+</ul>
+<h3 id="Androguard简单使用"><a href="#Androguard简单使用" class="headerlink" title="Androguard简单使用"></a>Androguard简单使用</h3><ul>
+<li><p><a href="http://androapkinfo.py" target="_blank" rel="noopener">androapkinfo.py</a><br>查看apk信息。包、资源、权限、组件、方法。<br>androapkinfo -i filename</p>
+</li>
+<li><p><a href="http://androaxml.py" target="_blank" rel="noopener">androaxml.py</a><br>解析AndroidManifest.xml文件。<br>androaxml -i filename</p>
+</li>
+<li><p><a href="http://androcsign.py" target="_blank" rel="noopener">androcsign.py</a><br>收集签名到数据库中，使用前需要为apk编写sign文件。</p>
+</li>
+<li><p><a href="http://androdd.py" target="_blank" rel="noopener">androdd.py</a><br>生成apk每个类的方法的调用流程图。<br>androdd -i filename -o dirname -d -f PNG<br>-d 是指定生成dot图形文件。</p>
+</li>
+<li><p><a href="http://androdiff.py" target="_blank" rel="noopener">androdiff.py</a><br>比较两个apk文件的差异。<br>androdiff -i filename1 filename2</p>
+</li>
+<li><p><a href="http://androdump.py" target="_blank" rel="noopener">androdump.py</a><br>dump一个Linux进程。<br>androdump -i pid</p>
+</li>
+<li><p><a href="http://androgexf.py" target="_blank" rel="noopener">androgexf.py</a><br>生成一个gexf图形文件。用Gephi查看。<br>androgexf -i filename1 -o filename2</p>
+</li>
+<li><p><a href="http://androlyze.py" target="_blank" rel="noopener">androlyze.py</a><br>提供交互环境静态分析android程序。</p>
+</li>
+<li><p><a href="http://andromercury.py" target="_blank" rel="noopener">andromercury.py</a><br>Mercury工具的框架。</p>
+</li>
+<li><p><a href="http://androrisk.py" target="_blank" rel="noopener">androrisk.py</a><br>评估apk文件中的潜在方法。<br>androrisk -m -i filename<br>m 表示需要分析每一个方法。</p>
+</li>
+<li><p><a href="http://androsign.py" target="_blank" rel="noopener">androsign.py</a><br>检测签名是否存于数据库，与androcsign作用相反。<br><img src="/2020/03/10/Android静态分析/image-20200310102455464.png" alt="image-20200310102455464"></p>
+</li>
+<li><p><a href="http://androsim.py" target="_blank" rel="noopener">androsim.py</a><br>计算两个apk文件的相似度。<br>androsim -i filename1 filename2</p>
+</li>
+<li><p><a href="http://androxgmml.py" target="_blank" rel="noopener">androxgmml.py</a><br>生成jar/class/apk/dex文件的控制流程及功能调度图，输出格式为xgmml。<br>androxgmml -i filename -o *.xgmml</p>
+</li>
+<li><p><a href="http://apkviewer.py" target="_blank" rel="noopener">apkviewer.py</a><br>为每一个类生成一个独立的graphml图形文件。<br>apkviewer -i filename -o xxx</p>
+</li>
+</ul>
+<h3 id="androlyze的简单使用"><a href="#androlyze的简单使用" class="headerlink" title="androlyze的简单使用"></a>androlyze的简单使用</h3><p>androlyze -s //获取交互命令行模式</p>
+<ol>
+<li>获取apk文件对象<br>a = APK(“filename”)</li>
+<li>获取dex文件对象<br>d = DalvikVMFormat(a.get_dex())</li>
+<li>获取分析结果对象<br>dx = VMAnalysis(d)</li>
+<li>三合一指令<br>a, d, dx = APK(“filename”, decompiler=”dad”)<br>decompiler指定反编译器名称。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+</search>
