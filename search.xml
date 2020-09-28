@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>C基础补充</title>
+    <url>/2020/07/29/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>从零开始，注重基础，心无旁骛。</p>
+<h1 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h1><p><img src="/2020/07/29/C基础补充/image-20200729180415547.png" alt="image-20200729180415547"></p>
+<h3 id="溢出"><a href="#溢出" class="headerlink" title="溢出"></a>溢出</h3><p>使用C语言的宏可以得到各类型的最大值，要包含limits.h库文件。</p>
+<p>浮点数的最大值要包含float.h。</p>
+<p>math.h库有数学公式。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>scanf遇到空白停止读取。</p>
+<p>sizeof计算存储单元，包括<code>\0</code>，strlen计算实际长度。</p>
+<p>对于类型需要sizeof(char),对于特定量sizeof name即可，建议都加圆括号，不会出错。</p>
+<p>const限定符修饰的是变量，不是常量，只是变量只读，不可更改。</p>
+<p><img src="/2020/07/29/C基础补充/image-20200729181326723.png" alt="image-20200729181326723"></p>
+<p><img src="/2020/07/29/C基础补充/image-20200729231246876.png" alt="image-20200729231246876"></p>
+<p><img src="/2020/07/29/C基础补充/image-20200729231610571.png" alt="image-20200729231610571"></p>
+<p><img src="/2020/07/29/C基础补充/image-20200729231628042.png" alt="image-20200729231628042"></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>报错、踩坑记录</title>
+    <url>/2020/07/16/%E6%8A%A5%E9%94%99%E3%80%81%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="IDA-python-插件安装"><a href="#IDA-python-插件安装" class="headerlink" title="IDA-python 插件安装"></a>IDA-python 插件安装</h1><ul>
+<li>yara-python安装命令 <code>python2 -m pip install yara-python==3.11.0</code>,因为只有3.11的轮子支持python2的而且是windows的版本。</li>
+</ul>
+<h1 id="VScode和WSL搭建C开发环境"><a href="#VScode和WSL搭建C开发环境" class="headerlink" title="VScode和WSL搭建C开发环境"></a>VScode和WSL搭建C开发环境</h1><ol>
+<li><p>首先安装wsl，微软商店就有。</p>
+</li>
+<li><p>安装VScode。</p>
+</li>
+<li><p>换源</p>
+<p><code>sudo vim /etc/apt/source.list</code></p>
+</li>
+<li><p>更新ubuntu软件，<code>sudo apt-get update</code></p>
+</li>
+<li><p>安装gcc，gdb等工具</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install build-essential</span><br><span class="line">sudo apt install gdb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在VScode中安装wsl扩展插件。</p>
+</li>
+<li><p>在VScode中安装C/C++插件。</p>
+</li>
+<li><p>安装code runner插件。</p>
+</li>
+<li><p>要将VScode的目录bin添加到环境变量</p>
+</li>
+<li><p>code runner插件中有run in terminal</p>
+</li>
+<li><p>设置文件执行命令，文件生成目录，在code runner插件的executor map中设置。</p>
+</li>
+</ol>
+<h1 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h1><ol>
+<li><p>设置右键菜单</p>
+<figure class="highlight taggerscript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line"> reg.exe add "HKEY_CLASSES_ROOT<span class="symbol">\D</span>irectory<span class="symbol">\B</span>ackground<span class="symbol">\s</span>hell<span class="symbol">\w</span>t" /f /ve /d "Terminal"</span><br><span class="line"> reg.exe add "HKEY_CLASSES_ROOT<span class="symbol">\D</span>irectory<span class="symbol">\B</span>ackground<span class="symbol">\s</span>hell<span class="symbol">\w</span>t" /f /v "Icon" /t REG_EXPAND_SZ /d "<span class="symbol">\"</span>C:<span class="symbol">\U</span>sers<span class="symbol">\S</span>1lenc3<span class="symbol">\P</span>ictures<span class="symbol">\S</span>aved Pictures<span class="symbol">\t</span>erminal.ico""</span><br><span class="line"></span><br><span class="line"> reg.exe add "HKEY_CLASSES_ROOT<span class="symbol">\D</span>irectory<span class="symbol">\B</span>ackground<span class="symbol">\s</span>hell<span class="symbol">\w</span>t<span class="symbol">\c</span>ommand" /f /ve /t REG_EXPAND_SZ /d "<span class="symbol">\"</span><span class="variable">%LOCALAPPDATA%</span><span class="symbol">\M</span>icrosoft<span class="symbol">\W</span>indowsApps<span class="symbol">\w</span>t.exe<span class="symbol">\"</span>"</span><br><span class="line"></span><br><span class="line"> pause</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>日常记录</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>二进制程序的保护措施</title>
+    <url>/2020/04/11/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%8E%AA%E6%96%BD/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>参考大佬博客：<a href="http://blog.eonew.cn/archives/222" target="_blank" rel="noopener">http://blog.eonew.cn/archives/222</a></p>
+<h1 id="ASLR"><a href="#ASLR" class="headerlink" title="ASLR"></a>ASLR</h1><p>ASLR（地址随机化）是一种针对缓冲区溢出的安全保护技术，通过对堆、栈、共享库映射等线性区布局的随机化，通过增加攻击者预测目的地址的难度，防止攻击者直接定位攻击代码位置，达到阻止溢出攻击的目的。<br>但是，地址随机化不是对所有模块和内存区都进行随机化！虽然libc、栈、堆的加载位置被随机化，但主镜像不会。</p>
+<p>Linux检查是否开启ASLR，命令：</p>
+<p><code>cat /proc/sys/kernel/randomize_va_space</code></p>
+<p>如果/proc/sys/kernel/randomize_va_space里的值为0时，则表示ASLR关闭。</p>
+<p>可用下面的命令手动关闭：</p>
+<p><code>echo -n &quot;0&quot; &gt; /proc/sys/kernel/randomize_va_space</code>      -n表示不输出换行</p>
+<p>Windows10强制开启ALSR，可以通过更改PE文件头里的Optional Header结构体里的DLL Characteristics字段，将DLL Characteristics字段的第7位设置为0即可关闭栈的ASLR，但是系统动态库的ALSR是强制开启的。</p>
+<h1 id="DEP"><a href="#DEP" class="headerlink" title="DEP"></a>DEP</h1><p>数据执行保护，默认栈的权限是可读、可写、不可执行。</p>
+<p>gcc编译时通过参数<code>-z execstack</code>关闭该保护，<code>-z noexecstack</code>开启该保护。（-z 传参链接器）</p>
+<h1 id="PIE"><a href="#PIE" class="headerlink" title="PIE"></a>PIE</h1><p>PIE(position-independent executable, 地址无关可执行文件)技术就是一个针对代码段.text, 数据段.*data，.bss等固定地址的一个防护技术。同ASLR一样，应用了PIE的程序会在每次加载时都变换加载基址。</p>
+<p>gcc编译时参数<code>-fpie -pie</code>开启PIE，-<code>no-pie</code>关闭PIE。</p>
+<h1 id="Stack-Guard"><a href="#Stack-Guard" class="headerlink" title="Stack Guard"></a>Stack Guard</h1><p>编译器对栈溢出的一种保护机制，在函数执行时，先在栈上放置一个随机标识符，函数返回前会先检查标识符是否被修改，如果被修改则直接触发中断来中止程序，可以有效的防止栈溢出攻击。</p>
+<p>gcc编译时传参<code>-fno-stack-protector</code> 就可以关闭 Stack Guard（CANARY）</p>
+<h1 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h1><p>relro 是一种用于加强对 binary 数据段的保护的技术。relro 分为 partial relro 和 full relro。参数 -z norelro 是关闭RELRO保护。</p>
+<p><strong>Partial RELRO</strong><br>现在gcc 默认编译就是 partial relro，参数是<code>-z relro</code><br>部分区块（比如：<code>.init_array .fini_array .jcr .dynamic .got</code>)在被动态装载（初始化）后，就被标记为只读区块。<br><strong>Full RELRO</strong><br>gcc编译参数是<code>-z relro -z now</code><br>拥有 Partial RELRO 的所有特性,所有导入的符号都在 startup time 被解析</p>
+<h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>还有一些保护，因为太菜，还没遇到过，想了解，可直接传送至开头博客。</p>
+]]></content>
+      <categories>
+        <category>Pwn</category>
+      </categories>
+      <tags>
+        <tag>Pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux-ELF文件学习</title>
+    <url>/2020/04/01/Linux-%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h1><p>先从目标文件说起，编译器编译源码之后的就是目标文件，目标文件除了没有链接库，格式和ELF相同。</p>
+<p>目标文件中包括链接是所需的信息，如符号表、调试信息、字符串等。以“段”的形式存储。</p>
+<p>机器指令通常放在代码段<code>.text</code>或<code>.code</code>。</p>
+<p>初始化的全局变量和局部静态变量放在数据段<code>.data</code>。</p>
+<p>未初始化的全局变量和局部静态变量放在数据段<code>.bss</code>。</p>
+<p><code>gcc -c SimpleSection.c</code> gcc -c 是 只编译不链接，得到.o文件。</p>
+<p><img src="/2020/04/01/Linux-文件/image-20200401225316230.png" alt="image-20200401225316230"></p>
+<p><img src="/2020/04/01/Linux-文件/image-20200401230031389.png" alt="image-20200401230031389"></p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.rodata</span> <span class="comment">//只读数据段</span></span><br><span class="line"><span class="selector-class">.comment</span> <span class="comment">//注释信息段</span></span><br><span class="line"><span class="selector-class">.note</span><span class="selector-class">.GNU-stack</span> <span class="comment">//堆栈提示段</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/04/01/Linux-文件/image-20200401230420911.png" alt="image-20200401230420911"></p>
+<p><code>dec 表示三个段长度之和的十进制，hex 是十六进制</code>。</p>
+<h2 id="代码段"><a href="#代码段" class="headerlink" title="代码段"></a>代码段</h2><p><code>objdump -s -d SimpleSection.o</code></p>
+<p>-s 以16进制打印段内容  -d 指令反汇编</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="attribute">SimpleSection.o</span>:     file format elf32-i386</span><br><span class="line"></span><br><span class="line">Contents of section .text:</span><br><span class="line"> 0000 5589e583 ec188b45 08894424 04c70424  U......E..D$...$</span><br><span class="line"> 0010 00000000 e8fcffff ffc9c355 89e583e4  ...........U....</span><br><span class="line"> 0020 f083ec20 c7442418 01000000 8b150400  ... .D$.........</span><br><span class="line"> 0030 0000a100 00000001 d0034424 18034424  ..........D$..D$</span><br><span class="line"> 0040 1c890424 e8fcffff ff8b4424 18c9c3    ...$......D$... </span><br><span class="line">Contents of section .data:</span><br><span class="line"> 0000 54000000 55000000                    T...U...        </span><br><span class="line">Contents of section .rodata:</span><br><span class="line"> 0000 25640a00                             %d..            </span><br><span class="line">Contents of section .comment:</span><br><span class="line"> 0000 00474343 3a202855 62756e74 752f4c69  .GCC: (Ubuntu/Li</span><br><span class="line"> 0010 6e61726f 20342e36 2e332d31 7562756e  naro 4.6.3-1ubun</span><br><span class="line"> 0020 74753529 20342e36 2e3300             tu5) 4.6.3.     </span><br><span class="line">Contents of section .eh_frame:</span><br><span class="line"> 0000 14000000 00000000 017a5200 017c0801  .........zR..|..</span><br><span class="line"> 0010 1b0c0404 88010000 1c000000 1c000000  ................</span><br><span class="line"> 0020 00000000 1b000000 00410e08 8502420d  .........A....B.</span><br><span class="line"> 0030 0557c50c 04040000 1c000000 3c000000  .W..........&lt;...</span><br><span class="line"> 0040 1b000000 34000000 00410e08 8502420d  ....4....A....B.</span><br><span class="line"> 0050 0570c50c 04040000                    .p......        </span><br><span class="line"></span><br><span class="line">Disassembly of section .text:</span><br><span class="line"></span><br><span class="line">00000000 &lt;func1&gt;:</span><br><span class="line">   0:	55                   	push   %ebp</span><br><span class="line">   1:	89 e5                	mov    %esp,%ebp</span><br><span class="line">   3:	83 ec 18             	sub    $0x18,%esp</span><br><span class="line">   6:	8b 45 08             	mov    0x8(%ebp),%eax</span><br><span class="line">   9:	89 44 24 04          	mov    %eax,0x4(%esp)</span><br><span class="line">   d:	c7 04 24 00 00 00 00 	movl   $0x0,(%esp)</span><br><span class="line">  14:	e8 fc ff ff ff       	call   15 &lt;func1+0x15&gt;</span><br><span class="line">  19:	c9                   	leave  </span><br><span class="line">  1a:	c3                   	ret    </span><br><span class="line"></span><br><span class="line">0000001b &lt;main&gt;:</span><br><span class="line">  1b:	55                   	push   %ebp</span><br><span class="line">  1c:	89 e5                	mov    %esp,%ebp</span><br><span class="line">  1e:	83 e4 f0             	and    $0xfffffff0,%esp</span><br><span class="line">  21:	83 ec 20             	sub    $0x20,%esp</span><br><span class="line">  24:	c7 44 24 18 01 00 00 	movl   $0x1,0x18(%esp)</span><br><span class="line">  2b:	00 </span><br><span class="line">  2c:	8b 15 04 00 00 00    	mov    0x4,%edx</span><br><span class="line">  32:	a1 00 00 00 00       	mov    0x0,%eax</span><br><span class="line">  37:	01 d0                	add    %edx,%eax</span><br><span class="line">  39:	03 44 24 18          	add    0x18(%esp),%eax</span><br><span class="line">  3d:	03 44 24 1c          	add    0x1c(%esp),%eax</span><br><span class="line">  41:	89 04 24             	mov    %eax,(%esp)</span><br><span class="line">  44:	e8 fc ff ff ff       	call   45 &lt;main+0x2a&gt;</span><br><span class="line">  49:	8b 44 24 18          	mov    0x18(%esp),%eax</span><br><span class="line">  4d:	c9                   	leave  </span><br><span class="line">  4e:	c3                   	ret</span><br></pre></td></tr></table></figure>
+
+<p>-x 可打印符号表</p>
+<h2 id="其他段"><a href="#其他段" class="headerlink" title="其他段"></a>其他段</h2><p>各个段的功能说明。</p>
+<p><img src="/2020/04/01/Linux-文件/image-20200402214117791.png" alt="image-20200402214117791"></p>
+<p>objcopy可以将二进制文件、音频等文件作为目标文件的一个段。</p>
+<p>自定义段 :<code>__attribute__((section(&quot;name&quot;)))</code>。</p>
+<h1 id="ELF文件结构描述"><a href="#ELF文件结构描述" class="headerlink" title="ELF文件结构描述"></a>ELF文件结构描述</h1><p>ELF基本结构图：</p>
+<p><img src="/2020/04/01/Linux-文件/image-20200402214917762.png" alt="image-20200402214917762"></p>
+<p>ELF文件与段有关的重要结构是“段表”。</p>
+<h2 id="文件头"><a href="#文件头" class="headerlink" title="文件头"></a>文件头</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">j1nx@j1nxu3-pc:~/work$ readelf -h SimpleSection.o</span><br><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32</span><br><span class="line">  Data:                              2's complement, little endian</span><br><span class="line">  Version:                           1 (current)</span><br><span class="line">  OS/ABI:                            UNIX - System V</span><br><span class="line">  ABI Version:                       0</span><br><span class="line">  Type:                              REL (Relocatable file)</span><br><span class="line">  Machine:                           Intel 80386</span><br><span class="line">  Version:                           0x1</span><br><span class="line">  Entry point address:               0x0</span><br><span class="line">  <span class="keyword">Start</span> <span class="keyword">of</span> program headers:          <span class="number">0</span> (<span class="keyword">bytes</span> <span class="keyword">into</span> <span class="keyword">file</span>)</span><br><span class="line">  <span class="keyword">Start</span> <span class="keyword">of</span> <span class="keyword">section</span> headers:          <span class="number">372</span> (<span class="keyword">bytes</span> <span class="keyword">into</span> <span class="keyword">file</span>)</span><br><span class="line">  Flags:                             <span class="number">0x0</span></span><br><span class="line">  <span class="keyword">Size</span> <span class="keyword">of</span> this header:               <span class="number">52</span> (<span class="keyword">bytes</span>)</span><br><span class="line">  <span class="keyword">Size</span> <span class="keyword">of</span> program headers:           <span class="number">0</span> (<span class="keyword">bytes</span>)</span><br><span class="line">  <span class="built_in">Number</span> <span class="keyword">of</span> program headers:         <span class="number">0</span></span><br><span class="line">  <span class="keyword">Size</span> <span class="keyword">of</span> <span class="keyword">section</span> headers:           <span class="number">40</span> (<span class="keyword">bytes</span>)</span><br><span class="line">  <span class="built_in">Number</span> <span class="keyword">of</span> <span class="keyword">section</span> headers:         <span class="number">13</span></span><br><span class="line">  <span class="keyword">Section</span> header <span class="keyword">string</span> <span class="keyword">table</span> <span class="keyword">index</span>: <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Magic:</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">前<span class="number">4</span>个字节:魔数</span><br><span class="line">第<span class="number">5</span>个字节:表示ELF文件类  #<span class="number">0</span> 无效文件; <span class="number">1</span> <span class="number">32</span>位文件; <span class="number">2</span> <span class="number">64</span>位文件</span><br><span class="line">第<span class="number">6</span>个字节:字节序 		 #<span class="number">0</span> 大端序; <span class="number">1</span> 小端序</span><br><span class="line">第<span class="number">7</span>个字节:ELF主版本号    #一般是<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>文件类型 Type:</strong></p>
+<p><img src="/2020/04/01/Linux-文件/image-20200402220224868.png" alt="image-20200402220224868"></p>
+<p><strong>机器类型 Machine:</strong> </p>
+<p><img src="/2020/04/01/Linux-文件/image-20200402220328247.png" alt="image-20200402220328247"></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android系统攻击与防范</title>
+    <url>/2020/03/20/Android%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="手机ROOT"><a href="#手机ROOT" class="headerlink" title="手机ROOT"></a>手机ROOT</h1><p>指用户获得ROOT权限，即最高权限。（我要吐槽，我把红米ROOT后，也就那么一点点权限，很多事情都不做，骗子。）</p>
+<h2 id="ROOT后的安全隐患"><a href="#ROOT后的安全隐患" class="headerlink" title="ROOT后的安全隐患"></a>ROOT后的安全隐患</h2><ul>
+<li>可能导致误删造成系统不稳定</li>
+<li>病毒入侵，自己拥有root权限，攻击者也可以拥有，所以病毒更容易入侵。</li>
+<li>隐私数据暴露，root权限可直接读文件，数据容易暴露</li>
+</ul>
+<h2 id="ROOT原理"><a href="#ROOT原理" class="headerlink" title="ROOT原理"></a>ROOT原理</h2><p>我才知道，很多root工具是利用了Android原本的漏洞，一直以为是专门预留的…….利用提权漏洞进行root提权。</p>
+<p>可以下载Xray for Android 是否可以通过漏洞获取root权限。</p>
+<p>su与superuser.apk协作对root权限进行管理。</p>
+<h1 id="Android权限攻击"><a href="#Android权限攻击" class="headerlink" title="Android权限攻击"></a>Android权限攻击</h1><h2 id="权限检查机制"><a href="#权限检查机制" class="headerlink" title="权限检查机制"></a>权限检查机制</h2><p>使用特定权限，需要在AndroidManifest中设置。</p>
+<h2 id="串谋权限攻击"><a href="#串谋权限攻击" class="headerlink" title="串谋权限攻击"></a>串谋权限攻击</h2><p>通过其他程序的Android组件突破权限限制。</p>
+<h2 id="权限攻击检测"><a href="#权限攻击检测" class="headerlink" title="权限攻击检测"></a>权限攻击检测</h2><p>Mercury可批量检测权限攻击组件。</p>
+<h1 id="Android组件安全"><a href="#Android组件安全" class="headerlink" title="Android组件安全"></a>Android组件安全</h1><h2 id="Activity安全"><a href="#Activity安全" class="headerlink" title="Activity安全"></a>Activity安全</h2><p>首先看<code>android:exported</code>是否可导出。</p>
+<p>允许特定程序需要使用<code>android:permission</code>：</p>
+<p><img src="/2020/03/20/Android系统攻击与防范/image-20200324215326188.png" alt="image-20200324215326188"></p>
+<p>如果要访问带有<code>android:permission</code>的Activuty，需要在AndroidManifest中声明权限：</p>
+<p><img src="/2020/03/20/Android系统攻击与防范/image-20200324215426533.png" alt="image-20200324215426533"></p>
+<h2 id="Broadcast-Receiver安全"><a href="#Broadcast-Receiver安全" class="headerlink" title="Broadcast Receiver安全"></a>Broadcast Receiver安全</h2><p>一般来说，一个广播可以被相应的Action接收，可能造成广播被窃取。</p>
+<p>可以通过intent指定某个Android组件或类接收广播。</p>
+<h2 id="Service安全"><a href="#Service安全" class="headerlink" title="Service安全"></a>Service安全</h2><p>service在后台运行，可能发生如下安全问题：</p>
+<p><img src="/2020/03/20/Android系统攻击与防范/image-20200324220934330.png" alt="image-20200324220934330"></p>
+<p>可通过<code>android:exported</code>和<code>android:permission</code>限制权限。</p>
+<h2 id="Content-Provider"><a href="#Content-Provider" class="headerlink" title="Content Provider"></a>Content Provider</h2><p>内容提供者，用于程序之间的数据交换。</p>
+<p>要限制其读写等权限，否则可能会存在串谋权限攻击。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android软件的反破解技术</title>
+    <url>/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Android逆向可以通过四个步骤：反编译、静态分析、动态调试、重编译。</p>
+<h1 id="对抗反编译"><a href="#对抗反编译" class="headerlink" title="对抗反编译"></a>对抗反编译</h1><h2 id="如何对抗反编译工具"><a href="#如何对抗反编译工具" class="headerlink" title="如何对抗反编译工具"></a>如何对抗反编译工具</h2><p>寻找反编译工具的缺陷，使其反编译失败。</p>
+<h3 id="阅读反编译工具源码"><a href="#阅读反编译工具源码" class="headerlink" title="阅读反编译工具源码"></a>阅读反编译工具源码</h3><p>需要较强的代码分析能力</p>
+<h3 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h3><p>通过脚本测试大量apk，查找反编译工具的缺陷</p>
+<h2 id="对抗dex2jar"><a href="#对抗dex2jar" class="headerlink" title="对抗dex2jar"></a>对抗dex2jar</h2><p>dex2jar可将dex文件转换为jar文件。</p>
+<h1 id="对抗静态分析"><a href="#对抗静态分析" class="headerlink" title="对抗静态分析"></a>对抗静态分析</h1><h2 id="代码混淆技术"><a href="#代码混淆技术" class="headerlink" title="代码混淆技术"></a>代码混淆技术</h2><p>使用ProGuard进行混淆。</p>
+<ol>
+<li>在project.properties文件中添加<code>proguard.config=proguard.cfg</code>。</li>
+<li>在proguard.cfg中设置需要混淆和保留的类和方法。</li>
+</ol>
+<p>现在在AS里会有这个文件：</p>
+<p><img src="/2020/03/18/Android软件的反破解技术/image-20200319161948039.png" alt="image-20200319161948039"></p>
+<p>配置 build.gradle,</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">release &#123;</span><br><span class="line">            <span class="comment">// 不显示log</span></span><br><span class="line">            buildConfigField <span class="string">"boolean"</span>, <span class="string">"LOG_DEBUG"</span>, <span class="string">"false"</span></span><br><span class="line">            <span class="comment">// 混淆</span></span><br><span class="line">            minifyEnabled <span class="literal">true</span></span><br><span class="line">            <span class="comment">// Zipalign优化</span></span><br><span class="line">            zipAlignEnabled <span class="literal">true</span></span><br><span class="line">            <span class="comment">// 移除无用的resource</span></span><br><span class="line">            shrinkResources <span class="literal">true</span></span><br><span class="line">            <span class="comment">// 混淆配置</span></span><br><span class="line">            proguardFiles get<span class="constructor">DefaultProguardFile('<span class="params">proguard</span>-<span class="params">android</span>.<span class="params">txt</span>')</span>, 'proguard-rules.pro'</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我用debug模式混淆的时候，apk打不开，release版的成功了。</p>
+<h3 id="proguard"><a href="#proguard" class="headerlink" title="proguard"></a>proguard</h3><p>proguard有以下功能：</p>
+<ul>
+<li>压缩(Shrink)：检测并移除代码中无用的类、字段、方法和特性（Attribute）。</li>
+<li>优化(Optimize)：对字节码进行优化，移除无用的指令。</li>
+<li>混淆(Obfuscate)：使用a，b，c，d这样简短而无意义的名称，对类、字段和方法进行重命名。</li>
+<li>预检(Preveirfy)：在Java平台上对处理后的代码进行预检，确保加载的class文件是可执行的。</li>
+</ul>
+<p>常用配置</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span> 公共 <span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#指定代码的压缩级别</span></span><br><span class="line">-optimizationpasses <span class="number">5</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 混淆时所采用的算法</span></span><br><span class="line">-optimizations !code<span class="regexp">/simplification/arithmetic,!field/</span>*,!<span class="class"><span class="keyword">class</span>/<span class="title">merging</span>/*</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#记录生成的日志数据,gradle build时在本项目根目录输出</span></span><br><span class="line"><span class="comment">#apk 包内所有 class 的内部结构</span></span><br><span class="line">-dump class_files.txt</span><br><span class="line"><span class="comment">#未混淆的类和成员</span></span><br><span class="line">-printseeds seeds.txt</span><br><span class="line"><span class="comment">#列出从 apk 中删除的代码</span></span><br><span class="line">-printusage unused.txt</span><br><span class="line"><span class="comment">#混淆前后的映射</span></span><br><span class="line">-printmapping mapping.txt</span><br><span class="line"> </span><br><span class="line"><span class="comment">#移除log代码</span></span><br><span class="line">-assumenosideeffects <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">util</span>.<span class="title">Log</span> &#123;</span></span><br><span class="line">    public static *** v(...);</span><br><span class="line">    public static *** i(...);</span><br><span class="line">    public static *** d(...);</span><br><span class="line">    public static *** w(...);</span><br><span class="line">    public static *** e(...);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆反射用到的类</span></span><br><span class="line">-keepattributes Signature</span><br><span class="line">-keepattributes EnclosingMethod</span><br><span class="line"> </span><br><span class="line"><span class="comment">#保持继承自系统类的class不被混淆</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Activity</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Application</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Service</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">content</span>.<span class="title">BroadcastReceiver</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">content</span>.<span class="title">ContentProvider</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">backup</span>.<span class="title">BackupAgentHelper</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">preference</span>.<span class="title">Preference</span></span></span><br><span class="line">-keep interface android.support.v4.app.** &#123; *; &#125;</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v4</span>.** &#123; *; &#125;</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v4</span>.**</span></span><br><span class="line">-keep interface android.support.v7.app.** &#123; *; &#125;</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v7</span>.** &#123; *; &#125;</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v7</span>.**</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Fragment</span></span></span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.**&#123;*;&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆Serializable接口的子类中指定的某些成员变量和方法</span></span><br><span class="line">-keepclassmembers <span class="class"><span class="keyword">class</span> * <span class="title">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> &#123;</span></span><br><span class="line">    static final long serialVersionUID;</span><br><span class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</span><br><span class="line">    private void writeObject(java.io.ObjectOutputStream);</span><br><span class="line">    private void readObject(java.io.ObjectInputStream);</span><br><span class="line">    java.lang.Object writeReplace();</span><br><span class="line">    java.lang.Object readResolve();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span> Module自定义 <span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span> 不混淆引用的jar <span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆butterknife</span></span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    @butterknife.* &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    @butterknife.* &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-dontwarn butterknife.internal.**</span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆AndroidBootstrap</span></span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">beardedhen</span>.<span class="title">androidbootstrap</span>.**&#123;*;&#125;</span></span><br><span class="line">-dontwarn com.beardedhen.androidbootstrap.**</span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆应用宝自更新jar</span></span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">qq</span>.**</span></span><br><span class="line">-dontwarn com.qq.**</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">tencent</span>.**</span></span><br><span class="line">-dontwarn com.tencent.**</span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span> 保持自定义控件不被混淆 <span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context);</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int, int);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span> 项目内部类的混淆配置 <span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆整个包</span></span><br><span class="line"><span class="comment">#-keep class com.test.test.**&#123;*;&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆对外接口的public类名和成员名，否则外部无法调用</span></span><br><span class="line"><span class="comment">#-keep public interface com.test.test.**&#123;*;&#125;</span></span><br><span class="line"><span class="comment">#-keep public enum com.test.test.**&#123;*;&#125;</span></span><br><span class="line"><span class="comment">#-keep public class com.test.test.**&#123;</span></span><br><span class="line"><span class="comment">#    public *;</span></span><br><span class="line"><span class="comment">#&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#忽略项目中其他Module的警告 ############</span></span><br><span class="line"><span class="comment">#-dontwarn com.test.test.**</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://blog.csdn.net/wangwangli6/article/details/79800520" target="_blank" rel="noopener">https://blog.csdn.net/wangwangli6/article/details/79800520</a></p>
+<h2 id="NDK保护"><a href="#NDK保护" class="headerlink" title="NDK保护"></a>NDK保护</h2><p>使用NDK开发可增加逆向难度。</p>
+<h2 id="外壳保护"><a href="#外壳保护" class="headerlink" title="外壳保护"></a>外壳保护</h2><p>加壳加固。</p>
+<h1 id="对抗动态调试"><a href="#对抗动态调试" class="headerlink" title="对抗动态调试"></a>对抗动态调试</h1><h2 id="检测调试器"><a href="#检测调试器" class="headerlink" title="检测调试器"></a>检测调试器</h2><p>通过检查debuggable的值是否被修改过判断是否被调试。</p>
+<p><img src="/2020/03/18/Android软件的反破解技术/image-20200319163846893.png" alt="image-20200319163846893"></p>
+<p>检测调试器是否连接：</p>
+<p><img src="/2020/03/18/Android软件的反破解技术/image-20200319164003984.png" alt="image-20200319164003984"></p>
+<h2 id="检测模拟器"><a href="#检测模拟器" class="headerlink" title="检测模拟器"></a>检测模拟器</h2><p>通过命令<code>adb shell getprop</code>对比模拟器和真机。</p>
+<p>真机：</p>
+<p><img src="/2020/03/18/Android软件的反破解技术/image-20200319164906736.png" alt="image-20200319164906736"></p>
+<p>模拟器：</p>
+<p><img src="/2020/03/18/Android软件的反破解技术/image-20200319175344380.png" alt="image-20200319175344380"></p>
+<p>这不没区别吗。。。现在模拟器都这么先进了，书上有点落后了。。。</p>
+<p>就贴一下旧代码吧，虽然不一定能用，以后也能作参考。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">检测代码：</span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isRunningInEmualtor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">boolean</span> qemuKernel = <span class="keyword">false</span>;</span><br><span class="line">    	Process process = <span class="keyword">null</span>;</span><br><span class="line">        DataOutputStream os = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;  </span><br><span class="line">            process = Runtime.getRuntime().exec(<span class="string">"getprop ro.kernel.qemu"</span>);  </span><br><span class="line">            os = <span class="keyword">new</span> DataOutputStream(process.getOutputStream());</span><br><span class="line">            BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(process.getInputStream(),<span class="string">"GBK"</span>));</span><br><span class="line">            os.writeBytes(<span class="string">"exit\n"</span>);  </span><br><span class="line">            os.flush();</span><br><span class="line">            process.waitFor();</span><br><span class="line">            qemuKernel = (Integer.valueOf(in.readLine()) == <span class="number">1</span>);</span><br><span class="line">            Log.d(<span class="string">"com.droider.checkqemu"</span>, <span class="string">"检测到模拟器:"</span> + qemuKernel);             </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e)&#123;  </span><br><span class="line">        	qemuKernel = <span class="keyword">false</span>;</span><br><span class="line">            Log.d(<span class="string">"com.droider.checkqemu"</span>, <span class="string">"run failed"</span> + e.getMessage()); </span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;  </span><br><span class="line">                <span class="keyword">if</span> (os != <span class="keyword">null</span>) &#123;  </span><br><span class="line">                    os.close();  </span><br><span class="line">                &#125;  </span><br><span class="line">                process.destroy();  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            	</span><br><span class="line">            &#125;  </span><br><span class="line">            Log.d(<span class="string">"com.droider.checkqemu"</span>, <span class="string">"run finally"</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> qemuKernel;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getProp</span><span class="params">(Context context, String property)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">    		ClassLoader cl = context.getClassLoader();</span><br><span class="line">    		Class SystemProperties = cl.loadClass(<span class="string">"android.os.SystemProperties"</span>);</span><br><span class="line">    		Method method = SystemProperties.getMethod(<span class="string">"get"</span>, String.class);</span><br><span class="line">    		Object[] params = <span class="keyword">new</span> Object[<span class="number">1</span>];</span><br><span class="line">    		params[<span class="number">0</span>] = <span class="keyword">new</span> String(property);</span><br><span class="line">    		<span class="keyword">return</span> (String)method.invoke(SystemProperties, params);</span><br><span class="line">    	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="防止重编译"><a href="#防止重编译" class="headerlink" title="防止重编译"></a>防止重编译</h1><h2 id="检查签名"><a href="#检查签名" class="headerlink" title="检查签名"></a>检查签名</h2><p>检查签名的hashcode是否一致。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSignature</span><span class="params">(String packageName)</span> </span>&#123;      </span><br><span class="line">		PackageManager pm = <span class="keyword">this</span>.getPackageManager();</span><br><span class="line">		PackageInfo pi = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">int</span> sig = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			pi = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);</span><br><span class="line">			Signature[] s = pi.signatures;</span><br><span class="line">			sig = s[<span class="number">0</span>].hashCode();  </span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e1) &#123;</span><br><span class="line">			sig = <span class="number">0</span>;</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sig;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="校验保护"><a href="#校验保护" class="headerlink" title="校验保护"></a>校验保护</h2><p>检测classes.dex的校验值。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkCRC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">boolean</span> beModified = <span class="keyword">false</span>;</span><br><span class="line">    	<span class="keyword">long</span> crc = Long.parseLong(getString(R.string.crc));</span><br><span class="line">    	ZipFile zf;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			zf = <span class="keyword">new</span> ZipFile(getApplicationContext().getPackageCodePath());</span><br><span class="line">	    	ZipEntry ze = zf.getEntry(<span class="string">"classes.dex"</span>);</span><br><span class="line">	    	Log.d(<span class="string">"com.droider.checkcrc"</span>, String.valueOf(ze.getCrc()));</span><br><span class="line">	    	<span class="keyword">if</span> (ze.getCrc() == crc) &#123;</span><br><span class="line">	    		beModified = <span class="keyword">true</span>;</span><br><span class="line">	    	&#125; </span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			beModified = <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> beModified;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用命令记录</title>
+    <url>/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Linux命令记录"><a href="#Linux命令记录" class="headerlink" title="Linux命令记录"></a>Linux命令记录</h1><figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">echo xxxxx &gt; xx.txt 会自动换行</span><br><span class="line">echo -n xxxxx &gt; xx.txt 不会换行</span><br><span class="line"></span><br><span class="line">sudo passwd root //更改root密码</span><br><span class="line"></span><br><span class="line">//链接</span><br><span class="line">$ sudo rm -rf python</span><br><span class="line">$ sudo ln -s /usr/bin/python3  /usr/bin/python</span><br><span class="line">//换内核程序</span><br><span class="line">sudo apt-get install synaptic</span><br><span class="line">//重启桌面</span><br><span class="line">sudo /etc/init.d/gdm restart</span><br><span class="line">//关闭ASLR</span><br><span class="line">echo <span class="number">0</span> &gt; /<span class="keyword">proc</span>/sys/kernel/randomize_va_space</span><br><span class="line"></span><br><span class="line">NX：-z<span class="title"> execstack / -z</span> noexecstack (关闭 / 开启)    不让执行栈上的数据，于是JMP<span class="title"> ESP就不能用了</span></span><br><span class="line"><span class="title">Canary：-fno-stack-protector /-fstack-protector / -fstack-protector-all (关闭</span> / 开启 / 全开启)  栈里插入cookie信息</span><br><span class="line">PIE：-no-pie / -pie (关闭 / 开启)   地址随机化，另外打开后会有get_pc_thunk</span><br><span class="line">RELRO：-z<span class="title"> norelro / -z</span> lazy / -z<span class="title"> now (关闭</span> / 部分开启 / 完全开启)  对GOT表具有写权限</span><br><span class="line">gcc -z<span class="title"> execstack</span> -fno-stack-protector -no-pie -z<span class="title"> norelro</span></span><br><span class="line"><span class="title">//linux命令，将指定程序在指定端口运行：</span></span><br><span class="line"><span class="title">socat</span> tcp-listen:10001,reuseaddr,fork<span class="title"> EXEC:./file_name,pty,raw,echo=0</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">//在x64下通常参数从左到右依次放在rdi,</span> rsi,<span class="title"> rdx,</span> rcx,<span class="title"> r8,</span> r9，多出来的参数才会入栈（根据调用约定的方式可能有不同，通常是这样）</span><br><span class="line"></span><br><span class="line">特殊的gadgets:</span><br><span class="line">通常位于x64的ELF程序中的__libc_csu_init,</span><br><span class="line">universal_gadget1 = 0x40075a           #万能gadget1：pop<span class="title"> rbx;</span> pop<span class="title"> rbp;</span> pop<span class="title"> r12;</span> pop<span class="title"> r13;</span> pop<span class="title"> r14;</span> pop<span class="title"> r15;</span> retn</span><br><span class="line">universal_gadget2 = 0x400740        #万能gadget2：mov<span class="title"> rdx,</span> r13;<span class="title"> mov</span> rsi,<span class="title"> r14;</span> mov<span class="title"> edi,</span> r15d;<span class="title"> call</span> qword<span class="title"> ptr</span> [r12+rbx*8]</span><br></pre></td></tr></table></figure>
+
+<h1 id="ABD命令"><a href="#ABD命令" class="headerlink" title="ABD命令"></a>ABD命令</h1><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">adb tcpip <span class="number">5555</span></span><br><span class="line">adb connect xxxxx:<span class="number">5555</span></span><br><span class="line"></span><br><span class="line">cat /proc/cpuinfo #Android查看cpu架构</span><br><span class="line"></span><br><span class="line">jdb附加 jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=<span class="number">8700</span></span><br><span class="line"></span><br><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="docker命令"><a href="#docker命令" class="headerlink" title="docker命令"></a>docker命令</h1><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导入镜像：docker import - ubuntu/17.04.amd64</span></span><br><span class="line"><span class="comment">//运行镜像：docker run -it -p 23946:23946 ubuntu/17.04.amd64 /bin/bash</span></span><br><span class="line">  会创建一个docker容器，第一个端口是宿主机的端口，第二个是容器的端口</span><br><span class="line"><span class="comment">//列出容器：docker container ls -a</span></span><br><span class="line"><span class="comment">//容器重命名：docker container rename old_name new_name</span></span><br><span class="line"><span class="comment">//打开容器的shell：docker exec -it container_name /bin/bash</span></span><br><span class="line"><span class="comment">//启动容器：docker start container_name</span></span><br><span class="line"><span class="comment">//复制：docker container cp file_name container_name:/root</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导入镜像</span></span><br><span class="line">docker load -<span class="selector-tag">i</span> nginx.tar</span><br><span class="line"><span class="comment">//导出镜像</span></span><br><span class="line">docker save -o nginx<span class="selector-class">.tar</span> nginx:latest</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Android漏洞挖掘</title>
+    <url>/2020/03/15/Android%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android软件的破解技术</title>
+    <url>/2020/03/14/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="授权key绕过"><a href="#授权key绕过" class="headerlink" title="授权key绕过"></a>授权key绕过</h2><p>一个apk通过另一个apk获取授权key即可解锁高级功能，两个apk共享资源需要指定<code>android:sharedUserId=&quot;xxx.xxx.xxx&quot;</code>相同。通过<code>creatPackageContext()</code>方法可以访问另一个apk的资源。</p>
+<p>对于示例软件，可通过逆向算法、修改关键跳转等方法进行破解。</p>
+<h2 id="序列号保护"><a href="#序列号保护" class="headerlink" title="序列号保护"></a>序列号保护</h2><p>通过注册码验证。</p>
+<h2 id="网络验证"><a href="#网络验证" class="headerlink" title="网络验证"></a>网络验证</h2><p>静态网络验证通过得到服务器的反馈信息进行验证。</p>
+<p>动态网络验证通过与服务器交互进行验证。</p>
+<h2 id="In-app-Billing-应用内付费"><a href="#In-app-Billing-应用内付费" class="headerlink" title="In-app Billing (应用内付费)"></a>In-app Billing (应用内付费)</h2><p>跳过。</p>
+<h2 id="Google-Play-License保护"><a href="#Google-Play-License保护" class="headerlink" title="Google Play License保护"></a>Google Play License保护</h2><p>跳过。</p>
+<h2 id="重启验证"><a href="#重启验证" class="headerlink" title="重启验证"></a>重启验证</h2><p>第一次注册保存验证信息，再次开启程序时读取验证信息进行验证。保存信息有内部存储、外部存储、数据库存储、SharedProferences等4种方式。</p>
+<h2 id="Mono-for-Android"><a href="#Mono-for-Android" class="headerlink" title="Mono for Android"></a>Mono for Android</h2><h2 id="Qt-for-Android"><a href="#Qt-for-Android" class="headerlink" title="Qt for Android"></a>Qt for Android</h2>]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高校战役CTF部分writeup</title>
+    <url>/2020/03/11/%E9%AB%98%E6%A0%A1%E6%88%98%E5%BD%B9CTF%E9%83%A8%E5%88%86writeup/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>打了两天的比赛，小做了几道题，不可谓不充实。虽然找不到工作，也要继续学习。</p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="简单的misc"><a href="#简单的misc" class="headerlink" title="简单的misc"></a>简单的misc</h2><p>用010editor打开photo.jpg，在最底部看到zip格式，</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311151648233.png" alt="image-20200311151648233"></p>
+<p>直接改后缀解压，得到摩斯密码，解密是flag.zip的密码，输入后得到base64加密的flag。</p>
+<p>解密即可。flag{Th1s_is_FlaG_you_aRE_rigHT}</p>
+<h2 id="隐藏的信息"><a href="#隐藏的信息" class="headerlink" title="隐藏的信息"></a>隐藏的信息</h2><p>拿到一个残缺的二维码，看这个二维码很别扭，用Stegsolve.jar翻转了颜色之后，看上去舒服多了，然后补定位符，奈何手残，总是补不好，于是放弃，然后我再压缩包右击了一下7z解压，无意发现这个压缩包是假密码，拿到了一个wav文件，使用百度找了好多类似的题，用Audacity分析频谱发现开始和结束有问题，把音量调到最大，开始的部分还是听不到，但是最后可以听出是拨号音，（看过柯南，一下就猜出这是要猜电话号码），结合百度，才发现和DTFM有关。这里给出一篇参考文章：<a href="https://hebin.me/2017/09/10/西普ctf-beyond/" target="_blank" rel="noopener">https://hebin.me/2017/09/10/%E8%A5%BF%E6%99%AEctf-beyond/</a></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153008620.png" alt="image-20200311153008620"></p>
+<p>然后可以得到一串数字187485618521，但是提交不对，感觉还是和那个二维码有关，</p>
+<p>strings命令找到：<img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153154593.png" alt="image-20200311153154593"></p>
+<p>看来要base64加密,最后得出flag{MTg3NDg1NjE4NTIx}</p>
+<h2 id="ez-mem-amp-usb"><a href="#ez-mem-amp-usb" class="headerlink" title="ez_mem&amp;usb"></a>ez_mem&amp;usb</h2><p>从来不刷杂项题，所以都是靠百度做，拿到一个数据pcap文件，分析流量，过滤http协议，找到上传的文件。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153716210.png" alt="image-20200311153716210"></p>
+<p>发现一个40M的数据包，那肯定传文件了，把文件dump出来，直接解压，得到一个vmem文件，百度一波，这是要内存取证，萌新参考：<a href="https://www.cnblogs.com/0x4D75/p/11161822.html" target="_blank" rel="noopener">https://www.cnblogs.com/0x4D75/p/11161822.html</a></p>
+<p>思路是，filescan+grep找到和flag字符匹配的文件，还真有一个flag.img，将flag.img dump出来，然后直接7z解压，需要密码，于是找到内存镜像中的cmd命令，有密码给出。</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 filescan | grep flag</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line"><span class="number">0x0000000001155f90</span>      <span class="number">1</span>      <span class="number">0</span> R--rwd \Device\HarddiskVolume1\Documents <span class="keyword">and</span> Settings\Administrator\flag.img</span><br><span class="line"></span><br><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 dumpfiles -Q 0x1155f90 -D ./output</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line">DataSectionObject <span class="number">0x01155f90</span>   None   \Device\HarddiskVolume1\Documents <span class="keyword">and</span> Settings\Administrator\flag.img</span><br><span class="line"></span><br><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 cmdscan</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line">**************************************************</span><br><span class="line"><span class="symbol">CommandProcess:</span> csrss.exe <span class="symbol">Pid:</span> <span class="number">464</span></span><br><span class="line"><span class="symbol">CommandHistory:</span> <span class="number">0x556bb8</span> <span class="symbol">Application:</span> cmd.exe <span class="symbol">Flags:</span> Allocated, Reset</span><br><span class="line"><span class="symbol">CommandCount:</span> <span class="number">2</span> <span class="symbol">LastAdded:</span> <span class="number">1</span> <span class="symbol">LastDisplayed:</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">FirstCommand:</span> <span class="number">0</span> <span class="symbol">CommandCountMax:</span> <span class="number">50</span></span><br><span class="line"><span class="symbol">ProcessHandle:</span> <span class="number">0x504</span></span><br><span class="line">Cmd <span class="comment">#0 @ 0x3609ea0: passwd:weak_auth_top100</span></span><br><span class="line">Cmd <span class="comment">#1 @ 0x5576d0: start wireshark</span></span><br><span class="line">Cmd <span class="comment">#13 @ 0x9f009f: ??</span></span><br><span class="line">Cmd <span class="comment">#41 @ 0x9f003f: ?\?????????</span></span><br></pre></td></tr></table></figure>
+
+<p>压缩包里是一个usbdata，查了一下这个脚本，解密即可。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">usb_codes = &#123;</span><br><span class="line">   <span class="number">0x04</span>:<span class="string">"aA"</span>, <span class="number">0x05</span>:<span class="string">"bB"</span>, <span class="number">0x06</span>:<span class="string">"cC"</span>, <span class="number">0x07</span>:<span class="string">"dD"</span>, <span class="number">0x08</span>:<span class="string">"eE"</span>, <span class="number">0x09</span>:<span class="string">"fF"</span>,</span><br><span class="line">   <span class="number">0x0A</span>:<span class="string">"gG"</span>, <span class="number">0x0B</span>:<span class="string">"hH"</span>, <span class="number">0x0C</span>:<span class="string">"iI"</span>, <span class="number">0x0D</span>:<span class="string">"jJ"</span>, <span class="number">0x0E</span>:<span class="string">"kK"</span>, <span class="number">0x0F</span>:<span class="string">"lL"</span>,</span><br><span class="line">   <span class="number">0x10</span>:<span class="string">"mM"</span>, <span class="number">0x11</span>:<span class="string">"nN"</span>, <span class="number">0x12</span>:<span class="string">"oO"</span>, <span class="number">0x13</span>:<span class="string">"pP"</span>, <span class="number">0x14</span>:<span class="string">"qQ"</span>, <span class="number">0x15</span>:<span class="string">"rR"</span>,</span><br><span class="line">   <span class="number">0x16</span>:<span class="string">"sS"</span>, <span class="number">0x17</span>:<span class="string">"tT"</span>, <span class="number">0x18</span>:<span class="string">"uU"</span>, <span class="number">0x19</span>:<span class="string">"vV"</span>, <span class="number">0x1A</span>:<span class="string">"wW"</span>, <span class="number">0x1B</span>:<span class="string">"xX"</span>,</span><br><span class="line">   <span class="number">0x1C</span>:<span class="string">"yY"</span>, <span class="number">0x1D</span>:<span class="string">"zZ"</span>, <span class="number">0x1E</span>:<span class="string">"1!"</span>, <span class="number">0x1F</span>:<span class="string">"2@"</span>, <span class="number">0x20</span>:<span class="string">"3#"</span>, <span class="number">0x21</span>:<span class="string">"4$"</span>,</span><br><span class="line">   <span class="number">0x22</span>:<span class="string">"5%"</span>, <span class="number">0x23</span>:<span class="string">"6^"</span>, <span class="number">0x24</span>:<span class="string">"7&amp;"</span>, <span class="number">0x25</span>:<span class="string">"8*"</span>, <span class="number">0x26</span>:<span class="string">"9("</span>, <span class="number">0x27</span>:<span class="string">"0)"</span>,</span><br><span class="line">   <span class="number">0x2C</span>:<span class="string">"  "</span>, <span class="number">0x2D</span>:<span class="string">"-_"</span>, <span class="number">0x2E</span>:<span class="string">"=+"</span>, <span class="number">0x2F</span>:<span class="string">"[&#123;"</span>, <span class="number">0x30</span>:<span class="string">"]&#125;"</span>,  <span class="number">0x32</span>:<span class="string">"#~"</span>,</span><br><span class="line">   <span class="number">0x33</span>:<span class="string">";:"</span>, <span class="number">0x34</span>:<span class="string">"'\""</span>,  <span class="number">0x36</span>:<span class="string">",&lt;"</span>,  <span class="number">0x37</span>:<span class="string">".&gt;"</span>, <span class="number">0x4f</span>:<span class="string">"&gt;"</span>, <span class="number">0x50</span>:<span class="string">"&lt;"</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">key = [<span class="number">0x09</span>,<span class="number">0x0F</span>,<span class="number">0x04</span>,<span class="number">0x0A</span>,<span class="number">0x2F</span>,<span class="number">0x23</span>,<span class="number">0x26</span>,<span class="number">0x1F</span>,<span class="number">0x27</span>,<span class="number">0x27</span>,<span class="number">0x25</span>,<span class="number">0x20</span>,<span class="number">0x22</span>,<span class="number">0x24</span>,<span class="number">0x25</span>,<span class="number">0x21</span>,<span class="number">0x08</span>,<span class="number">0x06</span>,<span class="number">0x20</span>,<span class="number">0x08</span>,<span class="number">0x07</span>,<span class="number">0x25</span>,<span class="number">0x07</span>,<span class="number">0x1F</span>,<span class="number">0x04</span>,<span class="number">0x23</span>,<span class="number">0x21</span>,<span class="number">0x08</span>,<span class="number">0x24</span>,<span class="number">0x20</span>,<span class="number">0x09</span>,<span class="number">0x08</span>,<span class="number">0x26</span>,<span class="number">0x1E</span>,<span class="number">0x20</span>,<span class="number">0x06</span>,<span class="number">0x27</span>,<span class="number">0x30</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(key)):</span><br><span class="line">    flag += usb_codes[key[i]][<span class="number">0</span>]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{69200835784ec3ed8d2a64e73fe913c0}</p>
+<h2 id="武汉加油"><a href="#武汉加油" class="headerlink" title="武汉加油"></a>武汉加油</h2><p>010editor打开图片，这可真是个好东西啊，两种不同的文件格式还分颜色。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319111152938.png" alt="image-20200319111152938"></p>
+<p>直接改后缀rar解压，</p>
+<p>然后使用一个工具爆破出隐藏的flag.txt文件。</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">将flag.txt文件隐藏到flag.jpg中：</span><br><span class="line">steghide embed -cf flag<span class="selector-class">.jpg</span> -ef flag<span class="selector-class">.txt</span> -<span class="selector-tag">p</span> <span class="number">123456</span></span><br><span class="line"></span><br><span class="line">从flag.jpg解出flag<span class="selector-class">.txt</span>:</span><br><span class="line">steghide extract -sf flag<span class="selector-class">.jpg</span> -<span class="selector-tag">p</span> <span class="number">123456</span></span><br></pre></td></tr></table></figure>
+
+<p>shell脚本爆破密码：</p>
+<p>…..没成功，算了，不贴了。。</p>
+<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="天津垓"><a href="#天津垓" class="headerlink" title="天津垓"></a>天津垓</h2><p>上来先运行程序，提示缺少cygwin1.dll文件，下载了之后运行还是报错，算了吧，静态分析看看。</p>
+<p>找到了一个f函数，代码很简单，就一些简单的运算操作。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315160945833.png" alt="image-20200315160945833"></p>
+<p>感觉有戏，直接写脚本。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s1 = [<span class="number">0x52</span>, <span class="number">0x69</span>, <span class="number">0x73</span>, <span class="number">0x69</span>, <span class="number">0x6e</span>, <span class="number">0x67</span>, <span class="number">0x5f</span>, <span class="number">0x48</span>, <span class="number">0x6f</span>, <span class="number">0x70</span>, <span class="number">0x70</span>, <span class="number">0x65</span>, <span class="number">0x72</span>, <span class="number">0x21</span>]</span><br><span class="line">s2 = [<span class="number">17</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">42</span>, <span class="number">59</span>, <span class="number">47</span>, <span class="number">3</span>, <span class="number">47</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">72</span>, <span class="number">62</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">16</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">255</span>):</span><br><span class="line">        <span class="keyword">if</span> s2[i] == (~(j &amp; s1[i % <span class="number">14</span>])) &amp; (j | s1[i % <span class="number">14</span>]):</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>脚本跑出来是<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![image-20200315161644169](高校战役CTF部分writeup/image-20200315161644169.png)</span><br><span class="line"></span><br><span class="line">那肯定要动态调试的啊，一想又运行不了。我把函数都看一遍看看有什么信息。</span><br><span class="line"></span><br><span class="line">![image-20200315162052676](高校战役CTF部分writeup/image-20200315162052676.png)</span><br><span class="line"></span><br><span class="line">发现这里的Str和f函数中的Str是一个，分析了一下这个函数，是一段SMC(自修改代码)进行动态解密的。</span><br><span class="line"></span><br><span class="line">使用IDAPython：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">flag = &quot;Caucasus@s_ability&quot;</span><br><span class="line">start = 0x10040164d</span><br><span class="line">end = start + 1045</span><br><span class="line">j = 0</span><br><span class="line">for i in range(start, end):</span><br><span class="line">    ida_bytes.patch_byte(i, ida_bytes.get_byte(i)^ ord(flag[j % 18]))</span><br><span class="line">    j += 1</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315162525217.png" alt="image-20200315162525217"></p>
+<p>也不是很复杂。。。。</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">s = [<span class="number">2007666</span>,<span class="number">2125764</span>,<span class="number">1909251</span>,<span class="number">2027349</span>,<span class="number">2421009</span>,<span class="number">1653372</span>,<span class="number">2047032</span>,<span class="number">2184813</span>,<span class="number">2302911</span>,<span class="number">2263545</span>,<span class="number">1909251</span>,<span class="number">2165130</span>,<span class="number">1968300</span>,<span class="number">2243862</span>,<span class="number">2066715</span>,<span class="number">2322594</span>,<span class="number">1987983</span>,<span class="number">2243862</span>,<span class="number">1869885</span>,<span class="number">2066715</span>,<span class="number">2263545</span>,<span class="number">1869885</span>,<span class="number">964467</span>,<span class="number">944784</span>,<span class="number">944784</span>,<span class="number">944784</span>,<span class="number">728271</span>,<span class="number">1869885</span>,<span class="number">2263545</span>,<span class="number">2283228</span>,<span class="number">2243862</span>,<span class="number">2184813</span>,<span class="number">2165130</span>,<span class="number">2027349</span>,<span class="number">1987983</span>,<span class="number">2243862</span>,<span class="number">1869885</span>,<span class="number">2283228</span>,<span class="number">2047032</span>,<span class="number">1909251</span>,<span class="number">2165130</span>,<span class="number">1869885</span>,<span class="number">2401326</span>,<span class="number">1987983</span>,<span class="number">2243862</span>,<span class="number">2184813</span>,<span class="number">885735</span>,<span class="number">2184813</span>,<span class="number">2165130</span>,<span class="number">1987983</span>,<span class="number">2460375</span>]</span><br><span class="line">print(len(s))</span><br><span class="line">v61 = <span class="number">19683</span></span><br><span class="line">v62 = <span class="number">0x8000000B</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">51</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">255</span>):</span><br><span class="line">        <span class="keyword">if</span> s[i] == v61 * j % v62:</span><br><span class="line">            flag+=chr(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{Thousandriver_is_1000%_stronger_than_zero-one}</p>
+<h2 id="cycle-graph"><a href="#cycle-graph" class="headerlink" title="cycle_graph"></a>cycle_graph</h2><p>描述是图算法，估计凉了，数据结构菜的一笔。</p>
+<p>找到关键函数：</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315163844983.png" alt="image-20200315163844983"></p>
+<p>这里是对v1进行初始化，假设v1是个二维数组，每组有三个数据，根据代码可分析出有32组。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315164605229.png" alt="image-20200315164605229"></p>
+<p>这里就是主要算法。</p>
+<p>然后最后判断flag：</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315195856725.png" alt="image-20200315195856725"></p>
+<p>刚开始没注意v7的限制，直接写的脚本跑，</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">arr_1 = [<span class="number">0x00000034</span>, <span class="number">0x00000002</span>, <span class="number">0x0000002C</span>, <span class="number">0x0000002A</span>, <span class="number">0x00000006</span>, <span class="number">0x0000002A</span>, <span class="number">0x0000002F</span>, <span class="number">0x0000002A</span>, <span class="number">0x00000033</span>, <span class="number">0x00000003</span>, <span class="number">0x00000002</span>, <span class="number">0x00000032</span>, <span class="number">0x00000032</span>, <span class="number">0x00000032</span>, <span class="number">0x00000030</span>, <span class="number">0x00000003</span>, <span class="number">0x00000001</span>, <span class="number">0x00000032</span>, <span class="number">0x0000002B</span>, <span class="number">0x00000002</span>, <span class="number">0x0000002E</span>, <span class="number">0x00000001</span>, <span class="number">0x00000002</span>, <span class="number">0x0000002D</span>, <span class="number">0x00000032</span>, <span class="number">0x00000004</span>, <span class="number">0x0000002D</span>, <span class="number">0x00000030</span>, <span class="number">0x00000031</span>, <span class="number">0x0000002F</span>, <span class="number">0x00000033</span>]</span><br><span class="line">print(len(arr_1))</span><br><span class="line">arr_2 = [<span class="number">0x0000001F</span>, <span class="number">0x00000002</span>, <span class="number">0x00000002</span>, <span class="number">0x00000001</span>, <span class="number">0x00000012</span>, <span class="number">0x00000007</span>, <span class="number">0x00000002</span>, <span class="number">0x0000001A</span>, <span class="number">0x0000000D</span>, <span class="number">0x00000004</span>, <span class="number">0x0000000A</span>, <span class="number">0x00000004</span>, <span class="number">0x00000015</span>, <span class="number">0x0000000E</span>, <span class="number">0x00000001</span>, <span class="number">0x00000000</span>, <span class="number">0x0000000E</span>, <span class="number">0x00000005</span>, <span class="number">0x00000007</span>, <span class="number">0x0000001C</span>, <span class="number">0x0000000C</span>, <span class="number">0x0000001C</span>, <span class="number">0x0000000F</span>, <span class="number">0x0000000F</span>, <span class="number">0x00000002</span>, <span class="number">0x00000010</span>, <span class="number">0x00000017</span>, <span class="number">0x0000001E</span>, <span class="number">0x00000017</span>, <span class="number">0x00000013</span>, <span class="number">0x00000009</span>, <span class="number">0x00000016</span>]</span><br><span class="line">print(len(arr_2))</span><br><span class="line">arr_3 = [<span class="number">0x00000005</span>, <span class="number">0x00000001</span>, <span class="number">0x00000008</span>, <span class="number">0x00000007</span>, <span class="number">0x00000017</span>, <span class="number">0x00000009</span>, <span class="number">0x00000013</span>, <span class="number">0x0000001F</span>, <span class="number">0x00000017</span>, <span class="number">0x00000009</span>, <span class="number">0x0000000D</span>, <span class="number">0x0000000C</span>, <span class="number">0x0000001D</span>, <span class="number">0x0000000A</span>, <span class="number">0x00000018</span>, <span class="number">0x00000009</span>, <span class="number">0x00000018</span>, <span class="number">0x00000019</span>, <span class="number">0x00000009</span>, <span class="number">0x0000001A</span>, <span class="number">0x00000003</span>, <span class="number">0x00000016</span>, <span class="number">0x00000006</span>, <span class="number">0x00000011</span>, <span class="number">0x0000000D</span>, <span class="number">0x00000007</span>, <span class="number">0x0000000F</span>, <span class="number">0x00000014</span>, <span class="number">0x00000001</span>, <span class="number">0x00000010</span>, <span class="number">0x00000004</span>, <span class="number">0x0000000B</span>]</span><br><span class="line"></span><br><span class="line">v1 = [[<span class="number">0</span>] * <span class="number">3</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">31</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">31</span>):</span><br><span class="line">    v1[i][<span class="number">0</span>] = arr_1[i]</span><br><span class="line">    v1[i][<span class="number">1</span>] = arr_2[i+<span class="number">1</span>]</span><br><span class="line">    v1[i][<span class="number">2</span>] = arr_3[i+<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">print(v1)</span><br><span class="line"></span><br><span class="line">str1 = string.printable</span><br><span class="line">print(str1)</span><br><span class="line"></span><br><span class="line">v5 = <span class="number">48</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line">ii = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> v1[ii][<span class="number">0</span>] + v5 == ord(j):</span><br><span class="line">            flag += j</span><br><span class="line">            ii = v1[ii][<span class="number">1</span>]</span><br><span class="line">            v5 = ord(j)</span><br><span class="line">            print(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> v5 - v1[ii][<span class="number">0</span>] == ord(j):</span><br><span class="line">            flag += j</span><br><span class="line">            ii = v1[ii][<span class="number">2</span>]</span><br><span class="line">            v5 = ord(j)</span><br><span class="line">            print(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>跑出来<code>d8b0bae8jh52db/2</code>,提交当然不对，后来看到了v7的限制。为什么v7会出现差异呢？ 因为有时候加v5和减v5都满足，不知道走哪条路径。估计得用某个算法解，比完赛再学一下算法，所以我手动正着加倒着，硬是给写出来了。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315170104295.png" alt="image-20200315170104295"></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315170118029.png" alt="image-20200315170118029"></p>
+<p>满满的菜啊…….</p>
+<p>此处可用广度优先搜索算法，算法学习具体参考<a href="https://blog.csdn.net/raphealguo/article/details/7523411" target="_blank" rel="noopener">https://blog.csdn.net/raphealguo/article/details/7523411</a></p>
+<h2 id="easyparser"><a href="#easyparser" class="headerlink" title="easyparser"></a>easyparser</h2><p>这个题，我可是特别肝的，知道是虚拟机，但是我也没遇到过这种题，直接动态调试，我一步一步跟出来的程序逻辑，还好不是特别复杂，也就调了6个小时左右吧。。。。先给出解密脚本，然后再学习一下正确的解法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = [<span class="number">144</span>, <span class="number">332</span>, <span class="number">28</span>, <span class="number">240</span>, <span class="number">132</span>, <span class="number">60</span>, <span class="number">24</span>, <span class="number">64</span>, <span class="number">64</span>, <span class="number">240</span>, <span class="number">208</span>, <span class="number">88</span>, <span class="number">44</span>, <span class="number">8</span>, <span class="number">52</span>, <span class="number">240</span>, <span class="number">276</span>, <span class="number">240</span>, <span class="number">128</span>, <span class="number">44</span>, <span class="number">40</span>, <span class="number">52</span>, <span class="number">8</span>, <span class="number">240</span>, <span class="number">144</span>, <span class="number">68</span>, <span class="number">48</span>, <span class="number">80</span>, <span class="number">92</span>, <span class="number">44</span>, <span class="number">264</span>, <span class="number">240</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x20</span>):</span><br><span class="line">    flag += chr((s[i] &gt;&gt; <span class="number">2</span>) ^ <span class="number">0x63</span>)</span><br><span class="line">print(<span class="string">"flag&#123;%s&#125;"</span> % flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{G0d_Bless_Wuhan_&amp;<em>China_Growth!</em>}</p>
+<h2 id="fxck！"><a href="#fxck！" class="headerlink" title="fxck！"></a>fxck！</h2><p>太累了，所以这道题随便看了一下，看到base58特征，直接解码，发现不对，一想其他题都不简单，这个应该也不会这么简单吧，所以就没考虑换表。比完赛看了看，还真是换表解密，我哭了。。。。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152415784.png" alt="image-20200316152415784"></p>
+<p>这段是求余，我调了一下，发现不是直接把输入base58加密，还加了点东西，说实话，仔细分析，我没看懂这段伪代码，求得余数和我跑程序求得不一样，自闭了。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152611658.png" alt="image-20200316152611658"></p>
+<p>换表和加密，不难。</p>
+<p>然后用了brainfuck代码，第一次遇见，根本不知道是什么东西，但是最后的比较字符串可以直接动调dump出来。因为是复现，也简单学习了一下这个加密。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152754240.png" alt="image-20200316152754240"></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152823755.png" alt="image-20200316152823755"></p>
+<p>注释中给出了这个加密的运算符。</p>
+<p>既然又碰到了base58，就熟悉一下吧，go语言写脚本，参考:<a href="https://blog.csdn.net/qq_45828877/article/details/103997621" target="_blank" rel="noopener">https://blog.csdn.net/qq_45828877/article/details/103997621</a></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math/big"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> base58_table []<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Encrypt</span><span class="params">(input []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	bInt := big.NewInt(<span class="number">0</span>).SetBytes(input)</span><br><span class="line">	fmt.Printf(<span class="string">"输入字节的16进制表达:%x\n"</span>, bInt)</span><br><span class="line">	base := big.NewInt(<span class="number">58</span>)</span><br><span class="line">	zero := big.NewInt(<span class="number">0</span>)</span><br><span class="line">	mod := &amp;big.Int&#123;&#125;</span><br><span class="line">	<span class="keyword">var</span> result []<span class="keyword">byte</span></span><br><span class="line">	<span class="keyword">for</span> bInt.Cmp(zero) != <span class="number">0</span> &#123;</span><br><span class="line">		bInt.DivMod(bInt, base, mod)</span><br><span class="line">		fmt.Printf(<span class="string">"%x\n"</span>, mod)</span><br><span class="line">		result = <span class="built_in">append</span>(result, base58_table[mod.Int64()])</span><br><span class="line">	&#125;</span><br><span class="line">	ReverseByte(result)</span><br><span class="line">	fmt.Printf(<span class="string">"base58加密结果:%s\n"</span>, result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Decrypt</span><span class="params">(input []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	result := big.NewInt(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> _, b := <span class="keyword">range</span> input &#123;</span><br><span class="line">		index := bytes.IndexByte(base58_table, b)</span><br><span class="line">		result.Mul(result, big.NewInt(<span class="number">58</span>))</span><br><span class="line">		result.Add(result, big.NewInt(<span class="keyword">int64</span>(index)))</span><br><span class="line">	&#125;</span><br><span class="line">	decodeByte := result.Bytes()</span><br><span class="line">	<span class="keyword">if</span> input[<span class="number">0</span>] == base58_table[<span class="number">0</span>] &#123;</span><br><span class="line">		decodeByte = <span class="built_in">append</span>([]<span class="keyword">byte</span>&#123;<span class="number">0x00</span>&#125;, decodeByte...)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(decodeByte)</span><br><span class="line">	fmt.Printf(<span class="string">"base58解密结果:%s"</span>, decodeByte)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReverseByte</span><span class="params">(input []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(input)<span class="number">-1</span>; i &lt; j; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		input[i], input[j] = input[j], input[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	base58_table = []<span class="keyword">byte</span>(<span class="string">"ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijkmnopqrstuvwxyz"</span>)</span><br><span class="line">	Encrypt([]<span class="keyword">byte</span>(<span class="string">"\x06"</span> + <span class="string">"flag&#123;63510cf7-2b80-45e1-a186-21234897e5cd&#125;"</span>))</span><br><span class="line">	Decrypt([]<span class="keyword">byte</span>(<span class="string">"4VyhuTqRfYFnQ85Bcw5XcDr3ScNBjf5CzwUdWKVM7SSVqBrkvYGt7SSUJe"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316153024371.png" alt="image-20200316153024371"></p>
+<p>跑出来，发现第一个字节是个<code>\x6</code>……..</p>
+<h2 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h2><p>比赛的时候分析出了源码，但是不知道是什么加密，无从下手。</p>
+<p>后得知是LFSR(线性反馈移位寄存器)，可参考：</p>
+<p>LFSR具体参考：</p>
+<p><a href="https://www.anquanke.com/post/id/181811" target="_blank" rel="noopener">https://www.anquanke.com/post/id/181811</a></p>
+<p><a href="https://xz.aliyun.com/t/3682" target="_blank" rel="noopener">https://xz.aliyun.com/t/3682</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33920501" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33920501</a></p>
+<p>writeup和脚本参考:</p>
+<p><a href="http://ctf.njupt.edu.cn/382.html#clock" target="_blank" rel="noopener">http://ctf.njupt.edu.cn/382.html#clock</a></p>
+<p>贴出逆向的源码(python3)和爆破脚本(go语言)吧。</p>
+<p>程序主要源码：</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">v4 = xxx</span><br><span class="line">v3 = xxx</span><br><span class="line">v2 = xxx</span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> ii <span class="keyword">in</span> range(<span class="number">0x100000</span>):</span><br><span class="line">    v5 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> jj <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        v7 = v4 &amp; <span class="number">0x17FA06</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> v7:</span><br><span class="line">            i ^= v7 &amp; <span class="number">1</span></span><br><span class="line">            v7 &gt;&gt;= <span class="number">1</span></span><br><span class="line">        v4 = (i ^ <span class="number">2</span> * v4) &amp; <span class="number">0x1FFFFF</span></span><br><span class="line">        v9 = v3 &amp; <span class="number">0x2A9A0D</span></span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> v9:</span><br><span class="line">            j ^= v9 &amp; <span class="number">1</span></span><br><span class="line">            v9 &gt;&gt;= <span class="number">1</span></span><br><span class="line">        v3 = (j ^ <span class="number">2</span> * v3) &amp; <span class="number">0x3FFFFF</span></span><br><span class="line">        v11 = v2 &amp; <span class="number">0x5E5E6A</span></span><br><span class="line">        k = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> v11:</span><br><span class="line">            k ^= v11 &amp; <span class="number">1</span></span><br><span class="line">            v11 &gt;&gt;= <span class="number">1</span></span><br><span class="line">        v2 = (k ^ <span class="number">2</span> * v2) &amp; <span class="number">0x7FFFFF</span></span><br><span class="line">        v13 = <span class="number">2</span> * v5</span><br><span class="line">        v14 = v3</span><br><span class="line">        <span class="keyword">if</span> v4 &amp; <span class="number">1</span>:</span><br><span class="line">            v14 = v2</span><br><span class="line">        v5 = v14 &amp; <span class="number">1</span> ^ v13</span><br><span class="line">    print(hex(v5))</span><br><span class="line">    result.append(v5)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<p>爆破脚本：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">lfsr</span><span class="params">(R, mask1, mask2 <span class="keyword">int64</span>, result *[100]<span class="keyword">uint8</span>, <span class="built_in">len</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> x := <span class="number">0</span>; x &lt; <span class="built_in">len</span>; x++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">8</span>; j++ &#123;</span><br><span class="line">			i := R &amp; mask1</span><br><span class="line">			lastbit := <span class="keyword">uint8</span>(<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">for</span> i != <span class="number">0</span> &#123;</span><br><span class="line">				lastbit ^= <span class="keyword">uint8</span>(i &amp; <span class="number">1</span>)</span><br><span class="line">				i &gt;&gt;= <span class="number">1</span></span><br><span class="line">			&#125;</span><br><span class="line">			R = (R&lt;&lt;<span class="number">1</span> ^ <span class="keyword">int64</span>(lastbit)) &amp; mask2</span><br><span class="line">			result[x] = result[x]&lt;&lt;<span class="number">1</span> ^ lastbit</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> output = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;<span class="number">95</span>, <span class="number">83</span>, <span class="number">107</span>, <span class="number">255</span>, <span class="number">209</span>, <span class="number">96</span>, <span class="number">188</span>, <span class="number">166</span>, <span class="number">230</span>, <span class="number">219</span>, <span class="number">223</span>, <span class="number">72</span>, <span class="number">150</span>, <span class="number">155</span>, <span class="number">169</span>,</span><br><span class="line">	<span class="number">138</span>, <span class="number">126</span>, <span class="number">0</span>, <span class="number">91</span>, <span class="number">20</span>, <span class="number">19</span>, <span class="number">109</span>, <span class="number">82</span>, <span class="number">12</span>, <span class="number">249</span>, <span class="number">91</span>, <span class="number">39</span>, <span class="number">107</span>, <span class="number">104</span>, <span class="number">55</span>, <span class="number">207</span>,</span><br><span class="line">	<span class="number">65</span>, <span class="number">155</span>, <span class="number">197</span>, <span class="number">204</span>, <span class="number">81</span>, <span class="number">76</span>, <span class="number">22</span>, <span class="number">83</span>, <span class="number">208</span>, <span class="number">215</span>, <span class="number">13</span>, <span class="number">254</span>, <span class="number">14</span>, <span class="number">43</span>, <span class="number">87</span>, <span class="number">29</span>,</span><br><span class="line">	<span class="number">42</span>, <span class="number">161</span>, <span class="number">92</span>, <span class="number">2</span>, <span class="number">109</span>, <span class="number">110</span>, <span class="number">232</span>, <span class="number">201</span>, <span class="number">147</span>, <span class="number">19</span>, <span class="number">53</span>, <span class="number">216</span>, <span class="number">82</span>, <span class="number">144</span>, <span class="number">169</span>,</span><br><span class="line">	<span class="number">34</span>, <span class="number">193</span>, <span class="number">106</span>, <span class="number">0</span>, <span class="number">253</span>, <span class="number">224</span>, <span class="number">7</span>, <span class="number">46</span>, <span class="number">24</span>, <span class="number">16</span>, <span class="number">226</span>, <span class="number">127</span>, <span class="number">164</span>, <span class="number">162</span>, <span class="number">54</span>, <span class="number">98</span>,</span><br><span class="line">	<span class="number">144</span>, <span class="number">141</span>, <span class="number">182</span>, <span class="number">174</span>, <span class="number">252</span>, <span class="number">64</span>, <span class="number">130</span>, <span class="number">19</span>, <span class="number">163</span>, <span class="number">242</span>, <span class="number">176</span>, <span class="number">78</span>, <span class="number">79</span>, <span class="number">3</span>, <span class="number">19</span>, <span class="number">11</span>,</span><br><span class="line">	<span class="number">160</span>, <span class="number">121</span>, <span class="number">149</span>, <span class="number">44</span>, <span class="number">53</span>, <span class="number">17</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">equalNumSum</span><span class="params">(rResult *[100]<span class="keyword">uint8</span>, output [100]<span class="keyword">uint8</span>, <span class="built_in">len</span> <span class="keyword">int</span>)</span> <span class="params">(sum <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	sum = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> x := <span class="number">0</span>; x &lt; <span class="built_in">len</span>; x++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">8</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> (rResult[x] &amp; <span class="number">1</span>) == (output[x] &amp; <span class="number">1</span>) &#123;</span><br><span class="line">				sum++</span><br><span class="line">			&#125;</span><br><span class="line">			rResult[x] &gt;&gt;= <span class="number">1</span></span><br><span class="line">			output[x] &gt;&gt;= <span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//fmt.Println(sum)</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">guessR</span><span class="params">(mask1, mask2 <span class="keyword">int64</span>, restrict <span class="keyword">int</span>)</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> result = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;&#125;</span><br><span class="line">	<span class="built_in">len</span> := <span class="number">100</span></span><br><span class="line">	maxLen := <span class="keyword">int64</span>(<span class="number">1</span> &lt;&lt; restrict)</span><br><span class="line">	cmpMax := <span class="number">0</span></span><br><span class="line">	rr := <span class="keyword">int64</span>(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> r := <span class="keyword">int64</span>(<span class="number">0</span>); r &lt; maxLen; r++ &#123;</span><br><span class="line">		lfsr(r, mask1, mask2, &amp;result, <span class="built_in">len</span>)</span><br><span class="line">		equalNumSum := equalNumSum(&amp;result, output, <span class="built_in">len</span>)</span><br><span class="line">		<span class="keyword">if</span> equalNumSum &gt; cmpMax &#123;</span><br><span class="line">			cmpMax = equalNumSum</span><br><span class="line">			rr = r</span><br><span class="line">			fmt.Println(rr, cmpMax)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(rr, cmpMax)</span><br><span class="line">	<span class="keyword">return</span> rr</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">brute_r1</span><span class="params">(r2, r3 [100]<span class="keyword">uint8</span>)</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> r1 [<span class="number">100</span>]<span class="keyword">uint8</span></span><br><span class="line">	<span class="built_in">len</span> := <span class="number">1</span> &lt;&lt; <span class="number">21</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="keyword">uint8</span></span><br><span class="line">	<span class="keyword">for</span> r := <span class="number">0</span>; r &lt; <span class="built_in">len</span>; r++ &#123;</span><br><span class="line">		lfsr(<span class="keyword">int64</span>(r), <span class="number">0x17f</span>a06, <span class="number">0x1fffff</span>, &amp;r1, <span class="number">100</span>)</span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">			<span class="keyword">for</span> k := <span class="number">7</span>; k &gt;= <span class="number">0</span>; k-- &#123;</span><br><span class="line">				s1 := (r1[i] &gt;&gt; k &amp; <span class="number">1</span>)</span><br><span class="line">				s2 := (r2[i] &gt;&gt; k &amp; <span class="number">1</span>)</span><br><span class="line">				s3 := (r3[i] &gt;&gt; k &amp; <span class="number">1</span>)</span><br><span class="line">				z := s2</span><br><span class="line">				<span class="keyword">if</span> s1 == <span class="number">1</span> &#123;</span><br><span class="line">					z = s3</span><br><span class="line">				&#125;</span><br><span class="line">				c = c&lt;&lt;<span class="number">1</span> ^ z</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> c != output[i] &#123;</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> i == <span class="number">99</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">int64</span>(r)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(r)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> r2Result = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;&#125;</span><br><span class="line">	<span class="keyword">var</span> r3Result = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;&#125;</span><br><span class="line">	<span class="comment">//r2 := guessR(0x2a9a0d, 0x3fffff, 22)   //3324079</span></span><br><span class="line">	<span class="comment">//r3 := guessR(0x5E5E6A, 0x7fffff, 23)	 //4958299</span></span><br><span class="line">	r2 := <span class="number">3324079</span></span><br><span class="line">	r3 := <span class="number">4958299</span></span><br><span class="line">	lfsr(<span class="number">3324079</span>, <span class="number">0x2a9a0d</span>, <span class="number">0x3fffff</span>, &amp;r2Result, <span class="number">100</span>)</span><br><span class="line">	lfsr(<span class="number">4958299</span>, <span class="number">0x5E5E6A</span>, <span class="number">0x7fffff</span>, &amp;r3Result, <span class="number">100</span>)</span><br><span class="line">	fmt.Println(r2Result)</span><br><span class="line">	fmt.Println(r3Result)</span><br><span class="line">	r1 := brute_r1(r2Result, r3Result)</span><br><span class="line">	fmt.Printf(<span class="string">"flag&#123;%x%x%x&#125;"</span>, r1, r2, r3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Mobile"><a href="#Mobile" class="headerlink" title="Mobile"></a>Mobile</h1><h2 id="GetFlag"><a href="#GetFlag" class="headerlink" title="GetFlag"></a>GetFlag</h2><p>比赛的时候觉得快出了，但是不会通信就很难受，复现一遍吧。</p>
+<p>扔到JEB里看看。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319114048514.png" alt="image-20200319114048514"></p>
+<p>往一个文件里写了flag，这样的方式创建的文件会在应用的私有目录下。我们安装软件到手机上，使用adb shell查看。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120728403.png" alt="image-20200319120728403"></p>
+<p>服务端监听8080端口。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319114813854.png" alt="image-20200319114813854"></p>
+<p>通过输入流得的传给它的数据。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120127116.png" alt="image-20200319120127116"></p>
+<p>还有接收数据的方法。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120203664.png" alt="image-20200319120203664"></p>
+<p>通过输出流返回一个随机数。然后对输入的数据进行了一些操作。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120307536.png" alt="image-20200319120307536"></p>
+<p>主要就是checkpayload方法。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120349230.png" alt="image-20200319120349230"></p>
+<p>验证mssage和check，check是随机数作为密钥的HmacSha1加密。</p>
+<p>验证通过即可执行wget message。</p>
+<p>没有环境了，搭了几个小时，还是没有成功。。。。</p>
+]]></content>
+      <categories>
+        <category>CTF赛题writeup</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树</title>
+    <url>/2020/03/10/%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="1-二叉树性质"><a href="#1-二叉树性质" class="headerlink" title="1. 二叉树性质"></a>1. 二叉树性质</h3><ul>
+<li>二叉树最多有两个子树。</li>
+<li>二叉树第i层最多有$2^{i-1}$个节点</li>
+<li>深度为k的二叉树至多有$2^k-1$个节点</li>
+<li>对任一二叉树，叶子节点为n0，度为2的节点为n2，则n0=n2+1</li>
+<li>包含n个结点的二叉树的高度至少为$log_2(n+1)$。</li>
+</ul>
+<h3 id="2-二叉树分类"><a href="#2-二叉树分类" class="headerlink" title="2. 二叉树分类"></a>2. 二叉树分类</h3><ul>
+<li>完全二叉树——叶子节点都在最底下两层，最后一层的叶子节点都靠左排列，并且除了最后一层，其他层的节点个数都要达到最大，这种二叉树叫作完全二叉树。</li>
+<li>满二叉树——叶子节点全都在最底层，除了叶子节点之外，每个节点都有左右两个子节点，这种二叉树就叫作满二叉树，他是一种特殊的完全二叉树。</li>
+<li>平衡二叉树——平衡二叉树又被称为AVL树（区别于AVL算法），它是一棵二叉排序树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</li>
+</ul>
+<h3 id="3-二叉树的遍历"><a href="#3-二叉树的遍历" class="headerlink" title="3. 二叉树的遍历"></a>3. 二叉树的遍历</h3><ul>
+<li>前序遍历<pre class="mermaid">graph LR
+结点-->左子树
+左子树-->右子树</pre></li>
+<li>中序遍历  <pre class="mermaid">graph LR
+左子树-->结点
+结点-->右子树</pre></li>
+<li>后序遍历  <pre class="mermaid">graph LR
+左子树-->右子树
+右子树-->结点</pre></li>
+<li>层次遍历  <pre class="mermaid">graph LR
+第一层-->第二层
+第二层-->...
+... -->第K层</pre>
+
+
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android逆向基础</title>
+    <url>/2020/03/10/Android%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>apk是一个压缩文件，后缀改为zip可以解压出来。</p>
+<p><strong>AndroidMainfest.xml</strong></p>
+<p>一些配置清单，名字、版本、权限、引用的库文件等等。找一个apk看看这个文件，就什么都懂了。</p>
+<p><strong>META-INF目录</strong></p>
+<p>存放签名信息，android程序生成release版本的apk需要签名，加密信息应该就保存的这里了。</p>
+<p><strong>res目录</strong></p>
+<p>存放各种资源文件。最终被映射到Android工程中的R文件中，对各种资源会生成对应ID。逆向android主要是找strings.xml，便于定位关键字符串。一般在values文件夹中，layout文件夹是存放的应用界面布局。</p>
+<p><strong>lib目录</strong></p>
+<p>存放依赖的native库文件，.so文件是C/C++写的。可以根据特定目录确定是什么架构的。.so文件在逆向中应用挺多。</p>
+<p><strong>assets目录</strong></p>
+<p>印象不是很深，我在之前CTF题中没有使用过这个目录。和res有点相似。</p>
+<p><strong>resources.arsc</strong></p>
+<p>编译后的二进制资源文件的索引。应该就是程序运行，然后从这个文件根据对应ID找到对应的res资源文件。</p>
+<p><strong>classes.dex文件</strong></p>
+<p>java字节码文件，这个文件很重要，可以用jeb等转换成java源码。说到这就不得不提一下几个文件的转换了。</p>
+<p> <img src="/2020/03/10/Android逆向基础/clipboard-1583806782413.png" alt="img"></p>
+<p>baksmali.jar和smali.jar有时候java自带的老出问题，我是从网上下载的。<a href="https://bitbucket.org/JesusFreke/smali/downloads/" target="_blank" rel="noopener">https://bitbucket.org/JesusFreke/smali/downloads/</a></p>
+<p>当然敲命令有点费事，可以去吾爱的爱盘下载android逆向工具包。</p>
+<p><strong>Activity 的主要方法</strong></p>
+<p><strong>onClick</strong></p>
+<p>CrackMe类型的题目，重点关注这个方法。</p>
+<p><strong>init和onCreate</strong></p>
+<p>Activity创建时的初始化函数</p>
+<p><strong>BuildConfig和R</strong></p>
+<p>编译时自动添加的资源类，不常用</p>
+<p><strong>Native层与so</strong></p>
+<p>Android原生代码，Linux中的执行代码，C/C++写的，底层是ARM汇编，很重要。</p>
+<p><strong>JNI_ONLOAD</strong></p>
+<p>这个函数是Dalvik虚拟机加载库时的初始化函数。</p>
+<p><strong>动态调试Smali代码演示</strong></p>
+<p>使用adb install xxxxxx.apk</p>
+<p>安装apk。</p>
+<p>拖入apk到jeb中，Ctrl+B下断点。</p>
+<p> 使用adb shell am start -D -n com.droider.crackme0201/.MainActivity   让程序处于等待调试状态</p>
+<p>然后点 调试器-&gt;开始</p>
+<p>附加。断点设在点击事件后。</p>
+<p>然后正常执行app，就会在指定断点处断下来。</p>
+<p>可以查看局部变量。</p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard-1583806831184.png" alt="img"></p>
+<p>在VM 终端中可以执行指令：</p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard-1583806844916.png" alt="img"></p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard-1583806852913.png" alt="img"></p>
+<p>还有很多用法，我也不会用。</p>
+<p>判断跳转:</p>
+<p><img src="/2020/03/10/Android逆向基础/clipboard.png" alt="![img](D:/有道笔记/数据/qq20118A67A04314627D0DF4F3B9EFF13F/7d45d1529d4c41eead3e0d46a2c8f067/clipboard.png)"></p>
+<p>用APKIDE修改 if-nez 为 if-eqz。</p>
+<p>APK破解成功。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android动态调试</title>
+    <url>/2020/03/10/Android%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Android动态调试支持"><a href="#Android动态调试支持" class="headerlink" title="Android动态调试支持"></a>Android动态调试支持</h1><ul>
+<li>dalvik实现了JDWP(Java Debug wire Protocol,Java调试有线协议)，可直接使用支持此协议的调试器来调试Android程序。</li>
+<li>dalvik为JDWP的实现加入了DDM(Dalvik Debug Monitor,Dalvik调试监视器)。具体的实现有DDMS(Dalvik Debug Monitor Server,调试监视器服务)和Eclipse ADT插件。</li>
+<li>系统属性ro.debuggable为1时所有程序都会开启调试(adb shell getprop ro.debuggable检查)，若为0，则会判断AndroidManifest.xml中的debuggable属性。</li>
+</ul>
+<h1 id="DDMS的使用"><a href="#DDMS的使用" class="headerlink" title="DDMS的使用"></a>DDMS的使用</h1><p>Logcat、文件浏览、Method Profiling等。</p>
+<p>Logcat视图相当于<code>adb logcat -s com.droider.jnimethods:V</code></p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">adb logcat -s TagName:<span class="keyword">Type</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="定位关键代码"><a href="#定位关键代码" class="headerlink" title="定位关键代码"></a>定位关键代码</h1><h2 id="代码注入法"><a href="#代码注入法" class="headerlink" title="代码注入法"></a>代码注入法</h2><p>通过Log输出定位关键代码，甚至破解程序。</p>
+<h2 id="栈跟踪法"><a href="#栈跟踪法" class="headerlink" title="栈跟踪法"></a>栈跟踪法</h2><figure class="highlight smali"><table><tr><td class="code"><pre><span class="line">java代码：</span><br><span class="line">   <span class="built_in"> new </span>Exception(<span class="string">"print trace"</span>).printStackTrace();</span><br><span class="line">smali代码:</span><br><span class="line">   <span class="built_in"> new-instance </span>v0, <span class="class">Ljava/lang/Exception;</span></span><br><span class="line">   <span class="built_in"> const-string </span>v1, <span class="string">"print trace"</span></span><br><span class="line">   <span class="built_in"> invoke-direct </span>&#123;v0, v1&#125;, <span class="class">Ljava/lang/Exception;</span>-&gt;&lt;init&gt;(<span class="class">Ljava/lang/String;</span>)V</span><br><span class="line">   <span class="built_in"> invoke-virtual </span>&#123;v0&#125;, <span class="class">Ljava/lang/Exception;</span>-&gt;printStackTrace()V</span><br></pre></td></tr></table></figure>
+
+<p>栈跟踪信息是WARN级别的log</p>
+<h2 id="Method-Profiling"><a href="#Method-Profiling" class="headerlink" title="Method Profiling"></a>Method Profiling</h2><p>相当于Ollydbg的trace功能，跟踪信息。</p>
+<p>通过方法设置跟踪的开始和停止：</p>
+<p><img src="/2020/03/10/Android动态调试/image-20200311221443847.png" alt="image-20200311221443847"></p>
+<p>smali代码如下：</p>
+<p><img src="/2020/03/10/Android动态调试/image-20200311221616231.png" alt="image-20200311221616231"></p>
+<p>此方法会在文件下生成trace文件，可以使用SDK目录下的traceview工具打开，使用此方法还需要有SD卡写入权限。</p>
+<h1 id="IDA调试原生程序"><a href="#IDA调试原生程序" class="headerlink" title="IDA调试原生程序"></a>IDA调试原生程序</h1><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">启动android_server文件</span><br><span class="line">转发端口 adb forward tcp:<span class="number">23946</span> tcp:<span class="number">23946</span></span><br><span class="line">设置等待调试 adb <span class="keyword">shell</span> <span class="keyword">am</span> start -D -n 包名/类名</span><br><span class="line">IDA attach进程</span><br><span class="line">jdb附加 jdb -connect <span class="keyword">com</span>.<span class="keyword">sun</span>.jdi.SocketAttach:<span class="built_in">hostname</span>=localhost,port=<span class="number">8700</span></span><br><span class="line">列出进程 <span class="keyword">ps</span> -aux</span><br><span class="line">杀死进程 kill -s <span class="number">9</span> PID (其中-s <span class="number">9</span> 制定了传递给进程的信号是９。强制、尽快终止进程。)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AndroidNDK逆向</title>
+    <url>/2020/03/10/AndroidNDK%E9%80%86%E5%90%91/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="原生C程序逆向分析"><a href="#原生C程序逆向分析" class="headerlink" title="原生C程序逆向分析"></a>原生C程序逆向分析</h2><p>.plt段主要是用于函数重定位的。<br>.text段就是程序代码段。</p>
+<ul>
+<li>反汇编。<br>  objdump -S filename  </li>
+</ul>
+<p>本以为这节不用记录，感觉都能看懂，汇编看多了就会了，但是竟然发现了惊天大秘密。看下边：<br><img src="/2020/03/10/AndroidNDK逆向/image-20200310102238328.png" alt="image-20200310102238328"><br>一直以为PC是指下一条指令，但是在这里ADDLS这条指令，我发现怎么都不可能按照正常逻辑执行，我郁闷了1个小时，终于找到了源头。<br>[<a href="https://blog.csdn.net/lee244868149/article/details/49488575]" target="_blank" rel="noopener">https://blog.csdn.net/lee244868149/article/details/49488575]</a>  </p>
+<p>PC需要取指、译码、执行三步，每次取指完就指向下一条指令即PC+4。然后取指完后又指向下一条指令，即PC+8。<br><img src="/2020/03/10/AndroidNDK逆向/image-20200310102307647.png" alt="image-20200310102307647"></p>
+<p>所以第一条指令执行的时候，PC=PC+8.</p>
+<h5 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h5><h4 id="编译优化"><a href="#编译优化" class="headerlink" title="编译优化"></a>编译优化</h4><p>gcc -O 可以进行优化。5个等级0,1,2,3,s  </p>
+<h2 id="C-逆向分析"><a href="#C-逆向分析" class="headerlink" title="C++逆向分析"></a>C++逆向分析</h2><p>C++是神，分析不来。。。awsl</p>
+<h2 id="JNI-API逆向分析"><a href="#JNI-API逆向分析" class="headerlink" title="JNI API逆向分析"></a>JNI API逆向分析</h2><p>JNINativeInterface:  </p>
+<pre><code>JNI本地接口，一个接口函数指针表，有JNI接口的函数指针。  </code></pre><p>JNIInvokeInterface:</p>
+<pre><code>JNI调用接口，有3个保留项，5个函数指针。  </code></pre><p><img src="/2020/03/10/AndroidNDK逆向/image-20200310102327161.png" alt="image-20200310102327161"><br>JNIEnv结构体的第一个字段就是JNINativeInterface，IDA分析时不会识别API，将函数的第一个参数类型改为JNIEnv类型就可以识别了，或者导入JNIEnv结构体。<br>对照着结构体看，可以知道IDA中相对寄存器的偏移处就是API函数。  </p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android静态分析</title>
+    <url>/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="IDA破解实例-定位关键代码"><a href="#IDA破解实例-定位关键代码" class="headerlink" title="IDA破解实例-定位关键代码"></a>IDA破解实例-定位关键代码</h3><h4 id="搜索特征字符串"><a href="#搜索特征字符串" class="headerlink" title="搜索特征字符串"></a>搜索特征字符串</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> ctrl+s定位<span class="built_in">string</span>s段</span><br><span class="line"><span class="number">2.</span> alt+t快捷键搜索文本字符串</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索API"><a href="#搜索API" class="headerlink" title="搜索API"></a>搜索API</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 定位到code段</span><br><span class="line"><span class="number">2.</span> 搜索API名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索方法名"><a href="#搜索方法名" class="headerlink" title="搜索方法名"></a>搜索方法名</h4><figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line">在<span class="keyword">Exports</span>窗口中搜索方法名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>if-eqz的opcode是0x38<br>if-nez的opcode是0x39<br>return的opcode是0x0f</p>
+</blockquote>
+<h4 id="修改dex，替换apk中的dex"><a href="#修改dex，替换apk中的dex" class="headerlink" title="修改dex，替换apk中的dex"></a>修改dex，替换apk中的dex</h4><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span> 使用dexFixer更新checksum</span><br><span class="line"><span class="number">2.</span> 将修改后的dex重新放回apk包里</span><br><span class="line"><span class="number">3.</span> 删除META-INF文件夹</span><br><span class="line"><span class="number">4.</span> 对apk重签名即可安装</span><br></pre></td></tr></table></figure>
+
+<h4 id="终止程序"><a href="#终止程序" class="headerlink" title="终止程序"></a>终止程序</h4><ul>
+<li><p>Context的finish()方法</p>
+</li>
+<li><p>android.os.Process的killProcess()方法</p>
+</li>
+</ul>
+<h3 id="Androguard简单使用"><a href="#Androguard简单使用" class="headerlink" title="Androguard简单使用"></a>Androguard简单使用</h3><ul>
+<li><p><a href="http://androapkinfo.py" target="_blank" rel="noopener">androapkinfo.py</a><br>查看apk信息。包、资源、权限、组件、方法。<br>androapkinfo -i filename</p>
+</li>
+<li><p><a href="http://androaxml.py" target="_blank" rel="noopener">androaxml.py</a><br>解析AndroidManifest.xml文件。<br>androaxml -i filename</p>
+</li>
+<li><p><a href="http://androcsign.py" target="_blank" rel="noopener">androcsign.py</a><br>收集签名到数据库中，使用前需要为apk编写sign文件。</p>
+</li>
+<li><p><a href="http://androdd.py" target="_blank" rel="noopener">androdd.py</a><br>生成apk每个类的方法的调用流程图。<br>androdd -i filename -o dirname -d -f PNG<br>-d 是指定生成dot图形文件。</p>
+</li>
+<li><p><a href="http://androdiff.py" target="_blank" rel="noopener">androdiff.py</a><br>比较两个apk文件的差异。<br>androdiff -i filename1 filename2</p>
+</li>
+<li><p><a href="http://androdump.py" target="_blank" rel="noopener">androdump.py</a><br>dump一个Linux进程。<br>androdump -i pid</p>
+</li>
+<li><p><a href="http://androgexf.py" target="_blank" rel="noopener">androgexf.py</a><br>生成一个gexf图形文件。用Gephi查看。<br>androgexf -i filename1 -o filename2</p>
+</li>
+<li><p><a href="http://androlyze.py" target="_blank" rel="noopener">androlyze.py</a><br>提供交互环境静态分析android程序。</p>
+</li>
+<li><p><a href="http://andromercury.py" target="_blank" rel="noopener">andromercury.py</a><br>Mercury工具的框架。</p>
+</li>
+<li><p><a href="http://androrisk.py" target="_blank" rel="noopener">androrisk.py</a><br>评估apk文件中的潜在方法。<br>androrisk -m -i filename<br>m 表示需要分析每一个方法。</p>
+</li>
+<li><p><a href="http://androsign.py" target="_blank" rel="noopener">androsign.py</a><br>检测签名是否存于数据库，与androcsign作用相反。<br><img src="/2020/03/10/Android静态分析/image-20200310102455464.png" alt="image-20200310102455464"></p>
+</li>
+<li><p><a href="http://androsim.py" target="_blank" rel="noopener">androsim.py</a><br>计算两个apk文件的相似度。<br>androsim -i filename1 filename2</p>
+</li>
+<li><p><a href="http://androxgmml.py" target="_blank" rel="noopener">androxgmml.py</a><br>生成jar/class/apk/dex文件的控制流程及功能调度图，输出格式为xgmml。<br>androxgmml -i filename -o *.xgmml</p>
+</li>
+<li><p><a href="http://apkviewer.py" target="_blank" rel="noopener">apkviewer.py</a><br>为每一个类生成一个独立的graphml图形文件。<br>apkviewer -i filename -o xxx</p>
+</li>
+</ul>
+<h3 id="androlyze的简单使用"><a href="#androlyze的简单使用" class="headerlink" title="androlyze的简单使用"></a>androlyze的简单使用</h3><p>androlyze -s //获取交互命令行模式</p>
+<ol>
+<li>获取apk文件对象<br>a = APK(“filename”)</li>
+<li>获取dex文件对象<br>d = DalvikVMFormat(a.get_dex())</li>
+<li>获取分析结果对象<br>dx = VMAnalysis(d)</li>
+<li>三合一指令<br>a, d, dx = APK(“filename”, decompiler=”dad”)<br>decompiler指定反编译器名称。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>Android逆向</category>
+      </categories>
+      <tags>
+        <tag>Android逆向</tag>
+      </tags>
+  </entry>
+</search>

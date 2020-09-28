@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cc_log32.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cc_log16.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"shrinkIn","post_header":"slideLeftIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="废话打了两天的比赛，小做了几道题，不可谓不充实。虽然找不到工作，也要继续学习。 MISC简单的misc用010editor打开photo.jpg，在最底部看到zip格式，  直接改后缀解压，得到摩斯密码，解密是flag.zip的密码，输入后得到base64加密的flag。 解密即可。flag{Th1s_is_FlaG_you_aRE_rigHT} 隐藏的信息拿到一个残缺的二维码，看这个二维码很别扭">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高校战役CTF部分writeup">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="废话打了两天的比赛，小做了几道题，不可谓不充实。虽然找不到工作，也要继续学习。 MISC简单的misc用010editor打开photo.jpg，在最底部看到zip格式，  直接改后缀解压，得到摩斯密码，解密是flag.zip的密码，输入后得到base64加密的flag。 解密即可。flag{Th1s_is_FlaG_you_aRE_rigHT} 隐藏的信息拿到一个残缺的二维码，看这个二维码很别扭">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200311151648233.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200311153008620.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200311153154593.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200311153716210.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319111152938.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315160945833.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315162525217.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315163844983.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315164605229.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315195856725.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315170104295.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200315170118029.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200316152415784.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200316152611658.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200316152754240.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200316152823755.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200316153024371.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319114048514.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319120728403.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319114813854.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319120127116.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319120203664.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319120307536.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200319120349230.png">
+<meta property="og:updated_time" content="2020-03-20T12:20:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高校战役CTF部分writeup">
+<meta name="twitter:description" content="废话打了两天的比赛，小做了几道题，不可谓不充实。虽然找不到工作，也要继续学习。 MISC简单的misc用010editor打开photo.jpg，在最底部看到zip格式，  直接改后缀解压，得到摩斯密码，解密是flag.zip的密码，输入后得到base64加密的flag。 解密即可。flag{Th1s_is_FlaG_you_aRE_rigHT} 隐藏的信息拿到一个残缺的二维码，看这个二维码很别扭">
+<meta name="twitter:image" content="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/image-20200311151648233.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>高校战役CTF部分writeup | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+ 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-bookmark"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="丨沉默丨">
+      <meta itemprop="description" content="刻苦学习逆向的小菜鸡。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高校战役CTF部分writeup
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+          	
+
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-11 15:05:38" itemprop="dateCreated datePublished" datetime="2020-03-11T15:05:38+08:00">2020-03-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-20 20:20:14" itemprop="dateModified" datetime="2020-03-20T20:20:14+08:00">2020-03-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF赛题writeup/" itemprop="url" rel="index"><span itemprop="name">CTF赛题writeup</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="废话"><a href="#废话" class="headerlink" title="废话"></a>废话</h1><p>打了两天的比赛，小做了几道题，不可谓不充实。虽然找不到工作，也要继续学习。</p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="简单的misc"><a href="#简单的misc" class="headerlink" title="简单的misc"></a>简单的misc</h2><p>用010editor打开photo.jpg，在最底部看到zip格式，</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311151648233.png" alt="image-20200311151648233"></p>
+<p>直接改后缀解压，得到摩斯密码，解密是flag.zip的密码，输入后得到base64加密的flag。</p>
+<p>解密即可。flag{Th1s_is_FlaG_you_aRE_rigHT}</p>
+<h2 id="隐藏的信息"><a href="#隐藏的信息" class="headerlink" title="隐藏的信息"></a>隐藏的信息</h2><p>拿到一个残缺的二维码，看这个二维码很别扭，用Stegsolve.jar翻转了颜色之后，看上去舒服多了，然后补定位符，奈何手残，总是补不好，于是放弃，然后我再压缩包右击了一下7z解压，无意发现这个压缩包是假密码，拿到了一个wav文件，使用百度找了好多类似的题，用Audacity分析频谱发现开始和结束有问题，把音量调到最大，开始的部分还是听不到，但是最后可以听出是拨号音，（看过柯南，一下就猜出这是要猜电话号码），结合百度，才发现和DTFM有关。这里给出一篇参考文章：<a href="https://hebin.me/2017/09/10/西普ctf-beyond/" target="_blank" rel="noopener">https://hebin.me/2017/09/10/%E8%A5%BF%E6%99%AEctf-beyond/</a></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153008620.png" alt="image-20200311153008620"></p>
+<p>然后可以得到一串数字187485618521，但是提交不对，感觉还是和那个二维码有关，</p>
+<p>strings命令找到：<img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153154593.png" alt="image-20200311153154593"></p>
+<p>看来要base64加密,最后得出flag{MTg3NDg1NjE4NTIx}</p>
+<h2 id="ez-mem-amp-usb"><a href="#ez-mem-amp-usb" class="headerlink" title="ez_mem&amp;usb"></a>ez_mem&amp;usb</h2><p>从来不刷杂项题，所以都是靠百度做，拿到一个数据pcap文件，分析流量，过滤http协议，找到上传的文件。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200311153716210.png" alt="image-20200311153716210"></p>
+<p>发现一个40M的数据包，那肯定传文件了，把文件dump出来，直接解压，得到一个vmem文件，百度一波，这是要内存取证，萌新参考：<a href="https://www.cnblogs.com/0x4D75/p/11161822.html" target="_blank" rel="noopener">https://www.cnblogs.com/0x4D75/p/11161822.html</a></p>
+<p>思路是，filescan+grep找到和flag字符匹配的文件，还真有一个flag.img，将flag.img dump出来，然后直接7z解压，需要密码，于是找到内存镜像中的cmd命令，有密码给出。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 filescan | grep flag</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line"><span class="number">0x0000000001155f90</span>      <span class="number">1</span>      <span class="number">0</span> R--rwd \Device\HarddiskVolume1\Documents <span class="keyword">and</span> Settings\Administrator\flag.img</span><br><span class="line"></span><br><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 dumpfiles -Q 0x1155f90 -D ./output</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line">DataSectionObject <span class="number">0x01155f90</span>   None   \Device\HarddiskVolume1\Documents <span class="keyword">and</span> Settings\Administrator\flag.img</span><br><span class="line"></span><br><span class="line">root<span class="variable">@redhat</span><span class="symbol">:/mnt/hgfs/P/</span>高校战疫/misc/usb取证<span class="comment"># volatility -f data.vmem --profile=WinXPSP3x86 cmdscan</span></span><br><span class="line">Volatility Foundation Volatility Framework <span class="number">2.6</span></span><br><span class="line">**************************************************</span><br><span class="line"><span class="symbol">CommandProcess:</span> csrss.exe <span class="symbol">Pid:</span> <span class="number">464</span></span><br><span class="line"><span class="symbol">CommandHistory:</span> <span class="number">0x556bb8</span> <span class="symbol">Application:</span> cmd.exe <span class="symbol">Flags:</span> Allocated, Reset</span><br><span class="line"><span class="symbol">CommandCount:</span> <span class="number">2</span> <span class="symbol">LastAdded:</span> <span class="number">1</span> <span class="symbol">LastDisplayed:</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">FirstCommand:</span> <span class="number">0</span> <span class="symbol">CommandCountMax:</span> <span class="number">50</span></span><br><span class="line"><span class="symbol">ProcessHandle:</span> <span class="number">0x504</span></span><br><span class="line">Cmd <span class="comment">#0 @ 0x3609ea0: passwd:weak_auth_top100</span></span><br><span class="line">Cmd <span class="comment">#1 @ 0x5576d0: start wireshark</span></span><br><span class="line">Cmd <span class="comment">#13 @ 0x9f009f: ??</span></span><br><span class="line">Cmd <span class="comment">#41 @ 0x9f003f: ?\?????????</span></span><br></pre></td></tr></table></figure>
+
+<p>压缩包里是一个usbdata，查了一下这个脚本，解密即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">usb_codes = &#123;</span><br><span class="line">   <span class="number">0x04</span>:<span class="string">"aA"</span>, <span class="number">0x05</span>:<span class="string">"bB"</span>, <span class="number">0x06</span>:<span class="string">"cC"</span>, <span class="number">0x07</span>:<span class="string">"dD"</span>, <span class="number">0x08</span>:<span class="string">"eE"</span>, <span class="number">0x09</span>:<span class="string">"fF"</span>,</span><br><span class="line">   <span class="number">0x0A</span>:<span class="string">"gG"</span>, <span class="number">0x0B</span>:<span class="string">"hH"</span>, <span class="number">0x0C</span>:<span class="string">"iI"</span>, <span class="number">0x0D</span>:<span class="string">"jJ"</span>, <span class="number">0x0E</span>:<span class="string">"kK"</span>, <span class="number">0x0F</span>:<span class="string">"lL"</span>,</span><br><span class="line">   <span class="number">0x10</span>:<span class="string">"mM"</span>, <span class="number">0x11</span>:<span class="string">"nN"</span>, <span class="number">0x12</span>:<span class="string">"oO"</span>, <span class="number">0x13</span>:<span class="string">"pP"</span>, <span class="number">0x14</span>:<span class="string">"qQ"</span>, <span class="number">0x15</span>:<span class="string">"rR"</span>,</span><br><span class="line">   <span class="number">0x16</span>:<span class="string">"sS"</span>, <span class="number">0x17</span>:<span class="string">"tT"</span>, <span class="number">0x18</span>:<span class="string">"uU"</span>, <span class="number">0x19</span>:<span class="string">"vV"</span>, <span class="number">0x1A</span>:<span class="string">"wW"</span>, <span class="number">0x1B</span>:<span class="string">"xX"</span>,</span><br><span class="line">   <span class="number">0x1C</span>:<span class="string">"yY"</span>, <span class="number">0x1D</span>:<span class="string">"zZ"</span>, <span class="number">0x1E</span>:<span class="string">"1!"</span>, <span class="number">0x1F</span>:<span class="string">"2@"</span>, <span class="number">0x20</span>:<span class="string">"3#"</span>, <span class="number">0x21</span>:<span class="string">"4$"</span>,</span><br><span class="line">   <span class="number">0x22</span>:<span class="string">"5%"</span>, <span class="number">0x23</span>:<span class="string">"6^"</span>, <span class="number">0x24</span>:<span class="string">"7&amp;"</span>, <span class="number">0x25</span>:<span class="string">"8*"</span>, <span class="number">0x26</span>:<span class="string">"9("</span>, <span class="number">0x27</span>:<span class="string">"0)"</span>,</span><br><span class="line">   <span class="number">0x2C</span>:<span class="string">"  "</span>, <span class="number">0x2D</span>:<span class="string">"-_"</span>, <span class="number">0x2E</span>:<span class="string">"=+"</span>, <span class="number">0x2F</span>:<span class="string">"[&#123;"</span>, <span class="number">0x30</span>:<span class="string">"]&#125;"</span>,  <span class="number">0x32</span>:<span class="string">"#~"</span>,</span><br><span class="line">   <span class="number">0x33</span>:<span class="string">";:"</span>, <span class="number">0x34</span>:<span class="string">"'\""</span>,  <span class="number">0x36</span>:<span class="string">",&lt;"</span>,  <span class="number">0x37</span>:<span class="string">".&gt;"</span>, <span class="number">0x4f</span>:<span class="string">"&gt;"</span>, <span class="number">0x50</span>:<span class="string">"&lt;"</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">key = [<span class="number">0x09</span>,<span class="number">0x0F</span>,<span class="number">0x04</span>,<span class="number">0x0A</span>,<span class="number">0x2F</span>,<span class="number">0x23</span>,<span class="number">0x26</span>,<span class="number">0x1F</span>,<span class="number">0x27</span>,<span class="number">0x27</span>,<span class="number">0x25</span>,<span class="number">0x20</span>,<span class="number">0x22</span>,<span class="number">0x24</span>,<span class="number">0x25</span>,<span class="number">0x21</span>,<span class="number">0x08</span>,<span class="number">0x06</span>,<span class="number">0x20</span>,<span class="number">0x08</span>,<span class="number">0x07</span>,<span class="number">0x25</span>,<span class="number">0x07</span>,<span class="number">0x1F</span>,<span class="number">0x04</span>,<span class="number">0x23</span>,<span class="number">0x21</span>,<span class="number">0x08</span>,<span class="number">0x24</span>,<span class="number">0x20</span>,<span class="number">0x09</span>,<span class="number">0x08</span>,<span class="number">0x26</span>,<span class="number">0x1E</span>,<span class="number">0x20</span>,<span class="number">0x06</span>,<span class="number">0x27</span>,<span class="number">0x30</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(key)):</span><br><span class="line">    flag += usb_codes[key[i]][<span class="number">0</span>]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{69200835784ec3ed8d2a64e73fe913c0}</p>
+<h2 id="武汉加油"><a href="#武汉加油" class="headerlink" title="武汉加油"></a>武汉加油</h2><p>010editor打开图片，这可真是个好东西啊，两种不同的文件格式还分颜色。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319111152938.png" alt="image-20200319111152938"></p>
+<p>直接改后缀rar解压，</p>
+<p>然后使用一个工具爆破出隐藏的flag.txt文件。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">将flag.txt文件隐藏到flag.jpg中：</span><br><span class="line">steghide embed -cf flag<span class="selector-class">.jpg</span> -ef flag<span class="selector-class">.txt</span> -<span class="selector-tag">p</span> <span class="number">123456</span></span><br><span class="line"></span><br><span class="line">从flag.jpg解出flag<span class="selector-class">.txt</span>:</span><br><span class="line">steghide extract -sf flag<span class="selector-class">.jpg</span> -<span class="selector-tag">p</span> <span class="number">123456</span></span><br></pre></td></tr></table></figure>
+
+<p>shell脚本爆破密码：</p>
+<p>…..没成功，算了，不贴了。。</p>
+<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="天津垓"><a href="#天津垓" class="headerlink" title="天津垓"></a>天津垓</h2><p>上来先运行程序，提示缺少cygwin1.dll文件，下载了之后运行还是报错，算了吧，静态分析看看。</p>
+<p>找到了一个f函数，代码很简单，就一些简单的运算操作。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315160945833.png" alt="image-20200315160945833"></p>
+<p>感觉有戏，直接写脚本。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">s1 = [<span class="number">0x52</span>, <span class="number">0x69</span>, <span class="number">0x73</span>, <span class="number">0x69</span>, <span class="number">0x6e</span>, <span class="number">0x67</span>, <span class="number">0x5f</span>, <span class="number">0x48</span>, <span class="number">0x6f</span>, <span class="number">0x70</span>, <span class="number">0x70</span>, <span class="number">0x65</span>, <span class="number">0x72</span>, <span class="number">0x21</span>]</span><br><span class="line">s2 = [<span class="number">17</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">42</span>, <span class="number">59</span>, <span class="number">47</span>, <span class="number">3</span>, <span class="number">47</span>, <span class="number">4</span>, <span class="number">16</span>, <span class="number">72</span>, <span class="number">62</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">16</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">255</span>):</span><br><span class="line">        <span class="keyword">if</span> s2[i] == (~(j &amp; s1[i % <span class="number">14</span>])) &amp; (j | s1[i % <span class="number">14</span>]):</span><br><span class="line">            flag += chr(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>脚本跑出来是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image-20200315161644169](高校战役CTF部分writeup/image-20200315161644169.png)</span><br><span class="line"></span><br><span class="line">那肯定要动态调试的啊，一想又运行不了。我把函数都看一遍看看有什么信息。</span><br><span class="line"></span><br><span class="line">![image-20200315162052676](高校战役CTF部分writeup/image-20200315162052676.png)</span><br><span class="line"></span><br><span class="line">发现这里的Str和f函数中的Str是一个，分析了一下这个函数，是一段SMC(自修改代码)进行动态解密的。</span><br><span class="line"></span><br><span class="line">使用IDAPython：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">flag = &quot;Caucasus@s_ability&quot;</span><br><span class="line">start = 0x10040164d</span><br><span class="line">end = start + 1045</span><br><span class="line">j = 0</span><br><span class="line">for i in range(start, end):</span><br><span class="line">    ida_bytes.patch_byte(i, ida_bytes.get_byte(i)^ ord(flag[j % 18]))</span><br><span class="line">    j += 1</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315162525217.png" alt="image-20200315162525217"></p>
+<p>也不是很复杂。。。。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="number">2007666</span>,<span class="number">2125764</span>,<span class="number">1909251</span>,<span class="number">2027349</span>,<span class="number">2421009</span>,<span class="number">1653372</span>,<span class="number">2047032</span>,<span class="number">2184813</span>,<span class="number">2302911</span>,<span class="number">2263545</span>,<span class="number">1909251</span>,<span class="number">2165130</span>,<span class="number">1968300</span>,<span class="number">2243862</span>,<span class="number">2066715</span>,<span class="number">2322594</span>,<span class="number">1987983</span>,<span class="number">2243862</span>,<span class="number">1869885</span>,<span class="number">2066715</span>,<span class="number">2263545</span>,<span class="number">1869885</span>,<span class="number">964467</span>,<span class="number">944784</span>,<span class="number">944784</span>,<span class="number">944784</span>,<span class="number">728271</span>,<span class="number">1869885</span>,<span class="number">2263545</span>,<span class="number">2283228</span>,<span class="number">2243862</span>,<span class="number">2184813</span>,<span class="number">2165130</span>,<span class="number">2027349</span>,<span class="number">1987983</span>,<span class="number">2243862</span>,<span class="number">1869885</span>,<span class="number">2283228</span>,<span class="number">2047032</span>,<span class="number">1909251</span>,<span class="number">2165130</span>,<span class="number">1869885</span>,<span class="number">2401326</span>,<span class="number">1987983</span>,<span class="number">2243862</span>,<span class="number">2184813</span>,<span class="number">885735</span>,<span class="number">2184813</span>,<span class="number">2165130</span>,<span class="number">1987983</span>,<span class="number">2460375</span>]</span><br><span class="line">print(len(s))</span><br><span class="line">v61 = <span class="number">19683</span></span><br><span class="line">v62 = <span class="number">0x8000000B</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">51</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">255</span>):</span><br><span class="line">        <span class="keyword">if</span> s[i] == v61 * j % v62:</span><br><span class="line">            flag+=chr(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{Thousandriver_is_1000%_stronger_than_zero-one}</p>
+<h2 id="cycle-graph"><a href="#cycle-graph" class="headerlink" title="cycle_graph"></a>cycle_graph</h2><p>描述是图算法，估计凉了，数据结构菜的一笔。</p>
+<p>找到关键函数：</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315163844983.png" alt="image-20200315163844983"></p>
+<p>这里是对v1进行初始化，假设v1是个二维数组，每组有三个数据，根据代码可分析出有32组。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315164605229.png" alt="image-20200315164605229"></p>
+<p>这里就是主要算法。</p>
+<p>然后最后判断flag：</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315195856725.png" alt="image-20200315195856725"></p>
+<p>刚开始没注意v7的限制，直接写的脚本跑，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">arr_1 = [<span class="number">0x00000034</span>, <span class="number">0x00000002</span>, <span class="number">0x0000002C</span>, <span class="number">0x0000002A</span>, <span class="number">0x00000006</span>, <span class="number">0x0000002A</span>, <span class="number">0x0000002F</span>, <span class="number">0x0000002A</span>, <span class="number">0x00000033</span>, <span class="number">0x00000003</span>, <span class="number">0x00000002</span>, <span class="number">0x00000032</span>, <span class="number">0x00000032</span>, <span class="number">0x00000032</span>, <span class="number">0x00000030</span>, <span class="number">0x00000003</span>, <span class="number">0x00000001</span>, <span class="number">0x00000032</span>, <span class="number">0x0000002B</span>, <span class="number">0x00000002</span>, <span class="number">0x0000002E</span>, <span class="number">0x00000001</span>, <span class="number">0x00000002</span>, <span class="number">0x0000002D</span>, <span class="number">0x00000032</span>, <span class="number">0x00000004</span>, <span class="number">0x0000002D</span>, <span class="number">0x00000030</span>, <span class="number">0x00000031</span>, <span class="number">0x0000002F</span>, <span class="number">0x00000033</span>]</span><br><span class="line">print(len(arr_1))</span><br><span class="line">arr_2 = [<span class="number">0x0000001F</span>, <span class="number">0x00000002</span>, <span class="number">0x00000002</span>, <span class="number">0x00000001</span>, <span class="number">0x00000012</span>, <span class="number">0x00000007</span>, <span class="number">0x00000002</span>, <span class="number">0x0000001A</span>, <span class="number">0x0000000D</span>, <span class="number">0x00000004</span>, <span class="number">0x0000000A</span>, <span class="number">0x00000004</span>, <span class="number">0x00000015</span>, <span class="number">0x0000000E</span>, <span class="number">0x00000001</span>, <span class="number">0x00000000</span>, <span class="number">0x0000000E</span>, <span class="number">0x00000005</span>, <span class="number">0x00000007</span>, <span class="number">0x0000001C</span>, <span class="number">0x0000000C</span>, <span class="number">0x0000001C</span>, <span class="number">0x0000000F</span>, <span class="number">0x0000000F</span>, <span class="number">0x00000002</span>, <span class="number">0x00000010</span>, <span class="number">0x00000017</span>, <span class="number">0x0000001E</span>, <span class="number">0x00000017</span>, <span class="number">0x00000013</span>, <span class="number">0x00000009</span>, <span class="number">0x00000016</span>]</span><br><span class="line">print(len(arr_2))</span><br><span class="line">arr_3 = [<span class="number">0x00000005</span>, <span class="number">0x00000001</span>, <span class="number">0x00000008</span>, <span class="number">0x00000007</span>, <span class="number">0x00000017</span>, <span class="number">0x00000009</span>, <span class="number">0x00000013</span>, <span class="number">0x0000001F</span>, <span class="number">0x00000017</span>, <span class="number">0x00000009</span>, <span class="number">0x0000000D</span>, <span class="number">0x0000000C</span>, <span class="number">0x0000001D</span>, <span class="number">0x0000000A</span>, <span class="number">0x00000018</span>, <span class="number">0x00000009</span>, <span class="number">0x00000018</span>, <span class="number">0x00000019</span>, <span class="number">0x00000009</span>, <span class="number">0x0000001A</span>, <span class="number">0x00000003</span>, <span class="number">0x00000016</span>, <span class="number">0x00000006</span>, <span class="number">0x00000011</span>, <span class="number">0x0000000D</span>, <span class="number">0x00000007</span>, <span class="number">0x0000000F</span>, <span class="number">0x00000014</span>, <span class="number">0x00000001</span>, <span class="number">0x00000010</span>, <span class="number">0x00000004</span>, <span class="number">0x0000000B</span>]</span><br><span class="line"></span><br><span class="line">v1 = [[<span class="number">0</span>] * <span class="number">3</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">31</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">31</span>):</span><br><span class="line">    v1[i][<span class="number">0</span>] = arr_1[i]</span><br><span class="line">    v1[i][<span class="number">1</span>] = arr_2[i+<span class="number">1</span>]</span><br><span class="line">    v1[i][<span class="number">2</span>] = arr_3[i+<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">print(v1)</span><br><span class="line"></span><br><span class="line">str1 = string.printable</span><br><span class="line">print(str1)</span><br><span class="line"></span><br><span class="line">v5 = <span class="number">48</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line">ii = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> str1:</span><br><span class="line">        <span class="keyword">if</span> v1[ii][<span class="number">0</span>] + v5 == ord(j):</span><br><span class="line">            flag += j</span><br><span class="line">            ii = v1[ii][<span class="number">1</span>]</span><br><span class="line">            v5 = ord(j)</span><br><span class="line">            print(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> v5 - v1[ii][<span class="number">0</span>] == ord(j):</span><br><span class="line">            flag += j</span><br><span class="line">            ii = v1[ii][<span class="number">2</span>]</span><br><span class="line">            v5 = ord(j)</span><br><span class="line">            print(j)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>跑出来<code>d8b0bae8jh52db/2</code>,提交当然不对，后来看到了v7的限制。为什么v7会出现差异呢？ 因为有时候加v5和减v5都满足，不知道走哪条路径。估计得用某个算法解，比完赛再学一下算法，所以我手动正着加倒着，硬是给写出来了。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315170104295.png" alt="image-20200315170104295"></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200315170118029.png" alt="image-20200315170118029"></p>
+<p>满满的菜啊…….</p>
+<p>此处可用广度优先搜索算法，算法学习具体参考<a href="https://blog.csdn.net/raphealguo/article/details/7523411" target="_blank" rel="noopener">https://blog.csdn.net/raphealguo/article/details/7523411</a></p>
+<h2 id="easyparser"><a href="#easyparser" class="headerlink" title="easyparser"></a>easyparser</h2><p>这个题，我可是特别肝的，知道是虚拟机，但是我也没遇到过这种题，直接动态调试，我一步一步跟出来的程序逻辑，还好不是特别复杂，也就调了6个小时左右吧。。。。先给出解密脚本，然后再学习一下正确的解法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="number">144</span>, <span class="number">332</span>, <span class="number">28</span>, <span class="number">240</span>, <span class="number">132</span>, <span class="number">60</span>, <span class="number">24</span>, <span class="number">64</span>, <span class="number">64</span>, <span class="number">240</span>, <span class="number">208</span>, <span class="number">88</span>, <span class="number">44</span>, <span class="number">8</span>, <span class="number">52</span>, <span class="number">240</span>, <span class="number">276</span>, <span class="number">240</span>, <span class="number">128</span>, <span class="number">44</span>, <span class="number">40</span>, <span class="number">52</span>, <span class="number">8</span>, <span class="number">240</span>, <span class="number">144</span>, <span class="number">68</span>, <span class="number">48</span>, <span class="number">80</span>, <span class="number">92</span>, <span class="number">44</span>, <span class="number">264</span>, <span class="number">240</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0x20</span>):</span><br><span class="line">    flag += chr((s[i] &gt;&gt; <span class="number">2</span>) ^ <span class="number">0x63</span>)</span><br><span class="line">print(<span class="string">"flag&#123;%s&#125;"</span> % flag)</span><br></pre></td></tr></table></figure>
+
+<p>flag{G0d_Bless_Wuhan_&amp;<em>China_Growth!</em>}</p>
+<h2 id="fxck！"><a href="#fxck！" class="headerlink" title="fxck！"></a>fxck！</h2><p>太累了，所以这道题随便看了一下，看到base58特征，直接解码，发现不对，一想其他题都不简单，这个应该也不会这么简单吧，所以就没考虑换表。比完赛看了看，还真是换表解密，我哭了。。。。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152415784.png" alt="image-20200316152415784"></p>
+<p>这段是求余，我调了一下，发现不是直接把输入base58加密，还加了点东西，说实话，仔细分析，我没看懂这段伪代码，求得余数和我跑程序求得不一样，自闭了。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152611658.png" alt="image-20200316152611658"></p>
+<p>换表和加密，不难。</p>
+<p>然后用了brainfuck代码，第一次遇见，根本不知道是什么东西，但是最后的比较字符串可以直接动调dump出来。因为是复现，也简单学习了一下这个加密。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152754240.png" alt="image-20200316152754240"></p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316152823755.png" alt="image-20200316152823755"></p>
+<p>注释中给出了这个加密的运算符。</p>
+<p>既然又碰到了base58，就熟悉一下吧，go语言写脚本，参考:<a href="https://blog.csdn.net/qq_45828877/article/details/103997621" target="_blank" rel="noopener">https://blog.csdn.net/qq_45828877/article/details/103997621</a></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"math/big"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> base58_table []<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Encrypt</span><span class="params">(input []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	bInt := big.NewInt(<span class="number">0</span>).SetBytes(input)</span><br><span class="line">	fmt.Printf(<span class="string">"输入字节的16进制表达:%x\n"</span>, bInt)</span><br><span class="line">	base := big.NewInt(<span class="number">58</span>)</span><br><span class="line">	zero := big.NewInt(<span class="number">0</span>)</span><br><span class="line">	mod := &amp;big.Int&#123;&#125;</span><br><span class="line">	<span class="keyword">var</span> result []<span class="keyword">byte</span></span><br><span class="line">	<span class="keyword">for</span> bInt.Cmp(zero) != <span class="number">0</span> &#123;</span><br><span class="line">		bInt.DivMod(bInt, base, mod)</span><br><span class="line">		fmt.Printf(<span class="string">"%x\n"</span>, mod)</span><br><span class="line">		result = <span class="built_in">append</span>(result, base58_table[mod.Int64()])</span><br><span class="line">	&#125;</span><br><span class="line">	ReverseByte(result)</span><br><span class="line">	fmt.Printf(<span class="string">"base58加密结果:%s\n"</span>, result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Decrypt</span><span class="params">(input []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	result := big.NewInt(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> _, b := <span class="keyword">range</span> input &#123;</span><br><span class="line">		index := bytes.IndexByte(base58_table, b)</span><br><span class="line">		result.Mul(result, big.NewInt(<span class="number">58</span>))</span><br><span class="line">		result.Add(result, big.NewInt(<span class="keyword">int64</span>(index)))</span><br><span class="line">	&#125;</span><br><span class="line">	decodeByte := result.Bytes()</span><br><span class="line">	<span class="keyword">if</span> input[<span class="number">0</span>] == base58_table[<span class="number">0</span>] &#123;</span><br><span class="line">		decodeByte = <span class="built_in">append</span>([]<span class="keyword">byte</span>&#123;<span class="number">0x00</span>&#125;, decodeByte...)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(decodeByte)</span><br><span class="line">	fmt.Printf(<span class="string">"base58解密结果:%s"</span>, decodeByte)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReverseByte</span><span class="params">(input []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(input)<span class="number">-1</span>; i &lt; j; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		input[i], input[j] = input[j], input[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	base58_table = []<span class="keyword">byte</span>(<span class="string">"ABCDEFGHJKLMNPQRSTUVWXYZ123456789abcdefghijkmnopqrstuvwxyz"</span>)</span><br><span class="line">	Encrypt([]<span class="keyword">byte</span>(<span class="string">"\x06"</span> + <span class="string">"flag&#123;63510cf7-2b80-45e1-a186-21234897e5cd&#125;"</span>))</span><br><span class="line">	Decrypt([]<span class="keyword">byte</span>(<span class="string">"4VyhuTqRfYFnQ85Bcw5XcDr3ScNBjf5CzwUdWKVM7SSVqBrkvYGt7SSUJe"</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200316153024371.png" alt="image-20200316153024371"></p>
+<p>跑出来，发现第一个字节是个<code>\x6</code>……..</p>
+<h2 id="clock"><a href="#clock" class="headerlink" title="clock"></a>clock</h2><p>比赛的时候分析出了源码，但是不知道是什么加密，无从下手。</p>
+<p>后得知是LFSR(线性反馈移位寄存器)，可参考：</p>
+<p>LFSR具体参考：</p>
+<p><a href="https://www.anquanke.com/post/id/181811" target="_blank" rel="noopener">https://www.anquanke.com/post/id/181811</a></p>
+<p><a href="https://xz.aliyun.com/t/3682" target="_blank" rel="noopener">https://xz.aliyun.com/t/3682</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/33920501" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33920501</a></p>
+<p>writeup和脚本参考:</p>
+<p><a href="http://ctf.njupt.edu.cn/382.html#clock" target="_blank" rel="noopener">http://ctf.njupt.edu.cn/382.html#clock</a></p>
+<p>贴出逆向的源码(python3)和爆破脚本(go语言)吧。</p>
+<p>程序主要源码：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">v4 = xxx</span><br><span class="line">v3 = xxx</span><br><span class="line">v2 = xxx</span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> ii <span class="keyword">in</span> range(<span class="number">0x100000</span>):</span><br><span class="line">    v5 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> jj <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        v7 = v4 &amp; <span class="number">0x17FA06</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> v7:</span><br><span class="line">            i ^= v7 &amp; <span class="number">1</span></span><br><span class="line">            v7 &gt;&gt;= <span class="number">1</span></span><br><span class="line">        v4 = (i ^ <span class="number">2</span> * v4) &amp; <span class="number">0x1FFFFF</span></span><br><span class="line">        v9 = v3 &amp; <span class="number">0x2A9A0D</span></span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> v9:</span><br><span class="line">            j ^= v9 &amp; <span class="number">1</span></span><br><span class="line">            v9 &gt;&gt;= <span class="number">1</span></span><br><span class="line">        v3 = (j ^ <span class="number">2</span> * v3) &amp; <span class="number">0x3FFFFF</span></span><br><span class="line">        v11 = v2 &amp; <span class="number">0x5E5E6A</span></span><br><span class="line">        k = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> v11:</span><br><span class="line">            k ^= v11 &amp; <span class="number">1</span></span><br><span class="line">            v11 &gt;&gt;= <span class="number">1</span></span><br><span class="line">        v2 = (k ^ <span class="number">2</span> * v2) &amp; <span class="number">0x7FFFFF</span></span><br><span class="line">        v13 = <span class="number">2</span> * v5</span><br><span class="line">        v14 = v3</span><br><span class="line">        <span class="keyword">if</span> v4 &amp; <span class="number">1</span>:</span><br><span class="line">            v14 = v2</span><br><span class="line">        v5 = v14 &amp; <span class="number">1</span> ^ v13</span><br><span class="line">    print(hex(v5))</span><br><span class="line">    result.append(v5)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<p>爆破脚本：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">lfsr</span><span class="params">(R, mask1, mask2 <span class="keyword">int64</span>, result *[100]<span class="keyword">uint8</span>, <span class="built_in">len</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> x := <span class="number">0</span>; x &lt; <span class="built_in">len</span>; x++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">8</span>; j++ &#123;</span><br><span class="line">			i := R &amp; mask1</span><br><span class="line">			lastbit := <span class="keyword">uint8</span>(<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">for</span> i != <span class="number">0</span> &#123;</span><br><span class="line">				lastbit ^= <span class="keyword">uint8</span>(i &amp; <span class="number">1</span>)</span><br><span class="line">				i &gt;&gt;= <span class="number">1</span></span><br><span class="line">			&#125;</span><br><span class="line">			R = (R&lt;&lt;<span class="number">1</span> ^ <span class="keyword">int64</span>(lastbit)) &amp; mask2</span><br><span class="line">			result[x] = result[x]&lt;&lt;<span class="number">1</span> ^ lastbit</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> output = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;<span class="number">95</span>, <span class="number">83</span>, <span class="number">107</span>, <span class="number">255</span>, <span class="number">209</span>, <span class="number">96</span>, <span class="number">188</span>, <span class="number">166</span>, <span class="number">230</span>, <span class="number">219</span>, <span class="number">223</span>, <span class="number">72</span>, <span class="number">150</span>, <span class="number">155</span>, <span class="number">169</span>,</span><br><span class="line">	<span class="number">138</span>, <span class="number">126</span>, <span class="number">0</span>, <span class="number">91</span>, <span class="number">20</span>, <span class="number">19</span>, <span class="number">109</span>, <span class="number">82</span>, <span class="number">12</span>, <span class="number">249</span>, <span class="number">91</span>, <span class="number">39</span>, <span class="number">107</span>, <span class="number">104</span>, <span class="number">55</span>, <span class="number">207</span>,</span><br><span class="line">	<span class="number">65</span>, <span class="number">155</span>, <span class="number">197</span>, <span class="number">204</span>, <span class="number">81</span>, <span class="number">76</span>, <span class="number">22</span>, <span class="number">83</span>, <span class="number">208</span>, <span class="number">215</span>, <span class="number">13</span>, <span class="number">254</span>, <span class="number">14</span>, <span class="number">43</span>, <span class="number">87</span>, <span class="number">29</span>,</span><br><span class="line">	<span class="number">42</span>, <span class="number">161</span>, <span class="number">92</span>, <span class="number">2</span>, <span class="number">109</span>, <span class="number">110</span>, <span class="number">232</span>, <span class="number">201</span>, <span class="number">147</span>, <span class="number">19</span>, <span class="number">53</span>, <span class="number">216</span>, <span class="number">82</span>, <span class="number">144</span>, <span class="number">169</span>,</span><br><span class="line">	<span class="number">34</span>, <span class="number">193</span>, <span class="number">106</span>, <span class="number">0</span>, <span class="number">253</span>, <span class="number">224</span>, <span class="number">7</span>, <span class="number">46</span>, <span class="number">24</span>, <span class="number">16</span>, <span class="number">226</span>, <span class="number">127</span>, <span class="number">164</span>, <span class="number">162</span>, <span class="number">54</span>, <span class="number">98</span>,</span><br><span class="line">	<span class="number">144</span>, <span class="number">141</span>, <span class="number">182</span>, <span class="number">174</span>, <span class="number">252</span>, <span class="number">64</span>, <span class="number">130</span>, <span class="number">19</span>, <span class="number">163</span>, <span class="number">242</span>, <span class="number">176</span>, <span class="number">78</span>, <span class="number">79</span>, <span class="number">3</span>, <span class="number">19</span>, <span class="number">11</span>,</span><br><span class="line">	<span class="number">160</span>, <span class="number">121</span>, <span class="number">149</span>, <span class="number">44</span>, <span class="number">53</span>, <span class="number">17</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">equalNumSum</span><span class="params">(rResult *[100]<span class="keyword">uint8</span>, output [100]<span class="keyword">uint8</span>, <span class="built_in">len</span> <span class="keyword">int</span>)</span> <span class="params">(sum <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	sum = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> x := <span class="number">0</span>; x &lt; <span class="built_in">len</span>; x++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">8</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> (rResult[x] &amp; <span class="number">1</span>) == (output[x] &amp; <span class="number">1</span>) &#123;</span><br><span class="line">				sum++</span><br><span class="line">			&#125;</span><br><span class="line">			rResult[x] &gt;&gt;= <span class="number">1</span></span><br><span class="line">			output[x] &gt;&gt;= <span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//fmt.Println(sum)</span></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">guessR</span><span class="params">(mask1, mask2 <span class="keyword">int64</span>, restrict <span class="keyword">int</span>)</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> result = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;&#125;</span><br><span class="line">	<span class="built_in">len</span> := <span class="number">100</span></span><br><span class="line">	maxLen := <span class="keyword">int64</span>(<span class="number">1</span> &lt;&lt; restrict)</span><br><span class="line">	cmpMax := <span class="number">0</span></span><br><span class="line">	rr := <span class="keyword">int64</span>(<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">for</span> r := <span class="keyword">int64</span>(<span class="number">0</span>); r &lt; maxLen; r++ &#123;</span><br><span class="line">		lfsr(r, mask1, mask2, &amp;result, <span class="built_in">len</span>)</span><br><span class="line">		equalNumSum := equalNumSum(&amp;result, output, <span class="built_in">len</span>)</span><br><span class="line">		<span class="keyword">if</span> equalNumSum &gt; cmpMax &#123;</span><br><span class="line">			cmpMax = equalNumSum</span><br><span class="line">			rr = r</span><br><span class="line">			fmt.Println(rr, cmpMax)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(rr, cmpMax)</span><br><span class="line">	<span class="keyword">return</span> rr</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">brute_r1</span><span class="params">(r2, r3 [100]<span class="keyword">uint8</span>)</span> <span class="title">int64</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> r1 [<span class="number">100</span>]<span class="keyword">uint8</span></span><br><span class="line">	<span class="built_in">len</span> := <span class="number">1</span> &lt;&lt; <span class="number">21</span></span><br><span class="line">	<span class="keyword">var</span> c <span class="keyword">uint8</span></span><br><span class="line">	<span class="keyword">for</span> r := <span class="number">0</span>; r &lt; <span class="built_in">len</span>; r++ &#123;</span><br><span class="line">		lfsr(<span class="keyword">int64</span>(r), <span class="number">0x17f</span>a06, <span class="number">0x1fffff</span>, &amp;r1, <span class="number">100</span>)</span><br><span class="line">		<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">			<span class="keyword">for</span> k := <span class="number">7</span>; k &gt;= <span class="number">0</span>; k-- &#123;</span><br><span class="line">				s1 := (r1[i] &gt;&gt; k &amp; <span class="number">1</span>)</span><br><span class="line">				s2 := (r2[i] &gt;&gt; k &amp; <span class="number">1</span>)</span><br><span class="line">				s3 := (r3[i] &gt;&gt; k &amp; <span class="number">1</span>)</span><br><span class="line">				z := s2</span><br><span class="line">				<span class="keyword">if</span> s1 == <span class="number">1</span> &#123;</span><br><span class="line">					z = s3</span><br><span class="line">				&#125;</span><br><span class="line">				c = c&lt;&lt;<span class="number">1</span> ^ z</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> c != output[i] &#123;</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> i == <span class="number">99</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">int64</span>(r)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(r)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> r2Result = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;&#125;</span><br><span class="line">	<span class="keyword">var</span> r3Result = [<span class="number">100</span>]<span class="keyword">uint8</span>&#123;&#125;</span><br><span class="line">	<span class="comment">//r2 := guessR(0x2a9a0d, 0x3fffff, 22)   //3324079</span></span><br><span class="line">	<span class="comment">//r3 := guessR(0x5E5E6A, 0x7fffff, 23)	 //4958299</span></span><br><span class="line">	r2 := <span class="number">3324079</span></span><br><span class="line">	r3 := <span class="number">4958299</span></span><br><span class="line">	lfsr(<span class="number">3324079</span>, <span class="number">0x2a9a0d</span>, <span class="number">0x3fffff</span>, &amp;r2Result, <span class="number">100</span>)</span><br><span class="line">	lfsr(<span class="number">4958299</span>, <span class="number">0x5E5E6A</span>, <span class="number">0x7fffff</span>, &amp;r3Result, <span class="number">100</span>)</span><br><span class="line">	fmt.Println(r2Result)</span><br><span class="line">	fmt.Println(r3Result)</span><br><span class="line">	r1 := brute_r1(r2Result, r3Result)</span><br><span class="line">	fmt.Printf(<span class="string">"flag&#123;%x%x%x&#125;"</span>, r1, r2, r3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Mobile"><a href="#Mobile" class="headerlink" title="Mobile"></a>Mobile</h1><h2 id="GetFlag"><a href="#GetFlag" class="headerlink" title="GetFlag"></a>GetFlag</h2><p>比赛的时候觉得快出了，但是不会通信就很难受，复现一遍吧。</p>
+<p>扔到JEB里看看。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319114048514.png" alt="image-20200319114048514"></p>
+<p>往一个文件里写了flag，这样的方式创建的文件会在应用的私有目录下。我们安装软件到手机上，使用adb shell查看。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120728403.png" alt="image-20200319120728403"></p>
+<p>服务端监听8080端口。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319114813854.png" alt="image-20200319114813854"></p>
+<p>通过输入流得的传给它的数据。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120127116.png" alt="image-20200319120127116"></p>
+<p>还有接收数据的方法。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120203664.png" alt="image-20200319120203664"></p>
+<p>通过输出流返回一个随机数。然后对输入的数据进行了一些操作。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120307536.png" alt="image-20200319120307536"></p>
+<p>主要就是checkpayload方法。</p>
+<p><img src="/2020/03/11/高校战役CTF部分writeup/image-20200319120349230.png" alt="image-20200319120349230"></p>
+<p>验证mssage和check，check是随机数作为密钥的HmacSha1加密。</p>
+<p>验证通过即可执行wget message。</p>
+<p>没有环境了，搭了几个小时，还是没有成功。。。。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>Thank you for your accept. mua！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/reward/wechatpay.png" alt="丨沉默丨 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/reward/alipay.png" alt="丨沉默丨 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>丨沉默丨</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/" title="高校战役CTF部分writeup">https://www.s1lenc3.com/2020/03/11/高校战役CTF部分writeup/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/10/二叉树/" rel="next" title="二叉树">
+                <i class="fa fa-chevron-left"></i> 二叉树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/14/Android软件的破解技术/" rel="prev" title="Android软件的破解技术">
+                Android软件的破解技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="丨沉默丨">
+            
+              <p class="site-author-name" itemprop="name">丨沉默丨</p>
+              <div class="site-description motion-element" itemprop="description">刻苦学习逆向的小菜鸡。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/s1lenc3-chenmo" title="GitHub &rarr; https://github.com/s1lenc3-chenmo" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:s1lenc3_chenmo@163.com" title="E-Mail &rarr; mailto:s1lenc3_chenmo@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#废话"><span class="nav-number">1.</span> <span class="nav-text">废话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的misc"><span class="nav-number">2.1.</span> <span class="nav-text">简单的misc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏的信息"><span class="nav-number">2.2.</span> <span class="nav-text">隐藏的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ez-mem-amp-usb"><span class="nav-number">2.3.</span> <span class="nav-text">ez_mem&amp;usb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#武汉加油"><span class="nav-number">2.4.</span> <span class="nav-text">武汉加油</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reverse"><span class="nav-number">3.</span> <span class="nav-text">Reverse</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#天津垓"><span class="nav-number">3.1.</span> <span class="nav-text">天津垓</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cycle-graph"><span class="nav-number">3.2.</span> <span class="nav-text">cycle_graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easyparser"><span class="nav-number">3.3.</span> <span class="nav-text">easyparser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fxck！"><span class="nav-number">3.4.</span> <span class="nav-text">fxck！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clock"><span class="nav-number">3.5.</span> <span class="nav-text">clock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mobile"><span class="nav-number">4.</span> <span class="nav-text">Mobile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GetFlag"><span class="nav-number">4.1.</span> <span class="nav-text">GetFlag</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" style=" text-align:center;">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沉默</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"> 站点字数合计:</i>
+    </span>
+    
+    <span title="站点总字数">30k</span>
+  
+  
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+<div class="run_time" style=" text-align:center;">
+  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+  <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("3/10/2020 10:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+  </script>
+</div>
+
+
+  <script src="https://unpkg.com/mermaid@/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+<div class="busuanzi-count" style=" text-align:center;">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="255,0,0" opacity="0.7" zindex="-1" count="140" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
