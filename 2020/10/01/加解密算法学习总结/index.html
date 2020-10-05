@@ -146,16 +146,20 @@
 
 
 
-  <meta name="description" content="刻苦学习逆向的小菜鸡。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="S1lenc3的辣鸡场">
-<meta property="og:url" content="https://www.s1lenc3.com/categories/笔记/Android逆向/index.html">
+  <meta name="description" content="AES(ECB模式)具体实现请参考:  加密实现AES-128bit加密，密钥长度和分组长度为16字节，加密轮数为10轮。 整个加密流程如图:  密钥扩展从图中可以得知W数组是每轮加密需要的密钥，每个W[i]为4字节，每4个W[i]为一轮加密所用的密钥，我们的输入密钥是16字节，也就是W[1]、W[2]、W[3]、W[4],所以进行加密前先进行密钥扩展。 123456789101112131415">
+<meta name="keywords" content="加解密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="加解密算法学习总结">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/10/01/加解密算法学习总结/index.html">
 <meta property="og:site_name" content="S1lenc3的辣鸡场">
-<meta property="og:description" content="刻苦学习逆向的小菜鸡。">
+<meta property="og:description" content="AES(ECB模式)具体实现请参考:  加密实现AES-128bit加密，密钥长度和分组长度为16字节，加密轮数为10轮。 整个加密流程如图:  密钥扩展从图中可以得知W数组是每轮加密需要的密钥，每个W[i]为4字节，每4个W[i]为一轮加密所用的密钥，我们的输入密钥是16字节，也就是W[1]、W[2]、W[3]、W[4],所以进行加密前先进行密钥扩展。 123456789101112131415">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcwMjE5MTYxMjAyNDg1?x-oss-process=image/format,png">
+<meta property="og:updated_time" content="2020-10-01T06:16:51.515Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="S1lenc3的辣鸡场">
-<meta name="twitter:description" content="刻苦学习逆向的小菜鸡。">
+<meta name="twitter:title" content="加解密算法学习总结">
+<meta name="twitter:description" content="AES(ECB模式)具体实现请参考:  加密实现AES-128bit加密，密钥长度和分组长度为16字节，加密轮数为10轮。 整个加密流程如图:  密钥扩展从图中可以得知W数组是每轮加密需要的密钥，每个W[i]为4字节，每4个W[i]为一轮加密所用的密钥，我们的输入密钥是16字节，也就是W[1]、W[2]、W[3]、W[4],所以进行加密前先进行密钥扩展。 123456789101112131415">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcwMjE5MTYxMjAyNDg1?x-oss-process=image/format,png">
 
 
 
@@ -163,7 +167,7 @@
 
   
   
-  <link rel="canonical" href="https://www.s1lenc3.com/categories/笔记/Android逆向/">
+  <link rel="canonical" href="https://www.s1lenc3.com/2020/10/01/加解密算法学习总结/">
 
 
 
@@ -173,7 +177,7 @@
   };
 </script>
 
-  <title>分类: Android逆向 | S1lenc3的辣鸡场</title>
+  <title>加解密算法学习总结 | S1lenc3的辣鸡场</title>
   
 
 
@@ -221,7 +225,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -293,7 +297,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -357,28 +361,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -424,213 +406,301 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Android逆向<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.s1lenc3.com/2020/10/01/加解密算法学习总结/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="丨沉默丨">
+      <meta itemprop="description" content="刻苦学习逆向的小菜鸡。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2020/03/20/Android系统攻击与防范/" itemprop="url">
-            
-              <span itemprop="name">Android系统攻击与防范</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">加解密算法学习总结
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-20T17:55:50+08:00" content="2020-03-20">
-          03-20
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
+          	
 
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-01 13:33:41 / 修改时间：14:16:51" itemprop="dateCreated datePublished" datetime="2020-10-01T13:33:41+08:00">2020-10-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/逆向/" itemprop="url" rel="index"><span itemprop="name">逆向</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">708</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/03/18/Android软件的反破解技术/" itemprop="url">
-            
-              <span itemprop="name">Android软件的反破解技术</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-18T21:20:19+08:00" content="2020-03-18">
-          03-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/03/14/Android软件的破解技术/" itemprop="url">
-            
-              <span itemprop="name">Android软件的破解技术</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-14T12:20:47+08:00" content="2020-03-14">
-          03-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/03/10/Android逆向基础/" itemprop="url">
-            
-              <span itemprop="name">Android逆向基础</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-10T10:14:27+08:00" content="2020-03-10">
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/03/10/Android动态调试/" itemprop="url">
-            
-              <span itemprop="name">Android动态调试</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-10T10:14:16+08:00" content="2020-03-10">
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/03/10/AndroidNDK逆向/" itemprop="url">
-            
-              <span itemprop="name">AndroidNDK逆向</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-10T10:14:07+08:00" content="2020-03-10">
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/03/10/Android静态分析/" itemprop="url">
-            
-              <span itemprop="name">Android静态分析</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-10T10:13:55+08:00" content="2020-03-10">
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
+        <h1 id="AES-ECB模式"><a href="#AES-ECB模式" class="headerlink" title="AES(ECB模式)"></a>AES(ECB模式)</h1><p>具体实现请参考: <a href="https://blog.csdn.net/qq_28205153/article/details/55798628" target="_blank" rel="noopener"></a></p>
+<h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>实现AES-128bit加密，密钥长度和分组长度为16字节，加密轮数为10轮。</p>
+<p>整个加密流程如图:</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcwMjE5MTYxMjAyNDg1?x-oss-process=image/format,png" alt="img"></p>
+<h5 id="密钥扩展"><a href="#密钥扩展" class="headerlink" title="密钥扩展"></a>密钥扩展</h5><p>从图中可以得知W数组是每轮加密需要的密钥，每个W[i]为4字节，每4个W[i]为一轮加密所用的密钥，我们的输入密钥是16字节，也就是W[1]、W[2]、W[3]、W[4],所以进行加密前先进行密钥扩展。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 扩展Key*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">extendKey</span><span class="params">(<span class="keyword">uint8_t</span> *key, <span class="keyword">uint8_t</span> W[<span class="number">44</span>][<span class="number">4</span>])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//10轮加密</span></span><br><span class="line">    <span class="comment">// 初始key</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; t &lt; <span class="number">16</span>; t++)</span><br><span class="line">    &#123;</span><br><span class="line">        W[t / <span class="number">4</span>][t % <span class="number">4</span>] = key[t] &amp; <span class="number">0xff</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//扩展</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">4</span>; i &lt; <span class="number">44</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">4</span> == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//W[i] = W[i-4] ^ T(W[i-1])</span></span><br><span class="line">            <span class="comment">//1.字循环</span></span><br><span class="line">            wordCycle(W[i - <span class="number">1</span>], W[i]);</span><br><span class="line">            <span class="comment">//2.字节代换 + 轮常量异或</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">4</span>; y++)</span><br><span class="line">            &#123;</span><br><span class="line">                W[i][y] = subBytes(W[i][y]) ^ ((Rcon[i / <span class="number">4</span> - <span class="number">1</span>]) &gt;&gt; ((<span class="number">3</span> - y) * <span class="number">8</span>) &amp; <span class="number">0xff</span>) ^ W[i - <span class="number">4</span>][y];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//W[i] = W[i-4] ^ W[i-1]</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">4</span>; y++)</span><br><span class="line">            &#123;</span><br><span class="line">                W[i][y] = W[i - <span class="number">1</span>][y] ^ W[i - <span class="number">4</span>][y];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>Thank you for your accept. mua！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/reward/wechatpay.png" alt="丨沉默丨 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/reward/alipay.png" alt="丨沉默丨 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>丨沉默丨</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://www.s1lenc3.com/2020/10/01/加解密算法学习总结/" title="加解密算法学习总结">https://www.s1lenc3.com/2020/10/01/加解密算法学习总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/加解密/" rel="tag"><i class="fa fa-tag"></i> 加解密</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/07/花指令学习/" rel="next" title="花指令学习">
+                <i class="fa fa-chevron-left"></i> 花指令学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -650,8 +720,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -788,6 +867,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AES-ECB模式"><span class="nav-number">1.</span> <span class="nav-text">AES(ECB模式)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">1.0.1.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#密钥扩展"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">密钥扩展</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -994,6 +1090,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -1018,6 +1118,8 @@
 
   
 
+
+  
 
 
   
@@ -1438,7 +1540,7 @@ if ($('body').find('pre.mermaid').length) {
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script>
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
