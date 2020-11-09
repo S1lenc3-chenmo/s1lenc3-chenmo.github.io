@@ -153,7 +153,7 @@
 <meta property="og:site_name" content="S1lenc3的辣鸡场">
 <meta property="og:description" content="Linux命令记录1234567891011121314151617181920212223242526272829echo xxxxx &amp;gt; xx.txt 会自动换行echo -n xxxxx &amp;gt; xx.txt 不会换行sudo passwd root //更改root密码//链接$ sudo rm -rf python$ sudo ln -s /usr/bin/python3  /u">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-08T08:04:36.000Z">
+<meta property="og:updated_time" content="2020-10-26T06:18:39.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用命令记录">
 <meta name="twitter:description" content="Linux命令记录1234567891011121314151617181920212223242526272829echo xxxxx &amp;gt; xx.txt 会自动换行echo -n xxxxx &amp;gt; xx.txt 不会换行sudo passwd root //更改root密码//链接$ sudo rm -rf python$ sudo ln -s /usr/bin/python3  /u">
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-08 16:04:36" itemprop="dateModified" datetime="2020-06-08T16:04:36+08:00">2020-06-08</time>
+                <time title="修改时间：2020-10-26 14:18:39" itemprop="dateModified" datetime="2020-10-26T14:18:39+08:00">2020-10-26</time>
               
             
           </span>
@@ -520,7 +520,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">1.7k</span>
               
 
               
@@ -534,7 +534,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -556,7 +556,7 @@
       
         <h1 id="Linux命令记录"><a href="#Linux命令记录" class="headerlink" title="Linux命令记录"></a>Linux命令记录</h1><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">echo xxxxx &gt; xx.txt 会自动换行</span><br><span class="line">echo -n xxxxx &gt; xx.txt 不会换行</span><br><span class="line"></span><br><span class="line">sudo passwd root //更改root密码</span><br><span class="line"></span><br><span class="line">//链接</span><br><span class="line">$ sudo rm -rf python</span><br><span class="line">$ sudo ln -s /usr/bin/python3  /usr/bin/python</span><br><span class="line">//换内核程序</span><br><span class="line">sudo apt-get install synaptic</span><br><span class="line">//重启桌面</span><br><span class="line">sudo /etc/init.d/gdm restart</span><br><span class="line">//关闭ASLR</span><br><span class="line">echo <span class="number">0</span> &gt; /<span class="keyword">proc</span>/sys/kernel/randomize_va_space</span><br><span class="line"></span><br><span class="line">NX：-z<span class="title"> execstack / -z</span> noexecstack (关闭 / 开启)    不让执行栈上的数据，于是JMP<span class="title"> ESP就不能用了</span></span><br><span class="line"><span class="title">Canary：-fno-stack-protector /-fstack-protector / -fstack-protector-all (关闭</span> / 开启 / 全开启)  栈里插入cookie信息</span><br><span class="line">PIE：-no-pie / -pie (关闭 / 开启)   地址随机化，另外打开后会有get_pc_thunk</span><br><span class="line">RELRO：-z<span class="title"> norelro / -z</span> lazy / -z<span class="title"> now (关闭</span> / 部分开启 / 完全开启)  对GOT表具有写权限</span><br><span class="line">gcc -z<span class="title"> execstack</span> -fno-stack-protector -no-pie -z<span class="title"> norelro</span></span><br><span class="line"><span class="title">//linux命令，将指定程序在指定端口运行：</span></span><br><span class="line"><span class="title">socat</span> tcp-listen:10001,reuseaddr,fork<span class="title"> EXEC:./file_name,pty,raw,echo=0</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">//在x64下通常参数从左到右依次放在rdi,</span> rsi,<span class="title"> rdx,</span> rcx,<span class="title"> r8,</span> r9，多出来的参数才会入栈（根据调用约定的方式可能有不同，通常是这样）</span><br><span class="line"></span><br><span class="line">特殊的gadgets:</span><br><span class="line">通常位于x64的ELF程序中的__libc_csu_init,</span><br><span class="line">universal_gadget1 = 0x40075a           #万能gadget1：pop<span class="title"> rbx;</span> pop<span class="title"> rbp;</span> pop<span class="title"> r12;</span> pop<span class="title"> r13;</span> pop<span class="title"> r14;</span> pop<span class="title"> r15;</span> retn</span><br><span class="line">universal_gadget2 = 0x400740        #万能gadget2：mov<span class="title"> rdx,</span> r13;<span class="title"> mov</span> rsi,<span class="title"> r14;</span> mov<span class="title"> edi,</span> r15d;<span class="title"> call</span> qword<span class="title"> ptr</span> [r12+rbx*8]</span><br></pre></td></tr></table></figure>
 
-<h1 id="ABD命令"><a href="#ABD命令" class="headerlink" title="ABD命令"></a>ABD命令</h1><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">adb tcpip <span class="number">5555</span></span><br><span class="line">adb connect xxxxx:<span class="number">5555</span></span><br><span class="line"></span><br><span class="line">cat /proc/cpuinfo #Android查看cpu架构</span><br><span class="line"></span><br><span class="line">jdb附加 jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=<span class="number">8700</span></span><br><span class="line"></span><br><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h1 id="ABD命令"><a href="#ABD命令" class="headerlink" title="ABD命令"></a>ABD命令</h1><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">adb tcpip <span class="number">5555</span></span><br><span class="line">adb connect xxxxx:<span class="number">5555</span></span><br><span class="line">强制运行<span class="number">32</span>位模式：adb install --abi armeabi-v7a xxxx.apk</span><br><span class="line"></span><br><span class="line">cat /proc/cpuinfo #Android查看cpu架构</span><br><span class="line"></span><br><span class="line">jdb附加 jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=<span class="number">8700</span></span><br><span class="line"></span><br><span class="line">setenforce <span class="number">0</span></span><br><span class="line"></span><br><span class="line">frida非标准端口连接:</span><br><span class="line">	./frida-server -l <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">6666</span></span><br><span class="line">	frida-ps -H <span class="number">192.168</span><span class="number">.1</span><span class="number">.102</span>:<span class="number">6666</span></span><br><span class="line">	objection -p <span class="number">6666</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="docker命令"><a href="#docker命令" class="headerlink" title="docker命令"></a>docker命令</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入镜像：docker import - ubuntu/17.04.amd64</span></span><br><span class="line"><span class="comment">//运行镜像：docker run -it -p 23946:23946 ubuntu/17.04.amd64 /bin/bash</span></span><br><span class="line">  会创建一个docker容器，第一个端口是宿主机的端口，第二个是容器的端口</span><br><span class="line"><span class="comment">//列出容器：docker container ls -a</span></span><br><span class="line"><span class="comment">//容器重命名：docker container rename old_name new_name</span></span><br><span class="line"><span class="comment">//打开容器的shell：docker exec -it container_name /bin/bash</span></span><br><span class="line"><span class="comment">//启动容器：docker start container_name</span></span><br><span class="line"><span class="comment">//复制：docker container cp file_name container_name:/root</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导入镜像</span></span><br><span class="line">docker load -<span class="selector-tag">i</span> nginx.tar</span><br><span class="line"><span class="comment">//导出镜像</span></span><br><span class="line">docker save -o nginx<span class="selector-class">.tar</span> nginx:latest</span><br></pre></td></tr></table></figure>
 
@@ -739,7 +739,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -774,7 +774,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -807,7 +815,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -910,7 +924,7 @@
       <i class="fa fa-area-chart"> 站点字数合计:</i>
     </span>
     
-    <span title="站点总字数">31k</span>
+    <span title="站点总字数">46k</span>
   
   
 </div>

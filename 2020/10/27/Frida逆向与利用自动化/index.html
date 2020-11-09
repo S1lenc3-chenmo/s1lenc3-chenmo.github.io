@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cc_log32.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cc_log16.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"shrinkIn","post_header":"slideLeftIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="frida安装 启动frida-server， ./fs1280arm64 -l 0.0.0.0:8888 然后查看包名： frida-ps -U|grep -i setting objection学习网络连接手机： objection -N -h 192.168.137.129 -p 8888 -g com.android.settings explore  .objection/objecti">
+<meta name="keywords" content="android应用安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Frida逆向与利用自动化">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="frida安装 启动frida-server， ./fs1280arm64 -l 0.0.0.0:8888 然后查看包名： frida-ps -U|grep -i setting objection学习网络连接手机： objection -N -h 192.168.137.129 -p 8888 -g com.android.settings explore  .objection/objecti">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201026202018428.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201027141654471.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201027152811246.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201027200807840.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201027201337333.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201028175528481.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029152944217.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029204223947.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029204335494.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029204407128.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029204439504.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029204615227.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029221128456.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201029222225029.png">
+<meta property="og:updated_time" content="2020-11-05T10:08:00.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Frida逆向与利用自动化">
+<meta name="twitter:description" content="frida安装 启动frida-server， ./fs1280arm64 -l 0.0.0.0:8888 然后查看包名： frida-ps -U|grep -i setting objection学习网络连接手机： objection -N -h 192.168.137.129 -p 8888 -g com.android.settings explore  .objection/objecti">
+<meta name="twitter:image" content="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/image-20201026202018428.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Frida逆向与利用自动化 | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+ 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-bookmark"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="丨沉默丨">
+      <meta itemprop="description" content="刻苦学习逆向的小菜鸡。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Frida逆向与利用自动化
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+          	
+
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-27 13:56:29" itemprop="dateCreated datePublished" datetime="2020-10-27T13:56:29+08:00">2020-10-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-05 18:08:00" itemprop="dateModified" datetime="2020-11-05T18:08:00+08:00">2020-11-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/逆向/" itemprop="url" rel="index"><span itemprop="name">逆向</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/逆向/frida/" itemprop="url" rel="index"><span itemprop="name">frida</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="frida安装"><a href="#frida安装" class="headerlink" title="frida安装"></a>frida安装</h1><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201026202018428.png" alt="image-20201026202018428"></p>
+<p>启动frida-server，</p>
+<p><code>./fs1280arm64 -l 0.0.0.0:8888</code></p>
+<p>然后查看包名：</p>
+<p><code>frida-ps -U|grep -i setting</code></p>
+<h1 id="objection学习"><a href="#objection学习" class="headerlink" title="objection学习"></a>objection学习</h1><p>网络连接手机：</p>
+<p><code>objection -N -h 192.168.137.129 -p 8888 -g com.android.settings explore</code></p>
+<p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201027141654471.png" alt="image-20201027141654471"></p>
+<p><code>.objection/objection.log</code>记录objection所有的输出。</p>
+<p>列出现有正在运行的库：</p>
+<p><code>memory list modules</code></p>
+<p>查看库的导出函数：</p>
+<p><code>memory list exports libssl.so</code></p>
+<p>在堆上搜索实例：</p>
+<p><code>android heap search instances com.android.settings.DisplaySettings</code></p>
+<p>调用实例方法：</p>
+<p><code>android heap execute 0x2286 getPreferenceScreenResId</code></p>
+<p>迷你编辑器执行JS代码：</p>
+<p><code>android heap evaluate 0x2286</code></p>
+<p>列出activity：</p>
+<p><code>android hooking list activities</code></p>
+<p>执行activity：</p>
+<p><code>android intent launch_activity com.xxxxxxxxx</code></p>
+<p>列出所有的类：</p>
+<p><code>android hooking list classes</code></p>
+<p>列出类中所有的方法：</p>
+<p><code>android hooking list class_methods sun.util.locale.LocaleUtils</code></p>
+<p>搜索和display相关的类：</p>
+<p><code>android hooking search classes display</code></p>
+<p>监听类：</p>
+<p><code>android hooking watch class android.bluetooth.BluetoothDevice</code></p>
+<p>显示job：<code>jobs list</code> 取消job：<code>jobs kill 734eu1j9bgl</code></p>
+<p>监听方法：</p>
+<p><code>android hooking watch class_method android.bluetooth.BluetoothDevice.equals --dump-args --dump-backtrace --dump-return</code></p>
+<p>hook构造函数：</p>
+<p><code>android hooking watch class_method java.io.File.$init --dump-args</code></p>
+<h3 id="Wallbreaker"><a href="#Wallbreaker" class="headerlink" title="Wallbreaker"></a>Wallbreaker</h3><p>安装：</p>
+<p><code>proxychains git clone https://github.com/hluwa/Wallbreaker.git</code></p>
+<p>加载插件：</p>
+<p><code>plugin load /root/Desktop/Wallbreaker</code></p>
+<p>查看信息：</p>
+<h3 id="FRIDA-DEXDump"><a href="#FRIDA-DEXDump" class="headerlink" title="FRIDA-DEXDump"></a>FRIDA-DEXDump</h3><p>安装：</p>
+<p><code>proxychains git clone https://github.com/hluwa/FRIDA-DEXDump.git</code></p>
+<p>某app脱壳：</p>
+<p><code>android hooking search classes com.cz.babySister</code></p>
+<p><code>android hooking list class_methods com.cz.babySister.interfaces.JiFenInterFaces</code></p>
+<p><code>plugin wallbreaker classdump --fullname com.cz.babySister.interfaces.JiFenInterFaces</code></p>
+<p><code>plugin dexdump search</code></p>
+<p><code>plugin dexdump dump</code></p>
+<p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201027152811246.png" alt="image-20201027152811246"></p>
+<h1 id="逆向实例"><a href="#逆向实例" class="headerlink" title="逆向实例"></a>逆向实例</h1><p>查找包名：</p>
+<p><code>frida-ps -U | grep -i yaphe</code></p>
+<p>搜索类:</p>
+<p><code>android hooking search classes com.example.yaphetshan.tencentwelcome</code></p>
+<p>列出方法:</p>
+<p><code>android hooking list class_methods com.example.yaphetshan.tencentwelcome.a</code></p>
+<p>wallbreaker查看类:</p>
+<p><code>plugin wallbreaker classdump com.example.yaphetshan.tencentwelcome.MainActivity</code></p>
+<p>hook onCreat中的方法（hook无效）:</p>
+<p><code>objection -d -g com.example.yaphetshan.tencentwelcome explore --startup-command &quot;android hooking watch class_method com.example.yaphetshan.tencentwelcome.MainActivity.a --dump-args --dump-backtrace --dump-return&quot;</code></p>
+<p>hook数据库的方法：</p>
+<p><code>android hooking watch class_method android.database.sqlite.SQLiteOpenHelper.getWritableDatabase --dump-args --dump-backtrace --dump-return</code></p>
+<p>搜寻实例：</p>
+<p><code>android heap search instances com.example.yaphetshan.tencentwelcome.MainActivity</code></p>
+<p>执行方法：</p>
+<p><code>android heap execute 0xa22 a</code></p>
+<p>发现没有执行，查找jeb反编译出来的库：</p>
+<p><code>android hooking list class_methods net.sqlcipher.database.SQLiteOpenHelper</code></p>
+<p>动态枚举方法：</p>
+<p><code>plugin wallbreaker classdump net.sqlcipher.database.SQLiteOpenHelper</code></p>
+<p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201027200807840.png" alt="image-20201027200807840"></p>
+<p><code>android heap execute 0xa22 a</code></p>
+<p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201027201337333.png" alt="image-20201027201337333"></p>
+<p>得到了参数，也就是数据库密码。</p>
+<h1 id="frida三段逆向"><a href="#frida三段逆向" class="headerlink" title="frida三段逆向"></a>frida三段逆向</h1><ol>
+<li>参数、调用栈、返回值</li>
+<li>方法重载、参数构造、动静态处理</li>
+<li>主动调用、忽略内部细节、直接返回结果</li>
+</ol>
+<p><strong>hook、invoke、rpc</strong></p>
+<p>frdai加载js注入：</p>
+<p><code>frida -U com.example.lesson4one -l lesson4-2.js</code></p>
+<p>spawn：</p>
+<p><code>frida -U -f com.example.lesson4one -l lesson4-2.js</code></p>
+<h4 id="int类型参数重载："><a href="#int类型参数重载：" class="headerlink" title="int类型参数重载："></a>int类型参数重载：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"com.example.lesson4one.MainActivity"</span>).fun.overload(<span class="string">'int'</span>, <span class="string">'int'</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">this</span>.fun(arg1,arg2);</span><br><span class="line">  <span class="comment">/* 打印调用栈 */</span></span><br><span class="line">  	<span class="built_in">console</span>.log(Java.use(<span class="string">"android.util.Log"</span>).getStackTraceString(Java.use(<span class="string">"java.lang.Throwable"</span>).$<span class="keyword">new</span>()));</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"arg1,arg2,result"</span>,arg1,arg2,result)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">800</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="string类型参数重载："><a href="#string类型参数重载：" class="headerlink" title="string类型参数重载："></a>string类型参数重载：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"com.example.lesson4one.MainActivity"</span>).fun.overload(<span class="string">'java.lang.String'</span>).implementation = <span class="function"><span class="keyword">function</span> (<span class="params">arg1 </span>)</span>&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">this</span>.fun(Java.use(<span class="string">'java.lang.String'</span>).$<span class="keyword">new</span>(<span class="string">"NIHAOJAVA"</span>));</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"arg1,result"</span>,arg1,result)</span><br><span class="line">            <span class="keyword">return</span> Java.use(<span class="string">'java.lang.String'</span>).$<span class="keyword">new</span>(<span class="string">"NIHAOJS"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索实例："><a href="#搜索实例：" class="headerlink" title="搜索实例："></a>搜索实例：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Java.choose(<span class="string">"com.example.lesson4one.MainActivity"</span>,&#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found instance :"</span>,instance)</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found instance :"</span>,instance.secret())</span><br><span class="line">            &#125;,<span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态方法调用："><a href="#静态方法调用：" class="headerlink" title="静态方法调用："></a>静态方法调用：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Java.use(<span class="string">"com.example.lesson4one.MainActivity"</span>).secret2();</span><br><span class="line">      <span class="built_in">console</span>.log(result);</span><br></pre></td></tr></table></figure>
+
+<p>立即执行：</p>
+<p><code>setImmediate(main)</code></p>
+<p>延时执行：</p>
+<p><code>setTimeout(invoke,2000)</code></p>
+<h4 id="frida-hook实例"><a href="#frida-hook实例" class="headerlink" title="frida hook实例"></a>frida hook实例</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"net.sqlcipher.database.SQLiteOpenHelper"</span>).getWritableDatabase.overload(<span class="string">'java.lang.String'</span>).implementation = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>)</span>&#123;</span><br><span class="line">           <span class="keyword">var</span> result = <span class="keyword">this</span>.getWritableDatabase(x);</span><br><span class="line">           <span class="built_in">console</span>.log(Java.use(<span class="string">"android.util.Log"</span>).getStackTraceString(Java.use(<span class="string">"java.lang.Throwable"</span>).$<span class="keyword">new</span>()));</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">"xString,result"</span>,x,result);</span><br><span class="line">           <span class="keyword">return</span> result;</span><br><span class="line">       &#125;</span><br><span class="line">       Java.use(<span class="string">"net.sqlcipher.database.SQLiteOpenHelper"</span>).getWritableDatabase.overload(<span class="string">'[C'</span>).implementation = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="keyword">this</span>.getWritableDatabase(x);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"xCharSe,result"</span>,x,result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.choose(<span class="string">"com.example.yaphetshan.tencentwelcome.MainActivity"</span>,&#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found insttance "</span>,instance);</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"invoke instance.a "</span>,instance.a());</span><br><span class="line">            &#125;,<span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"search completed !"</span>)&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201028175528481.png" alt="image-20201028175528481"></p>
+<h1 id="Frida-构造数组、对象、Map和类参数"><a href="#Frida-构造数组、对象、Map和类参数" class="headerlink" title="Frida 构造数组、对象、Map和类参数"></a>Frida 构造数组、对象、Map和类参数</h1><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029152944217.png" alt="image-20201029152944217"></p>
+<p>重载toString，打印char型：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.use(<span class="string">"java.lang.Character"</span>).toString.overload(<span class="string">'char'</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">this</span>.toString(x);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"x, result"</span>, x, result);</span><br><span class="line">            <span class="keyword">return</span> result; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"java.util.Arrays"</span>).toString.overload(<span class="string">'[C'</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">this</span>.toString(x);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"x, result"</span>, <span class="built_in">JSON</span>.stringify(x), result);</span><br><span class="line">            <span class="keyword">return</span> result; </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>强制类型转换：父类不能转子类，子类可转父类。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Juicehandle = <span class="literal">null</span>;</span><br><span class="line">       Java.choose(<span class="string">"com.r0ysue.a0526printout.Juice"</span>,&#123;</span><br><span class="line">           onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">"found instance:"</span>,instance);</span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">"fillEnergy:"</span>,instance.fillEnergy());</span><br><span class="line">               Juicehandle = instance;</span><br><span class="line">           &#125;,<span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"search completed!"</span>)&#125;</span><br><span class="line">       &#125;)</span><br><span class="line">       <span class="keyword">var</span> WaterHandle = Java.cast(Juicehandle, Java.use(<span class="string">"com.r0ysue.a0526printout.Water"</span>));</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"water invoke still:"</span>, WaterHandle.still(WaterHandle));</span><br></pre></td></tr></table></figure>
+
+<p>新建类，实现接口：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> beer = Java.registerClass(&#123;</span><br><span class="line">         name: <span class="string">'com.r0ysue.a0526printout.beer'</span>,</span><br><span class="line">         implements: [Java.use(<span class="string">'com.r0ysue.a0526printout.liquid'</span>)],</span><br><span class="line">         methods: &#123;</span><br><span class="line">             flow:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                 <span class="built_in">console</span>.log(<span class="string">"look I'm beer!"</span>);</span><br><span class="line">                 <span class="keyword">return</span> <span class="string">"taste good!"</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"beer.flow"</span>, beer.$<span class="keyword">new</span>().flow());</span><br></pre></td></tr></table></figure>
+
+<p>HashMap实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Java.choose(<span class="string">"java.util.HashMap"</span>,&#123;</span><br><span class="line">            onMatch: <span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance.toString().indexOf(<span class="string">"ISBN"</span>) != <span class="number">-1</span>)&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">"found instance:"</span>, instance);</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">"HashMap toString:"</span>, instance.toString());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"search Complete!"</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Hook HashMap:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"java.util.HashMap"</span>).put.implementation = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">this</span>.put(x, y);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"x, y, result"</span>, x, y, result);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Frida综合情景案例"><a href="#Frida综合情景案例" class="headerlink" title="Frida综合情景案例"></a>Frida综合情景案例</h1><h4 id="login："><a href="#login：" class="headerlink" title="login："></a>login：</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029204223947.png" alt="image-20201029204223947"></p>
+<p>hook结果，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"com.example.androiddemo.Activity.LoginActivity"</span>).a.overload(<span class="string">'java.lang.String'</span>, <span class="string">'java.lang.String'</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> result = <span class="keyword">this</span>.a(x, y);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"x,y,result:"</span>, x,y,result);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第一关："><a href="#第一关：" class="headerlink" title="第一关："></a>第一关：</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029204335494.png" alt="image-20201029204335494"></p>
+<p>直接返回正确的结果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity1"</span>).a.implementation = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"first challenge 1"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"R4jSLLLLLLLLLLOrLE7/5B+Z6fsl65yj6BgC6YWz66gO6g2t65Pk6a+P65NK44NNROl0wNOLLLL="</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029204407128.png" alt="image-20201029204407128"></p>
+<p>调用函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">second</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity2"</span>).setStatic_bool_var();</span><br><span class="line"></span><br><span class="line">        Java.choose(<span class="string">"com.example.androiddemo.Activity.FridaActivity2"</span>, &#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found instance:"</span>, instance);</span><br><span class="line">                instance.setBool_var();</span><br><span class="line">            &#125;, <span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029204439504.png" alt="image-20201029204439504"></p>
+<p>设置变量的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">third</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        </span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity3"</span>).static_bool_var.value = <span class="literal">true</span>;</span><br><span class="line">        Java.choose(<span class="string">"com.example.androiddemo.Activity.FridaActivity3"</span>, &#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found instance:"</span>, instance);</span><br><span class="line">                instance.bool_var.value = <span class="literal">true</span>;</span><br><span class="line">                <span class="comment">//有重名函数加下划线</span></span><br><span class="line">                instance._same_name_bool_var.value = <span class="literal">true</span>;</span><br><span class="line">            &#125;, <span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029204615227.png" alt="image-20201029204615227"></p>
+<p>hook内部类</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>).check1.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>).check2.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>).check3.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>).check4.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>).check5.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>).check6.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>采用枚举的方式批量hook：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forth2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> class_name = <span class="string">"com.example.androiddemo.Activity.FridaActivity4$InnerClasses"</span>;</span><br><span class="line">        <span class="keyword">var</span> InnerClass = Java.use(class_name);</span><br><span class="line">        <span class="keyword">var</span> all_methods = InnerClass.class.getDeclaredMethods();</span><br><span class="line">        <span class="comment">//console.log(all_methods);</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;all_methods.length;i++)&#123;</span><br><span class="line">            <span class="keyword">var</span> method = all_methods[i];</span><br><span class="line">            <span class="comment">//console.log(method);</span></span><br><span class="line">            <span class="keyword">var</span> substring = method.toString().substr(method.toString().indexOf(class_name)+class_name.length+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">var</span> finalMethodString = substring.substr(<span class="number">0</span>, substring.indexOf(<span class="string">"("</span>));</span><br><span class="line">            <span class="built_in">console</span>.log(finalMethodString);</span><br><span class="line">            InnerClass[finalMethodString].implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029221128456.png" alt="image-20201029221128456"></p>
+<p>加载了新的dex，枚举classLoader：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fifth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.choose(<span class="string">"com.example.androiddemo.Activity.FridaActivity5"</span>,&#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"getDynamicDexCheck:"</span>, instance.getDynamicDexCheck().$className);</span><br><span class="line">            &#125;,<span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"search complete!"</span>);&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        Java.enumerateClassLoaders(&#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">loader</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    <span class="keyword">if</span>(loader.findClass(<span class="string">"com.example.androiddemo.Dynamic.DynamicCheck"</span>))&#123;</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">"Succefully found loader!"</span>, loader);</span><br><span class="line">                        Java.classFactory.loader = loader;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">catch</span>(error)&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">"found error:"</span>+error);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,<span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Dynamic.DynamicCheck"</span>).check.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h4><p><img src="/2020/10/27/Frida逆向与利用自动化/image-20201029222225029.png" alt="image-20201029222225029"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sixth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.Frida6.Frida6Class0"</span>).check.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.Frida6.Frida6Class1"</span>).check.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;;</span><br><span class="line">        Java.use(<span class="string">"com.example.androiddemo.Activity.Frida6.Frida6Class2"</span>).check.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>枚举加载类 loadedClass,批量hook：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sixth2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.enumerateLoadedClasses(&#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">name, handle</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(name.toString().indexOf(<span class="string">"com.example.androiddemo.Activity.Frida6.Frida6"</span>)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">"name, handle"</span>, name, handle);</span><br><span class="line">                    Java.use(name).check.implementation = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="RPC-Remote-Procedure-Call-远程过程调用"><a href="#RPC-Remote-Procedure-Call-远程过程调用" class="headerlink" title="RPC(Remote Procedure Call)远程过程调用"></a>RPC(Remote Procedure Call)远程过程调用</h1><p>找到实例，远程调用invoke函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">invoke</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        Java.choose(<span class="string">"com.example.lesson4one.MainActivity"</span>,&#123;</span><br><span class="line">            onMatch:<span class="function"><span class="keyword">function</span>(<span class="params">instance</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found instance :"</span>,instance)</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"found instance :"</span>,instance.secret())</span><br><span class="line">            &#125;,<span class="attr">onComplete</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rpc.exports = &#123;</span><br><span class="line">    invokefunc:invoke</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_message_hadler</span><span class="params">(message, payload)</span>:</span></span><br><span class="line">    print(message)</span><br><span class="line">    print(payload)</span><br><span class="line"></span><br><span class="line"><span class="comment"># device = frida.get_usb_device()</span></span><br><span class="line">device = frida.get_device_manager().add_remote_device(<span class="string">"192.168.137.113:9999"</span>)</span><br><span class="line">print(device.enumerate_applications())</span><br><span class="line"><span class="comment"># pid = device.spawn(["com.example.lesson4one"])</span></span><br><span class="line"><span class="comment"># device.resume</span></span><br><span class="line"><span class="comment"># time.sleep(1)</span></span><br><span class="line">session = device.attach(<span class="string">"com.example.lesson4one"</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"lesson7lesson4.js"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    script = session.create_script(f.read())</span><br><span class="line">script.on(<span class="string">"message"</span>, my_message_hadler)</span><br><span class="line">script.load()</span><br><span class="line"></span><br><span class="line">command = <span class="string">""</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    command = input(<span class="string">"Enter Command:"</span>)</span><br><span class="line">    <span class="keyword">if</span> command == <span class="string">"1"</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span> command == <span class="string">"2"</span>:</span><br><span class="line">        script.exports.invokefunc()</span><br></pre></td></tr></table></figure>
+
+<p>远程调用并且修改参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Java.perform(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Java.use(<span class="string">"android.widget.TextView"</span>).setText.overload(<span class="string">'java.lang.CharSequence'</span>).implementation = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> string_to_send_x = x.toString()</span><br><span class="line">        <span class="keyword">var</span> string_to_recv;</span><br><span class="line">        send(string_to_send_x);</span><br><span class="line">        recv(<span class="function"><span class="keyword">function</span>(<span class="params">received_json_objection</span>)</span>&#123;</span><br><span class="line">            string_to_recv = received_json_objection.my_data</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"string_to_recv:"</span>+string_to_recv);</span><br><span class="line">        &#125;).wait();</span><br><span class="line">        <span class="keyword">var</span> javaStringToSend = Java.use(<span class="string">'java.lang.String'</span>).$<span class="keyword">new</span>(string_to_recv);</span><br><span class="line">        <span class="keyword">var</span> result = <span class="keyword">this</span>.setText(javaStringToSend);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_message_hadler</span><span class="params">(message, payload)</span>:</span></span><br><span class="line">    print(message)</span><br><span class="line">    print(payload)</span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">"type"</span>] == <span class="string">"send"</span>:</span><br><span class="line">        print(message[<span class="string">"payload"</span>])</span><br><span class="line">        data = message[<span class="string">"payload"</span>].split(<span class="string">":"</span>)[<span class="number">1</span>].strip()</span><br><span class="line">        print(<span class="string">'message:'</span>, message)</span><br><span class="line">        data = str(base64.b64decode(data))</span><br><span class="line">        print(<span class="string">'data:'</span>, data)</span><br><span class="line">        usr, pw = data.split(<span class="string">":"</span>)</span><br><span class="line">        print(<span class="string">'pw: '</span>, pw)</span><br><span class="line">        data = str(base64.b64encode((<span class="string">"admin"</span> + pw).encode()))</span><br><span class="line">        print(<span class="string">"encode data:"</span>, data)</span><br><span class="line">        script.post(&#123;<span class="string">"my_data"</span>:data&#125;)</span><br><span class="line">        print(<span class="string">"Modified data sent!"</span>)</span><br><span class="line"></span><br><span class="line">device = frida.get_usb_device()</span><br><span class="line">session = device.attach(<span class="string">"com.example.lesson7sec"</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"lesson7sec.js"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    script = session.create_script(f.read())</span><br><span class="line">script.on(<span class="string">"message"</span>, my_message_hadler)</span><br><span class="line">script.load()</span><br><span class="line">input()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>Thank you for your accept. mua！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/reward/wechatpay.png" alt="丨沉默丨 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/reward/alipay.png" alt="丨沉默丨 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>丨沉默丨</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/" title="Frida逆向与利用自动化">https://www.s1lenc3.com/2020/10/27/Frida逆向与利用自动化/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------本文结束<i class="fa fa-heart"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android应用安全/" rel="tag"><i class="fa fa-tag"></i> android应用安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/19/密码学初步认识/" rel="next" title="密码学初步认识">
+                <i class="fa fa-chevron-left"></i> 密码学初步认识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/09/buuctf-web-1/" rel="prev" title="buuctf-web-1">
+                buuctf-web-1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="丨沉默丨">
+            
+              <p class="site-author-name" itemprop="name">丨沉默丨</p>
+              <div class="site-description motion-element" itemprop="description">刻苦学习逆向的小菜鸡。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/s1lenc3-chenmo" title="GitHub &rarr; https://github.com/s1lenc3-chenmo" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:s1lenc3_chenmo@163.com" title="E-Mail &rarr; mailto:s1lenc3_chenmo@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#frida安装"><span class="nav-number">1.</span> <span class="nav-text">frida安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#objection学习"><span class="nav-number">2.</span> <span class="nav-text">objection学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wallbreaker"><span class="nav-number">2.0.1.</span> <span class="nav-text">Wallbreaker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FRIDA-DEXDump"><span class="nav-number">2.0.2.</span> <span class="nav-text">FRIDA-DEXDump</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#逆向实例"><span class="nav-number">3.</span> <span class="nav-text">逆向实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frida三段逆向"><span class="nav-number">4.</span> <span class="nav-text">frida三段逆向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#int类型参数重载："><span class="nav-number">4.0.0.1.</span> <span class="nav-text">int类型参数重载：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#string类型参数重载："><span class="nav-number">4.0.0.2.</span> <span class="nav-text">string类型参数重载：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索实例："><span class="nav-number">4.0.0.3.</span> <span class="nav-text">搜索实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态方法调用："><span class="nav-number">4.0.0.4.</span> <span class="nav-text">静态方法调用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#frida-hook实例"><span class="nav-number">4.0.0.5.</span> <span class="nav-text">frida hook实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Frida-构造数组、对象、Map和类参数"><span class="nav-number">5.</span> <span class="nav-text">Frida 构造数组、对象、Map和类参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Frida综合情景案例"><span class="nav-number">6.</span> <span class="nav-text">Frida综合情景案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#login："><span class="nav-number">6.0.0.1.</span> <span class="nav-text">login：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第一关："><span class="nav-number">6.0.0.2.</span> <span class="nav-text">第一关：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二关"><span class="nav-number">6.0.0.3.</span> <span class="nav-text">第二关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三关"><span class="nav-number">6.0.0.4.</span> <span class="nav-text">第三关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四关"><span class="nav-number">6.0.0.5.</span> <span class="nav-text">第四关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五关"><span class="nav-number">6.0.0.6.</span> <span class="nav-text">第五关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第六关"><span class="nav-number">6.0.0.7.</span> <span class="nav-text">第六关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPC-Remote-Procedure-Call-远程过程调用"><span class="nav-number">7.</span> <span class="nav-text">RPC(Remote Procedure Call)远程过程调用</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" style=" text-align:center;">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沉默</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"> 站点字数合计:</i>
+    </span>
+    
+    <span title="站点总字数">46k</span>
+  
+  
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+<div class="run_time" style=" text-align:center;">
+  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+  <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("3/10/2020 10:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+  </script>
+</div>
+
+
+  <script src="https://unpkg.com/mermaid@/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+<div class="busuanzi-count" style=" text-align:center;">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="255,0,0" opacity="0.7" zindex="-1" count="140" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
