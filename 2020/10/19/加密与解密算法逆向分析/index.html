@@ -146,36 +146,18 @@
 
 
 
-  <meta name="description" content="密码学初步认识对称密码加密与解密时使用相同的密钥，如RC4、DES、AES等。 序列密码又称流密码，将明文消息按字符逐位进行加密。 分组密码将明文分组，逐组进行加密。 非对称密码加密与解密时使用不同的密钥，如RSA、ECC椭圆曲线等。 散列算法哈希函数，对不同长度的消息，产生固定长度的输出。这个固定长度的输出被称为原输入消息的“散列函数”或“消息摘要”。 Base编码原理 base64用64个可见">
+  <meta name="description" content="加密文章，内容不公开。">
 <meta name="keywords" content="密码算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加密与解密算法逆向分析">
 <meta property="og:url" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/index.html">
 <meta property="og:site_name" content="S1lenc3的辣鸡场">
-<meta property="og:description" content="密码学初步认识对称密码加密与解密时使用相同的密钥，如RC4、DES、AES等。 序列密码又称流密码，将明文消息按字符逐位进行加密。 分组密码将明文分组，逐组进行加密。 非对称密码加密与解密时使用不同的密钥，如RSA、ECC椭圆曲线等。 散列算法哈希函数，对不同长度的消息，产生固定长度的输出。这个固定长度的输出被称为原输入消息的“散列函数”或“消息摘要”。 Base编码原理 base64用64个可见">
+<meta property="og:description" content="加密文章，内容不公开。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026140450733.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026135903008.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026140234140.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026140057868.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026140126528.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026143534037.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026143824805.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210224224542028.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210224225155696.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304150116805.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304201950234.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304202001676.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304202035332.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304203948063.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304205131810.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304205118941.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20210304205059091.png">
-<meta property="og:updated_time" content="2021-03-04T12:53:59.937Z">
+<meta property="og:updated_time" content="2021-03-05T04:31:37.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="加密与解密算法逆向分析">
-<meta name="twitter:description" content="密码学初步认识对称密码加密与解密时使用相同的密钥，如RC4、DES、AES等。 序列密码又称流密码，将明文消息按字符逐位进行加密。 分组密码将明文分组，逐组进行加密。 非对称密码加密与解密时使用不同的密钥，如RSA、ECC椭圆曲线等。 散列算法哈希函数，对不同长度的消息，产生固定长度的输出。这个固定长度的输出被称为原输入消息的“散列函数”或“消息摘要”。 Base编码原理 base64用64个可见">
-<meta name="twitter:image" content="https://www.s1lenc3.com/2020/10/19/加密与解密算法逆向分析/image-20201026140450733.png">
+<meta name="twitter:description" content="加密文章，内容不公开。">
 
 
 
@@ -500,7 +482,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-03-04 20:53:59" itemprop="dateModified" datetime="2021-03-04T20:53:59+08:00">2021-03-04</time>
+                <time title="修改时间：2021-03-05 12:31:37" itemprop="dateModified" datetime="2021-03-05T12:31:37+08:00">2021-03-05</time>
               
             
           </span>
@@ -567,7 +549,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">1.4k</span>
               
 
               
@@ -601,58 +583,18 @@
       
 
       
-        <h1 id="密码学初步认识"><a href="#密码学初步认识" class="headerlink" title="密码学初步认识"></a>密码学初步认识</h1><h3 id="对称密码"><a href="#对称密码" class="headerlink" title="对称密码"></a>对称密码</h3><p>加密与解密时使用相同的密钥，如RC4、DES、AES等。</p>
-<h5 id="序列密码"><a href="#序列密码" class="headerlink" title="序列密码"></a>序列密码</h5><p>又称流密码，将明文消息按字符逐位进行加密。</p>
-<h5 id="分组密码"><a href="#分组密码" class="headerlink" title="分组密码"></a>分组密码</h5><p>将明文分组，逐组进行加密。</p>
-<h3 id="非对称密码"><a href="#非对称密码" class="headerlink" title="非对称密码"></a>非对称密码</h3><p>加密与解密时使用不同的密钥，如RSA、ECC椭圆曲线等。</p>
-<h3 id="散列算法"><a href="#散列算法" class="headerlink" title="散列算法"></a>散列算法</h3><p>哈希函数，对不同长度的消息，产生固定长度的输出。这个固定长度的输出被称为原输入消息的“散列函数”或“消息摘要”。</p>
-<h3 id="Base编码原理"><a href="#Base编码原理" class="headerlink" title="Base编码原理"></a>Base编码原理</h3><p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026140450733.png" alt="image-20201026140450733"></p>
-<h5 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h5><p>用64个可见字符来表示8bite位二进制。3个字节为24位，变为每6位一组为4个字节。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026135903008.png" alt="image-20201026135903008"></p>
-<p>编码的内容长度不是3的倍数时，在后面填充0。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026140234140.png" alt="image-20201026140234140"></p>
-<h5 id="base32"><a href="#base32" class="headerlink" title="base32"></a>base32</h5><p>用32个可见字符表示。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026140057868.png" alt="image-20201026140057868"></p>
-<h5 id="base16"><a href="#base16" class="headerlink" title="base16"></a>base16</h5><p>16个可见字符表示，同HEX编码。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026140126528.png" alt="image-20201026140126528"></p>
-<h1 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h1><p>流密码，字符逐位进行加密。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026143534037.png" alt="image-20201026143534037"></p>
-<p>RC4,包括初始算法（KSA）和伪随机子密码生成算法（PRGA）两个部分。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20201026143824805.png" alt="image-20201026143824805"></p>
-<p>逆向识别特征：</p>
-<ol>
-<li>多次256循环</li>
-<li>明文和密文长度是否相等，相等代表是序列密码。</li>
-<li>最终与明文逐字节异或。</li>
-</ol>
-<h3 id="初始化-KSA-算法部分"><a href="#初始化-KSA-算法部分" class="headerlink" title="初始化(KSA)算法部分"></a>初始化(KSA)算法部分</h3><p>参数一是状态向量s盒，参数二是密钥key，参数三是密钥长度。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210224224542028.png" alt="image-20210224224542028"></p>
-<h3 id="伪随机子密码生成算法-PRGA"><a href="#伪随机子密码生成算法-PRGA" class="headerlink" title="伪随机子密码生成算法(PRGA)"></a>伪随机子密码生成算法(PRGA)</h3><p>参数一是扰乱后的s盒，参数二是需要加密的数据data。 </p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210224225155696.png" alt="image-20210224225155696"></p>
-<h3 id="原理总结"><a href="#原理总结" class="headerlink" title="原理总结"></a>原理总结</h3><ol>
-<li>KSA阶段经过两轮256次循环，对长度为256的状态向量S盒进行扰乱。</li>
-<li>PRGA阶段，循环次数为加密内容的长度，每一次循环状态向量S盒都会参与，并重新扰乱S盒。</li>
-<li>RC4对称序列密码，256是多次出现的次数。</li>
-</ol>
-<h1 id="分组密码之DES"><a href="#分组密码之DES" class="headerlink" title="分组密码之DES"></a>分组密码之DES</h1><p>​        DES算法，明文按照64位进行分组，密钥长64位，而事实上是56位参与DES运算，（第8、16、24、32、40、48、56、64位是校验位，使得每个密钥都有奇数个1）分组后的明文组和56位的密钥按位替代或交换的方法形成密文组的加密方法。它用56位对64位二进制数据块进行加密，每次加密对64位的输入数据进行16轮编码，经过一系列替换和移位后，输入的64位原数据转换成不同的64位输出数据。主要的实现由两部分组成，分别是密钥的生成及明文的处理，每一个分组的明文处理分为16轮，每一轮使用子密钥参与运算。</p>
-<p>Android可使用javax.crypto.Cipher进行加密。</p>
-<h3 id="des流程图"><a href="#des流程图" class="headerlink" title="des流程图"></a>des流程图</h3><p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304150116805.png" alt="image-20210304150116805"></p>
-<h3 id="常量表"><a href="#常量表" class="headerlink" title="常量表"></a>常量表</h3><p>初始置换IP(8x8),逆初始置换IP(8x8),f函数中的p表(4x8),扩展置换E表(8x6),8个S盒(4x16),密钥编排常量表PC1(7x8),PC2(6x8)。</p>
-<h3 id="双重及三层DES"><a href="#双重及三层DES" class="headerlink" title="双重及三层DES"></a>双重及三层DES</h3><p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304201950234.png" alt="image-20210304201950234"></p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304202001676.png" alt="image-20210304202001676"></p>
-<h1 id="分组密码之AES"><a href="#分组密码之AES" class="headerlink" title="分组密码之AES"></a>分组密码之AES</h1><p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304202035332.png" alt="image-20210304202035332"></p>
-<p>AES-128，会对明文分组进行10轮迭代运算，加密的第1轮到第9轮的轮函数一样，包括4个操作：自己而替换、行位移、列混合和轮密钥加。最后一轮不执行列混合。迭代运算之前，先将明文和原始密钥进行一次异或加密操作。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304203948063.png" alt="image-20210304203948063"></p>
-<p>字节替换：通过S盒进行字节映射。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304205131810.png" alt="image-20210304205131810"></p>
-<p>行位移：第一行保持不变，第二行循环左移1个字节，第三行循环左移2个字节，第四行循环左移3个字节。</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304205118941.png" alt="image-20210304205118941"></p>
-<p>列混淆：矩阵相乘</p>
-<p><img src="/2020/10/19/加密与解密算法逆向分析/image-20210304205059091.png" alt="image-20210304205059091"></p>
-<p>轮密钥加：每轮的输入与轮密钥异或一次。</p>
-<p>密钥扩展：将4个字的密钥扩展城11个子密钥，共44个字。</p>
-<h1 id="Hash算法"><a href="#Hash算法" class="headerlink" title="Hash算法"></a>Hash算法</h1><p>将任意长度压缩为固定长度的一种加密方式。</p>
-
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="4ca3692ad8168b70ef366e08e04ecac5568a9bf7be070281906e83106fe22c25">f183fed301845e48b00e35ee3a0eaaf17fdf36512435a4855069d501608d1832bf29d50f3f41235e0c11e3bb1a3eec1c1a770680e4219b4d4320be8f5c8dd043283d548ae87404b5b7f5973c106be836ba68bb0c9040951726d35133091fbdd3d138f7857d8e75c1692458a2c60837236638a5cc0a285c68712ec373b1269e192bb3ca0cdc74f37a1024dac18b6ebbda4867856c9fce064ac7d5cfb7dc74b344fc996fb302d15a61801e61cf2b7f9fa9c016c3eff7126a9e638cc6395b2096d45ed721403727c96b68fb6dcacb742e48060f5fa9e0c0a805e0735d8088f7effc3872c8fbbae3ef808ed800505a19f96cb467b7dbf75d8ea40a5b63f5ecc79e0041610c1e9fcf4cbd0c41cfb4c8332c89865fc0cd199b0fab705525de7272e6b7cc4b5e4df38edca3883e230804808fd6486ce7ae88672c8cc0a938d65faa0b4b817b045a1d6b1fde2e9b10103caf8fde6cd96efe945b64c2801a4b286d5b5704c3ed5edd6d6c98cc4777fc12849f24721970a9478c7c5c7efc881a3463543858faf0ec0f6441a86a21f4ad81364e8852e7963a2d7b9c4727ee41ba46a06d0c97b4fa93934376de97382a0c34fbca80afc1a0f8e305cb4bfe77e2ece1bbdcc67dc6602446297f6914b6d30557b971d3c798a174063632c615e4afc069275b695d1e129068e4bdba25cc171086b860ab889c3cd549202eb865fd50104bd82a682701f0329a59b8143d7c882a02514f03310e9a4bba13512ecd2c8c3e1fca6ed692c171ff51f5bac1aa2ed0c6156cc32dba82e3724859c397bb146569a654bba33f43f12630f6730c1cbd23bb4444be23aebd556397f6c33b7084a480dfb019ffe23e633266ded2aeffa11a6a3ee938b5b372449849129d4e64f2243b5892c934e33087b75329a1c2546133ec1b71eb4c955e5c39888db583c313aa296d8f48cdb1d3571b71c16a688d53fefbbaaad17e9c887ed859a0334fb38842028e3388bf789dd84f0b55c4765f588aba1728ab0d8b50a2e441251e2fd5bb57ab2cd9d6e48f3eb3f50e77ed193d031be4bd3f36ab044dba1b72234b74fbc57ab4c2ec75f022d33777d95a60f87b1f79ea6e4bedfb88c8ebe187da50d35a5eafe4c1950fd69ab1175767843d74fbf80e0576ed4280760c2169026c82b3dafbf22feeafe200c299b09220d268a589d8a9d8162eea5473b71c37b2da927c619592789968be85393a5b7a7e754f69c01a3c0d44af65446823edc2b77aa77a2211b16eea7d68caea25b1afb3501dc7cda5cb020ad72e37f8cec1104fbbf8bd1f535ecd2e2209ba15d92afe7de3a3ef62ab759cb204c3dd51126195f6c63bcdb92dc1e220044ccf0a7db330d50c633e1997aacff73e1e05738c7d94b44323e1dd27761c8bf34a1236cf9982bce13ad1afb95efbd95101a7cbb9b67deeb9c8710fb8b07ade2c448dde55a9bea5c0bb51a547c095a6f6ed6efe86b3727e4c9893ea911e0510aa8c3b86c91996a452d27017dcfc325cece60177632411c39e1a037807720dd7472698b746dab95975f54947fb736704f2f9b63217c6122c23ad640da2e7ee552eeaf3d5f14e327e95006fa4c2be04529bbe173c01ffb15478382a01f266abc8c05bcaf8501e18b2216044177cf69e680b84a8a8dee1acd4936451c97c64dfd43f7cf8e7837c687afeccd7ec12db2271725755cf7b086f22b381933291cce3d37490622c5cfd682dd096b472ed142b82a6b20ed9c929084799cad9218ec21a2ebb75c70bcf354f07e049404dae7ae9fa7a6577def864e757229f1d42855b03d153a850f6802a21cb0a6df63329503d3e0c75689487ed9d4febe0a25b1659fec1a119da1edea5613dfb56e5587b82ba1f4a1c6b447ca22f2b8c4ed52d226777ac353941c6d01f201530fc62dd32a467cdf69db75b7ce45a8ff274024f586def686224b918a2ed1ca54b796bea6feb61ac87020d9f2d0efc00b2db4b90a40dd0d04c63846fb72cd30490707d868c48208e780cf1d45905f001e9d7185aa7a032995326313096ba5b88928dc4d51f4c834c4803ef29d09b85bbd98890812c31fe44cdacc965461009e973cf57c511aec0f88c43c40a02a0daad246c618be14d8bf7b06b3f7da9fe2f42efb6e4d6328fecd33fede5cd876822f8650bf0225bb817ce88c06acc130ecca38e95d7a96b2395f63e856029e90ea7f46bab1e7213ecc6c27361f7db2c89e1c713e84c6521c8da775669b79139609a2c06929232a2e5b8f335fdbca51756a6addc4185202e1c3f3268ea2167057419ccaab96c688eabd3d721e31c07841c5caa8c3dfb82f292d2287c502dd40df173c1b4ef073b4a25f3b696dac6a486a0b3043306b7ae3c6b147fd5ec0e7d863be7538e9dafc79889487d6aa7897f5bf68b8181c1e95ae86072df0a8492300a05391c629b0d3eff1f6305ac383b2e07a1ccf75da79ba96dba4fa9172b2cf677f87f19b9c74dfa2002985034778c8f3278a13acf2ce7004fd86abcb9b7db50a2816ccbdb965650d33dd9c10a0837e9697d6f39fa103c014249649b139358ff13197b015f66f55c5493f6c7fd85fe8968e15d7e3ec9cf95385196dc629d9cd620000690fdcdcfa7d069879626369930d6ff5ed61fac86bfab8f863784c52ed21c813274df80d57f43dfef6aca7c1b10627bffd2b704686820d3a77913447e6da8c822dc314d99d981ffe56f359b4785d6a5c7b71b6a8aeed8f12c5aa227fe97a1ebee97d0478a2b32e969a2d7a0abec981df8febfc986768d53a8d323e64cb4cc1790fba5ce1448b035c0886527b74fc9e3de898ae7a4f807038d3cb8a87389410bd3567a0a3ac755c1b56d0c277e2719204de9b2dd67f6821e5aae64c68423253555307ca5ad28cbc1a7008fdea8d2dcc2112fc57a62725224f6eae34d6f435bc18d4c966db0717e5174ec7ac7fbea75c6dbaa62c59983bcde0341b9820cada521c98d1eaf87e54d47d980c3cf733952b150c19e6b3954150b0b24cdf7324d1affc629912a154cb61adb98bd49d82d2062ece681e9256db0f3eda217c3d119f440c659f9d3a137652430795ea9b7e5b0a36bb6ed436d0b5a6b68d0367aa5281b96c19962d6a7d77a0af46b8168185e56e0b3b41eabe34ce6ec69723f61f865ade829e84d9944bf1fb42018023afb7a1845304cf76a48566e75e920cd6f1e0a649126cd63f3545bf54f7ea8228d5b1bfcb710877cfe149e39590c4d19e3f0490aa386dcde359c4770a69973155b9ddcf3027eeb9d141f3955fbd053208336ad72a1b2d51715448aea048d7c2ca4cd961426f9122290c806bac5a1a76f0433bbd3964f8fc186efc230950572b69d54d82094f1227aa3858d0d981550491f04c6bcf20f13fdbf1a01097b78f8d7684d75d24ff1f5864b350b5a4bdb05d2c70929c425c9f970bbc51bf5c008cf05833a2a225800c0e9f882557260855fc765057f0866ef9c2429b6f1dae8935686d95a26da432607ea5f583475b3c30db16ab7952951a7fddfa6da91543701ae364e8355b730ccdcfaa43f18153f3d025412f1c12bef16cf88f1806e9884164a169525ee904f293419c350629dda5ba675bcc061b98d9cae98bed08646dd16e6b6cbf25ad859cdd005efd2a0cb4c7a00d6a7ce04c0c78e1295c923d75ef91a3072efa6e81053aa8a9fe30e8bd82dffd9109842ecb05143b8ea1858cb2c67b077c4d4b33b70857ab36425bbceb06d4ed13fcdc3b4606c1016c7840eaace3946377770017f54d18914b12eb5c7886248113c86035c41098a3ffc9c426b75b730969118953b666d3468811e7f4b18830fa631517866248dc7b0a2a5390892db58ff36dda98ef9e605be2da7065b8942ea83fe3aa6e7aa90de1fe4a9b3671b8c955025e54e957d76f8e4ee7ef73d416cebce79f2c85c8137cdc8a7136e78907f653a8bd3a6d3e41867c4c7610490a93c4ce6508081ca9a6ab787f294681fc369898d6bb95501af8935c9a04ea91fd32f633e88c407097c36fe740028825ad7d182b55f2815a144dcaef6eb5d3e297a4695f066de8d13b8bf7cf54c7c8423c2d2fd9a26ca71f151c2c2c01f092e589ea6d043330bc4dab21a86e9347076ca32842df5adbde790cd68139c68c4eee327fc0bdc408562778842819304bb787349342077b7abf4b83d6a462e9ef5d79be6ef7c0e8e20e706881794cd4db5d8357232fb17459a0e81b1f67a4b545b1515c24a82148f152b0acec62c62c997579f025451c1d8927ed9df40b9d68b216b49574629379370880f0867814b849828117c4ca22a222547d64d294a492f760a4863946c39119818c7dfbf907d5b9196f7f992389ef63067aefcdcf2afab418b1da9afd9f69d58732311f44676d0010ebff488426d835f9b13976595534381101f1d3ef2c4f107096f693de8a384ab32e616bcc9a2c97a5bb0a78647ff175f9fb5d7333afd99686b03d66ed5604ecbd6f9aab74243cf09630fed26e6c917e016e6ecbfae3e07ce92217d0a1ffca9f7626ea65963e1b4f35594c5e6055532c1cdbe5b4857b2705a5fdb1026d434afdc2209ebcc7e0050b41c8b77d7837c689fe0aa7df96bf76f6b0a931b86c2f2dc1fd0b3992dfc9054f1eaf68aeb90d23fd49706bb80dd32d754c8587a80f7dd3bde3ee5f938fced34766cdef01ef0ad092e40cb8182ddca2530115964a0e68203bc2c48e08e32ad12a9d94fd40482cba9e7dad1d5e49b31517f8b68f71cfc01e860974af68b921dea262132d09f9d8f7626bfb472f74fb657a9c16b59ea0f8ea82e7711cf9dda901299487b1c1f16f968ab1dc6df06b6d7b023a4f554c1bceaefc947d1e0b03b7189e3099af0e46a463b63162e0f5503286f2adbb055be73bd3942b3f0697d656f563743f5b83307d2109b35a92a09c00b08ca918e6a2ce5f75b848fd821e2d6edfa626600689d38a320d31bff2ab3c27b55e6a7cd30a339c664fdd5e4b3621777ccdaae861af498b70237f8c5879ca8264d8dabb4620fad11fff54f2b75218ee465693680038577319ff59c4d4f1041b1d77ede4696cf03c83c0e3c3c2fde8ab17c727cd5ac327c1aaef9402b0c7dba19b0ce8c7bd56e9460e5923552737ff9639ad0e639aa01abcda48f9f2a72cb09168c7abbd65c1b693b36ebada2d42d714648e1d82743b3635187e911d0e231300938a7254d295950ce37da1f2119674717fa7202b96ecbe35449a9c64d40f0e39ac7717fb916c2f3f1f3922a25034f93ba0c6fdef694a6e126791cadf76fd6976fbe0820b44fde589024669aba1b6b115daf98f28cc07e461deaf048b7b161bcf363cae7434a3333811609f89fdbae03d3dcb8cad4669a8adc3e9c83bb03a92af5eb5edfda41efccbef8ae6c03eca3d278cae512aafe621acb61d1d41febec855be55ceb63e906b76af282a6ee4e55494e1c53f6f49871924e8066ab4cc1a189c57a422cbb7fe5e1a76be6a357705de040da45a4ac0d350df3bc24a512deb1be4a6a7f3b43fc3f9608a66894530ccdba03ac4042ca4ad829e8521ce968c63e367cf64b53c37f19e133b9206934734985c2796032934c1a675be209713abe03938efc53c596817556395b80f2d433fe37cc88002d96cd5dc52e258bb86d475b78bbf7be222801ca0f365c9ac8ce2059891bfb6770b40d195a8a61f5ac39b971903100ae6c51ec1272480cc8510be142e913b93d30b8b491bd8d6a520a02e2981a6ab17dcfe591fe38b4793fc87e3a283635518f393a3a1667604598fe45a5b2717589b14e7ddf757350dffa0acb02fd5ab5a6ba51d1111c3a50825932f24c415cffc29da7f5590d84dc9459562ffb6f52dfb80a6c258affd0dd16758540ecb393e6d65793a9f3392a40e9ecd12131d14fa66bd44d4cc61c2c99456c7d1af5fdf9669c1cfcfd195d6b70352ac8c4106c4e195d2a42faf86e4adb149db6f875ab60000fe8072e435c60bb88dbf01a51b7ea9e6efba259ea7350c25fd26ab0f26b646a8fb2e0f87ee1f3e1599afe23a4a244e7db75671097e86986e23b94f732acfd70e2e218d285c3f595c9995600a84c74957528e5fac77514b1ea24bdb6bf314bc42bc859ec0b0a901a18a293fab3b9bd4a123d51f9798fbd124448f6c1246e8df9dbb2bc343fee222793361cc0389ff4def5e6cbbc83e1c2a5fec9302bed7677d1fa7c1e28537c627a25b9e6803975d7a14ada588ee4fcce307bcc47e12f04a16d5115f70e2d674f51a3406c7ac80f7e4fa797297cf92ec369f073745d3343a1298e9ea148e6602a798644a2540d3f08178a519a4985f92cf13246fd6e991d5ca26c90f403dd27e7d6059dd2b52549475c8526233cc236635c6f49f97556c7883e3e468be9b580c3c93603aaa5df690e3d28065323339eecdf66930c9daf3c05cc4368b205731c96febfde7df6b8abecc4014510651c987f2c76f1618b2b4862ed348c835a4eca8ff06d0efa3c516cc1e063ec6084a36ec6915fd80fd6dc0ebabdc213901ce8ac76c132b5bc307aea9e6d2dff6313f88b035537ce64de1dd742600f998aebf6af781c4e88f6f9b068237f3989fb4dc79a780157f13213651d3d5e9b2529cdc3aed888dde55af0e6e44b5439952e419b23fbf379c95cc9f76bafe9807f2a502ffb13696f8a780f7cbf9ec66ca320c4757d7478ab372be7adbb638b7208d874e13c36351c49c98d0579c23b68368d7dbb212fc78cd390ab671784046c6261d860a2b9949a87d31e6c1586db4e4c7ac1bed23c90d9046f1c33d744d79d2cd2433f498f238b5b53b330823a6ee381d24639b64b0153562447a476c38e3d973b28a525a1bcf8bd5759c77c753da5d33d19c1df224186b51ea1e5011d2904b372072926ff036d9e9c079cca1f895b7074e91c7dc387b4778041b9327171fd4e354d825e7218c8c29348c9c486f5de8f4c0fbb538eacbb2a39624012263c1fcbaf01b446898fef6bf22f96ec8ffc43118b5e0db6cdf636241d729ed56ab6ffb16674081513ee545584f7b9fb8e17f470a83f53f86ee731d89c899f60ec28f220a2b68ffa6be2434e291293716216859de846d52c4b4fdb9dd2d6e15a1487facb23258be27aed32516971507df9c1fb10eff759d437666924c4b53979af9171166ff87e773347b5f31d0b48821080f9f0aa091d9957a3504ef3019ca5476426f4f5af56acef4c57e3555cc3fa3b61d3d934ef136c547d674eec0fa0277d9656594bd108d6a8a08b3b713949a0f22691010eb0d03ce685373252623a77fa1aae0b968b041919f788969203f06a39eea1869945432d6c37851a455259fce160259a176d312fce7a40257f52764cc4f8a69fbc95f8b819efd9859c1cb6ec47cbc1a97820eb967990e72bbbaacd1bb28a1ea0b7500796ead5e1de6168d6daed93b4a1acaa9057d1113cd06876992ac7df14655b61981583aaf2adbc0b400e2682d3ad7c1fa71224b2842e5adc9a8b6590df28fb4e56af951d5e0b7ab64dbdeeb0321a22fd031063be1bf6506fcda079f9308836da7438f317780171fb7a8c64259e039f82b27098af27b409764810192e06e85710adbf30134dcc80d0ca48388d1780bca8e510b451a51515bb5dc824c1363694c1389e40b672b0a48e7292cdd863678b845339f5a6dcfea88169d33a49f4432ebc90f3c23998237586f866335e298a56ec8f396e6eeebf497659f9a6c365588086d90f835b488e4d0f9fc98a67f26930b459a3ca71f95320e181a1f62d55ed8538508e08d227cdb1f9cac9e3d8854f67512ecaaed4e0486a187d4f8f283817b907faf786d0e5a32d064bf84e6fe315f8889396f776c08dbfb04f5538ec4bd88eb9fedaa872af73c9017e3f535a0a2505817a8f0c2ef13480c79739143f2970569d838709ce860badec36c75ce987f896c72871f76e6e136489517db4c4a9a519a41a8112375a31dd95d1295bcc4bcfb0888099bd4d5064239f7963c59e1717d84a6467b5c561b348af819b36c9b7b48783e5561fae443a9098d33088878a9b13321dc33134134d7a38266dabeffe3c92c488b8284397caa0d0eaccfd078ff62b95de24383f4a2008ecfa05472fb667a877b0619e38e30a5747cafe27220de055a8dab746b428c951f55975be9e9e056d3d10ad77450029b0fb9b9cedbdade0d501dc53e39db74f6fa4c6143b2f1dd90d7905703a4f8b0cb37f65c0c7327056d7df4182c327f11e78dfdf10c56cf845762809667d5761b2e3ef8e566aac2a45fca90926c15dda292eb73ca135af3e3e9ce6352d23867528307d958ab45b48347275e04c18bda969de04044799a7d5133191ceedacb9394d69655ee5e00292140d40c5c56b5dd7c4dfa1330b20b1a73da76bf930727222b76dbd70d539438a3539ac4a469a8abffd218089ee0ef65050beb376f34dc45cbd07fa36d6b0735b95de65a767e2594c91d0330104356989ee2ddf5fc4d2b9ab23dcde67c7318a5d1bf6e2ceabbabd932fdf5f6e92f3e50c333faab2589765a85ad0231d573adbd8e4d693c0da669e4fdf803cfc198811010165aed9c242e8b8327c4acdcc075fe55f856433d03d150f3cd498ab581941931f8fa034d467a03dd15e9c154cd837fa5c4c85b8dc4660b30d0a9d795ef3aa7dbf4a04e4ff5c82084bb72f4d762f90c0c4f33bdbfcf75793864a73b243e27a8e0a4c1d0501b6e185c9519c98d4e965c99bc12739a8eb58762679951e213093e46e628ffc36015eec5ec0e8cf7678a419bd0b54e3d492c2d96c46848e5df631d3060c585a9a1e378f0d7111552334fdb6a6e890530bf8b4deab7baa1f5fafdaf6a6b2aea5e9596c84c47128c3a5f11e484c7eeba50683b9853bde05af983a3cdf91ac581dc4c5cef5e5fd38e3ad881ac6a32d43fa8efd49aa1db16d388bca37ba92c95eb4e6800ff033d3bb840d02a131da56a0d0113a27fd1df8a27ef2c433b314a0a7c782a7364fd3a5a953bbbab7cbd971c0f36472830d249408ec92b1c6dfce0d24152d76f1fdd17ebf533bd9f1e3652e872a008b8ef555a252975134df91bb45b8348e77303606a423459a43d9052f0a25c42c19927a52a3a96e39a0153acd57836d1213e84c77f48dd99d01d06ada9657c924a14de6e849ff3e7729e8aa754b94cd1bd7b2628b37625758f7713d5be684f28551f08932b81f121b92c339af51827f3f5a78df0b59608aba097b491023e62d4f16b1695903df4b1eee66f1983ae011faccc79ef8b80d6dcee5229516a8e10b103e2ba101eb19f2ea53ec6f8f29f59283d6739bf0714cf712c583e7f74842adddff33819172ea7af1cfc27892dcce7f8cec8359259dee3682b771578100aa8a60d3fee67268a860d49274d4b084b21d35963387886581939514c8f6d6ddb374dc7378bb39c85788d261a3521edb8438a8d6004080b69419fd7bea427f5592387696614934820994f6fb2f96914dbbc39a7f3116e8ba1908bc1a5677b553bba27fa4fe454039cb20b54524403c47da24a6cc67ea48174119c8f33e8d5e47415a1c9ac4ff5062e783c892660c4f69f30ce703a33940018bcd11332ba5b5f78c9df4440c5c746c2ce73664865f7a986025c5e719d86fb9f9abb9a43340227c162eb08100b9d932ba8e0a80770664c0f0f6b3ea55378b7c0e3af83bbbb0854756e8419f21acefc70eb1c4ad68c7fa391a0373add28158f101b647e61f9dd9b03b03de845e108d47c9994f5b8ce89cb5e10020130935c0d54335dd02813ac18bab86b764253dbadc8775a7c56114de8e58408aa642b17784c7e9eaa98bae8897ac083b12e038c20a3b8b584aa096c95b32d0900744123fbae894b9f08d857077d679c6e141065f5f7e8d77a4b355d9079fca734f3957c0cc04be0ec4a24eb7e5782fce2d0d28d255677e38f417c5c91229206c342f491e21ea62dc78ba492f10169139ce1176be07b0a9d25a9f49f88bfb9f5ba5792bfc13c9b8bfb2494445ffa7fb8f107e97341d2295753027bc3f8c7b649f77878e5af239640b652e5035ef88cc52e4be65ebc0424fc9b3334819cb82784f535efc9766b9b689acefc8e49f8dfdb7e5281be0c6082afb266ebced78cf5e355dc76141b614a3d4e2e985c013e52c0c4c3a7b31f02d36db90c62902f1a9e4cb0b1f4920a4baac6cde9e1c9b9b28f568f081452a374d3695e9928b6a74fb1abb3b65a3a4db2f107b8f7aec7c09695821b66c024940fedbab8249d15707d3fb1b071d07995bdbefd90937876617de2620becdbebec73e0612aa1ec9482993457a82f917f7604fc8d4ad6ee299f39ae7b0010f3ad8dcc3f0698af5aeafef8dc57b6beb50ade0022f5b1a422746d9c9efb3276e68d813df102a472aa789320b7ce835a00ab4302a474630ed0e85cc11abf3e52105bf2e4d692e2ce240959d7c543a4ab11f31d5b9e0e02d5cbfba423b278bf9ac16d33a8e6137ec3ee7678b382a165a597b90984fbeb6e90103da973e8e2e131989f34b0b961743093d67b88e9395ebc1d24da3e4fc6d10e42fbf87bbcfa90d380d46d6dc6d59ffda4d7edd983e2064364471166e95fba0d9bc79932b44d59e263933ebdde0de80ed37688ccf12393044053f15de5418cbf626b7d9c642d9f16293284f603990e98e2d304f27608c90628b60db0e203aafe33686a613924540b66330477616c6122fdfde9b8560a891f6b3d4b2cbecdaf3120697e097e31177465a93de81e8160fce43b6e5b8d6ea9907e07b46627d32de2bc9622ca8541ea26ddd6a8157f6894cea4441111326286923fcd700d2a43476b8b4752d823052312c3f71bc7fd15c53c17753faa0d724d1c60734b2fed6d3a89f26890d4a83a0633f010dfe1092f22a3501b473b1b547d91725bae9494587ab3531c84ece433c109ce5f57b25105feaf71a86ca3a49673f9d526a85cc7eecf4fa7aa4df2fee172b698274fc41b32883ad21ad78b2422b5a0d3393e9824914161d22bc9c49c14da7925f93c48ea986e244662506d663a8c51776236564130a03624b12829563bc2c58f52df8b280d9ae5fcffbc6b9f6192e6f5af44f46393dd7a93123f00ad1d7b2d80dc61a7660d351dc563b9c4946812798224dfeea6b4542f623dc5d0e1e3bb374929e2cb83997abd09e1120422dd903ae340eba97979957bdc3cc8955f46b0f10ead7b69552bdf6807ff17cadfdded885240270d7c2144dcf94e4cdb4cbdac9050365a21b2cc6434d8cac933129a58436b0ca300dd4692c7eb7f82d835fb3a82da15b52c997735625dc643ed117e6103b0f80373867c526a87fd168c1b47bfe75cfd5f3d3fa7d85d87ba83c0114e5ccd415676c8fc33385a98e375621096032a162764f630d1a720402bb2753c9c4987ac15e1ff78707c1b1fa652935e60e86bec490d0e4252a3af7c0e1b7b3a4a877d946ec831a3d3f5b3161352cc7c96f52c3e9a5b0523c3c658467f04a8a9b7eb0d849be95e7ad2e2273d4a5ca1db6edd9afef6a47eb0b34026f2ba4a41d8a9bb7f21dfded71a5b5d315faae185860a0593806be90c30e0c6996381fc5e5fc0c108f202ecd8a7847b1defec43cbfabb67ccb6e9e5b29df43bf7edf4452a68fff2aab6c44ec2d8e4ada7db9963eee1c7696657cc6e0c9a3d5e94da9a283b3176224839e7267a05a2c8d881328b140b414c4b200862b7a2e143a00b6c6e1bee6607ec1e58dc3799568d27a287fd19e9d39c54f6036dcb944d4c55dc01e9b232afcf6e82e82f7b173d3c7fcf1ecc42ba0f9ac2fd2a44fa1189d72b8cc4a127e2ce2feeacf59103449ecf7e9819dfcb0</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">输入密码，查看文章。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
       
     </div>
 
@@ -810,17 +752,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -979,23 +912,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学初步认识"><span class="nav-number">1.</span> <span class="nav-text">密码学初步认识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对称密码"><span class="nav-number">1.0.1.</span> <span class="nav-text">对称密码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#序列密码"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">序列密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分组密码"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">分组密码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称密码"><span class="nav-number">1.0.2.</span> <span class="nav-text">非对称密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散列算法"><span class="nav-number">1.0.3.</span> <span class="nav-text">散列算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Base编码原理"><span class="nav-number">1.0.4.</span> <span class="nav-text">Base编码原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#base64"><span class="nav-number">1.0.4.0.1.</span> <span class="nav-text">base64</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#base32"><span class="nav-number">1.0.4.0.2.</span> <span class="nav-text">base32</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#base16"><span class="nav-number">1.0.4.0.3.</span> <span class="nav-text">base16</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#RC4"><span class="nav-number">2.</span> <span class="nav-text">RC4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化-KSA-算法部分"><span class="nav-number">2.0.1.</span> <span class="nav-text">初始化(KSA)算法部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪随机子密码生成算法-PRGA"><span class="nav-number">2.0.2.</span> <span class="nav-text">伪随机子密码生成算法(PRGA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理总结"><span class="nav-number">2.0.3.</span> <span class="nav-text">原理总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组密码之DES"><span class="nav-number">3.</span> <span class="nav-text">分组密码之DES</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#des流程图"><span class="nav-number">3.0.1.</span> <span class="nav-text">des流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量表"><span class="nav-number">3.0.2.</span> <span class="nav-text">常量表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双重及三层DES"><span class="nav-number">3.0.3.</span> <span class="nav-text">双重及三层DES</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组密码之AES"><span class="nav-number">4.</span> <span class="nav-text">分组密码之AES</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hash算法"><span class="nav-number">5.</span> <span class="nav-text">Hash算法</span></a></li></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
