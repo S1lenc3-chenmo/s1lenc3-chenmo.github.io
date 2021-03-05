@@ -223,7 +223,7 @@
 <meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201230144638614.png">
 <meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201230151427427.png">
 <meta property="og:image" content="https://www.s1lenc3.com/2020/11/09/buuctf-web-1/image-20201231183535996.png">
-<meta property="og:updated_time" content="2020-12-31T10:53:11.509Z">
+<meta property="og:updated_time" content="2021-03-05T07:39:21.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="buuctf-web-1">
 <meta name="twitter:description" content="Secret File 查看源代码：   点secret，什么都没发现，但是action.php变为了end.php，应该有重定向，抓包看看，  然后访问这个页面，得到源码。  想到可以通过伪协议读取flag。 secr3t.php?file=php://filter/read=convert.base64-encode/resource=flag.php 将得到的base64编码进行解码，  I">
@@ -552,7 +552,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-12-31 18:53:11" itemprop="dateModified" datetime="2020-12-31T18:53:11+08:00">2020-12-31</time>
+                <time title="修改时间：2021-03-05 15:39:21" itemprop="dateModified" datetime="2021-03-05T15:39:21+08:00">2021-03-05</time>
               
             
           </span>
@@ -569,14 +569,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF赛题writeup/" itemprop="url" rel="index"><span itemprop="name">CTF赛题writeup</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/web/CTF赛题writeup/" itemprop="url" rel="index"><span itemprop="name">CTF赛题writeup</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF赛题writeup/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a></span>
 
                 
                 
@@ -783,7 +783,7 @@
 <p><img src="/2020/11/09/buuctf-web-1/image-20201202193649179.png" alt="image-20201202193649179"></p>
 <p>蚁剑连接，</p>
 <p><img src="/2020/11/09/buuctf-web-1/image-20201202194501924.png" alt="image-20201202194501924"></p>
-<h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>上传.php文件，检查后缀了，上传.php.jpg,过了后缀检测，但是发现检测了文件内容和文件头，最后上传如下文件：</p>
+<h1 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h1><p>上传.php文件，检查后缀了，上传.php.jpg,过了后缀检测，但是发现检测了文件内容和文件头，最后上传如下文件：</p>
 <p><img src="/2020/11/09/buuctf-web-1/image-20201202195431071.png" alt="image-20201202195431071"></p>
 <p>但是马不会执行，这里还有一个知识点：</p>
 <p>.user.ini文件</p>
@@ -989,8 +989,8 @@
     <div class="sidebar-inner">
 
       
-
       
+        
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
@@ -999,8 +999,8 @@
             站点概览
           </li>
         </ul>
+        
       
-
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1063,13 +1063,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1161,6 +1155,7 @@
       </div>
 
       
+        
       <!--noindex-->
         <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
@@ -1169,11 +1164,12 @@
             
             
             
-
+                
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Secret-File"><span class="nav-number">1.</span> <span class="nav-text">Secret File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Include1"><span class="nav-number">2.</span> <span class="nav-text">Include1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LoveSQL"><span class="nav-number">3.</span> <span class="nav-text">LoveSQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-tornado"><span class="nav-number">4.</span> <span class="nav-text">easy_tornado</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ping-Ping-Ping"><span class="nav-number">5.</span> <span class="nav-text">Ping Ping Ping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-Calc1"><span class="nav-number">6.</span> <span class="nav-text">Easy Calc1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exec"><span class="nav-number">7.</span> <span class="nav-text">Exec</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Knife"><span class="nav-number">8.</span> <span class="nav-text">Knife</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP"><span class="nav-number">9.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http"><span class="nav-number">10.</span> <span class="nav-text">Http</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#admin"><span class="nav-number">11.</span> <span class="nav-text">admin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Upload"><span class="nav-number">12.</span> <span class="nav-text">Upload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACTF2020-新生赛-Upload"><span class="nav-number">13.</span> <span class="nav-text">[ACTF2020 新生赛]Upload</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SUCTF-2019-CheckIn"><span class="nav-number">13.1.</span> <span class="nav-text">[SUCTF 2019]CheckIn</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BuyFlag"><span class="nav-number">14.</span> <span class="nav-text">BuyFlag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-MD5"><span class="nav-number">15.</span> <span class="nav-text">Easy MD5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZJCTF-2019-NiZhuanSiWei"><span class="nav-number">16.</span> <span class="nav-text">[ZJCTF 2019]NiZhuanSiWei</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hack-World"><span class="nav-number">17.</span> <span class="nav-text">Hack World</span></a></li></ol></div>
             
-
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Secret-File"><span class="nav-number">1.</span> <span class="nav-text">Secret File</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Include1"><span class="nav-number">2.</span> <span class="nav-text">Include1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LoveSQL"><span class="nav-number">3.</span> <span class="nav-text">LoveSQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#easy-tornado"><span class="nav-number">4.</span> <span class="nav-text">easy_tornado</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ping-Ping-Ping"><span class="nav-number">5.</span> <span class="nav-text">Ping Ping Ping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-Calc1"><span class="nav-number">6.</span> <span class="nav-text">Easy Calc1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exec"><span class="nav-number">7.</span> <span class="nav-text">Exec</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Knife"><span class="nav-number">8.</span> <span class="nav-text">Knife</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP"><span class="nav-number">9.</span> <span class="nav-text">PHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http"><span class="nav-number">10.</span> <span class="nav-text">Http</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#admin"><span class="nav-number">11.</span> <span class="nav-text">admin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Upload"><span class="nav-number">12.</span> <span class="nav-text">Upload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACTF2020-新生赛-Upload"><span class="nav-number">13.</span> <span class="nav-text">[ACTF2020 新生赛]Upload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SUCTF-2019-CheckIn"><span class="nav-number">14.</span> <span class="nav-text">[SUCTF 2019]CheckIn</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BuyFlag"><span class="nav-number">15.</span> <span class="nav-text">BuyFlag</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-MD5"><span class="nav-number">16.</span> <span class="nav-text">Easy MD5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZJCTF-2019-NiZhuanSiWei"><span class="nav-number">17.</span> <span class="nav-text">[ZJCTF 2019]NiZhuanSiWei</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hack-World"><span class="nav-number">18.</span> <span class="nav-text">Hack World</span></a></li></ol></div>
+            
+       
           </div>
         </div>
       <!--/noindex-->
