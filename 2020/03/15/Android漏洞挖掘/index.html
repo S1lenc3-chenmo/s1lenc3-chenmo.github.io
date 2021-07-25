@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android逆向," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="菜鸡准备开始尝试挖洞了。学习文章：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;22933619 AndroidManifest配置相关的详情或漏洞程序被任意调试详情：AndroidManifest.xml中android:debuggable&#x3D;”true”。 危害：导致app可以被任意调试 建议：将true改为false即可。 程序数据任意备份详情：AndroidManifest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android漏洞挖掘">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/03/15/Android%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="菜鸡准备开始尝试挖洞了。学习文章：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;22933619 AndroidManifest配置相关的详情或漏洞程序被任意调试详情：AndroidManifest.xml中android:debuggable&#x3D;”true”。 危害：导致app可以被任意调试 建议：将true改为false即可。 程序数据任意备份详情：AndroidManifest">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-15T13:43:52.000Z">
+<meta property="article:modified_time" content="2021-07-23T08:57:41.760Z">
+<meta property="article:author" content="丨S1lenc3丨">
+<meta property="article:tag" content="Android逆向">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.S1lenc3.com/2020/03/15/Android漏洞挖掘/"/>
+
+
+
+
+
+  <title>Android漏洞挖掘 | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.S1lenc3.com/2020/03/15/Android%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kenan.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android漏洞挖掘</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-15T21:43:52+08:00">
+                2020-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/Android%E9%80%86%E5%90%91/" itemprop="url" rel="index">
+                    <span itemprop="name">Android逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>菜鸡准备开始尝试挖洞了。学习文章：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22933619">https://www.zhihu.com/question/22933619</a></p>
+<h1 id="AndroidManifest配置相关的详情或漏洞"><a href="#AndroidManifest配置相关的详情或漏洞" class="headerlink" title="AndroidManifest配置相关的详情或漏洞"></a>AndroidManifest配置相关的详情或漏洞</h1><h2 id="程序被任意调试"><a href="#程序被任意调试" class="headerlink" title="程序被任意调试"></a>程序被任意调试</h2><p>详情：AndroidManifest.xml中android:debuggable=”true”。</p>
+<p>危害：导致app可以被任意调试</p>
+<p>建议：将true改为false即可。</p>
+<h2 id="程序数据任意备份"><a href="#程序数据任意备份" class="headerlink" title="程序数据任意备份"></a>程序数据任意备份</h2><p>详情：AndroidManifest.xml中android:allowBackup=”true”。</p>
+<p>危害：导致app应用数据可以被备份导出。</p>
+<p>建议：将true改为false即可。</p>
+<p>组件暴露：建议使用android:protectionLevel=”signature”验证调用来源。</p>
+<h2 id="Activity组件暴露"><a href="#Activity组件暴露" class="headerlink" title="Activity组件暴露"></a>Activity组件暴露</h2><p>详情：Activity组件的exported被设置为true，或者未设置exported同时IntentFilter不为空时，可通过设置intent唤起activity。</p>
+<p>危害：构造恶意数据对导出的activity进行越权攻击。</p>
+<p>建议：exported设置为false，对组件进行权限控制和参数校验</p>
+<h2 id="Service组件暴露"><a href="#Service组件暴露" class="headerlink" title="Service组件暴露"></a>Service组件暴露</h2><p>同Activity组件暴露相同。</p>
+<h2 id="ContentProvider组件暴露"><a href="#ContentProvider组件暴露" class="headerlink" title="ContentProvider组件暴露"></a>ContentProvider组件暴露</h2><p>详情：exported为true或者api小于等于16.</p>
+<p>危害：访问不公开共享的数据或文件。</p>
+<p>建议：同上。</p>
+<h2 id="BroadcastReceiver组件暴露"><a href="#BroadcastReceiver组件暴露" class="headerlink" title="BroadcastReceiver组件暴露"></a>BroadcastReceiver组件暴露</h2><p>同上。</p>
+<h2 id="Intent-Scheme-URLs攻击"><a href="#Intent-Scheme-URLs攻击" class="headerlink" title="Intent Scheme URLs攻击"></a>Intent Scheme URLs攻击</h2><p>详情：在AndroidManifest.xml设置Scheme协议之后，可以通过浏览器打开对应的Activity。</p>
+<p>危害：通过访问浏览器构造Intent语法唤醒app相应组件，可能导致拒绝服务甚至越权调用以及提权漏洞。</p>
+<p>建议：对数据进行安全检查，配置category filter,添加android.intent.category.BROWSABLE方式规避风险。</p>
+<h1 id="WebView组件及服务器通信相关的风险或漏洞"><a href="#WebView组件及服务器通信相关的风险或漏洞" class="headerlink" title="WebView组件及服务器通信相关的风险或漏洞"></a>WebView组件及服务器通信相关的风险或漏洞</h1><h2 id="webview存在本地Java接口"><a href="#webview存在本地Java接口" class="headerlink" title="webview存在本地Java接口"></a>webview存在本地Java接口</h2><p>详情：android的webview组件有一个非常特殊接口函数addJavascriptInterface，能实现本地java与js之间交互。</p>
+<p>危害：targetSdkVersion小于17时，利用此接口可以远程执行任意代码。</p>
+<p>建议：不使用此接口，使用注入javascript和第三方协议的替代方案。</p>
+<h2 id="WebView组件远程代码执行（调用getClassLoader）"><a href="#WebView组件远程代码执行（调用getClassLoader）" class="headerlink" title="WebView组件远程代码执行（调用getClassLoader）"></a>WebView组件远程代码执行（调用getClassLoader）</h2><p>详情：targetSdkVersion小于17时，并在Context子类中使用addJavascriptInterface绑定this对象。</p>
+<p>危害：通过调用getClassLoader绕过getClass方法的限制。</p>
+<p>建议：targetSdkVersion大于17。</p>
+<h2 id="WebView忽略SSL证书错误"><a href="#WebView忽略SSL证书错误" class="headerlink" title="WebView忽略SSL证书错误"></a>WebView忽略SSL证书错误</h2><p>详情：WebView调用onReceivedSslError方法时，直接执行handler.proceed()来忽略该证书错误。</p>
+<p>危害：可能引起中间人攻击。</p>
+<p>建议：不要重写onReceivedSslError方法，或者对错误进行业务判断。</p>
+<h2 id="WebView启用访问文件数据"><a href="#WebView启用访问文件数据" class="headerlink" title="WebView启用访问文件数据"></a>WebView启用访问文件数据</h2><p>详情：setAllowFileAccess(true),可通过webview访问私有目录下的文件数据。</p>
+<p>危害：此方法默认为true，绕过同源策略能够对私有目录文件进行访问，导致隐私泄漏。</p>
+<p>建议：设置为false，禁止访问私有文件数据。</p>
+<h2 id="SSL通信服务端-客户端检测信任任意证书"><a href="#SSL通信服务端-客户端检测信任任意证书" class="headerlink" title="SSL通信服务端/客户端检测信任任意证书"></a>SSL通信服务端/客户端检测信任任意证书</h2><p>详情：自定义SSL x509 TrustManager，重写checkServerTrusted/checkClientTrusted方法，方法内不做任何服务端的证书校验。</p>
+<p>危害：中间人攻击。</p>
+<p>建议：双端进行严格证书校验。</p>
+<h2 id="HTTPS关闭主机名验证"><a href="#HTTPS关闭主机名验证" class="headerlink" title="HTTPS关闭主机名验证"></a>HTTPS关闭主机名验证</h2><p>详情：构造HttpCLient时，HostnameVerifier参数为ALLOW_ALL_HOSTNAME_VERIFIER或空。</p>
+<p>危害：中间人攻击。</p>
+<p>建议：加密通信被还原为明文通信。</p>
+<h2 id="开放socket端口"><a href="#开放socket端口" class="headerlink" title="开放socket端口"></a>开放socket端口</h2><p>详情：App绑定端口进行监听，建立连接后可接收外部发送的数据。</p>
+<p>危害：构造恶意数据对端口进行测试，对于绑定了0.0.0.0的app可发起远程攻击。</p>
+<p>建议：绑定127.0.0.1，对接受数据进行校验检测。</p>
+<h1 id="数据安全风险"><a href="#数据安全风险" class="headerlink" title="数据安全风险"></a>数据安全风险</h1><h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><h3 id="SD卡数据被第三方程序访问"><a href="#SD卡数据被第三方程序访问" class="headerlink" title="SD卡数据被第三方程序访问"></a>SD卡数据被第三方程序访问</h3><p>详情：存储在SD卡中的内容可以调用getExternalStorageDirectory访问。</p>
+<p>建议：存储信息到私有目录，对敏感数据加密。</p>
+<h3 id="全局File可读写漏洞-openFileOutput"><a href="#全局File可读写漏洞-openFileOutput" class="headerlink" title="全局File可读写漏洞-openFileOutput"></a>全局File可读写漏洞-openFileOutput</h3><p>详情：openFileOutput方法创建内部文件时，将文件设置了全局的可读权限MODE_WORLD_READABLE/MODE_WORLD_WRITEABLE。。</p>
+<p>危害：恶意读取文件内容。</p>
+<p>建议：确认是否存在敏感数据，删除全局可读/写属性。</p>
+<h2 id="私有文件泄漏风险-getSharedPreferences"><a href="#私有文件泄漏风险-getSharedPreferences" class="headerlink" title="私有文件泄漏风险-getSharedPreferences"></a>私有文件泄漏风险-getSharedPreferences</h2><h3 id="配置文件可读可写"><a href="#配置文件可读可写" class="headerlink" title="配置文件可读可写"></a>配置文件可读可写</h3><p>详情：getSharedPreferences第二个参数为MODE_WORLD_READABLE 或MODE_WORLD_WRITEABLE。</p>
+<p>危害：信息泄漏，篡改内容，影响程序正常运行。</p>
+<p>建议：参数设置MODE_PRIVATE。禁止使用MODE_WORLD_READABLE ｜MODE_WORLD_WRITEABLE模式。</p>
+<h2 id="数据加密"><a href="#数据加密" class="headerlink" title="数据加密"></a>数据加密</h2><h3 id="AES弱加密"><a href="#AES弱加密" class="headerlink" title="AES弱加密"></a>AES弱加密</h3><p>详情：使用“AES/ECB/NoPadding”或“AES/ECB/PKCS5padding”的模式。</p>
+<p>危害：破解难度低。</p>
+<p>建议：使用cbc或cfb加密模式。</p>
+<h3 id="随机数不安全使用"><a href="#随机数不安全使用" class="headerlink" title="随机数不安全使用"></a>随机数不安全使用</h3><p>详情：调用SecureRandom类中的setSeed方法。</p>
+<p>危害：生成的随机数具有确定性，存在被破解的可能性。</p>
+<p>建议：使用/dev/urandom或/dev/random来初始化伪随机数生成器。</p>
+<h3 id="AES-DES硬编码密钥"><a href="#AES-DES硬编码密钥" class="headerlink" title="AES/DES硬编码密钥"></a>AES/DES硬编码密钥</h3><p>详情：加密时采用硬编码在程序中。</p>
+<p>危害：通过反编译获取密钥可以轻易揭秘APP通信数据。</p>
+<p>建议：密钥加密存储或进行加解密运算。</p>
+<h1 id="文件目录遍历类漏洞"><a href="#文件目录遍历类漏洞" class="headerlink" title="文件目录遍历类漏洞"></a>文件目录遍历类漏洞</h1><h2 id="Provider文件目录遍历"><a href="#Provider文件目录遍历" class="headerlink" title="Provider文件目录遍历"></a>Provider文件目录遍历</h2><p>详情：Provider被导出并且覆写了openFile方法，没有对Content Query Uri进行有效判断或过滤。</p>
+<p>危害：利用openFile接口进行文件目录遍历，可达到访问任意可读文件的目的。</p>
+<p>建议：不覆写openFile方法，对参数进行安全校验。</p>
+<h2 id="unzip解压缩漏洞"><a href="#unzip解压缩漏洞" class="headerlink" title="unzip解压缩漏洞"></a>unzip解压缩漏洞</h2><p>详情：解压zip，使用getName获取压缩文件名后未进行校验。</p>
+<p>危害：构造恶意zip文件，覆盖相应的的文件导致任意代码执行。</p>
+<p>建议：解压文件时，判断是否有../特殊字符。</p>
+<h1 id="文件格式解析类漏洞"><a href="#文件格式解析类漏洞" class="headerlink" title="文件格式解析类漏洞"></a>文件格式解析类漏洞</h1><h2 id="FFmpeg文件读取"><a href="#FFmpeg文件读取" class="headerlink" title="FFmpeg文件读取"></a>FFmpeg文件读取</h2><p>详情：使用了低版本的FFmpeg库进行视频解码。</p>
+<p>危害：低版本可能存在本地文件读取漏洞，可以通过构造恶意文件获取本地文件内容。</p>
+<p>建议：升级最新版。</p>
+<h2 id="安卓“Janus”漏洞"><a href="#安卓“Janus”漏洞" class="headerlink" title="安卓“Janus”漏洞"></a>安卓“Janus”漏洞</h2><p>详情：在原始apk前部添加一个恶意的classes.dex文件（A文件），安卓系统在校验时计算了A文件的hash值，并以“classes.dex”为字符串作为key保存，然后计算原本的classes.dex（B文件），同样的key保存，之后将会覆盖A文件的hash值，系统认为apk没有被修改，完成安装，运行apk会优先执行文件A，忽略B。</p>
+<p>危害：绕过安卓系统的signature scheme V1签名机制，进而直接对App进行篡改。</p>
+<p>建议：禁止安装多个同名apk文件。</p>
+<h1 id="内存堆栈类漏洞"><a href="#内存堆栈类漏洞" class="headerlink" title="内存堆栈类漏洞"></a>内存堆栈类漏洞</h1><h2 id="未使用编译器堆栈保护技术"><a href="#未使用编译器堆栈保护技术" class="headerlink" title="未使用编译器堆栈保护技术"></a>未使用编译器堆栈保护技术</h2><p>详情：stack canaries漏洞缓解技术，函数调用时，向栈帧内压入额外的canary随机数，栈溢出时，canary先被覆盖，之后才是ebp和返回地址。函数返回时，会将canary与.data副本的值进行比较，不相同，说明发生了栈溢出。</p>
+<p>危害：发生栈溢出时系统不会对程序进行保护。</p>
+<p>建议：使用NDK编译so时，在Android.mk文件中添加：LOCAL_CFLAGS := -Wall -O2 -U_FORTIFY_SOURCE -fstack-protector-all</p>
+<h2 id="未使用地址空间随机化技术"><a href="#未使用地址空间随机化技术" class="headerlink" title="未使用地址空间随机化技术"></a>未使用地址空间随机化技术</h2><p>详情：PIE，地址随机分配。</p>
+<p>危害：shellcode执行难度降低，攻击成功率增加。</p>
+<p>建议：NDK编译so时，加入LOCAL_CFLAGS := -fpie -pie开启对PIE的支持。</p>
+<h2 id="libupnp栈溢出漏洞"><a href="#libupnp栈溢出漏洞" class="headerlink" title="libupnp栈溢出漏洞"></a>libupnp栈溢出漏洞</h2><p>详情：使用了低于1.6.18版本的libupnp库文件。</p>
+<p>危害：代码执行。</p>
+<p>建议：升级库到1.6.18版本或以上。</p>
+<h1 id="动态类漏洞"><a href="#动态类漏洞" class="headerlink" title="动态类漏洞"></a>动态类漏洞</h1><h2 id="DEX文件动态加载"><a href="#DEX文件动态加载" class="headerlink" title="DEX文件动态加载"></a>DEX文件动态加载</h2><p>详情：使用DEXClassLoader加载外部apk，dex等文件，外部文件无法控制时，无法保证加载的文件是否安全。</p>
+<p>危害：加载恶意dex文件会导致任意命令的执行。</p>
+<p>建议：加载外部文件前，必须使用校验签名或MD5等方式确认外部文件的安全性。</p>
+<h2 id="动态注册广播"><a href="#动态注册广播" class="headerlink" title="动态注册广播"></a>动态注册广播</h2><p>详情：使用registerReceiver动态注册的广播在组件的生命周期里是默认导出的。</p>
+<p>危害：拒绝服务、数据泄露、越权调用。</p>
+<p>建议：使用带权限检验的registerReceiver API进行动态广播的注册。</p>
+<h1 id="校验或限定不严导致的风险或漏洞"><a href="#校验或限定不严导致的风险或漏洞" class="headerlink" title="校验或限定不严导致的风险或漏洞"></a>校验或限定不严导致的风险或漏洞</h1><h2 id="Fragment注入"><a href="#Fragment注入" class="headerlink" title="Fragment注入"></a>Fragment注入</h2><p>详情：通过导出的PreferenceActivity的子类，没有正确处理intent的extra值。</p>
+<p>危害：攻击者可绕过限制访问未授权页面。</p>
+<p>建议：使用isValidFragment方法中进行fragment名的合法性校验。</p>
+<h2 id="隐式意图调用"><a href="#隐式意图调用" class="headerlink" title="隐式意图调用"></a>隐式意图调用</h2><p>详情：封装Intent时采用隐式设置，只设定action，未限定具体的接受对象，导致intent可被其他应用获取并读取其中的数据。</p>
+<p>危害：Intent被第三方劫持，导致内部隐私数据泄漏。</p>
+<p>建议：改为显示调用。</p>
+<h1 id="命令行调用类相关的风险或漏洞"><a href="#命令行调用类相关的风险或漏洞" class="headerlink" title="命令行调用类相关的风险或漏洞"></a>命令行调用类相关的风险或漏洞</h1><h2 id="动态链接库中包含执行命令的函数"><a href="#动态链接库中包含执行命令的函数" class="headerlink" title="动态链接库中包含执行命令的函数"></a>动态链接库中包含执行命令的函数</h2><p>详情：native程序，执行系统命令时，对接收的参数执行命令时没有做过滤或检验。</p>
+<p>危害：攻击者传入任意命令，导致命令执行。</p>
+<p>建议：对参数进行严格过滤。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h2 id="应用反编译"><a href="#应用反编译" class="headerlink" title="应用反编译"></a>应用反编译</h2><p><strong>漏洞</strong>：APK 包非常容易被反编译成可读文件，稍加修改就能重新打包成新的 APK。<br><strong>利用</strong>：软件破解，内购破解，软件逻辑修改，插入恶意代码，替换广告商 ID。<br><strong>建议</strong>：使用 ProGuard 等工具混淆代码，重要逻辑用 NDK 实现。<br><strong>例子</strong>：反编译重打包 FlappyBird，把广告商 ID 换了，游戏改加插一段恶意代码等等。</p>
+<h2 id="数据的存储与传输"><a href="#数据的存储与传输" class="headerlink" title="数据的存储与传输"></a>数据的存储与传输</h2><p><strong>漏洞</strong>：外部存储（SD 卡）上的文件没有权限管理，所有应用都可读可写。开发者把敏感信息明文存在 SD 卡上，或者动态加载的 payload 放在 SD 卡上。<br><strong>利用</strong>：窃取敏感信息，篡改配置文件，修改 payload 逻辑并重打包。<br><strong>建议</strong>：不要把敏感信息放在外部存储上面；在动态加载外部资源的时候验证文件完整性。</p>
+<p><strong>漏洞</strong>：使用全局可读写（MODE_WORLD_READABLE，MODE_WORLD_WRITEABLE）的内部存储方式，或明文存储敏感信息（用户账号密码等）。<br><strong>利用</strong>：全局读写敏感信息，或 root 后读取明文信息。<br><strong>建议</strong>：不适用全局可读写的内部存储方式，不明文存储用户账号密码。</p>
+<h2 id="密码泄露"><a href="#密码泄露" class="headerlink" title="密码泄露"></a>密码泄露</h2><p><strong>漏洞</strong>：密码明文存储，传输。<br><strong>利用</strong>：</p>
+<ul>
+<li>root 后可读写内部存储。</li>
+<li>SD 卡全局可读写。</li>
+<li>公共 WiFi 抓包获取账号密码。</li>
+</ul>
+<p><strong>建议</strong>：实用成熟的加密方案。不要把密码明文存储在 SD 卡上。</p>
+<h2 id="组件暴露-Activity-Service-Broadcast-Receiver-Content-Provider"><a href="#组件暴露-Activity-Service-Broadcast-Receiver-Content-Provider" class="headerlink" title="组件暴露 (Activity, Service, Broadcast Receiver, Content Provider)"></a>组件暴露 (Activity, Service, Broadcast Receiver, Content Provider)</h2><p><strong>漏洞</strong>：</p>
+<ul>
+<li>组件在被调用时未做验证。</li>
+<li>在调用其他组件时未做验证。</li>
+</ul>
+<p><strong>利用</strong>：</p>
+<ul>
+<li>调用暴露的组件，达到某种效果，获取某些信息，构造某些数据。（比如：调用暴露的组件发短信、微博等）。</li>
+<li>监听暴露组件，读取数据。</li>
+</ul>
+<p><strong>建议</strong>：验证输入信息、验证组件调用等。android:exported 设置为 false。使用 android:protectionLevel=”signature” 验证调用来源。</p>
+<h2 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h2><p><strong>漏洞</strong>：</p>
+<ul>
+<li>恶意 App 可以注入 JavaScript 代码进入 WebView 中的网页，网页未作验证。</li>
+<li>恶意网页可以执行 JavaScript 反过来调用 App 中注册过的方法，或者使用资源。</li>
+</ul>
+<p><strong>利用</strong>：</p>
+<ul>
+<li>恶意程序嵌入 Web App，然后窃取用户信息。</li>
+<li>恶意网页远程调用 App 代码。更有甚者，通过 Java Reflection 调用 Runtime 执行任意代码。</li>
+</ul>
+<p><strong>建议</strong>：不使用 WebView 中的 setJavaScriptEnabled(true)，或者使用时对输入进行验证。</p>
+<h2 id="其他漏洞"><a href="#其他漏洞" class="headerlink" title="其他漏洞"></a>其他漏洞</h2><ul>
+<li>ROOT 后的手机可以修改 App 的内购，或者安装外挂 App 等。</li>
+<li>Logcat 泄露用户敏感信息。</li>
+<li>恶意的广告包。</li>
+<li>利用 next Intent。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Android 应用的漏洞大部分都是因为开发人员没有对输入信息做验证造成的，另外因为 Intent 这种特殊的机制，需要过滤外部的各种恶意行为。再加上 Android 应用市场混乱。所以现在 Android 应用的漏洞，恶意软件，钓鱼等还在不断增多。再加上 root 对于 App 沙箱的破坏，Android 升级的限制。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    丨S1lenc3丨
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://www.s1lenc3.com/2020/03/15/Android%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="Android漏洞挖掘">https://www.s1lenc3.com/2020/03/15/Android%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android%E9%80%86%E5%90%91/" rel="tag"># Android逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/14/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/" rel="next" title="Android软件的破解技术">
+                <i class="fa fa-chevron-left"></i> Android软件的破解技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" rel="prev" title="常用命令记录">
+                常用命令记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/kenan.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/S1lenc3-chenmo/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AndroidManifest%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E7%9A%84%E8%AF%A6%E6%83%85%E6%88%96%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.</span> <span class="nav-text">AndroidManifest配置相关的详情或漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%A2%AB%E4%BB%BB%E6%84%8F%E8%B0%83%E8%AF%95"><span class="nav-number">1.1.</span> <span class="nav-text">程序被任意调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E6%95%B0%E6%8D%AE%E4%BB%BB%E6%84%8F%E5%A4%87%E4%BB%BD"><span class="nav-number">1.2.</span> <span class="nav-text">程序数据任意备份</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity%E7%BB%84%E4%BB%B6%E6%9A%B4%E9%9C%B2"><span class="nav-number">1.3.</span> <span class="nav-text">Activity组件暴露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service%E7%BB%84%E4%BB%B6%E6%9A%B4%E9%9C%B2"><span class="nav-number">1.4.</span> <span class="nav-text">Service组件暴露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ContentProvider%E7%BB%84%E4%BB%B6%E6%9A%B4%E9%9C%B2"><span class="nav-number">1.5.</span> <span class="nav-text">ContentProvider组件暴露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BroadcastReceiver%E7%BB%84%E4%BB%B6%E6%9A%B4%E9%9C%B2"><span class="nav-number">1.6.</span> <span class="nav-text">BroadcastReceiver组件暴露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intent-Scheme-URLs%E6%94%BB%E5%87%BB"><span class="nav-number">1.7.</span> <span class="nav-text">Intent Scheme URLs攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebView%E7%BB%84%E4%BB%B6%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%80%9A%E4%BF%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E9%A3%8E%E9%99%A9%E6%88%96%E6%BC%8F%E6%B4%9E"><span class="nav-number">2.</span> <span class="nav-text">WebView组件及服务器通信相关的风险或漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#webview%E5%AD%98%E5%9C%A8%E6%9C%AC%E5%9C%B0Java%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.</span> <span class="nav-text">webview存在本地Java接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView%E7%BB%84%E4%BB%B6%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%88%E8%B0%83%E7%94%A8getClassLoader%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">WebView组件远程代码执行（调用getClassLoader）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView%E5%BF%BD%E7%95%A5SSL%E8%AF%81%E4%B9%A6%E9%94%99%E8%AF%AF"><span class="nav-number">2.3.</span> <span class="nav-text">WebView忽略SSL证书错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView%E5%90%AF%E7%94%A8%E8%AE%BF%E9%97%AE%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">2.4.</span> <span class="nav-text">WebView启用访问文件数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL%E9%80%9A%E4%BF%A1%E6%9C%8D%E5%8A%A1%E7%AB%AF-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A3%80%E6%B5%8B%E4%BF%A1%E4%BB%BB%E4%BB%BB%E6%84%8F%E8%AF%81%E4%B9%A6"><span class="nav-number">2.5.</span> <span class="nav-text">SSL通信服务端&#x2F;客户端检测信任任意证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS%E5%85%B3%E9%97%AD%E4%B8%BB%E6%9C%BA%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="nav-number">2.6.</span> <span class="nav-text">HTTPS关闭主机名验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%94%BEsocket%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.7.</span> <span class="nav-text">开放socket端口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9"><span class="nav-number">3.</span> <span class="nav-text">数据安全风险</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-number">3.1.</span> <span class="nav-text">数据存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SD%E5%8D%A1%E6%95%B0%E6%8D%AE%E8%A2%AB%E7%AC%AC%E4%B8%89%E6%96%B9%E7%A8%8B%E5%BA%8F%E8%AE%BF%E9%97%AE"><span class="nav-number">3.1.1.</span> <span class="nav-text">SD卡数据被第三方程序访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80File%E5%8F%AF%E8%AF%BB%E5%86%99%E6%BC%8F%E6%B4%9E-openFileOutput"><span class="nav-number">3.1.2.</span> <span class="nav-text">全局File可读写漏洞-openFileOutput</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E6%96%87%E4%BB%B6%E6%B3%84%E6%BC%8F%E9%A3%8E%E9%99%A9-getSharedPreferences"><span class="nav-number">3.2.</span> <span class="nav-text">私有文件泄漏风险-getSharedPreferences</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8F%AF%E8%AF%BB%E5%8F%AF%E5%86%99"><span class="nav-number">3.2.1.</span> <span class="nav-text">配置文件可读可写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86"><span class="nav-number">3.3.</span> <span class="nav-text">数据加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AES%E5%BC%B1%E5%8A%A0%E5%AF%86"><span class="nav-number">3.3.1.</span> <span class="nav-text">AES弱加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%8D%E5%AE%89%E5%85%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">3.3.2.</span> <span class="nav-text">随机数不安全使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AES-DES%E7%A1%AC%E7%BC%96%E7%A0%81%E5%AF%86%E9%92%A5"><span class="nav-number">3.3.3.</span> <span class="nav-text">AES&#x2F;DES硬编码密钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E7%B1%BB%E6%BC%8F%E6%B4%9E"><span class="nav-number">4.</span> <span class="nav-text">文件目录遍历类漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Provider%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86"><span class="nav-number">4.1.</span> <span class="nav-text">Provider文件目录遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unzip%E8%A7%A3%E5%8E%8B%E7%BC%A9%E6%BC%8F%E6%B4%9E"><span class="nav-number">4.2.</span> <span class="nav-text">unzip解压缩漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90%E7%B1%BB%E6%BC%8F%E6%B4%9E"><span class="nav-number">5.</span> <span class="nav-text">文件格式解析类漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FFmpeg%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="nav-number">5.1.</span> <span class="nav-text">FFmpeg文件读取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%8D%93%E2%80%9CJanus%E2%80%9D%E6%BC%8F%E6%B4%9E"><span class="nav-number">5.2.</span> <span class="nav-text">安卓“Janus”漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E7%B1%BB%E6%BC%8F%E6%B4%9E"><span class="nav-number">6.</span> <span class="nav-text">内存堆栈类漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%BC%96%E8%AF%91%E5%99%A8%E5%A0%86%E6%A0%88%E4%BF%9D%E6%8A%A4%E6%8A%80%E6%9C%AF"><span class="nav-number">6.1.</span> <span class="nav-text">未使用编译器堆栈保护技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E4%BD%BF%E7%94%A8%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E9%9A%8F%E6%9C%BA%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="nav-number">6.2.</span> <span class="nav-text">未使用地址空间随机化技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libupnp%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E"><span class="nav-number">6.3.</span> <span class="nav-text">libupnp栈溢出漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%B1%BB%E6%BC%8F%E6%B4%9E"><span class="nav-number">7.</span> <span class="nav-text">动态类漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DEX%E6%96%87%E4%BB%B6%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD"><span class="nav-number">7.1.</span> <span class="nav-text">DEX文件动态加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C%E5%B9%BF%E6%92%AD"><span class="nav-number">7.2.</span> <span class="nav-text">动态注册广播</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E6%88%96%E9%99%90%E5%AE%9A%E4%B8%8D%E4%B8%A5%E5%AF%BC%E8%87%B4%E7%9A%84%E9%A3%8E%E9%99%A9%E6%88%96%E6%BC%8F%E6%B4%9E"><span class="nav-number">8.</span> <span class="nav-text">校验或限定不严导致的风险或漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fragment%E6%B3%A8%E5%85%A5"><span class="nav-number">8.1.</span> <span class="nav-text">Fragment注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E6%84%8F%E5%9B%BE%E8%B0%83%E7%94%A8"><span class="nav-number">8.2.</span> <span class="nav-text">隐式意图调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%B0%83%E7%94%A8%E7%B1%BB%E7%9B%B8%E5%85%B3%E7%9A%84%E9%A3%8E%E9%99%A9%E6%88%96%E6%BC%8F%E6%B4%9E"><span class="nav-number">9.</span> <span class="nav-text">命令行调用类相关的风险或漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93%E4%B8%AD%E5%8C%85%E5%90%AB%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">9.1.</span> <span class="nav-text">动态链接库中包含执行命令的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">9.2.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-number">9.3.</span> <span class="nav-text">应用反编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E4%BC%A0%E8%BE%93"><span class="nav-number">9.4.</span> <span class="nav-text">数据的存储与传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E6%B3%84%E9%9C%B2"><span class="nav-number">9.5.</span> <span class="nav-text">密码泄露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%9A%B4%E9%9C%B2-Activity-Service-Broadcast-Receiver-Content-Provider"><span class="nav-number">9.6.</span> <span class="nav-text">组件暴露 (Activity, Service, Broadcast Receiver, Content Provider)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView"><span class="nav-number">9.7.</span> <span class="nav-text">WebView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%BC%8F%E6%B4%9E"><span class="nav-number">9.8.</span> <span class="nav-text">其他漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">丨S1lenc3丨</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

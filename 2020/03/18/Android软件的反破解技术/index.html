@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android逆向," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Android逆向可以通过四个步骤：反编译、静态分析、动态调试、重编译。 对抗反编译如何对抗反编译工具寻找反编译工具的缺陷，使其反编译失败。 阅读反编译工具源码需要较强的代码分析能力 压力测试通过脚本测试大量apk，查找反编译工具的缺陷 对抗dex2jardex2jar可将dex文件转换为jar文件。 对抗静态分析代码混淆技术使用ProGuard进行混淆。  在project.properties">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android软件的反破解技术">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="Android逆向可以通过四个步骤：反编译、静态分析、动态调试、重编译。 对抗反编译如何对抗反编译工具寻找反编译工具的缺陷，使其反编译失败。 阅读反编译工具源码需要较强的代码分析能力 压力测试通过脚本测试大量apk，查找反编译工具的缺陷 对抗dex2jardex2jar可将dex文件转换为jar文件。 对抗静态分析代码混淆技术使用ProGuard进行混淆。  在project.properties">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319161948039.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319163846893.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319164003984.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319164906736.png">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319175344380.png">
+<meta property="article:published_time" content="2020-03-18T13:20:19.000Z">
+<meta property="article:modified_time" content="2020-03-19T09:54:44.000Z">
+<meta property="article:author" content="丨S1lenc3丨">
+<meta property="article:tag" content="Android逆向">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319161948039.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.S1lenc3.com/2020/03/18/Android软件的反破解技术/"/>
+
+
+
+
+
+  <title>Android软件的反破解技术 | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.S1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kenan.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android软件的反破解技术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-18T21:20:19+08:00">
+                2020-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/Android%E9%80%86%E5%90%91/" itemprop="url" rel="index">
+                    <span itemprop="name">Android逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Android逆向可以通过四个步骤：反编译、静态分析、动态调试、重编译。</p>
+<h1 id="对抗反编译"><a href="#对抗反编译" class="headerlink" title="对抗反编译"></a>对抗反编译</h1><h2 id="如何对抗反编译工具"><a href="#如何对抗反编译工具" class="headerlink" title="如何对抗反编译工具"></a>如何对抗反编译工具</h2><p>寻找反编译工具的缺陷，使其反编译失败。</p>
+<h3 id="阅读反编译工具源码"><a href="#阅读反编译工具源码" class="headerlink" title="阅读反编译工具源码"></a>阅读反编译工具源码</h3><p>需要较强的代码分析能力</p>
+<h3 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h3><p>通过脚本测试大量apk，查找反编译工具的缺陷</p>
+<h2 id="对抗dex2jar"><a href="#对抗dex2jar" class="headerlink" title="对抗dex2jar"></a>对抗dex2jar</h2><p>dex2jar可将dex文件转换为jar文件。</p>
+<h1 id="对抗静态分析"><a href="#对抗静态分析" class="headerlink" title="对抗静态分析"></a>对抗静态分析</h1><h2 id="代码混淆技术"><a href="#代码混淆技术" class="headerlink" title="代码混淆技术"></a>代码混淆技术</h2><p>使用ProGuard进行混淆。</p>
+<ol>
+<li>在project.properties文件中添加<code>proguard.config=proguard.cfg</code>。</li>
+<li>在proguard.cfg中设置需要混淆和保留的类和方法。</li>
+</ol>
+<p>现在在AS里会有这个文件：</p>
+<p><img src="/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319161948039.png" alt="image-20200319161948039"></p>
+<p>配置 build.gradle,</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">release &#123;</span><br><span class="line">            <span class="regexp">//</span> 不显示log</span><br><span class="line">            buildConfigField <span class="string">&quot;boolean&quot;</span>, <span class="string">&quot;LOG_DEBUG&quot;</span>, <span class="string">&quot;false&quot;</span></span><br><span class="line">            <span class="regexp">//</span> 混淆</span><br><span class="line">            minifyEnabled true</span><br><span class="line">            <span class="regexp">//</span> Zipalign优化</span><br><span class="line">            zipAlignEnabled true</span><br><span class="line">            <span class="regexp">//</span> 移除无用的resource</span><br><span class="line">            shrinkResources true</span><br><span class="line">            <span class="regexp">//</span> 混淆配置</span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">&#x27;proguard-android.txt&#x27;</span>), <span class="string">&#x27;proguard-rules.pro&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我用debug模式混淆的时候，apk打不开，release版的成功了。</p>
+<h3 id="proguard"><a href="#proguard" class="headerlink" title="proguard"></a>proguard</h3><p>proguard有以下功能：</p>
+<ul>
+<li>压缩(Shrink)：检测并移除代码中无用的类、字段、方法和特性（Attribute）。</li>
+<li>优化(Optimize)：对字节码进行优化，移除无用的指令。</li>
+<li>混淆(Obfuscate)：使用a，b，c，d这样简短而无意义的名称，对类、字段和方法进行重命名。</li>
+<li>预检(Preveirfy)：在Java平台上对处理后的代码进行预检，确保加载的class文件是可执行的。</li>
+</ul>
+<p>常用配置</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span> 公共 <span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#指定代码的压缩级别</span></span><br><span class="line">-optimizationpasses <span class="number">5</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 混淆时所采用的算法</span></span><br><span class="line">-optimizations !code<span class="regexp">/simplification/arithmetic,!field/</span>*,!<span class="class"><span class="keyword">class</span>/<span class="title">merging</span>/*</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#记录生成的日志数据,gradle build时在本项目根目录输出</span></span><br><span class="line"><span class="comment">#apk 包内所有 class 的内部结构</span></span><br><span class="line">-dump class_files.txt</span><br><span class="line"><span class="comment">#未混淆的类和成员</span></span><br><span class="line">-printseeds seeds.txt</span><br><span class="line"><span class="comment">#列出从 apk 中删除的代码</span></span><br><span class="line">-printusage unused.txt</span><br><span class="line"><span class="comment">#混淆前后的映射</span></span><br><span class="line">-printmapping mapping.txt</span><br><span class="line"> </span><br><span class="line"><span class="comment">#移除log代码</span></span><br><span class="line">-assumenosideeffects <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">util</span>.<span class="title">Log</span> &#123;</span></span><br><span class="line">    public static *** v(...);</span><br><span class="line">    public static *** i(...);</span><br><span class="line">    public static *** d(...);</span><br><span class="line">    public static *** w(...);</span><br><span class="line">    public static *** e(...);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆反射用到的类</span></span><br><span class="line">-keepattributes Signature</span><br><span class="line">-keepattributes EnclosingMethod</span><br><span class="line"> </span><br><span class="line"><span class="comment">#保持继承自系统类的class不被混淆</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Activity</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Application</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Service</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">content</span>.<span class="title">BroadcastReceiver</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">content</span>.<span class="title">ContentProvider</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">backup</span>.<span class="title">BackupAgentHelper</span></span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">preference</span>.<span class="title">Preference</span></span></span><br><span class="line">-keep interface android.support.v4.app.** &#123; *; &#125;</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v4</span>.** &#123; *; &#125;</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v4</span>.**</span></span><br><span class="line">-keep interface android.support.v7.app.** &#123; *; &#125;</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v7</span>.** &#123; *; &#125;</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v7</span>.**</span></span><br><span class="line">-keep public <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Fragment</span></span></span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> * <span class="keyword">extends</span> <span class="title">android</span>.**&#123;*;&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆Serializable接口的子类中指定的某些成员变量和方法</span></span><br><span class="line">-keepclassmembers <span class="class"><span class="keyword">class</span> * <span class="title">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> &#123;</span></span><br><span class="line">    static final long serialVersionUID;</span><br><span class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</span><br><span class="line">    private <span class="keyword">void</span> writeObject(java.io.ObjectOutputStream);</span><br><span class="line">    private <span class="keyword">void</span> readObject(java.io.ObjectInputStream);</span><br><span class="line">    java.lang.<span class="built_in">Object</span> writeReplace();</span><br><span class="line">    java.lang.<span class="built_in">Object</span> readResolve();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span> Module自定义 <span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span> 不混淆引用的jar <span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆butterknife</span></span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    @butterknife.* &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    @butterknife.* &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-dontwarn butterknife.internal.**</span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆AndroidBootstrap</span></span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">beardedhen</span>.<span class="title">androidbootstrap</span>.**&#123;*;&#125;</span></span><br><span class="line">-dontwarn com.beardedhen.androidbootstrap.**</span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆应用宝自更新jar</span></span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">qq</span>.**</span></span><br><span class="line">-dontwarn com.qq.**</span><br><span class="line">-keep <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">tencent</span>.**</span></span><br><span class="line">-dontwarn com.tencent.**</span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span> 保持自定义控件不被混淆 <span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context);</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</span><br><span class="line">&#125;</span><br><span class="line">-keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span><br><span class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int, int);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">######</span><span class="comment">######</span> 项目内部类的混淆配置 <span class="comment">######</span><span class="comment">######</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆整个包</span></span><br><span class="line"><span class="comment">#-keep class com.test.test.**&#123;*;&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#不混淆对外接口的public类名和成员名，否则外部无法调用</span></span><br><span class="line"><span class="comment">#-keep public interface com.test.test.**&#123;*;&#125;</span></span><br><span class="line"><span class="comment">#-keep public enum com.test.test.**&#123;*;&#125;</span></span><br><span class="line"><span class="comment">#-keep public class com.test.test.**&#123;</span></span><br><span class="line"><span class="comment">#    public *;</span></span><br><span class="line"><span class="comment">#&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#忽略项目中其他Module的警告 ############</span></span><br><span class="line"><span class="comment">#-dontwarn com.test.test.**</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wangwangli6/article/details/79800520">https://blog.csdn.net/wangwangli6/article/details/79800520</a></p>
+<h2 id="NDK保护"><a href="#NDK保护" class="headerlink" title="NDK保护"></a>NDK保护</h2><p>使用NDK开发可增加逆向难度。</p>
+<h2 id="外壳保护"><a href="#外壳保护" class="headerlink" title="外壳保护"></a>外壳保护</h2><p>加壳加固。</p>
+<h1 id="对抗动态调试"><a href="#对抗动态调试" class="headerlink" title="对抗动态调试"></a>对抗动态调试</h1><h2 id="检测调试器"><a href="#检测调试器" class="headerlink" title="检测调试器"></a>检测调试器</h2><p>通过检查debuggable的值是否被修改过判断是否被调试。</p>
+<p><img src="/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319163846893.png" alt="image-20200319163846893"></p>
+<p>检测调试器是否连接：</p>
+<p><img src="/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319164003984.png" alt="image-20200319164003984"></p>
+<h2 id="检测模拟器"><a href="#检测模拟器" class="headerlink" title="检测模拟器"></a>检测模拟器</h2><p>通过命令<code>adb shell getprop</code>对比模拟器和真机。</p>
+<p>真机：</p>
+<p><img src="/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319164906736.png" alt="image-20200319164906736"></p>
+<p>模拟器：</p>
+<p><img src="/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/image-20200319175344380.png" alt="image-20200319175344380"></p>
+<p>这不没区别吗。。。现在模拟器都这么先进了，书上有点落后了。。。</p>
+<p>就贴一下旧代码吧，虽然不一定能用，以后也能作参考。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">检测代码：</span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isRunningInEmualtor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">boolean</span> qemuKernel = <span class="keyword">false</span>;</span><br><span class="line">    	Process process = <span class="keyword">null</span>;</span><br><span class="line">        DataOutputStream os = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;  </span><br><span class="line">            process = Runtime.getRuntime().exec(<span class="string">&quot;getprop ro.kernel.qemu&quot;</span>);  </span><br><span class="line">            os = <span class="keyword">new</span> DataOutputStream(process.getOutputStream());</span><br><span class="line">            BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(process.getInputStream(),<span class="string">&quot;GBK&quot;</span>));</span><br><span class="line">            os.writeBytes(<span class="string">&quot;exit\n&quot;</span>);  </span><br><span class="line">            os.flush();</span><br><span class="line">            process.waitFor();</span><br><span class="line">            qemuKernel = (Integer.valueOf(in.readLine()) == <span class="number">1</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;com.droider.checkqemu&quot;</span>, <span class="string">&quot;检测到模拟器:&quot;</span> + qemuKernel);             </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e)&#123;  </span><br><span class="line">        	qemuKernel = <span class="keyword">false</span>;</span><br><span class="line">            Log.d(<span class="string">&quot;com.droider.checkqemu&quot;</span>, <span class="string">&quot;run failed&quot;</span> + e.getMessage()); </span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;  </span><br><span class="line">                <span class="keyword">if</span> (os != <span class="keyword">null</span>) &#123;  </span><br><span class="line">                    os.close();  </span><br><span class="line">                &#125;  </span><br><span class="line">                process.destroy();  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            	</span><br><span class="line">            &#125;  </span><br><span class="line">            Log.d(<span class="string">&quot;com.droider.checkqemu&quot;</span>, <span class="string">&quot;run finally&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> qemuKernel;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getProp</span><span class="params">(Context context, String property)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">    		ClassLoader cl = context.getClassLoader();</span><br><span class="line">    		Class SystemProperties = cl.loadClass(<span class="string">&quot;android.os.SystemProperties&quot;</span>);</span><br><span class="line">    		Method method = SystemProperties.getMethod(<span class="string">&quot;get&quot;</span>, String.class);</span><br><span class="line">    		Object[] params = <span class="keyword">new</span> Object[<span class="number">1</span>];</span><br><span class="line">    		params[<span class="number">0</span>] = <span class="keyword">new</span> String(property);</span><br><span class="line">    		<span class="keyword">return</span> (String)method.invoke(SystemProperties, params);</span><br><span class="line">    	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="防止重编译"><a href="#防止重编译" class="headerlink" title="防止重编译"></a>防止重编译</h1><h2 id="检查签名"><a href="#检查签名" class="headerlink" title="检查签名"></a>检查签名</h2><p>检查签名的hashcode是否一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSignature</span><span class="params">(String packageName)</span> </span>&#123;      </span><br><span class="line">		PackageManager pm = <span class="keyword">this</span>.getPackageManager();</span><br><span class="line">		PackageInfo pi = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">int</span> sig = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			pi = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);</span><br><span class="line">			Signature[] s = pi.signatures;</span><br><span class="line">			sig = s[<span class="number">0</span>].hashCode();  </span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e1) &#123;</span><br><span class="line">			sig = <span class="number">0</span>;</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sig;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="校验保护"><a href="#校验保护" class="headerlink" title="校验保护"></a>校验保护</h2><p>检测classes.dex的校验值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkCRC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">boolean</span> beModified = <span class="keyword">false</span>;</span><br><span class="line">    	<span class="keyword">long</span> crc = Long.parseLong(getString(R.string.crc));</span><br><span class="line">    	ZipFile zf;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			zf = <span class="keyword">new</span> ZipFile(getApplicationContext().getPackageCodePath());</span><br><span class="line">	    	ZipEntry ze = zf.getEntry(<span class="string">&quot;classes.dex&quot;</span>);</span><br><span class="line">	    	Log.d(<span class="string">&quot;com.droider.checkcrc&quot;</span>, String.valueOf(ze.getCrc()));</span><br><span class="line">	    	<span class="keyword">if</span> (ze.getCrc() == crc) &#123;</span><br><span class="line">	    		beModified = <span class="keyword">true</span>;</span><br><span class="line">	    	&#125; </span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			beModified = <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> beModified;</span><br><span class="line">    &#125;    </span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    丨S1lenc3丨
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/" title="Android软件的反破解技术">https://www.s1lenc3.com/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android%E9%80%86%E5%90%91/" rel="tag"># Android逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" rel="next" title="常用命令记录">
+                <i class="fa fa-chevron-left"></i> 常用命令记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/20/Android%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/" rel="prev" title="Android系统攻击与防范">
+                Android系统攻击与防范 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/kenan.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/S1lenc3-chenmo/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%8A%97%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-number">1.</span> <span class="nav-text">对抗反编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AF%B9%E6%8A%97%E5%8F%8D%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7"><span class="nav-number">1.1.</span> <span class="nav-text">如何对抗反编译工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E5%8F%8D%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E6%BA%90%E7%A0%81"><span class="nav-number">1.1.1.</span> <span class="nav-text">阅读反编译工具源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">压力测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%8A%97dex2jar"><span class="nav-number">1.2.</span> <span class="nav-text">对抗dex2jar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%8A%97%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">对抗静态分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E6%8A%80%E6%9C%AF"><span class="nav-number">2.1.</span> <span class="nav-text">代码混淆技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proguard"><span class="nav-number">2.1.1.</span> <span class="nav-text">proguard</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NDK%E4%BF%9D%E6%8A%A4"><span class="nav-number">2.2.</span> <span class="nav-text">NDK保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E5%A3%B3%E4%BF%9D%E6%8A%A4"><span class="nav-number">2.3.</span> <span class="nav-text">外壳保护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%8A%97%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">对抗动态调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E8%B0%83%E8%AF%95%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">检测调试器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">检测模拟器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E9%87%8D%E7%BC%96%E8%AF%91"><span class="nav-number">4.</span> <span class="nav-text">防止重编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%AD%BE%E5%90%8D"><span class="nav-number">4.1.</span> <span class="nav-text">检查签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E4%BF%9D%E6%8A%A4"><span class="nav-number">4.2.</span> <span class="nav-text">校验保护</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">丨S1lenc3丨</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

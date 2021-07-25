@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Linux命令记录1234567891011121314151617181920212223242526272829echo xxxxx &gt; xx.txt 会自动换行echo -n xxxxx &gt; xx.txt 不会换行sudo passwd root &#x2F;&#x2F;更改root密码&#x2F;&#x2F;链接$ sudo rm -rf python$ sudo ln -s &#x2F;usr&#x2F;bin&#x2F;python3  &#x2F;u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用命令记录">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="Linux命令记录1234567891011121314151617181920212223242526272829echo xxxxx &gt; xx.txt 会自动换行echo -n xxxxx &gt; xx.txt 不会换行sudo passwd root &#x2F;&#x2F;更改root密码&#x2F;&#x2F;链接$ sudo rm -rf python$ sudo ln -s &#x2F;usr&#x2F;bin&#x2F;python3  &#x2F;u">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-16T10:56:35.000Z">
+<meta property="article:modified_time" content="2021-07-25T16:06:44.104Z">
+<meta property="article:author" content="丨S1lenc3丨">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.S1lenc3.com/2020/03/16/常用命令记录/"/>
+
+
+
+
+
+  <title>常用命令记录 | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.S1lenc3.com/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kenan.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常用命令记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-16T18:56:35+08:00">
+                2020-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux命令记录"><a href="#Linux命令记录" class="headerlink" title="Linux命令记录"></a>Linux命令记录</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">echo xxxxx &gt; xx.txt 会自动换行</span><br><span class="line">echo -n xxxxx &gt; xx.txt 不会换行</span><br><span class="line"></span><br><span class="line">sudo passwd root <span class="regexp">//</span>更改root密码</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>链接</span><br><span class="line">$ sudo rm -rf python</span><br><span class="line">$ sudo ln -s <span class="regexp">/usr/</span>bin<span class="regexp">/python3  /u</span>sr<span class="regexp">/bin/</span>python</span><br><span class="line"><span class="regexp">//</span>换内核程序</span><br><span class="line">sudo apt-get install synaptic</span><br><span class="line"><span class="regexp">//</span>重启桌面</span><br><span class="line">sudo <span class="regexp">/etc/i</span>nit.d/gdm restart</span><br><span class="line"><span class="regexp">//</span>关闭ASLR</span><br><span class="line">echo <span class="number">0</span> &gt; <span class="regexp">/proc/</span>sys<span class="regexp">/kernel/</span>randomize_va_space</span><br><span class="line"></span><br><span class="line">NX：-z execstack <span class="regexp">/ -z noexecstack (关闭 /</span> 开启)    不让执行栈上的数据，于是JMP ESP就不能用了</span><br><span class="line">Canary：-fno-stack-protector <span class="regexp">/-fstack-protector /</span> -fstack-protector-all (关闭 <span class="regexp">/ 开启 /</span> 全开启)  栈里插入cookie信息</span><br><span class="line">PIE：-no-pie <span class="regexp">/ -pie (关闭 /</span> 开启)   地址随机化，另外打开后会有get_pc_thunk</span><br><span class="line">RELRO：-z norelro <span class="regexp">/ -z lazy /</span> -z now (关闭 <span class="regexp">/ 部分开启 /</span> 完全开启)  对GOT表具有写权限</span><br><span class="line">gcc -z execstack -fno-stack-protector -no-pie -z norelro</span><br><span class="line"><span class="regexp">//</span>linux命令，将指定程序在指定端口运行：</span><br><span class="line">socat tcp-listen:<span class="number">10001</span>,reuseaddr,fork EXEC:./file_name,pty,raw,echo=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>在x64下通常参数从左到右依次放在rdi, rsi, rdx, rcx, r8, r9，多出来的参数才会入栈（根据调用约定的方式可能有不同，通常是这样）</span><br><span class="line"></span><br><span class="line">特殊的gadgets:</span><br><span class="line">通常位于x64的ELF程序中的__libc_csu_init,</span><br><span class="line">universal_gadget1 = <span class="number">0</span>x40075a           <span class="comment">#万能gadget1：pop rbx; pop rbp; pop r12; pop r13; pop r14; pop r15; retn</span></span><br><span class="line">universal_gadget2 = <span class="number">0</span>x400740        <span class="comment">#万能gadget2：mov rdx, r13; mov rsi, r14; mov edi, r15d; call qword ptr [r12+rbx*8]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="ABD命令"><a href="#ABD命令" class="headerlink" title="ABD命令"></a>ABD命令</h1><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">adb tcpip <span class="number">5555</span></span><br><span class="line">adb connect xxxxx:<span class="number">5555</span></span><br><span class="line">强制运行<span class="number">32</span>位模式：adb install --abi armeabi-v7a xxxx.apk</span><br><span class="line"></span><br><span class="line">cat /<span class="keyword">proc</span>/cpuinfo #Android查看cpu架构<span class="title"></span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">adb</span> shell<span class="title"> am</span> start -D -n<span class="title"> com.iscclockk/.MainActivity</span></span><br><span class="line">jdb附加<span class="title"> jdb</span> -connect<span class="title"> com.sun.jdi.SocketAttach:hostname=localhost,port=8700</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">setenforce</span> 0</span><br><span class="line">设置全局调试：<span class="title"></span></span><br><span class="line"><span class="title">magisk</span> resetprop<span class="title"> ro.debuggable</span> 1<span class="title"></span></span><br><span class="line"><span class="title">stop;start;</span></span><br><span class="line"><span class="title"></span></span><br><span class="line"><span class="title">frida非标准端口连接:</span></span><br><span class="line">	./frida-server -l 0.0.0.0:6666<span class="title"></span></span><br><span class="line"><span class="title">	frida-ps</span> -H 192.168.1.102:6666<span class="title"></span></span><br><span class="line"><span class="title">	objection</span> -p 6666</span><br><span class="line">以调试模式启动：<span class="title"></span></span><br><span class="line"><span class="title">adb</span> shell<span class="title"> am</span> set-debug-app -w<span class="title"> com.d3ctf.noname</span></span><br><span class="line">查看android是32还是64：<span class="title"></span></span><br><span class="line"><span class="title">adb</span> shell<span class="title"> getprop</span> ro.product.cpu.abi</span><br></pre></td></tr></table></figure>
+
+<h1 id="docker命令"><a href="#docker命令" class="headerlink" title="docker命令"></a>docker命令</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>导入镜像：docker import - ubuntu/<span class="number">17.04</span>.amd64</span><br><span class="line"><span class="regexp">//</span>运行镜像：docker run -it -p <span class="number">23946</span>:<span class="number">23946</span> ubuntu<span class="regexp">/17.04.amd64 /</span>bin/bash</span><br><span class="line">  会创建一个docker容器，第一个端口是宿主机的端口，第二个是容器的端口</span><br><span class="line"><span class="regexp">//</span>列出容器：docker container ls -a</span><br><span class="line"><span class="regexp">//</span>容器重命名：docker container rename old_name new_name</span><br><span class="line"><span class="regexp">//</span>打开容器的shell：docker exec -it container_name <span class="regexp">/bin/</span>bash</span><br><span class="line"><span class="regexp">//</span>启动容器：docker start container_name</span><br><span class="line"><span class="regexp">//</span>复制：docker container cp file_name container_name:/root</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>导入镜像</span><br><span class="line">docker load -i nginx.tar</span><br><span class="line"><span class="regexp">//</span>导出镜像</span><br><span class="line">docker save -o nginx.tar nginx:latest</span><br></pre></td></tr></table></figure>
+
+<h1 id="IDA常用"><a href="#IDA常用" class="headerlink" title="IDA常用"></a>IDA常用</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sub_</span> 指令和子函数起点</span><br><span class="line"><span class="attribute">locret_</span> 返回指令 </span><br><span class="line"><span class="attribute">loc_</span> 指令</span><br><span class="line"><span class="attribute">off_</span> 数据，包含偏移量</span><br><span class="line"><span class="attribute">seg_</span> 数据，包含段地址值</span><br><span class="line"><span class="attribute">asc_</span> 数据，ASCII字符串</span><br><span class="line"><span class="attribute">byte_</span> 数据，字节（或字节数组）</span><br><span class="line"><span class="attribute">word_</span> 数据，<span class="number">16</span>位数据（或字数组）</span><br><span class="line"><span class="attribute">dword_</span> 数据，<span class="number">32</span>位数据（或双字数组）</span><br><span class="line"><span class="attribute">qword_</span> 数据，<span class="number">64</span>位数据（或<span class="number">4</span>字数组）</span><br><span class="line"><span class="attribute">flt_</span> 浮点数据，<span class="number">32</span>位（或浮点数组）</span><br><span class="line"><span class="attribute">dbl_</span> 浮点数，<span class="number">64</span>位（或双精度数组）</span><br><span class="line"><span class="attribute">tbyte_</span> 浮点数，<span class="number">80</span>位（或扩展精度浮点数）</span><br><span class="line"><span class="attribute">stru_</span> 结构体(或结构体数组)</span><br><span class="line"><span class="attribute">algn_</span> 对齐指示</span><br><span class="line"><span class="attribute">unk_</span> 未处理字节</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    丨S1lenc3丨
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://www.s1lenc3.com/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/" title="常用命令记录">https://www.s1lenc3.com/2020/03/16/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/15/Android%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" rel="next" title="Android漏洞挖掘">
+                <i class="fa fa-chevron-left"></i> Android漏洞挖掘
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/18/Android%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%8F%8D%E7%A0%B4%E8%A7%A3%E6%8A%80%E6%9C%AF/" rel="prev" title="Android软件的反破解技术">
+                Android软件的反破解技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/kenan.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/S1lenc3-chenmo/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">Linux命令记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ABD%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">ABD命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">docker命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IDA%E5%B8%B8%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">IDA常用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">丨S1lenc3丨</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

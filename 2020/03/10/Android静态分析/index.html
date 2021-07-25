@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android逆向," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="IDA破解实例-定位关键代码搜索特征字符串121. ctrl+s定位strings段2. alt+t快捷键搜索文本字符串  搜索API121. 定位到code段2. 搜索API名称  搜索方法名1在Exports窗口中搜索方法名   if-eqz的opcode是0x38if-nez的opcode是0x39return的opcode是0x0f  修改dex，替换apk中的dex12341. 使用de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android静态分析">
+<meta property="og:url" content="https://www.s1lenc3.com/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="IDA破解实例-定位关键代码搜索特征字符串121. ctrl+s定位strings段2. alt+t快捷键搜索文本字符串  搜索API121. 定位到code段2. 搜索API名称  搜索方法名1在Exports窗口中搜索方法名   if-eqz的opcode是0x38if-nez的opcode是0x39return的opcode是0x0f  修改dex，替换apk中的dex12341. 使用de">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.s1lenc3.com/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20200310102455464.png">
+<meta property="article:published_time" content="2020-03-10T02:13:55.000Z">
+<meta property="article:modified_time" content="2020-03-12T15:03:12.000Z">
+<meta property="article:author" content="丨S1lenc3丨">
+<meta property="article:tag" content="Android逆向">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.s1lenc3.com/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20200310102455464.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.S1lenc3.com/2020/03/10/Android静态分析/"/>
+
+
+
+
+
+  <title>Android静态分析 | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.S1lenc3.com/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kenan.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android静态分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-10T10:13:55+08:00">
+                2020-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AC%94%E8%AE%B0/Android%E9%80%86%E5%90%91/" itemprop="url" rel="index">
+                    <span itemprop="name">Android逆向</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="IDA破解实例-定位关键代码"><a href="#IDA破解实例-定位关键代码" class="headerlink" title="IDA破解实例-定位关键代码"></a>IDA破解实例-定位关键代码</h3><h4 id="搜索特征字符串"><a href="#搜索特征字符串" class="headerlink" title="搜索特征字符串"></a>搜索特征字符串</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> ctrl+s定位strings段</span><br><span class="line"><span class="bullet">2.</span> alt+t快捷键搜索文本字符串</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索API"><a href="#搜索API" class="headerlink" title="搜索API"></a>搜索API</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 定位到code段</span><br><span class="line"><span class="bullet">2.</span> 搜索API名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="搜索方法名"><a href="#搜索方法名" class="headerlink" title="搜索方法名"></a>搜索方法名</h4><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在<span class="keyword">Exports</span>窗口中搜索方法名</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>if-eqz的opcode是0x38<br>if-nez的opcode是0x39<br>return的opcode是0x0f</p>
+</blockquote>
+<h4 id="修改dex，替换apk中的dex"><a href="#修改dex，替换apk中的dex" class="headerlink" title="修改dex，替换apk中的dex"></a>修改dex，替换apk中的dex</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 使用dexFixer更新checksum</span><br><span class="line"><span class="bullet">2.</span> 将修改后的dex重新放回apk包里</span><br><span class="line"><span class="bullet">3.</span> 删除META-INF文件夹</span><br><span class="line"><span class="bullet">4.</span> 对apk重签名即可安装</span><br></pre></td></tr></table></figure>
+
+<h4 id="终止程序"><a href="#终止程序" class="headerlink" title="终止程序"></a>终止程序</h4><ul>
+<li><p>Context的finish()方法</p>
+</li>
+<li><p>android.os.Process的killProcess()方法</p>
+</li>
+</ul>
+<h3 id="Androguard简单使用"><a href="#Androguard简单使用" class="headerlink" title="Androguard简单使用"></a>Androguard简单使用</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://androapkinfo.py/">androapkinfo.py</a><br>查看apk信息。包、资源、权限、组件、方法。<br>androapkinfo -i filename</li>
+<li><a target="_blank" rel="noopener" href="http://androaxml.py/">androaxml.py</a><br>解析AndroidManifest.xml文件。<br>androaxml -i filename</li>
+<li><a target="_blank" rel="noopener" href="http://androcsign.py/">androcsign.py</a><br>收集签名到数据库中，使用前需要为apk编写sign文件。</li>
+<li><a target="_blank" rel="noopener" href="http://androdd.py/">androdd.py</a><br>生成apk每个类的方法的调用流程图。<br>androdd -i filename -o dirname -d -f PNG<br>-d 是指定生成dot图形文件。</li>
+<li><a target="_blank" rel="noopener" href="http://androdiff.py/">androdiff.py</a><br>比较两个apk文件的差异。<br>androdiff -i filename1 filename2</li>
+<li><a target="_blank" rel="noopener" href="http://androdump.py/">androdump.py</a><br>dump一个Linux进程。<br>androdump -i pid</li>
+<li><a target="_blank" rel="noopener" href="http://androgexf.py/">androgexf.py</a><br>生成一个gexf图形文件。用Gephi查看。<br>androgexf -i filename1 -o filename2</li>
+<li><a target="_blank" rel="noopener" href="http://androlyze.py/">androlyze.py</a><br>提供交互环境静态分析android程序。</li>
+<li><a target="_blank" rel="noopener" href="http://andromercury.py/">andromercury.py</a><br>Mercury工具的框架。</li>
+<li><a target="_blank" rel="noopener" href="http://androrisk.py/">androrisk.py</a><br>评估apk文件中的潜在方法。<br>androrisk -m -i filename<br>m 表示需要分析每一个方法。</li>
+<li><a target="_blank" rel="noopener" href="http://androsign.py/">androsign.py</a><br>检测签名是否存于数据库，与androcsign作用相反。<br><img src="/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/image-20200310102455464.png" alt="image-20200310102455464"></li>
+<li><a target="_blank" rel="noopener" href="http://androsim.py/">androsim.py</a><br>计算两个apk文件的相似度。<br>androsim -i filename1 filename2</li>
+<li><a target="_blank" rel="noopener" href="http://androxgmml.py/">androxgmml.py</a><br>生成jar/class/apk/dex文件的控制流程及功能调度图，输出格式为xgmml。<br>androxgmml -i filename -o *.xgmml</li>
+<li><a target="_blank" rel="noopener" href="http://apkviewer.py/">apkviewer.py</a><br>为每一个类生成一个独立的graphml图形文件。<br>apkviewer -i filename -o xxx</li>
+</ul>
+<h3 id="androlyze的简单使用"><a href="#androlyze的简单使用" class="headerlink" title="androlyze的简单使用"></a>androlyze的简单使用</h3><p>androlyze -s //获取交互命令行模式</p>
+<ol>
+<li>获取apk文件对象<br>a = APK(“filename”)</li>
+<li>获取dex文件对象<br>d = DalvikVMFormat(a.get_dex())</li>
+<li>获取分析结果对象<br>dx = VMAnalysis(d)</li>
+<li>三合一指令<br>a, d, dx = APK(“filename”, decompiler=”dad”)<br>decompiler指定反编译器名称。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    丨S1lenc3丨
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://www.s1lenc3.com/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/" title="Android静态分析">https://www.s1lenc3.com/2020/03/10/Android%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android%E9%80%86%E5%90%91/" rel="tag"># Android逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/10/AndroidNDK%E9%80%86%E5%90%91/" rel="prev" title="AndroidNDK逆向">
+                AndroidNDK逆向 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/kenan.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/S1lenc3-chenmo/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA%E7%A0%B4%E8%A7%A3%E5%AE%9E%E4%BE%8B-%E5%AE%9A%E4%BD%8D%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">IDA破解实例-定位关键代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E7%89%B9%E5%BE%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.</span> <span class="nav-text">搜索特征字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2API"><span class="nav-number">1.2.</span> <span class="nav-text">搜索API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%96%B9%E6%B3%95%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">搜索方法名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9dex%EF%BC%8C%E6%9B%BF%E6%8D%A2apk%E4%B8%AD%E7%9A%84dex"><span class="nav-number">1.4.</span> <span class="nav-text">修改dex，替换apk中的dex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%88%E6%AD%A2%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.5.</span> <span class="nav-text">终止程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Androguard%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Androguard简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#androlyze%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">androlyze的简单使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">丨S1lenc3丨</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
