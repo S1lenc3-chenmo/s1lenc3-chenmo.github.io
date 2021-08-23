@@ -249,6 +249,13 @@
   </url>
   
   <url>
+    <loc>https://www.s1lenc3.com/tags/Android%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2021-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.s1lenc3.com/tags/writeup/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
@@ -257,13 +264,6 @@
   
   <url>
     <loc>https://www.s1lenc3.com/tags/C-C/</loc>
-    <lastmod>2021-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.s1lenc3.com/tags/Android%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -298,14 +298,14 @@
   </url>
   
   <url>
-    <loc>https://www.s1lenc3.com/tags/Pwn/</loc>
+    <loc>https://www.s1lenc3.com/tags/%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.s1lenc3.com/tags/%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://www.s1lenc3.com/tags/Pwn/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -335,6 +335,13 @@
   </url>
   
   <url>
+    <loc>https://www.s1lenc3.com/categories/Android/</loc>
+    <lastmod>2021-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.s1lenc3.com/categories/CTF%E8%B5%9B%E9%A2%98writeup/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
@@ -343,13 +350,6 @@
   
   <url>
     <loc>https://www.s1lenc3.com/categories/%E7%AC%94%E8%AE%B0/C-C/</loc>
-    <lastmod>2021-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.s1lenc3.com/categories/Android/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -370,14 +370,14 @@
   </url>
   
   <url>
-    <loc>https://www.s1lenc3.com/categories/Pwn/</loc>
+    <loc>https://www.s1lenc3.com/categories/%E7%AC%94%E8%AE%B0/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.s1lenc3.com/categories/%E7%AC%94%E8%AE%B0/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://www.s1lenc3.com/categories/Pwn/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -398,14 +398,14 @@
   </url>
   
   <url>
-    <loc>https://www.s1lenc3.com/categories/CTF%E8%B5%9B%E9%A2%98writeup/misc/</loc>
+    <loc>https://www.s1lenc3.com/categories/CTF%E8%B5%9B%E9%A2%98writeup/pwn/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.s1lenc3.com/categories/CTF%E8%B5%9B%E9%A2%98writeup/pwn/</loc>
+    <loc>https://www.s1lenc3.com/categories/CTF%E8%B5%9B%E9%A2%98writeup/misc/</loc>
     <lastmod>2021-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

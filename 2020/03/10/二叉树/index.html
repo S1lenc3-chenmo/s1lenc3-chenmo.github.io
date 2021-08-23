@@ -256,10 +256,23 @@
 <li>平衡二叉树——平衡二叉树又被称为AVL树（区别于AVL算法），它是一棵二叉排序树，且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</li>
 </ul>
 <h3 id="3-二叉树的遍历"><a href="#3-二叉树的遍历" class="headerlink" title="3. 二叉树的遍历"></a>3. 二叉树的遍历</h3><ul>
-<li>前序遍历<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">结点--&gt;左子树</span><br><span class="line">左子树--&gt;右子树</span><br></pre></td></tr></table></figure></li>
-<li>中序遍历  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">左子树--&gt;结点</span><br><span class="line">结点--&gt;右子树</span><br></pre></td></tr></table></figure></li>
-<li>后序遍历  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">左子树--&gt;右子树</span><br><span class="line">右子树--&gt;结点</span><br></pre></td></tr></table></figure></li>
-<li>层次遍历  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">第一层--&gt;第二层</span><br><span class="line">第二层--&gt;...</span><br><span class="line">... --&gt;第K层</span><br></pre></td></tr></table></figure></li>
+<li>前序遍历<pre><code class=" mermaid">graph LR
+结点--&gt;左子树
+左子树--&gt;右子树
+</code></pre></li>
+<li>中序遍历  <pre><code class=" mermaid">graph LR
+左子树--&gt;结点
+结点--&gt;右子树
+</code></pre></li>
+<li>后序遍历  <pre><code class=" mermaid">graph LR
+左子树--&gt;右子树
+右子树--&gt;结点
+</code></pre></li>
+<li>层次遍历  <pre><code class=" mermaid">graph LR
+第一层--&gt;第二层
+第二层--&gt;...
+... --&gt;第K层
+</code></pre></li>
 </ul>
 
             </div>
