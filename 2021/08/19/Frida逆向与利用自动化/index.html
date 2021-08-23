@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android安全," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Frida逆向与利用自动化">
+<meta property="og:url" content="https://www.s1lenc3.com/2021/08/19/Frida%E9%80%86%E5%90%91%E4%B8%8E%E5%88%A9%E7%94%A8%E8%87%AA%E5%8A%A8%E5%8C%96/index.html">
+<meta property="og:site_name" content="S1lenc3的辣鸡场">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-19T04:32:42.000Z">
+<meta property="article:modified_time" content="2021-08-20T04:27:24.509Z">
+<meta property="article:author" content="丨S1lenc3丨">
+<meta property="article:tag" content="Android安全">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.S1lenc3.com/2021/08/19/Frida逆向与利用自动化/"/>
+
+
+
+
+
+  <title>Frida逆向与利用自动化 | S1lenc3的辣鸡场</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">S1lenc3的辣鸡场</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.S1lenc3.com/2021/08/19/Frida%E9%80%86%E5%90%91%E4%B8%8E%E5%88%A9%E7%94%A8%E8%87%AA%E5%8A%A8%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kenan.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="S1lenc3的辣鸡场">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Frida逆向与利用自动化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-19T12:32:42+08:00">
+                2021-08-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-20T12:27:24+08:00">
+                2021-08-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/Android%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">Android应用安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="7954893117e6faae3f4d8f77479379729266e5690948ee29e3b0ef9d0c9bfbc1">5f381da81afca645bb2dff47095c1ef48b67ceff7944449f02e08e41bf6435b6c26d7980b3e5b2b2ae550a39bec549bcb55abe209805ee137e94d9a9752c18d1bca88b1f5c16d05a1b91d718bf5b967d10e2460c0c528067f3c23a8a01fc59b9b2bc6ed63ff62017baf04673cd52362e70242ca7abb3d97357c06069717826e11388c3db9a1cf06519323e882d4005cd751cb7be6cba9b8fb7fa5e466477eb270da0a4e86955c24a5a06939bd88ea65b5fc947602d09c11b86fc1b8f94fcad60f039dbda140f1b3b27144a6f17269313c508faadb9af69cc7a01a78f076d1bf985a9a2311ea3c5398445a11b8417b2f2f5e4a0a3808e2e3c3a923fe299aacb5aaec585776ac4130ea0f38ab4d58c094ab1abc752b3f8d9a5054645cb8e483d210e122e4854928b379ddea86409db91d5771e70545a41e72d22c1cd69e529a36f62f85724b4f0b1e316e08135bc7a50ccdf495804e6acdfacf6c2721bead1d518536c200d7816c08b5e0a5762c15b9eb4fb1965bb5ff83ad65004945d2b28a76d214fda380329bf9a349ba2b00933fc9a7beb3fe66ca8c9e7d2a0e2911017b95a790407e528847e102647527b90bd1353647b974e3c0ef06373c393e9d3a8457defb20c3f104e7c921a5069865e45f22d0dd472cc01e62e21469dd13786f4d0eaa500db507cc3fc0150244b5c016059611057941809121f3c00d32cecf3e38a0adf6e9a3d71493a60c98736739d4d0cfe5c8a44cd4d74a78424df36ae2be8c988fbc016c97f9cd86d090c6542291e248cb2e6d8b869d8404193b9d7a426f9bbaa0b5d3a47cd0b632a47b1f7a7a6011ab53168a06d66a60cb46d8e3a8168aa33dfd39494387cfde73921aab6bf06b692aa5d27dde3c65cea039d51479752c6e002264baa7f17b02bc2f8c9a3d33c814721e8558e9ac61a80e22663646877145104d9ede762ce45f2e23437859f6137900582daf0f49fe2a585f59245a8c364c21b76543946968cf9804a40ed2ada1946f7c03e6b5b5d83a1850cfd8ea42e41d154bfc3f42ba4aafbb1f2645ce87c530079100ad045f4e09b96f75115a878d7b313eea84478812b48c31dc5475e41ecded61773f019e653247a7634c017d15bac5f9149b58ebefff5e43054450ba283078229351b94c1e33c30cf4d7298873b61b54b2665376912897a62d1af53e842017708f4f294ecbbeceecfb93f0a269776c47438b5c7e018169ec72d1956c8396cee635461b44823ece5d74ec1cd7415d8f57cae5db1e91af4f541c5284c5618ef81a47e4b71c4eeb4a86ca3f005efb84f99cc07cbd995c63e138e0de74524d9f5eb86653e531155412b05e602fdd94d6feceb044bcda7d75bf3701d731aa021e5496b075eccaa987709c82611865f6b4c3dcd165c613cb14d1047d2fe57cd09ac4cd96848ce4560243154b9a6c9cda545afbf11e5989edd85b5ecb709ac48bcad2f3559e80328752f611d6451170a9177f89158740832ada7646afd95c9e76020f5369121f3abe809b62f3a9dffbdd11f2a6af1c82be21ba641235ad513f20250e99a3f1c7864c04a10d68ac3e219924d79bca1a1110ecd14a7119b3a81b8c93b33751441379c3617623b52087a6b8c7ad70a9032d730dcd3fb7c1f69d06ec2459f04ea30a9b4f57e6d96348357944e33b650a5b237966eba146a0e3c18eaf74e9de2a16883b47f3461409206f4f94c13783c80e87861041c9c8df776136999ccaf11551ecba8aeee1fc366f0cefb5aaac8589756684c0d49a25f85e7288bcdc40cd0c1e060119b787d7cb2c97fefb498a265473ca67a564e00a38bfbaf2b79cf18b28c97c393a13ae103e4e0b49e92a0adb16feb485405c84d2d27cee3dc17876760487339b6dd5832078af9d9bf7a73277c133ed0c04d7dfaa4317b73407aad19a1eeaf699c71c2ad36f2c55afb0dd245c802db10cd9eb0b74dcc8b8fab35b1f42e2746b0e9b3a402704bb03c07f186a4481a90351859cd98cc0994cdbe17aa25a2942d5ff9bc826544c8cbf95dc4289c21c6030429f722dda0cb139e28709993c4fb56cbe37c891b9e29524a3aadd65f8dcd012b6093fb66a2bdb0a9a11aecab41e30be29dc3b5524bd11e694feb068b48db93ba9f7c2577b1d3318bd776ffdc7026aa081c2cd4e00ef4c17c4cdb6aa7ae31ce7501dff8b22ecb84a2771d04b18877891c008f88656ebe31a34b7c9eff29be672b152145ceb1dbb84e4e76ee0fb9050df7a39dcd39c5bd7e09ff007a24226384768dbf040d598e27a9fdc6078d0ca58df71aee5aa5587c4b9b83e3192cce36b457c873a4cdb2e02b243d813411db372304a8a76480ceb46c495dbf4954fd2ffa9e678c329531f2cbbf6a78ff45ecefe335f8ce960b6c9369a03b6ee480ac466a1faca17aab6333d01243a6a882ec299f4038e19234cc995364184374e9ad03e8fd36a50286d4c5e4a03947bf4b1ebf4c5275b0f9c55aa18e186598410af84850349dd026d0bb656afee51a6c31f1a5774543f51210cb0854b4443561e7231bf40745c92ce9557949656b2cb884934ff582598c98b1fbdb8d742720ee70ce3064d405089a3c10151d49dc9e2e8663d55214b8e30dba51acf655a3bcceaf14eea24a85ebddf4f650f7e047a9bfad9c4f4c82679e4f78ce0e1ed2cafff57ad27d6e40d01b6d37d597809ab3b0b75f9f6823221d4369647828448ddee587bd0f6300d7aa32db9a403a42b9f33e765160878f3b3f5e856e7deaad41226fb01133e2445ba831e1b8d7b18807f99538c42d40c455dd1525bd4d7a6e73748cf957f792f1593d017bbc8bfc5581aed7cee2dfaceebdfd9d5311245e49e47e2d008b07ca6ff1f0a208a3be51b0604c628eb6974c404a8302261b5e781ab031356a7f23aec86fc9c66afa085f208aab0fab5e0733d13106ba1a573bcfef6283307b2d7f49a4f4a7e209875f615012dcec162e69b3ca45cffc6adbf68846469f41ab0ead9ead4aa983787b84db51471f8339d45f20f57c51afc31e8ef13e8eb0abe02b78e73d6d199a862b6a3c09a6108835606d216bb59fdb8041ff83aae0b5730063074ee52fe4273c07d04686ebf0eb4ae45ccbbaa198688104be1e25163a62165ea6139bdd2b75cfe3b1078316bf53bb6b0bd93a0019f990bbc0347f64b626dcebc47ee8d8edf76a9b57f092e42cc9fe420a1fc30253f6b7d14a34ad3eb389ce6856e7fbb982176d2952b155539c2b4be5f494d141ac0fe37781837f45c910e0768cfb6eec4ed27da79d1d588308184acb52f92873fda4f074a8e97d60b37bbb5908cc4dddc4e1a14f764f99edb4133f3303e17579ba33c9eee37460a2d7ae3a0029367a210983a3f5a8a57ffc78128e3e5a56f9454d247e705283e264472923ae586449e7aaec3a86ddf2b1bbdc3794b72b0e6ed5c1a55f12ecbb9796823ffd4772e835f7ac5b249a35072cb855c6cc492c37de340325b4d7f5f7c797872f53c74170b737a6384a84b2e7d4df53c83e548ada582420bdd8308ce8cf570a64636dd55af5fe25de643b8b5a7f044b2533aa296900e26b1691157dc70a22aa1edf974fe06b60f80c4a0f99406494a96a0eeb7143f3f520b4d37ff7a6e195cccea1ac3826f83ffd8dfe431959da3af7927a638bda4a9894b9b29fe834b0b708efa1a06dd9f6a2a2d8d6bd91a9bdb6d674275edbb74d3caf1635dd3a82467885ba62314bbc7f4eba1595193b4ff77a7e0a42e55590b759bb7bf06ec05986b2cd1690518d437759a28254d75074e919e62e1a082b36688e70abc1f76046c17ff34d34477a09f6da49fb7af6204bf6faafddeb2c790e089b9c78358e3a21e65e538e03e8b02327aeead0c3baf387e0cb83a386a0e6c1c7612d4b509fdb5b4d3d8458819f577c1506a0cd1027879d878a4f28efb666fbc288344b3dad184539ab1bf3794093a05912cfa6071808a54e78764ebfd2237430f9ad65d24b5a4445cfb9cd4d7eafb052a3dc122f20e54f4cbc012e6977a09b1b3ea0476ba1dca4e464d6ff33457cb5f8446eb7c9840b868a32189b2491933eb3718d509309334028b5186df144fe496c6911faa768df071aa8a12896ae32f187f6a8b138ca8c8f536f8054d4230b09f6c96945ea904dd3ad2691b71321eac127cbfd933e3ad4b7882158d290e4041da654ee1c0a6636d4fba18db2d6c90340275be4c6327d402f3a94cc0264015d6d8684c7883274bda575b1ad934acd4460a59748790b254ef38f7e2228ace981386e3c2260d52b31629c9bc30bac3ee514e84154aa1d88827e596a46661d7d889daf1bfec088f3838e498626629ca22616e7a30fd7f70e1d9675cac70ff2e222cad402f9a639c17c49e75296b07a64e506567597bd66fa90e902f7e90e1dbf14d86a969e19473d9d0bf9c5cd93118ea9631ae11d5b47929063d1e6bd448bb4b891bf01d5048133bd34a92ab97aeec191b240f1715009506fde861a6690e60a3a813f12857730da1bc9f3101dfa67253e66eecbe7fd6be9384fc8da4a367a696dd25f249b2838de03344388ede4a35205bef4bf604ae82268a2721982f600cf4f98e2dcf7922c659782c7498b480db5cbf41e9990a7d5bf1896d27b3b5349fb9c5c15defcff16486514e9085d462620bf8545978aae8d935ae2be93f036de41a618cd418c65f1dd037df67491e6952bc3f0c16fa93fca745631d623c4b41b443052a7d64d3d3fba069f8580145e0cb8f54f62bede94101590babf4eed96ef513c2bdb2ab7128324fcc0f4388947d8b3956be917a4ef16b4cad6644910e6930c185d0062264a335bd2bd8c0c30ece3986dda7190ee6cb0cb19551d1a2440270635ad4e96c66f240f697c953c1ec3e9848507effc5dfb8b778b0b6f115586222c47efda9c004d7eb6aa828a773ad8fc055ff727f875df3294b4a0872d080ed39a877a4c0313361084c16314a97c01ea615b1aac0bbc8c2151e3851852c7eef56947afacc1a33484aeb82f57d0bcdbbd9ba3905b9da0f3db76c35c04f712c491f99907c876d2432899f9c6f5f95c46f5fa16cd4c958e6886c596ee8342399572d12aee6b82def232c09d7345540d54096abde60f209eceee52c751dcd29f887dd24850ac5faaab027b026a18003788c3e2aaf066422b8372430045bdc474bc270c3fe18433a7fef0caaf47db41a81208684addeb4776e60e3f3479520c6d784fed4ad422450065c94810cbf9eadb18653bf297b1484e41c4e523516293d590ee7e66dca3c583c4752b5421b74c35cecbb5c949812c12d158f66e77f52a98909edfc840e64c9dc7ee0e00d9fb4a1b0fedfd1986552a31149f1f3f69f7f2b97990e44e2c5344b53b44fa543c3c182f85b4ef49d119b58d4992e85976356986ad975439fd646a33000b7ce1fe686dc5a46d8826952ed348b2f350c5a4331232029ef802d23f9b183d3b1fbff4b6c4a04b02f16e3929ea9a09a197e7e184e4c381a85e6d319104e2aa2f41ab1bc627bd85bd6cc0101046ce7f3270e6b72d35f3f6e85f20d37b96758665aecb6086e06ec2f4c674672168194dfd3e30e9abb43f430cadf5f0ebce397439bf1fd986846b9d055a24a72f167aec9f85729d5a392e0d0d4f96051fed44e2ce0fed6d3f2539c3870206431dedfcc73d4f5d0f46d5c11f82b79a0de0a7f2dce6d5cf5affa2360f1e57fe7065dfb3730e5025252eec4c95d0680eec00833612761caeef730642bd2a2d033051be37ac0d364727bf3a23cbbe3dd579ff16b8bfa41f73c8f6a0dbb9f3a7ee602a1802eac797e0214da29453205760599ab1db8e32d80b77583658b3758173c4d6f7013b6a1e91326ac8af9880f3671fa5d2ed87686d2ccad2209a2304bea8eca61656997114766fa833540bb0fc7c27d3a9f03324ed89752050002282b9b4138f7964344cd00d9ef44ec927b97bd6971c4749d930e5113418c8478837914392d937e239d9e096a7f80e33f468393145559a6900e547eb5a8894c850cc5a6d7e9650cb5b708784b2a33451bf0ed4121503e1121abb07b5a1696c40bc31f3eb564ded47a57e5057939c315de9f29a847c1880e145ba7357baa3e39c6dd3f7520b60ca7162439a7408f6b9ce63b9b620b108b55fa2bb7fc0f26d372ada44a1ef9c2cfeebc735033d19ddee633d2e45212791cd91a3357618c11f6b4a075a4c0f581c71c91844011c8fca1266dac394f2a968fd69ae424dec76bb334a3dcdb670189a451bd91ef19947aed9171f7f4db8deef74652a98f95f5135d38427d26d8a0fd97aa07758cc1817ed8b3aabd85891592478f81d55f4756817e9770fd92e1ecab5094a6dc45d2f8ca8df5165788915bcd4a3b0d9db3f7db30453c803d2a66f31c0cd3119b2cd2da3c20521b755adb84ebe1c26383656159904ea2cbe789a5452cb4cdc98501fe7224ee7b029f51a</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    丨S1lenc3丨
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://www.s1lenc3.com/2021/08/19/Frida%E9%80%86%E5%90%91%E4%B8%8E%E5%88%A9%E7%94%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" title="Frida逆向与利用自动化">https://www.s1lenc3.com/2021/08/19/Frida%E9%80%86%E5%90%91%E4%B8%8E%E5%88%A9%E7%94%A8%E8%87%AA%E5%8A%A8%E5%8C%96/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android%E5%AE%89%E5%85%A8/" rel="tag"># Android安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/10/Xposed%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/" rel="next" title="Xposed相关学习">
+                <i class="fa fa-chevron-left"></i> Xposed相关学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/kenan.jpeg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/S1lenc3-chenmo/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">丨S1lenc3丨</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
