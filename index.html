@@ -219,6 +219,222 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/09/14/%E7%BD%91%E5%88%83%E6%9D%AF%E9%80%86%E5%90%91wp/" target="_self">
+          网刃杯逆向wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/14/%E7%BD%91%E5%88%83%E6%9D%AF%E9%80%86%E5%90%91wp/" target="_self">
+          
+          
+            
+          
+          re1根据常数搜索到Sm3，然后爆破就行。
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-14 15:39" pubdate>
+              2021-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CTF/">CTF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/14/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/" target="_self">
+          羊城杯逆向部分wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/14/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/" target="_self">
+          
+          
+            
+          
+          babysmc有一个smc，
+
+没发现反调试，直接调试解smc，调试直接跳过了一大串代码，来到关键处。
+
+类似base64，不过加了个异或。
+写脚本解密：
+1234567891011121314151617181920212223242526272829303132333435363738import base64base_table = [        0xE4, 0xC4, 0xE7, 0x
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-14 10:29" pubdate>
+              2021-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CTF/">CTF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/03/WMCTF-2021-re%E9%83%A8%E5%88%86wp/" target="_self">
+          WMCTF-2021-re部分wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/03/WMCTF-2021-re%E9%83%A8%E5%88%86wp/" target="_self">
+          
+          
+            
+          
+          re1无法F5，栈帧太大，看了看汇编。
+
+通过alt+k调整栈帧或者把相应的汇编代码nop掉。
+然后分析伪代码，输入，check长度和flag格式
+
+之后会对几个block块进行赋值：
+
+
+12345678block块：0-0xff flag&#123;xxxx&#125; 中的第一个x 取余 2560x101-0x200 flag&#123;xxxx&#125; 中的第二个x 加1 取余 256
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-03 13:33" pubdate>
+              2021-09-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CTF/">CTF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/26/%E7%A5%A5%E4%BA%91%E6%9D%AF2021-re%E9%83%A8%E5%88%86wp/" target="_self">
+          祥云杯2021-re部分wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/26/%E7%A5%A5%E4%BA%91%E6%9D%AF2021-re%E9%83%A8%E5%88%86wp/" target="_self">
+          
+          
+            
+          
+          Dizzy通过sublime 进行replace 加减操作和行逆序操作，然后exec执行跑出flag。
+123456789byte_43841C = [ord(&quot;&#x27;&quot;),ord(&quot;&lt;&quot;),-29,-4,46,65,7,94,98,-49,-24,-14,-110,0x80,-30,54,-76,-78,103,119,15,-10,13,-7
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-26 14:18" pubdate>
+              2021-08-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CTF/">CTF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/08/19/Frida%E9%80%86%E5%90%91%E4%B8%8E%E5%88%A9%E7%94%A8%E8%87%AA%E5%8A%A8%E5%8C%96/" target="_self">
           Frida逆向与利用自动化
         </a>
@@ -494,243 +710,11 @@ vmm给了
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/01/%E6%8A%93%E5%8C%85%E5%85%A8%E8%A7%A3/" target="_self">
-          抓包全解
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/01/%E6%8A%93%E5%8C%85%E5%85%A8%E8%A7%A3/" target="_self">
-          
-          
-            
-          
-          抓包核心原理和环境准备
-抓包的核心原理：抓住包处在明文状态的一切时机
-HTTPS抓包的种类：HTTP框架hook、系统框架hook、中间人抓包
-搭建环境抓取HTTP：Charles、Burpsuite
-Http的缺陷：1.通信使用明文，内容会被窃听。 2.不验证通信方身份，可能被伪造。 3.无法证明报文完整性，可能被修改。
-
-虚拟机设置桥接，进行app的http通讯抓包。
-1设置代理，burpsu
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-01 18:47" pubdate>
-              2021-06-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Android/">Android</a>
-            
-              <a href="/categories/Android/Android%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/">Android应用安全</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Android%E5%AE%89%E5%85%A8/">Android安全</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/01/Frida-hook%E5%A4%A7%E5%85%A8/" target="_self">
-          Frida_hook大全
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/01/Frida-hook%E5%A4%A7%E5%85%A8/" target="_self">
-          
-          
-            
-          
-          框架层hook及Frida和Java语言的互转Frida对应的Java语法指南
-Frida与Java共同的一等公民：类
-找到/添加类的几种方法：内存漫游、动态加载、frida加载
-类变量、类方法、实例变量、实例方法、构造方法、hook和主动调用
-1234打开dex文件，即可使用其中的类：Java.openClassFile(&quot;*.dex&quot;).load();java数组：Java
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-01 18:47" pubdate>
-              2021-06-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Android/">Android</a>
-            
-              <a href="/categories/Android/Android%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/">Android应用安全</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Android%E5%AE%89%E5%85%A8/">Android安全</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/31/%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" target="_self">
-          花指令学习
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/31/%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" target="_self">
-          
-          
-            
-          
-          编写花指令如果我们在写程序的时候嵌入_asm _emit 0E9，反编译器就会把下一条指令当做地址数据，不管下一条指令实际上的四个字节是地址数据还是操作指令。
-win下：
-123456__asm &#123;     _emit 075h    #jmp $+4    _emit 2h    _emit 0E9h    _emit 0EDh&#125;
-
-Linux下：
-1234asm __vol
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-31 17:16" pubdate>
-              2021-05-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/%E9%80%86%E5%90%91/">逆向</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%80%86%E5%90%91/">逆向</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/31/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" target="_self">
-          C基础补充
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/31/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" target="_self">
-          
-          
-            
-          
-          从零开始，注重基础，心无旁骛。
-基本类型
-溢出使用C语言的宏可以得到各类型的最大值，要包含limits.h库文件。
-浮点数的最大值要包含float.h。
-math.h库有数学公式。
-字符串scanf遇到空白停止读取。
-sizeof计算存储单元，包括\0，strlen计算实际长度。
-对于类型需要sizeof(char),对于特定量sizeof name即可，建议都加圆括号，不会出错。
-const限定
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-31 17:13" pubdate>
-              2021-05-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/C-C/">C/C++</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/C-C/">C/C++</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
