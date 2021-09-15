@@ -435,59 +435,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/08/10/Xposed%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/" target="_self">
-          Xposed相关学习
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/10/Xposed%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/" target="_self">
-          
-          
-            
-          
-          简介Xposed框架是一款可以在不修改APK的情况下影响程序运行(修改系统)的框架服务，基于它可以制作出许多功能强大的模块，且在功能不冲突的情况下同时运作。
-原理123Xposed框架的原理是替换安卓系统/System/bin目录下的文件，从而实现对系统某些功能的替换，进而给予基于 Xposed 框架开发的App更多权限。Xposed通过替换/system/bin/app_process程序控制z
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-10 16:36" pubdate>
-              2021-08-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Android/">Android</a>
-            
-              <a href="/categories/Android/Android%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/">Android应用安全</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Android%E5%AE%89%E5%85%A8/">Android安全</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2021/08/03/%E5%B7%85%E5%B3%B0%E6%9E%81%E5%AE%A22021%E9%80%86%E5%90%91wp/" target="_self">
           巅峰极客2021逆向wp
         </a>
@@ -653,25 +600,23 @@ vmm给了
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/01/%E6%8A%93%E5%8C%85%E5%85%A8%E8%A7%A3/" target="_self">
-          抓包全解
+        <a href="/2021/05/31/%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" target="_self">
+          花指令学习
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/01/%E6%8A%93%E5%8C%85%E5%85%A8%E8%A7%A3/" target="_self">
+        <a href="/2021/05/31/%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" target="_self">
           
           
             
           
-          抓包核心原理和环境准备
-抓包的核心原理：抓住包处在明文状态的一切时机
-HTTPS抓包的种类：HTTP框架hook、系统框架hook、中间人抓包
-搭建环境抓取HTTP：Charles、Burpsuite
-Http的缺陷：1.通信使用明文，内容会被窃听。 2.不验证通信方身份，可能被伪造。 3.无法证明报文完整性，可能被修改。
+          编写花指令如果我们在写程序的时候嵌入_asm _emit 0E9，反编译器就会把下一条指令当做地址数据，不管下一条指令实际上的四个字节是地址数据还是操作指令。
+win下：
+123456__asm &#123;     _emit 075h    #jmp $+4    _emit 2h    _emit 0E9h    _emit 0EDh&#125;
 
-虚拟机设置桥接，进行app的http通讯抓包。
-1设置代理，burpsu
+Linux下：
+1234asm __vol
         </a>
       </p>
 
@@ -679,8 +624,8 @@ Http的缺陷：1.通信使用明文，内容会被窃听。 2.不验证通信�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-01 18:47" pubdate>
-              2021-06-01
+            <time datetime="2021-05-31 17:16" pubdate>
+              2021-05-31
             </time>
           </div>
         
@@ -688,9 +633,9 @@ Http的缺陷：1.通信使用明文，内容会被窃听。 2.不验证通信�
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Android/">Android</a>
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
             
-              <a href="/categories/Android/Android%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/">Android应用安全</a>
+              <a href="/categories/%E7%AC%94%E8%AE%B0/%E9%80%86%E5%90%91/">逆向</a>
             
           </div>
         
@@ -698,7 +643,67 @@ Http的缺陷：1.通信使用明文，内容会被窃听。 2.不验证通信�
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Android%E5%AE%89%E5%85%A8/">Android安全</a>
+              <a href="/tags/%E9%80%86%E5%90%91/">逆向</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/31/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" target="_self">
+          C基础补充
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/31/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" target="_self">
+          
+          
+            
+          
+          从零开始，注重基础，心无旁骛。
+基本类型
+溢出使用C语言的宏可以得到各类型的最大值，要包含limits.h库文件。
+浮点数的最大值要包含float.h。
+math.h库有数学公式。
+字符串scanf遇到空白停止读取。
+sizeof计算存储单元，包括\0，strlen计算实际长度。
+对于类型需要sizeof(char),对于特定量sizeof name即可，建议都加圆括号，不会出错。
+const限定
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-31 17:13" pubdate>
+              2021-05-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/C-C/">C/C++</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C-C/">C/C++</a>
             
           </div>
         
@@ -710,7 +715,7 @@ Http的缺陷：1.通信使用明文，内容会被窃听。 2.不验证通信�
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
