@@ -194,7 +194,7 @@
           
             
           
-          Linux/Mac命令记录12345678910111213141516171819202122232425262728293031echo xxxxx &gt; xx.txt 会自动换行echo -n xxxxx &gt; xx.txt 不会换行sudo passwd root //更改root密码//链接$ sudo rm -rf python$ sudo ln -s /usr/bin/pyt
+          Linux/Mac命令记录12345678910111213141516171819202122232425262728293031323334echo xxxxx &gt; xx.txt 会自动换行echo -n xxxxx &gt; xx.txt 不会换行sudo passwd root //更改root密码//链接$ sudo rm -rf python$ sudo ln -s /usr/b
         </a>
       </p>
 
@@ -208,6 +208,418 @@
           </div>
         
         
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/28/%E8%99%8E%E7%AC%A62022%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/" target="_self">
+          虎符2022逆向部分wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/28/%E8%99%8E%E7%AC%A62022%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/" target="_self">
+          
+          
+            
+          
+          reverse2048加载webview，一个2048游戏。MainActivity中点击十次进入TestActivity，但是点击后无效，猜测可能隐藏按钮，不知道在哪个地方，也不需要分析layout文件，直接使用命令adb shell am start -n com.test.hufu22/.TestActivity即可进入游戏界面。TestActivity中有JS接口，
+
+我们去assets下
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-28 20:02" pubdate>
+              2022-03-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CTF/">CTF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/14/D3CTF-2022-wp/" target="_self">
+          D3CTF-2022-wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/14/D3CTF-2022-wp/" target="_self">
+          
+          
+            
+          
+          Reversed3mugandroid的Unity游戏题目，第一次逆android的游戏，最后看官方wp说是签到题，tcl，打扰了。
+说一下比赛时做的一些步骤，解包后看到lib文件中有libunity.so文件，所以去搜索android的unity游戏逆向，给的解答都是去assets下存在Assembly-CSharp.dll，但是并没有。由于逆PC中的unity游戏时，可以得到IL指令，这里li
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-14 16:50" pubdate>
+              2022-03-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/writeup/">writeup</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/07/SUSCTF-2022-wp/" target="_self">
+          SUSCTF-2022-wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/07/SUSCTF-2022-wp/" target="_self">
+          
+          
+            
+          
+          ReverseDigitalCircuitspy文件编译的exe，使用pyinstxtractor.py反编译，找到DigitalCircuits，修改文件头，然后使用uncompyle6反编译pyc文件，得到源码。
+分析代码，，发现有与或非，左移右移，又根据f10的代码：
+123456789def f10(v0, v1, k0, k1, k2, k3):    s = &#x27;0000000
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-07 14:30" pubdate>
+              2022-03-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CTF/">CTF</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/11/16/%E6%B9%96%E6%B9%98%E6%9D%AF-RE-Writeup/" target="_self">
+          湖湘杯-RE-Writeup
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/11/16/%E6%B9%96%E6%B9%98%E6%9D%AF-RE-Writeup/" target="_self">
+          
+          
+            
+          
+          Hideit静态不好分析，直接动态调试找到输入的地方。看到如下加密，findcrypt搜到salsa20。
+先进行xxtea解密，在salsa20，因为我没有创建文件，所以输入为空，输入正确的随机数。直接拿到最后的字节流，进行异或即可。
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-11-16 19:47" pubdate>
+              2021-11-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/11/15/KCTF2021-WRITEUP/" target="_self">
+          KCTF2021_WRITEUP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/11/15/KCTF2021-WRITEUP/" target="_self">
+          
+          
+            
+          
+          签到
+123456crc320x13B88C770x52a1ed5aKCTF: 0x5ee54f4c205824534
+
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-11-15 19:25" pubdate>
+              2021-11-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/writeup/">writeup</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/11/15/L3HCTF-REVERSE-WRITEUP/" target="_self">
+          L3HCTF_REVERSE_WRITEUP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/11/15/L3HCTF-REVERSE-WRITEUP/" target="_self">
+          
+          
+            
+          
+          hills根据配置文件，得知是某公司的设备，网上找到设备固件，对其进行分析。
+12binwalk -Me xxxxx.bingrep -rn &quot;Hello&quot; ./
+
+
+分析这两个文件。
+其实跟了半天没跟出来在哪里加密，就挺菜的。根据文件里的函数名猜测，根据set_password找到aaa相关函数，然后发现set_password是libauth的导出函数，去分析，最后跟到了l
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-11-15 19:25" pubdate>
+              2021-11-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/writeup/">writeup</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/22/%E9%95%BF%E5%AE%89%E6%9D%AF%E9%80%86%E5%90%91wp/" target="_self">
+          长安杯逆向wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/22/%E9%95%BF%E5%AE%89%E6%9D%AF%E9%80%86%E5%90%91wp/" target="_self">
+          
+          
+            
+          
+          fantasyZ3 解方程。
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859from z3 import *x = [Int(&quot;v%s&quot; % i) for i in range(32)]# wow = [[8
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-22 15:33" pubdate>
+              2021-09-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/writeup/">writeup</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/09/22/%E9%95%BF%E5%9F%8E%E6%9D%AF%E9%83%A8%E5%88%86wp/" target="_self">
+          长城杯及第五空间部分wp
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/09/22/%E9%95%BF%E5%9F%8E%E6%9D%AF%E9%83%A8%E5%88%86wp/" target="_self">
+          
+          
+            
+          
+          Reversefunny_jsQuickjs，参考https://blog.d2x3.cn/kctf2020-%E7%AC%AC%E4%B8%89%E9%A2%98-%E5%AF%BB%E8%B8%AA%E8%A7%85%E6%BA%90.html
+123456https://gitee.com/haloxxg/QuickJS/releases 下载对应版本修改 quickjs.c，使其输出byt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-22 13:50" pubdate>
+              2021-09-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/writeup/">writeup</a>
+            
+          </div>
         
       </div>
     </article>
@@ -264,458 +676,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/14/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/" target="_self">
-          羊城杯逆向部分wp
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/14/%E7%BE%8A%E5%9F%8E%E6%9D%AF%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/" target="_self">
-          
-          
-            
-          
-          babysmc有一个smc，
-
-没发现反调试，直接调试解smc，调试直接跳过了一大串代码，来到关键处。
-
-类似base64，不过加了个异或。
-写脚本解密：
-1234567891011121314151617181920212223242526272829303132333435363738import base64base_table = [        0xE4, 0xC4, 0xE7, 0x
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-14 10:29" pubdate>
-              2021-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CTF/">CTF</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/09/03/WMCTF-2021-re%E9%83%A8%E5%88%86wp/" target="_self">
-          WMCTF-2021-re部分wp
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/09/03/WMCTF-2021-re%E9%83%A8%E5%88%86wp/" target="_self">
-          
-          
-            
-          
-          re1无法F5，栈帧太大，看了看汇编。
-
-通过alt+k调整栈帧或者把相应的汇编代码nop掉。
-然后分析伪代码，输入，check长度和flag格式
-
-之后会对几个block块进行赋值：
-
-
-12345678block块：0-0xff flag&#123;xxxx&#125; 中的第一个x 取余 2560x101-0x200 flag&#123;xxxx&#125; 中的第二个x 加1 取余 256
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-03 13:33" pubdate>
-              2021-09-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CTF/">CTF</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/26/%E7%A5%A5%E4%BA%91%E6%9D%AF2021-re%E9%83%A8%E5%88%86wp/" target="_self">
-          祥云杯2021-re部分wp
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/26/%E7%A5%A5%E4%BA%91%E6%9D%AF2021-re%E9%83%A8%E5%88%86wp/" target="_self">
-          
-          
-            
-          
-          Dizzy通过sublime 进行replace 加减操作和行逆序操作，然后exec执行跑出flag。
-123456789byte_43841C = [ord(&quot;&#x27;&quot;),ord(&quot;&lt;&quot;),-29,-4,46,65,7,94,98,-49,-24,-14,-110,0x80,-30,54,-76,-78,103,119,15,-10,13,-7
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-26 14:18" pubdate>
-              2021-08-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CTF/">CTF</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/03/%E5%B7%85%E5%B3%B0%E6%9E%81%E5%AE%A22021%E9%80%86%E5%90%91wp/" target="_self">
-          巅峰极客2021逆向wp
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/03/%E5%B7%85%E5%B3%B0%E6%9E%81%E5%AE%A22021%E9%80%86%E5%90%91wp/" target="_self">
-          
-          
-            
-          
-          baby_maze没有迷宫数据，一堆函数调用，得写脚本跑了，使用idapython。
-12我们可以找到最后提示成功的函数，然后通过交叉引用获取上层调用的函数，一直追溯到开始，跑出函数调用流程。对于获取WASD方向，分析函数时发现在调用方向函数时有switch case xx 的注释，直接去获取注释，即可得到路径。
-
-
-1234567891011121314151617181920212223242
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-03 15:46" pubdate>
-              2021-08-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CTF/">CTF</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/25/unicorn%E5%85%A5%E9%97%A8%E5%8F%8A%E5%BC%BA%E7%BD%91%E6%9D%AFunicorn-like-a-pro%E5%A4%8D%E7%8E%B0/" target="_self">
-          unicorn入门及强网杯unicorn_like_a_pro复现
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/25/unicorn%E5%85%A5%E9%97%A8%E5%8F%8A%E5%BC%BA%E7%BD%91%E6%9D%AFunicorn-like-a-pro%E5%A4%8D%E7%8E%B0/" target="_self">
-          
-          
-            
-          
-          unicorn简介及安装简介12345678Unicorn 是一个基于QEMU的轻量级、多平台、多架构的 CPU 模拟器框架。我们可以更好地关注CPU操作, 忽略机器设备的差异. 想象一下, 我们可以将其应用于这些情景: 比如我们单纯只是需要模拟代码的执行而非需要一个真的CPU去完成那些操作, 又或者想要更安全地分析恶意代码, 检测病毒特征, 或者想要在逆向过程中验证某些代码的含义. 使用CPU模
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-25 18:47" pubdate>
-              2021-07-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CTF/">CTF</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/09/NUCTF-%E9%83%A8%E5%88%86wp/" target="_self">
-          NUCTF-部分wp
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/09/NUCTF-%E9%83%A8%E5%88%86wp/" target="_self">
-          
-          
-            
-          
-          Reverseencryption程序有自加密代码，直接动态调试得到解密的代码。
-根据特征发现是rc4加密，找到key和最终比较的结果，解密即可。
-
-
-得到key：r3v3rs3_1s_s0_3z
-
-
-最终比较的结果：91747F215A6CB4DB11A52D12D40F1970
-进行解密：
-
-flag为：DACTF{7ce6798bc692ef04c6273a39d94dff9f}
-vmm给了
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-09 13:41" pubdate>
-              2021-06-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CTF/">CTF</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/31/%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" target="_self">
-          花指令学习
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/31/%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" target="_self">
-          
-          
-            
-          
-          编写花指令如果我们在写程序的时候嵌入_asm _emit 0E9，反编译器就会把下一条指令当做地址数据，不管下一条指令实际上的四个字节是地址数据还是操作指令。
-win下：
-123456__asm &#123;     _emit 075h    #jmp $+4    _emit 2h    _emit 0E9h    _emit 0EDh&#125;
-
-Linux下：
-1234asm __vol
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-31 17:16" pubdate>
-              2021-05-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/%E9%80%86%E5%90%91/">逆向</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%80%86%E5%90%91/">逆向</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/31/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" target="_self">
-          C基础补充
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/31/C%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%85%85/" target="_self">
-          
-          
-            
-          
-          从零开始，注重基础，心无旁骛。
-基本类型
-溢出使用C语言的宏可以得到各类型的最大值，要包含limits.h库文件。
-浮点数的最大值要包含float.h。
-math.h库有数学公式。
-字符串scanf遇到空白停止读取。
-sizeof计算存储单元，包括\0，strlen计算实际长度。
-对于类型需要sizeof(char),对于特定量sizeof name即可，建议都加圆括号，不会出错。
-const限定
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-31 17:13" pubdate>
-              2021-05-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
-            
-              <a href="/categories/%E7%AC%94%E8%AE%B0/C-C/">C/C++</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/C-C/">C/C++</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

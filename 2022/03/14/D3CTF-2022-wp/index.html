@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="刻苦学习逆向的小菜鸡。">
+  <meta name="author" content="丨S1lenc3丨">
+  <meta name="keywords" content="">
+  
+  <title>D3CTF-2022-wp - S1lenc3的辣鸡场</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.s1lenc3.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>S1lenc3</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="D3CTF-2022-wp">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-14 16:50" pubdate>
+        2022年3月14日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">D3CTF-2022-wp</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年3月16日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="d3mug"><a href="#d3mug" class="headerlink" title="d3mug"></a>d3mug</h2><p>android的Unity游戏题目，第一次逆android的游戏，最后看官方wp说是签到题，tcl，打扰了。</p>
+<p>说一下比赛时做的一些步骤，解包后看到lib文件中有libunity.so文件，所以去搜索android的unity游戏逆向，给的解答都是去assets下存在Assembly-CSharp.dll，但是并没有。由于逆PC中的unity游戏时，可以得到IL指令，这里lib文件夹下有libil2cpp.so，感觉有问题，去搜索了一下，得到了Il2CppDumper，然后就是dump，恢复符号表，这里恢复符号表恢复了1个小时左右。。。。机器太垃圾了吧可能。而且一些交叉引用还有问题，和官方wp中恢复后的有些差距。 然后接下来就是分析了。</p>
+<p>因为没什么经验，开始只关注了两个类：</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220314170458701.png" srcset="/img/loading.gif" lazyload alt="image-20220314170458701"></p>
+<p>猜测一个是使用update来更新是否点中，还有一个是得到多少分获得flag文本，猜测是得到击中并且全部都是perfect可以获得flag。其他函数功能基本猜测了大概。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pf">击中：NoteHit<br>没击中：NoteMiss<br>加载地图：<span class="hljs-built_in">load</span>Beatmap<br></code></pre></td></tr></table></figure>
+
+<p>然后去分析代码：</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220314171131147.png" srcset="/img/loading.gif" lazyload alt="image-20220314171131147"></p>
+<p>这里外部调用了libd3mug.so中的update函数，其中使用了一些加密，最后ScoreScene::get也外部调用了libd3mug.so中的get函数，这里可能会给flag。在MoveNext中有很多字符串，应该是使用Concat将它们拼接成路径然后使用Load加载，但是我找不到资源数据。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220314171909026.png" srcset="/img/loading.gif" lazyload alt="image-20220314171909026"></p>
+<p>当时大概就分析到这里，一半分析一半靠猜，但是之后就没有思路了，因为没办法获得一些特定的数据，就是一些点的位置，最后看wp才知道assetstudio可以解析资源文件，可以得到hitpoints。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220314172113109.png" srcset="/img/loading.gif" lazyload alt="image-20220314172113109"></p>
+<p>得到hitpoints后，其实根据这些数据点击就可以得到全部perfect，想到使用frida，我们先来看一下update的参数是什么吧。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">var</span> d3mug = Module.findBaseAddress(<span class="hljs-string">&quot;libd3mug.so&quot;</span>);<br>    <span class="hljs-keyword">var</span> dm = <span class="hljs-built_in">parseInt</span>(d3mug, <span class="hljs-number">16</span>) + <span class="hljs-number">0x780</span>;<br>    <span class="hljs-keyword">var</span> update = <span class="hljs-keyword">new</span> NativePointer(dm);<br>    Interceptor.attach(update,&#123;<br>        <span class="hljs-attr">onEnter</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">args</span>)</span>&#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;\n-----------  update ----------&quot;</span>)<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;args:&quot;</span>,args[<span class="hljs-number">0</span>]);<br>        &#125;,<span class="hljs-attr">onLeave</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">retval</span>)</span>&#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;retval =&gt; &quot;</span>,retval)<br>        &#125;<br>    &#125;)<br>&#125;<br>setImmediate(main)<br></code></pre></td></tr></table></figure>
+
+<p>当点击中的时候，参数会发生变化，一个整数值，应该是hitpoints逗号后边的数据，所以我们写脚本，跑一遍hitpoint，然后调用get。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316182949460.png" srcset="/img/loading.gif" lazyload alt="image-20220316182949460"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> numArray = [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">146</span>,<span class="hljs-number">292</span>,<span class="hljs-number">292</span>,<span class="hljs-number">439</span>,<span class="hljs-number">512</span>,<span class="hljs-number">585</span>,<span class="hljs-number">585</span>,<span class="hljs-number">658</span>,<span class="hljs-number">731</span>,<span class="hljs-number">804</span>,<span class="hljs-number">878</span>,<span class="hljs-number">1024</span>,<span class="hljs-number">1170</span>,<span class="hljs-number">1170</span>,<span class="hljs-number">1317</span>,<span class="hljs-number">1463</span>,<span class="hljs-number">1463</span>,<span class="hljs-number">1609</span>,<span class="hljs-number">1682</span>,<span class="hljs-number">1756</span>,<span class="hljs-number">1756</span>,<span class="hljs-number">1902</span>,<span class="hljs-number">2048</span>,<span class="hljs-number">2195</span>,<span class="hljs-number">2341</span>,<span class="hljs-number">2341</span>,<span class="hljs-number">2487</span>,<span class="hljs-number">2634</span>,<span class="hljs-number">2634</span>,<span class="hljs-number">2780</span>,<span class="hljs-number">2853</span>,<span class="hljs-number">2926</span>,<span class="hljs-number">2926</span>,<span class="hljs-number">3073</span>,<span class="hljs-number">3146</span>,<span class="hljs-number">3219</span>,<span class="hljs-number">3219</span>,<span class="hljs-number">3365</span>,<span class="hljs-number">3439</span>,<span class="hljs-number">3512</span>,<span class="hljs-number">3512</span>,<span class="hljs-number">3658</span>,<span class="hljs-number">3804</span>,<span class="hljs-number">3878</span>,<span class="hljs-number">3951</span>,<span class="hljs-number">4024</span>,<span class="hljs-number">4097</span>,<span class="hljs-number">4097</span>,<span class="hljs-number">4243</span>,<span class="hljs-number">4390</span>,<span class="hljs-number">4682</span>,<span class="hljs-number">4682</span>,<span class="hljs-number">4682</span>,<span class="hljs-number">4829</span>,<span class="hljs-number">4975</span>,<span class="hljs-number">4975</span>,<span class="hljs-number">5121</span>,<span class="hljs-number">5195</span>,<span class="hljs-number">5268</span>,<span class="hljs-number">5341</span>,<span class="hljs-number">5414</span>,<span class="hljs-number">5487</span>,<span class="hljs-number">5560</span>,<span class="hljs-number">5560</span>,<span class="hljs-number">5853</span>,<span class="hljs-number">5853</span>,<span class="hljs-number">5999</span>,<span class="hljs-number">6146</span>,<span class="hljs-number">6146</span>,<span class="hljs-number">6292</span>,<span class="hljs-number">6365</span>,<span class="hljs-number">6439</span>,<span class="hljs-number">6439</span>,<span class="hljs-number">6585</span>,<span class="hljs-number">6731</span>,<span class="hljs-number">6731</span>,<span class="hljs-number">6731</span>,<span class="hljs-number">7024</span>,<span class="hljs-number">7024</span>,<span class="hljs-number">7170</span>,<span class="hljs-number">7317</span>,<span class="hljs-number">7317</span>,<span class="hljs-number">7463</span>,<span class="hljs-number">7536</span>,<span class="hljs-number">7609</span>,<span class="hljs-number">7609</span>,<span class="hljs-number">7682</span>,<span class="hljs-number">7756</span>,<span class="hljs-number">7829</span>,<span class="hljs-number">7902</span>,<span class="hljs-number">7902</span>,<span class="hljs-number">7975</span>,<span class="hljs-number">8048</span>,<span class="hljs-number">8121</span>,<span class="hljs-number">8195</span>,<span class="hljs-number">8341</span>,<span class="hljs-number">8487</span>,<span class="hljs-number">8634</span>,<span class="hljs-number">8780</span>,<span class="hljs-number">9073</span>,<span class="hljs-number">9073</span>,<span class="hljs-number">9073</span>,<span class="hljs-number">9219</span>,<span class="hljs-number">9365</span>,<span class="hljs-number">9365</span>,<span class="hljs-number">9512</span>,<span class="hljs-number">9658</span>,<span class="hljs-number">9658</span>,<span class="hljs-number">9804</span>,<span class="hljs-number">9878</span>,<span class="hljs-number">9951</span>,<span class="hljs-number">9951</span>,<span class="hljs-number">10097</span>,<span class="hljs-number">10243</span>,<span class="hljs-number">10243</span>,<span class="hljs-number">10243</span>,<span class="hljs-number">10390</span>,<span class="hljs-number">10463</span>,<span class="hljs-number">10536</span>,<span class="hljs-number">10536</span>,<span class="hljs-number">10682</span>,<span class="hljs-number">10829</span>,<span class="hljs-number">10829</span>,<span class="hljs-number">10975</span>,<span class="hljs-number">11121</span>,<span class="hljs-number">11121</span>,<span class="hljs-number">11268</span>,<span class="hljs-number">11414</span>,<span class="hljs-number">11414</span>,<span class="hljs-number">11560</span>,<span class="hljs-number">11707</span>,<span class="hljs-number">11707</span>,<span class="hljs-number">11853</span>,<span class="hljs-number">11999</span>,<span class="hljs-number">11999</span>,<span class="hljs-number">11999</span>,<span class="hljs-number">12146</span>,<span class="hljs-number">12292</span>,<span class="hljs-number">12292</span>,<span class="hljs-number">12439</span>,<span class="hljs-number">12439</span>,<span class="hljs-number">12585</span>,<span class="hljs-number">12585</span>,<span class="hljs-number">12585</span>,<span class="hljs-number">12731</span>,<span class="hljs-number">12878</span>,<span class="hljs-number">12951</span>,<span class="hljs-number">13024</span>,<span class="hljs-number">13097</span>,<span class="hljs-number">13170</span>,<span class="hljs-number">13170</span>,<span class="hljs-number">13317</span>,<span class="hljs-number">13463</span>,<span class="hljs-number">13463</span>,<span class="hljs-number">13463</span>,<span class="hljs-number">13609</span>,<span class="hljs-number">13756</span>,<span class="hljs-number">13756</span>,<span class="hljs-number">13756</span>,<span class="hljs-number">13902</span>,<span class="hljs-number">14048</span>,<span class="hljs-number">14048</span>,<span class="hljs-number">14195</span>,<span class="hljs-number">14341</span>,<span class="hljs-number">14487</span>,<span class="hljs-number">14634</span>,<span class="hljs-number">14634</span>,<span class="hljs-number">14926</span>,<span class="hljs-number">14926</span>,<span class="hljs-number">14926</span>,<span class="hljs-number">15219</span>,<span class="hljs-number">15219</span>,<span class="hljs-number">15219</span>,<span class="hljs-number">15365</span>,<span class="hljs-number">15365</span>,<span class="hljs-number">15512</span>,<span class="hljs-number">15512</span>,<span class="hljs-number">15658</span>,<span class="hljs-number">15804</span>,<span class="hljs-number">15804</span>,<span class="hljs-number">15951</span>,<span class="hljs-number">16024</span>,<span class="hljs-number">16097</span>,<span class="hljs-number">16097</span>,<span class="hljs-number">16170</span>,<span class="hljs-number">16243</span>,<span class="hljs-number">16317</span>,<span class="hljs-number">16390</span>,<span class="hljs-number">16390</span>,<span class="hljs-number">16536</span>,<span class="hljs-number">16682</span>,<span class="hljs-number">16682</span>,<span class="hljs-number">16829</span>,<span class="hljs-number">16902</span>,<span class="hljs-number">16975</span>,<span class="hljs-number">16975</span>,<span class="hljs-number">17121</span>,<span class="hljs-number">17268</span>,<span class="hljs-number">17268</span>,<span class="hljs-number">17268</span>,<span class="hljs-number">17414</span>,<span class="hljs-number">17560</span>,<span class="hljs-number">17634</span>,<span class="hljs-number">17707</span>,<span class="hljs-number">17780</span>,<span class="hljs-number">17853</span>,<span class="hljs-number">17926</span>,<span class="hljs-number">17999</span>,<span class="hljs-number">18073</span>,<span class="hljs-number">18146</span>,<span class="hljs-number">18146</span>,<span class="hljs-number">18292</span>,<span class="hljs-number">18439</span>,<span class="hljs-number">18439</span>,<span class="hljs-number">18731</span>,<span class="hljs-number">18731</span>,<span class="hljs-number">18731</span>,<span class="hljs-number">18878</span>,<span class="hljs-number">19024</span>,<span class="hljs-number">19024</span>,<span class="hljs-number">19024</span>,<span class="hljs-number">19170</span>,<span class="hljs-number">19243</span>,<span class="hljs-number">19317</span>,<span class="hljs-number">19463</span>,<span class="hljs-number">19609</span>,<span class="hljs-number">19609</span>,<span class="hljs-number">19609</span>,<span class="hljs-number">19756</span>,<span class="hljs-number">19829</span>,<span class="hljs-number">19902</span>,<span class="hljs-number">20048</span>,<span class="hljs-number">20195</span>,<span class="hljs-number">20195</span>,<span class="hljs-number">20341</span>,<span class="hljs-number">20487</span>,<span class="hljs-number">20487</span>,<span class="hljs-number">20634</span>,<span class="hljs-number">20780</span>,<span class="hljs-number">20780</span>,<span class="hljs-number">20926</span>,<span class="hljs-number">21073</span>,<span class="hljs-number">21073</span>,<span class="hljs-number">21219</span>,<span class="hljs-number">21365</span>,<span class="hljs-number">21365</span>,<span class="hljs-number">21365</span>,<span class="hljs-number">21512</span>,<span class="hljs-number">21585</span>,<span class="hljs-number">21658</span>,<span class="hljs-number">21658</span>,<span class="hljs-number">21804</span>,<span class="hljs-number">21951</span>,<span class="hljs-number">21951</span>,<span class="hljs-number">21951</span>,<span class="hljs-number">22097</span>,<span class="hljs-number">22243</span>,<span class="hljs-number">22317</span>,<span class="hljs-number">22390</span>,<span class="hljs-number">22463</span>,<span class="hljs-number">22536</span>,<span class="hljs-number">22536</span>,<span class="hljs-number">22609</span>,<span class="hljs-number">22682</span>,<span class="hljs-number">22756</span>,<span class="hljs-number">22829</span>,<span class="hljs-number">22829</span>,<span class="hljs-number">22975</span>,<span class="hljs-number">23121</span>,<span class="hljs-number">23121</span>,<span class="hljs-number">23268</span>,<span class="hljs-number">23414</span>,<span class="hljs-number">23560</span>,<span class="hljs-number">23707</span>,<span class="hljs-number">23780</span>,<span class="hljs-number">23853</span>,<span class="hljs-number">23926</span>,<span class="hljs-number">23999</span>,<span class="hljs-number">23999</span>,<span class="hljs-number">24073</span>,<span class="hljs-number">24146</span>,<span class="hljs-number">24219</span>,<span class="hljs-number">24292</span>,<span class="hljs-number">24365</span>,<span class="hljs-number">24439</span>,<span class="hljs-number">24512</span>,<span class="hljs-number">24585</span>,<span class="hljs-number">24585</span>,<span class="hljs-number">24731</span>,<span class="hljs-number">24731</span>,<span class="hljs-number">24878</span>,<span class="hljs-number">24878</span>,<span class="hljs-number">24878</span>,<span class="hljs-number">25024</span>,<span class="hljs-number">25170</span>,<span class="hljs-number">25170</span>,<span class="hljs-number">25317</span>,<span class="hljs-number">25390</span>,<span class="hljs-number">25463</span>,<span class="hljs-number">25463</span>,<span class="hljs-number">25609</span>,<span class="hljs-number">25756</span>,<span class="hljs-number">25756</span>,<span class="hljs-number">25756</span>,<span class="hljs-number">25902</span>,<span class="hljs-number">25902</span>,<span class="hljs-number">26048</span>,<span class="hljs-number">26048</span>,<span class="hljs-number">26195</span>,<span class="hljs-number">26195</span>,<span class="hljs-number">26341</span>,<span class="hljs-number">26341</span>,<span class="hljs-number">26414</span>,<span class="hljs-number">26487</span>,<span class="hljs-number">26487</span>,<span class="hljs-number">26560</span>,<span class="hljs-number">26634</span>,<span class="hljs-number">26634</span>,<span class="hljs-number">26780</span>,<span class="hljs-number">26780</span>,<span class="hljs-number">26926</span>,<span class="hljs-number">27219</span>,<span class="hljs-number">27512</span>,<span class="hljs-number">27585</span>,<span class="hljs-number">27658</span>,<span class="hljs-number">27731</span>,<span class="hljs-number">27804</span>,<span class="hljs-number">27804</span>,<span class="hljs-number">28097</span>,<span class="hljs-number">28097</span>,<span class="hljs-number">28390</span>,<span class="hljs-number">28682</span>,<span class="hljs-number">28682</span>,<span class="hljs-number">28975</span>,<span class="hljs-number">29268</span>,<span class="hljs-number">29268</span>,<span class="hljs-number">29560</span>,<span class="hljs-number">29560</span>,<span class="hljs-number">29853</span>,<span class="hljs-number">29853</span>,<span class="hljs-number">30146</span>,<span class="hljs-number">30439</span>,<span class="hljs-number">30439</span>,<span class="hljs-number">30731</span>,<span class="hljs-number">31024</span>,<span class="hljs-number">31024</span>,<span class="hljs-number">31317</span>,<span class="hljs-number">31609</span>,<span class="hljs-number">31609</span>,<span class="hljs-number">31902</span>,<span class="hljs-number">32195</span>,<span class="hljs-number">32195</span>,<span class="hljs-number">32487</span>,<span class="hljs-number">32780</span>,<span class="hljs-number">32780</span>,<span class="hljs-number">32780</span>,<span class="hljs-number">33365</span>,<span class="hljs-number">33365</span>,<span class="hljs-number">33365</span>,<span class="hljs-number">33951</span>,<span class="hljs-number">33951</span>,<span class="hljs-number">34243</span>,<span class="hljs-number">34536</span>,<span class="hljs-number">34536</span>,<span class="hljs-number">34829</span>,<span class="hljs-number">35121</span>,<span class="hljs-number">35121</span>,<span class="hljs-number">35414</span>,<span class="hljs-number">35707</span>,<span class="hljs-number">35707</span>,<span class="hljs-number">35707</span>,<span class="hljs-number">35999</span>,<span class="hljs-number">36292</span>,<span class="hljs-number">36585</span>,<span class="hljs-number">36878</span>,<span class="hljs-number">36878</span>,<span class="hljs-number">37024</span>,<span class="hljs-number">37024</span>,<span class="hljs-number">37170</span>,<span class="hljs-number">37170</span>,<span class="hljs-number">37463</span>,<span class="hljs-number">37463</span>,<span class="hljs-number">37463</span>,<span class="hljs-number">37609</span>,<span class="hljs-number">37756</span>,<span class="hljs-number">37756</span>,<span class="hljs-number">37902</span>,<span class="hljs-number">38048</span>,<span class="hljs-number">38048</span>,<span class="hljs-number">38195</span>,<span class="hljs-number">38341</span>,<span class="hljs-number">38341</span>,<span class="hljs-number">38487</span>,<span class="hljs-number">38634</span>,<span class="hljs-number">38634</span>,<span class="hljs-number">38780</span>,<span class="hljs-number">38926</span>,<span class="hljs-number">39073</span>,<span class="hljs-number">39219</span>,<span class="hljs-number">39365</span>,<span class="hljs-number">39512</span>,<span class="hljs-number">39658</span>,<span class="hljs-number">39804</span>,<span class="hljs-number">39804</span>,<span class="hljs-number">39951</span>,<span class="hljs-number">40097</span>,<span class="hljs-number">40097</span>,<span class="hljs-number">40243</span>,<span class="hljs-number">40390</span>,<span class="hljs-number">40390</span>,<span class="hljs-number">40536</span>,<span class="hljs-number">40682</span>,<span class="hljs-number">40829</span>,<span class="hljs-number">40975</span>,<span class="hljs-number">40975</span>,<span class="hljs-number">41121</span>,<span class="hljs-number">41268</span>,<span class="hljs-number">41414</span>,<span class="hljs-number">41560</span>,<span class="hljs-number">41707</span>,<span class="hljs-number">41853</span>,<span class="hljs-number">41999</span>,<span class="hljs-number">42146</span>,<span class="hljs-number">42146</span>,<span class="hljs-number">42292</span>,<span class="hljs-number">42292</span>,<span class="hljs-number">42439</span>,<span class="hljs-number">42585</span>,<span class="hljs-number">42731</span>,<span class="hljs-number">42731</span>,<span class="hljs-number">42878</span>,<span class="hljs-number">42878</span>,<span class="hljs-number">43024</span>,<span class="hljs-number">43170</span>,<span class="hljs-number">43317</span>,<span class="hljs-number">43317</span>,<span class="hljs-number">43463</span>,<span class="hljs-number">43463</span>,<span class="hljs-number">43609</span>,<span class="hljs-number">43609</span>,<span class="hljs-number">43682</span>,<span class="hljs-number">43756</span>,<span class="hljs-number">43756</span>,<span class="hljs-number">43829</span>,<span class="hljs-number">43902</span>,<span class="hljs-number">43902</span>,<span class="hljs-number">44048</span>,<span class="hljs-number">44048</span>,<span class="hljs-number">44195</span>,<span class="hljs-number">44195</span>,<span class="hljs-number">44341</span>,<span class="hljs-number">44341</span>,<span class="hljs-number">44487</span>,<span class="hljs-number">44560</span>,<span class="hljs-number">44634</span>,<span class="hljs-number">44707</span>,<span class="hljs-number">44780</span>,<span class="hljs-number">44853</span>,<span class="hljs-number">44926</span>,<span class="hljs-number">44999</span>,<span class="hljs-number">45073</span>,<span class="hljs-number">45146</span>,<span class="hljs-number">45219</span>,<span class="hljs-number">45292</span>,<span class="hljs-number">45365</span>,<span class="hljs-number">45439</span>,<span class="hljs-number">45512</span>,<span class="hljs-number">45585</span>,<span class="hljs-number">45658</span>,<span class="hljs-number">45658</span>,<span class="hljs-number">45804</span>,<span class="hljs-number">45951</span>,<span class="hljs-number">45951</span>,<span class="hljs-number">46097</span>,<span class="hljs-number">46243</span>,<span class="hljs-number">46243</span>,<span class="hljs-number">46536</span>,<span class="hljs-number">46536</span>,<span class="hljs-number">46536</span>,<span class="hljs-number">46829</span>,<span class="hljs-number">46829</span>,<span class="hljs-number">46902</span>,<span class="hljs-number">46975</span>,<span class="hljs-number">47121</span>,<span class="hljs-number">47121</span>,<span class="hljs-number">47268</span>,<span class="hljs-number">47414</span>,<span class="hljs-number">47414</span>,<span class="hljs-number">47560</span>,<span class="hljs-number">47634</span>,<span class="hljs-number">47707</span>,<span class="hljs-number">47707</span>,<span class="hljs-number">47853</span>,<span class="hljs-number">47926</span>,<span class="hljs-number">47999</span>,<span class="hljs-number">47999</span>,<span class="hljs-number">48146</span>,<span class="hljs-number">48292</span>,<span class="hljs-number">48292</span>,<span class="hljs-number">48439</span>,<span class="hljs-number">48585</span>,<span class="hljs-number">48585</span>,<span class="hljs-number">48731</span>,<span class="hljs-number">48878</span>,<span class="hljs-number">48878</span>,<span class="hljs-number">49024</span>,<span class="hljs-number">49170</span>,<span class="hljs-number">49170</span>,<span class="hljs-number">49243</span>,<span class="hljs-number">49317</span>,<span class="hljs-number">49463</span>,<span class="hljs-number">49463</span>,<span class="hljs-number">49609</span>,<span class="hljs-number">49756</span>,<span class="hljs-number">49756</span>,<span class="hljs-number">49902</span>,<span class="hljs-number">49975</span>,<span class="hljs-number">50048</span>,<span class="hljs-number">50048</span>,<span class="hljs-number">50121</span>,<span class="hljs-number">50195</span>,<span class="hljs-number">50268</span>,<span class="hljs-number">50341</span>,<span class="hljs-number">50341</span>,<span class="hljs-number">50487</span>,<span class="hljs-number">50487</span>,<span class="hljs-number">50707</span>,<span class="hljs-number">50707</span>,<span class="hljs-number">50926</span>,<span class="hljs-number">50926</span>,<span class="hljs-number">51073</span>,<span class="hljs-number">51219</span>,<span class="hljs-number">51365</span>,<span class="hljs-number">51512</span>,<span class="hljs-number">51512</span>,<span class="hljs-number">51585</span>,<span class="hljs-number">51658</span>,<span class="hljs-number">51804</span>,<span class="hljs-number">51804</span>,<span class="hljs-number">51951</span>,<span class="hljs-number">52097</span>,<span class="hljs-number">52097</span>,<span class="hljs-number">52170</span>,<span class="hljs-number">52243</span>,<span class="hljs-number">52317</span>,<span class="hljs-number">52390</span>,<span class="hljs-number">52390</span>,<span class="hljs-number">52536</span>,<span class="hljs-number">52609</span>,<span class="hljs-number">52682</span>,<span class="hljs-number">52682</span>,<span class="hljs-number">52829</span>,<span class="hljs-number">52975</span>,<span class="hljs-number">52975</span>,<span class="hljs-number">53121</span>,<span class="hljs-number">53268</span>,<span class="hljs-number">53268</span>,<span class="hljs-number">53414</span>,<span class="hljs-number">53560</span>,<span class="hljs-number">53560</span>,<span class="hljs-number">53707</span>,<span class="hljs-number">53853</span>,<span class="hljs-number">53853</span>,<span class="hljs-number">53926</span>,<span class="hljs-number">53999</span>,<span class="hljs-number">54073</span>,<span class="hljs-number">54146</span>,<span class="hljs-number">54146</span>,<span class="hljs-number">54219</span>,<span class="hljs-number">54292</span>,<span class="hljs-number">54365</span>,<span class="hljs-number">54439</span>,<span class="hljs-number">54439</span>,<span class="hljs-number">54512</span>,<span class="hljs-number">54585</span>,<span class="hljs-number">54658</span>,<span class="hljs-number">54731</span>,<span class="hljs-number">54731</span>,<span class="hljs-number">54878</span>,<span class="hljs-number">54878</span>,<span class="hljs-number">55024</span>,<span class="hljs-number">55024</span>,<span class="hljs-number">55024</span>,<span class="hljs-number">55317</span>,<span class="hljs-number">55317</span>,<span class="hljs-number">55317</span>,<span class="hljs-number">55609</span>,<span class="hljs-number">55609</span>,<span class="hljs-number">55609</span>,<span class="hljs-number">55902</span>,<span class="hljs-number">55902</span>,<span class="hljs-number">55902</span>,<span class="hljs-number">56195</span>,<span class="hljs-number">56268</span>,<span class="hljs-number">56341</span>,<span class="hljs-number">56487</span>,<span class="hljs-number">56487</span>,<span class="hljs-number">56634</span>,<span class="hljs-number">56780</span>,<span class="hljs-number">56780</span>,<span class="hljs-number">56926</span>,<span class="hljs-number">56999</span>,<span class="hljs-number">57073</span>,<span class="hljs-number">57073</span>,<span class="hljs-number">57219</span>,<span class="hljs-number">57292</span>,<span class="hljs-number">57365</span>,<span class="hljs-number">57365</span>,<span class="hljs-number">57512</span>,<span class="hljs-number">57658</span>,<span class="hljs-number">57658</span>,<span class="hljs-number">57804</span>,<span class="hljs-number">57951</span>,<span class="hljs-number">57951</span>,<span class="hljs-number">58097</span>,<span class="hljs-number">58243</span>,<span class="hljs-number">58243</span>,<span class="hljs-number">58390</span>,<span class="hljs-number">58536</span>,<span class="hljs-number">58536</span>,<span class="hljs-number">58609</span>,<span class="hljs-number">58682</span>,<span class="hljs-number">58829</span>,<span class="hljs-number">58829</span>,<span class="hljs-number">58975</span>,<span class="hljs-number">59121</span>,<span class="hljs-number">59121</span>,<span class="hljs-number">59268</span>,<span class="hljs-number">59341</span>,<span class="hljs-number">59414</span>,<span class="hljs-number">59414</span>,<span class="hljs-number">59560</span>,<span class="hljs-number">59634</span>,<span class="hljs-number">59707</span>,<span class="hljs-number">59707</span>,<span class="hljs-number">59853</span>,<span class="hljs-number">59926</span>,<span class="hljs-number">59999</span>,<span class="hljs-number">59999</span>,<span class="hljs-number">60073</span>,<span class="hljs-number">60292</span>,<span class="hljs-number">60292</span>,<span class="hljs-number">60439</span>,<span class="hljs-number">60585</span>,<span class="hljs-number">60585</span>,<span class="hljs-number">60731</span>,<span class="hljs-number">60878</span>,<span class="hljs-number">60878</span>,<span class="hljs-number">60951</span>,<span class="hljs-number">61024</span>,<span class="hljs-number">61024</span>,<span class="hljs-number">61170</span>,<span class="hljs-number">61170</span>,<span class="hljs-number">61317</span>,<span class="hljs-number">61317</span>,<span class="hljs-number">61463</span>,<span class="hljs-number">61463</span>,<span class="hljs-number">61463</span>,<span class="hljs-number">61536</span>,<span class="hljs-number">61609</span>,<span class="hljs-number">61609</span>,<span class="hljs-number">61756</span>,<span class="hljs-number">61756</span>,<span class="hljs-number">61902</span>,<span class="hljs-number">61902</span>,<span class="hljs-number">62048</span>,<span class="hljs-number">62048</span>,<span class="hljs-number">62048</span>,<span class="hljs-number">62121</span>,<span class="hljs-number">62195</span>,<span class="hljs-number">62195</span>,<span class="hljs-number">62341</span>,<span class="hljs-number">62341</span>,<span class="hljs-number">62414</span>,<span class="hljs-number">62487</span>,<span class="hljs-number">62560</span>,<span class="hljs-number">62634</span>,<span class="hljs-number">62634</span>,<span class="hljs-number">62780</span>,<span class="hljs-number">62780</span>,<span class="hljs-number">62926</span>,<span class="hljs-number">62926</span>,<span class="hljs-number">63073</span>,<span class="hljs-number">63073</span>,<span class="hljs-number">63219</span>,<span class="hljs-number">63219</span>,<span class="hljs-number">63292</span>,<span class="hljs-number">63365</span>,<span class="hljs-number">63439</span>,<span class="hljs-number">63512</span>,<span class="hljs-number">63512</span>,<span class="hljs-number">63585</span>,<span class="hljs-number">63658</span>,<span class="hljs-number">63731</span>,<span class="hljs-number">63804</span>,<span class="hljs-number">63804</span>,<span class="hljs-number">63878</span>,<span class="hljs-number">63951</span>,<span class="hljs-number">64024</span>,<span class="hljs-number">64097</span>,<span class="hljs-number">64097</span>,<span class="hljs-number">64170</span>,<span class="hljs-number">64243</span>,<span class="hljs-number">64317</span>,<span class="hljs-number">64390</span>,<span class="hljs-number">64390</span>,<span class="hljs-number">64536</span>,<span class="hljs-number">64536</span>,<span class="hljs-number">64609</span>,<span class="hljs-number">64682</span>,<span class="hljs-number">64829</span>,<span class="hljs-number">64975</span>,<span class="hljs-number">65121</span>,<span class="hljs-number">65268</span>,<span class="hljs-number">65414</span>,<span class="hljs-number">65560</span>,<span class="hljs-number">65560</span>,<span class="hljs-number">65707</span>,<span class="hljs-number">65853</span>,<span class="hljs-number">65999</span>,<span class="hljs-number">66146</span>,<span class="hljs-number">66146</span>,<span class="hljs-number">66439</span>,<span class="hljs-number">66585</span>,<span class="hljs-number">66878</span>,<span class="hljs-number">67170</span>,<span class="hljs-number">67317</span>,<span class="hljs-number">67317</span>,<span class="hljs-number">67609</span>,<span class="hljs-number">67902</span>,<span class="hljs-number">68048</span>,<span class="hljs-number">68195</span>,<span class="hljs-number">68341</span>,<span class="hljs-number">68487</span>,<span class="hljs-number">68487</span>,<span class="hljs-number">68780</span>,<span class="hljs-number">68926</span>,<span class="hljs-number">69073</span>,<span class="hljs-number">69219</span>,<span class="hljs-number">69365</span>,<span class="hljs-number">69512</span>,<span class="hljs-number">69658</span>,<span class="hljs-number">69658</span>,<span class="hljs-number">69804</span>,<span class="hljs-number">69951</span>,<span class="hljs-number">70243</span>,<span class="hljs-number">70390</span>,<span class="hljs-number">70536</span>,<span class="hljs-number">70682</span>,<span class="hljs-number">70829</span>,<span class="hljs-number">70829</span>,<span class="hljs-number">71121</span>,<span class="hljs-number">71268</span>,<span class="hljs-number">71560</span>,<span class="hljs-number">71853</span>,<span class="hljs-number">71999</span>,<span class="hljs-number">71999</span>,<span class="hljs-number">72292</span>,<span class="hljs-number">72585</span>,<span class="hljs-number">72731</span>,<span class="hljs-number">72878</span>,<span class="hljs-number">73024</span>,<span class="hljs-number">73170</span>,<span class="hljs-number">73317</span>,<span class="hljs-number">73463</span>,<span class="hljs-number">73609</span>,<span class="hljs-number">73609</span>,<span class="hljs-number">73756</span>,<span class="hljs-number">73975</span>,<span class="hljs-number">74195</span>,<span class="hljs-number">74341</span>,<span class="hljs-number">74341</span>,<span class="hljs-number">74634</span>,<span class="hljs-number">74707</span>,<span class="hljs-number">74780</span>,<span class="hljs-number">74926</span>,<span class="hljs-number">74926</span>,<span class="hljs-number">75073</span>,<span class="hljs-number">75073</span>,<span class="hljs-number">75219</span>,<span class="hljs-number">75219</span>,<span class="hljs-number">75219</span>,<span class="hljs-number">75365</span>,<span class="hljs-number">75512</span>,<span class="hljs-number">75512</span>,<span class="hljs-number">75658</span>,<span class="hljs-number">75658</span>,<span class="hljs-number">75804</span>,<span class="hljs-number">75804</span>,<span class="hljs-number">75804</span>,<span class="hljs-number">75951</span>,<span class="hljs-number">76097</span>,<span class="hljs-number">76097</span>,<span class="hljs-number">76390</span>,<span class="hljs-number">76390</span>,<span class="hljs-number">76390</span>,<span class="hljs-number">76536</span>,<span class="hljs-number">76682</span>,<span class="hljs-number">76682</span>,<span class="hljs-number">76829</span>,<span class="hljs-number">76829</span>,<span class="hljs-number">76975</span>,<span class="hljs-number">76975</span>,<span class="hljs-number">76975</span>,<span class="hljs-number">77268</span>,<span class="hljs-number">77268</span>,<span class="hljs-number">77414</span>,<span class="hljs-number">77560</span>,<span class="hljs-number">77560</span>,<span class="hljs-number">77561</span>,<span class="hljs-number">77707</span>,<span class="hljs-number">77853</span>,<span class="hljs-number">77853</span>,<span class="hljs-number">77999</span>,<span class="hljs-number">77999</span>,<span class="hljs-number">78146</span>,<span class="hljs-number">78146</span>,<span class="hljs-number">78146</span>,<span class="hljs-number">78292</span>,<span class="hljs-number">78439</span>,<span class="hljs-number">78439</span>,<span class="hljs-number">78731</span>,<span class="hljs-number">78732</span>,<span class="hljs-number">78732</span>,<span class="hljs-number">78878</span>,<span class="hljs-number">79024</span>,<span class="hljs-number">79024</span>,<span class="hljs-number">79170</span>,<span class="hljs-number">79171</span>,<span class="hljs-number">79317</span>,<span class="hljs-number">79317</span>,<span class="hljs-number">79463</span>,<span class="hljs-number">79609</span>,<span class="hljs-number">79609</span>,<span class="hljs-number">79756</span>,<span class="hljs-number">79902</span>,<span class="hljs-number">79902</span>,<span class="hljs-number">80048</span>,<span class="hljs-number">80195</span>,<span class="hljs-number">80341</span>,<span class="hljs-number">80341</span>,<span class="hljs-number">80487</span>,<span class="hljs-number">80487</span>,<span class="hljs-number">80634</span>,<span class="hljs-number">80780</span>,<span class="hljs-number">80780</span>,<span class="hljs-number">80926</span>,<span class="hljs-number">80926</span>,<span class="hljs-number">81073</span>,<span class="hljs-number">81073</span>,<span class="hljs-number">81073</span>,<span class="hljs-number">81219</span>,<span class="hljs-number">81365</span>,<span class="hljs-number">81512</span>,<span class="hljs-number">81512</span>,<span class="hljs-number">81658</span>,<span class="hljs-number">81658</span>,<span class="hljs-number">81658</span>,<span class="hljs-number">81951</span>,<span class="hljs-number">81951</span>,<span class="hljs-number">81951</span>,<span class="hljs-number">82097</span>,<span class="hljs-number">82243</span>,<span class="hljs-number">82243</span>,<span class="hljs-number">82390</span>,<span class="hljs-number">82536</span>,<span class="hljs-number">82682</span>,<span class="hljs-number">82682</span>,<span class="hljs-number">82829</span>,<span class="hljs-number">82829</span>,<span class="hljs-number">82829</span>,<span class="hljs-number">82975</span>,<span class="hljs-number">83121</span>,<span class="hljs-number">83121</span>,<span class="hljs-number">83268</span>,<span class="hljs-number">83414</span>,<span class="hljs-number">83414</span>,<span class="hljs-number">83560</span>,<span class="hljs-number">83707</span>,<span class="hljs-number">83853</span>,<span class="hljs-number">83853</span>,<span class="hljs-number">83999</span>,<span class="hljs-number">83999</span>,<span class="hljs-number">83999</span>,<span class="hljs-number">84292</span>,<span class="hljs-number">84292</span>,<span class="hljs-number">84365</span>,<span class="hljs-number">84439</span>,<span class="hljs-number">84512</span>,<span class="hljs-number">84585</span>,<span class="hljs-number">84585</span>,<span class="hljs-number">84731</span>,<span class="hljs-number">84804</span>,<span class="hljs-number">84878</span>,<span class="hljs-number">84878</span>,<span class="hljs-number">84951</span>,<span class="hljs-number">85024</span>,<span class="hljs-number">85097</span>,<span class="hljs-number">85170</span>,<span class="hljs-number">85170</span>,<span class="hljs-number">85317</span>,<span class="hljs-number">85390</span>,<span class="hljs-number">85463</span>,<span class="hljs-number">85463</span>,<span class="hljs-number">85536</span>,<span class="hljs-number">85609</span>,<span class="hljs-number">85682</span>,<span class="hljs-number">85756</span>,<span class="hljs-number">85756</span>,<span class="hljs-number">85829</span>,<span class="hljs-number">85902</span>,<span class="hljs-number">85975</span>,<span class="hljs-number">86048</span>,<span class="hljs-number">86048</span>,<span class="hljs-number">86121</span>,<span class="hljs-number">86195</span>,<span class="hljs-number">86268</span>,<span class="hljs-number">86341</span>,<span class="hljs-number">86341</span>,<span class="hljs-number">86487</span>,<span class="hljs-number">86634</span>,<span class="hljs-number">86634</span>,<span class="hljs-number">86707</span>,<span class="hljs-number">86780</span>,<span class="hljs-number">86853</span>,<span class="hljs-number">86926</span>,<span class="hljs-number">86926</span>,<span class="hljs-number">87073</span>,<span class="hljs-number">87146</span>,<span class="hljs-number">87219</span>,<span class="hljs-number">87219</span>,<span class="hljs-number">87292</span>,<span class="hljs-number">87365</span>,<span class="hljs-number">87439</span>,<span class="hljs-number">87512</span>,<span class="hljs-number">87512</span>,<span class="hljs-number">87658</span>,<span class="hljs-number">87804</span>,<span class="hljs-number">87804</span>,<span class="hljs-number">87878</span>,<span class="hljs-number">87951</span>,<span class="hljs-number">88024</span>,<span class="hljs-number">88097</span>,<span class="hljs-number">88097</span>,<span class="hljs-number">88170</span>,<span class="hljs-number">88243</span>,<span class="hljs-number">88317</span>,<span class="hljs-number">88390</span>,<span class="hljs-number">88390</span>,<span class="hljs-number">88536</span>,<span class="hljs-number">88609</span>,<span class="hljs-number">88682</span>,<span class="hljs-number">88682</span>,<span class="hljs-number">88829</span>,<span class="hljs-number">88975</span>,<span class="hljs-number">88975</span>,<span class="hljs-number">89121</span>,<span class="hljs-number">89121</span>,<span class="hljs-number">89268</span>,<span class="hljs-number">89268</span>,<span class="hljs-number">89414</span>,<span class="hljs-number">89414</span>,<span class="hljs-number">89560</span>,<span class="hljs-number">89560</span>,<span class="hljs-number">89707</span>,<span class="hljs-number">89707</span>,<span class="hljs-number">89853</span>,<span class="hljs-number">89853</span>,<span class="hljs-number">89999</span>,<span class="hljs-number">89999</span>,<span class="hljs-number">90146</span>,<span class="hljs-number">90146</span>,<span class="hljs-number">90292</span>,<span class="hljs-number">90292</span>,<span class="hljs-number">90439</span>,<span class="hljs-number">90439</span>,<span class="hljs-number">90585</span>,<span class="hljs-number">90585</span>,<span class="hljs-number">90731</span>,<span class="hljs-number">90731</span>,<span class="hljs-number">90878</span>,<span class="hljs-number">90878</span>,<span class="hljs-number">91024</span>,<span class="hljs-number">91024</span>,<span class="hljs-number">91170</span>,<span class="hljs-number">91170</span>,<span class="hljs-number">91317</span>,<span class="hljs-number">91317</span>,<span class="hljs-number">91390</span>,<span class="hljs-number">91463</span>,<span class="hljs-number">91536</span>,<span class="hljs-number">91609</span>,<span class="hljs-number">91682</span>,<span class="hljs-number">91756</span>,<span class="hljs-number">91829</span>,<span class="hljs-number">91902</span>,<span class="hljs-number">91975</span>,<span class="hljs-number">92048</span>,<span class="hljs-number">92121</span>,<span class="hljs-number">92195</span>,<span class="hljs-number">92268</span>,<span class="hljs-number">92341</span>,<span class="hljs-number">92634</span>,<span class="hljs-number">92780</span>,<span class="hljs-number">92926</span>,<span class="hljs-number">93219</span>,<span class="hljs-number">93365</span>,<span class="hljs-number">93365</span>,<span class="hljs-number">93365</span>,<span class="hljs-number">93365</span>,<span class="hljs-number">93658</span>,<span class="hljs-number">93658</span>,<span class="hljs-number">93804</span>,<span class="hljs-number">93878</span>,<span class="hljs-number">93951</span>,<span class="hljs-number">93951</span>,<span class="hljs-number">94097</span>,<span class="hljs-number">94243</span>,<span class="hljs-number">94317</span>,<span class="hljs-number">94390</span>,<span class="hljs-number">94463</span>,<span class="hljs-number">94536</span>,<span class="hljs-number">94536</span>,<span class="hljs-number">94682</span>,<span class="hljs-number">94829</span>,<span class="hljs-number">94829</span>,<span class="hljs-number">94975</span>,<span class="hljs-number">95121</span>,<span class="hljs-number">95121</span>,<span class="hljs-number">95268</span>,<span class="hljs-number">95414</span>,<span class="hljs-number">95487</span>,<span class="hljs-number">95560</span>,<span class="hljs-number">95634</span>,<span class="hljs-number">95707</span>,<span class="hljs-number">95707</span>,<span class="hljs-number">95853</span>,<span class="hljs-number">95853</span>,<span class="hljs-number">95999</span>,<span class="hljs-number">95999</span>,<span class="hljs-number">96146</span>,<span class="hljs-number">96292</span>,<span class="hljs-number">96292</span>,<span class="hljs-number">96292</span>,<span class="hljs-number">96439</span>,<span class="hljs-number">96585</span>,<span class="hljs-number">96585</span>,<span class="hljs-number">96658</span>,<span class="hljs-number">96731</span>,<span class="hljs-number">96804</span>,<span class="hljs-number">96878</span>,<span class="hljs-number">96878</span>,<span class="hljs-number">97024</span>,<span class="hljs-number">97170</span>,<span class="hljs-number">97170</span>,<span class="hljs-number">97317</span>,<span class="hljs-number">97390</span>,<span class="hljs-number">97463</span>,<span class="hljs-number">97463</span>,<span class="hljs-number">97609</span>,<span class="hljs-number">97756</span>,<span class="hljs-number">97756</span>,<span class="hljs-number">97829</span>,<span class="hljs-number">97902</span>,<span class="hljs-number">98048</span>,<span class="hljs-number">98048</span>,<span class="hljs-number">98048</span>,<span class="hljs-number">98195</span>,<span class="hljs-number">98341</span>,<span class="hljs-number">98341</span>,<span class="hljs-number">98487</span>,<span class="hljs-number">98560</span>,<span class="hljs-number">98634</span>,<span class="hljs-number">98634</span>,<span class="hljs-number">98780</span>,<span class="hljs-number">98926</span>,<span class="hljs-number">98926</span>,<span class="hljs-number">99073</span>,<span class="hljs-number">99219</span>,<span class="hljs-number">99219</span>,<span class="hljs-number">99365</span>,<span class="hljs-number">99512</span>,<span class="hljs-number">99512</span>,<span class="hljs-number">99658</span>,<span class="hljs-number">99804</span>,<span class="hljs-number">99804</span>,<span class="hljs-number">99951</span>,<span class="hljs-number">100097</span>,<span class="hljs-number">100170</span>,<span class="hljs-number">100243</span>,<span class="hljs-number">100317</span>,<span class="hljs-number">100390</span>,<span class="hljs-number">100390</span>,<span class="hljs-number">100536</span>,<span class="hljs-number">100682</span>,<span class="hljs-number">100682</span>,<span class="hljs-number">100829</span>,<span class="hljs-number">100975</span>,<span class="hljs-number">100975</span>,<span class="hljs-number">100975</span>,<span class="hljs-number">101121</span>,<span class="hljs-number">101268</span>,<span class="hljs-number">101268</span>,<span class="hljs-number">101341</span>,<span class="hljs-number">101414</span>,<span class="hljs-number">101487</span>,<span class="hljs-number">101560</span>,<span class="hljs-number">101560</span>,<span class="hljs-number">101707</span>,<span class="hljs-number">101853</span>,<span class="hljs-number">101853</span>,<span class="hljs-number">101926</span>,<span class="hljs-number">101999</span>,<span class="hljs-number">102073</span>,<span class="hljs-number">102146</span>,<span class="hljs-number">102146</span>,<span class="hljs-number">102292</span>,<span class="hljs-number">102439</span>,<span class="hljs-number">102439</span>,<span class="hljs-number">102439</span>,<span class="hljs-number">102585</span>,<span class="hljs-number">102658</span>,<span class="hljs-number">102731</span>,<span class="hljs-number">102731</span>,<span class="hljs-number">102878</span>,<span class="hljs-number">103024</span>,<span class="hljs-number">103024</span>,<span class="hljs-number">103024</span>,<span class="hljs-number">103170</span>,<span class="hljs-number">103243</span>,<span class="hljs-number">103317</span>,<span class="hljs-number">103317</span>,<span class="hljs-number">103317</span>,<span class="hljs-number">103463</span>,<span class="hljs-number">103609</span>,<span class="hljs-number">103682</span>,<span class="hljs-number">103756</span>,<span class="hljs-number">103829</span>,<span class="hljs-number">103902</span>,<span class="hljs-number">103902</span>,<span class="hljs-number">104048</span>,<span class="hljs-number">104195</span>,<span class="hljs-number">104195</span>,<span class="hljs-number">104341</span>,<span class="hljs-number">104487</span>,<span class="hljs-number">104487</span>,<span class="hljs-number">104487</span>,<span class="hljs-number">104634</span>,<span class="hljs-number">104780</span>,<span class="hljs-number">104853</span>,<span class="hljs-number">104926</span>,<span class="hljs-number">104999</span>,<span class="hljs-number">105073</span>,<span class="hljs-number">105073</span>,<span class="hljs-number">105219</span>,<span class="hljs-number">105365</span>,<span class="hljs-number">105365</span>,<span class="hljs-number">105512</span>,<span class="hljs-number">105658</span>,<span class="hljs-number">105658</span>,<span class="hljs-number">105658</span>,<span class="hljs-number">105804</span>,<span class="hljs-number">105951</span>,<span class="hljs-number">105951</span>,<span class="hljs-number">106097</span>,<span class="hljs-number">106170</span>,<span class="hljs-number">106243</span>,<span class="hljs-number">106243</span>,<span class="hljs-number">106317</span>,<span class="hljs-number">106390</span>,<span class="hljs-number">106536</span>,<span class="hljs-number">106536</span>,<span class="hljs-number">106682</span>,<span class="hljs-number">106756</span>,<span class="hljs-number">106829</span>,<span class="hljs-number">106829</span>,<span class="hljs-number">106829</span>,<span class="hljs-number">106975</span>,<span class="hljs-number">107121</span>,<span class="hljs-number">107121</span>,<span class="hljs-number">107268</span>,<span class="hljs-number">107268</span>,<span class="hljs-number">107414</span>,<span class="hljs-number">107414</span>,<span class="hljs-number">107414</span>,<span class="hljs-number">107560</span>,<span class="hljs-number">107707</span>,<span class="hljs-number">107707</span>,<span class="hljs-number">107707</span>,<span class="hljs-number">107853</span>,<span class="hljs-number">107999</span>,<span class="hljs-number">107999</span>,<span class="hljs-number">107999</span>,<span class="hljs-number">108146</span>,<span class="hljs-number">108292</span>,<span class="hljs-number">108292</span>,<span class="hljs-number">108439</span>,<span class="hljs-number">108585</span>,<span class="hljs-number">108585</span>,<span class="hljs-number">108731</span>,<span class="hljs-number">108878</span>,<span class="hljs-number">108878</span>,<span class="hljs-number">108878</span>,<span class="hljs-number">109024</span>,<span class="hljs-number">109170</span>,<span class="hljs-number">109170</span>,<span class="hljs-number">109317</span>,<span class="hljs-number">109463</span>,<span class="hljs-number">109463</span>,<span class="hljs-number">109536</span>,<span class="hljs-number">109609</span>,<span class="hljs-number">109682</span>,<span class="hljs-number">109756</span>,<span class="hljs-number">109756</span>,<span class="hljs-number">109902</span>,<span class="hljs-number">110048</span>,<span class="hljs-number">110048</span>,<span class="hljs-number">110048</span>,<span class="hljs-number">110195</span>,<span class="hljs-number">110195</span>,<span class="hljs-number">110341</span>,<span class="hljs-number">110341</span>,<span class="hljs-number">110341</span>,<span class="hljs-number">110487</span>,<span class="hljs-number">110487</span>,<span class="hljs-number">110634</span>,<span class="hljs-number">110634</span>,<span class="hljs-number">110634</span>,<span class="hljs-number">110780</span>,<span class="hljs-number">110780</span>,<span class="hljs-number">110926</span>,<span class="hljs-number">110926</span>,<span class="hljs-number">110926</span>,<span class="hljs-number">111073</span>,<span class="hljs-number">111073</span>,<span class="hljs-number">111219</span>,<span class="hljs-number">111219</span>,<span class="hljs-number">111219</span>,<span class="hljs-number">111365</span>,<span class="hljs-number">111512</span>,<span class="hljs-number">111658</span>,<span class="hljs-number">111731</span>,<span class="hljs-number">111804</span>,<span class="hljs-number">111878</span>,<span class="hljs-number">111951</span>,<span class="hljs-number">112024</span>,<span class="hljs-number">112097</span>,<span class="hljs-number">112097</span>,<span class="hljs-number">112097</span>,<span class="hljs-number">112390</span>,<span class="hljs-number">112390</span>,<span class="hljs-number">112536</span>,<span class="hljs-number">112682</span>,<span class="hljs-number">112682</span>,<span class="hljs-number">112682</span>,<span class="hljs-number">112829</span>,<span class="hljs-number">112975</span>,<span class="hljs-number">112975</span>,<span class="hljs-number">113121</span>,<span class="hljs-number">113268</span>,<span class="hljs-number">113268</span>,<span class="hljs-number">113414</span>,<span class="hljs-number">113560</span>,<span class="hljs-number">113560</span>,<span class="hljs-number">113707</span>,<span class="hljs-number">113853</span>,<span class="hljs-number">113853</span>,<span class="hljs-number">113999</span>,<span class="hljs-number">114146</span>,<span class="hljs-number">114219</span>,<span class="hljs-number">114292</span>,<span class="hljs-number">114365</span>,<span class="hljs-number">114439</span>,<span class="hljs-number">114439</span>,<span class="hljs-number">114585</span>,<span class="hljs-number">114731</span>,<span class="hljs-number">114731</span>,<span class="hljs-number">114878</span>,<span class="hljs-number">115024</span>,<span class="hljs-number">115024</span>,<span class="hljs-number">115024</span>,<span class="hljs-number">115170</span>,<span class="hljs-number">115317</span>,<span class="hljs-number">115317</span>,<span class="hljs-number">115463</span>,<span class="hljs-number">115536</span>,<span class="hljs-number">115609</span>,<span class="hljs-number">115609</span>,<span class="hljs-number">115756</span>,<span class="hljs-number">115902</span>,<span class="hljs-number">115902</span>,<span class="hljs-number">115975</span>,<span class="hljs-number">116048</span>,<span class="hljs-number">116121</span>,<span class="hljs-number">116195</span>,<span class="hljs-number">116195</span>,<span class="hljs-number">116268</span>,<span class="hljs-number">116341</span>,<span class="hljs-number">116414</span>,<span class="hljs-number">116487</span>,<span class="hljs-number">116487</span>,<span class="hljs-number">116560</span>,<span class="hljs-number">116634</span>,<span class="hljs-number">116707</span>,<span class="hljs-number">116780</span>,<span class="hljs-number">116780</span>,<span class="hljs-number">116926</span>,<span class="hljs-number">117073</span>,<span class="hljs-number">117073</span>,<span class="hljs-number">117219</span>,<span class="hljs-number">117365</span>,<span class="hljs-number">117365</span>,<span class="hljs-number">117512</span>,<span class="hljs-number">117658</span>,<span class="hljs-number">117658</span>,<span class="hljs-number">117804</span>,<span class="hljs-number">117878</span>,<span class="hljs-number">117951</span>,<span class="hljs-number">117951</span>,<span class="hljs-number">118097</span>,<span class="hljs-number">118243</span>,<span class="hljs-number">118243</span>,<span class="hljs-number">118390</span>,<span class="hljs-number">118536</span>,<span class="hljs-number">118536</span>,<span class="hljs-number">118682</span>,<span class="hljs-number">118829</span>,<span class="hljs-number">118902</span>,<span class="hljs-number">118975</span>,<span class="hljs-number">119048</span>,<span class="hljs-number">119121</span>,<span class="hljs-number">119121</span>,<span class="hljs-number">119268</span>,<span class="hljs-number">119414</span>,<span class="hljs-number">119414</span>,<span class="hljs-number">119560</span>,<span class="hljs-number">119707</span>,<span class="hljs-number">119707</span>,<span class="hljs-number">119853</span>,<span class="hljs-number">119999</span>,<span class="hljs-number">119999</span>,<span class="hljs-number">120146</span>,<span class="hljs-number">120292</span>,<span class="hljs-number">120292</span>,<span class="hljs-number">120439</span>,<span class="hljs-number">120439</span>,<span class="hljs-number">120731</span>,<span class="hljs-number">121024</span>,<span class="hljs-number">121170</span>,<span class="hljs-number">121463</span>,<span class="hljs-number">121536</span>,<span class="hljs-number">121609</span>,<span class="hljs-number">121682</span>,<span class="hljs-number">121756</span>,<span class="hljs-number">121756</span>,<span class="hljs-number">121756</span>,<span class="hljs-number">121902</span>,<span class="hljs-number">122048</span>,<span class="hljs-number">122048</span>,<span class="hljs-number">122048</span>,<span class="hljs-number">122195</span>,<span class="hljs-number">122341</span>,<span class="hljs-number">122341</span>,<span class="hljs-number">122341</span>,<span class="hljs-number">122487</span>,<span class="hljs-number">122560</span>,<span class="hljs-number">122634</span>,<span class="hljs-number">122634</span>,<span class="hljs-number">122634</span>,<span class="hljs-number">122780</span>,<span class="hljs-number">122926</span>,<span class="hljs-number">122926</span>,<span class="hljs-number">122926</span>,<span class="hljs-number">123073</span>,<span class="hljs-number">123219</span>,<span class="hljs-number">123219</span>,<span class="hljs-number">123219</span>,<span class="hljs-number">123365</span>,<span class="hljs-number">123512</span>,<span class="hljs-number">123512</span>,<span class="hljs-number">123512</span>,<span class="hljs-number">123585</span>,<span class="hljs-number">123658</span>,<span class="hljs-number">123731</span>,<span class="hljs-number">123804</span>,<span class="hljs-number">123804</span>,<span class="hljs-number">123804</span>,<span class="hljs-number">123951</span>,<span class="hljs-number">124097</span>,<span class="hljs-number">124097</span>,<span class="hljs-number">124097</span>,<span class="hljs-number">124243</span>,<span class="hljs-number">124390</span>,<span class="hljs-number">124390</span>,<span class="hljs-number">124390</span>,<span class="hljs-number">124536</span>,<span class="hljs-number">124682</span>,<span class="hljs-number">124682</span>,<span class="hljs-number">124682</span>,<span class="hljs-number">124829</span>,<span class="hljs-number">124975</span>,<span class="hljs-number">124975</span>,<span class="hljs-number">124975</span>,<span class="hljs-number">125121</span>,<span class="hljs-number">125268</span>,<span class="hljs-number">125268</span>,<span class="hljs-number">125268</span>,<span class="hljs-number">125414</span>,<span class="hljs-number">125487</span>,<span class="hljs-number">125560</span>,<span class="hljs-number">125560</span>,<span class="hljs-number">125560</span>,<span class="hljs-number">125707</span>,<span class="hljs-number">125853</span>,<span class="hljs-number">125853</span>,<span class="hljs-number">125853</span>,<span class="hljs-number">125999</span>,<span class="hljs-number">126146</span>,<span class="hljs-number">126146</span>,<span class="hljs-number">126146</span>,<span class="hljs-number">126292</span>,<span class="hljs-number">126439</span>,<span class="hljs-number">126439</span>,<span class="hljs-number">126439</span>,<span class="hljs-number">126585</span>,<span class="hljs-number">126585</span>,<span class="hljs-number">126731</span>,<span class="hljs-number">126731</span>,<span class="hljs-number">126878</span>,<span class="hljs-number">126878</span>,<span class="hljs-number">127024</span>,<span class="hljs-number">127024</span>,<span class="hljs-number">127024</span>,<span class="hljs-number">127170</span>,<span class="hljs-number">127170</span>,<span class="hljs-number">127317</span>,<span class="hljs-number">127317</span>,<span class="hljs-number">127463</span>,<span class="hljs-number">127463</span>,<span class="hljs-number">127609</span>,<span class="hljs-number">127609</span>,<span class="hljs-number">127609</span>,<span class="hljs-number">127756</span>,<span class="hljs-number">127756</span>,<span class="hljs-number">127902</span>,<span class="hljs-number">127902</span>,<span class="hljs-number">128048</span>,<span class="hljs-number">128048</span>,<span class="hljs-number">128195</span>,<span class="hljs-number">128195</span>,<span class="hljs-number">128268</span>,<span class="hljs-number">128341</span>,<span class="hljs-number">128341</span>,<span class="hljs-number">128414</span>,<span class="hljs-number">128487</span>,<span class="hljs-number">128487</span>,<span class="hljs-number">128560</span>,<span class="hljs-number">128634</span>,<span class="hljs-number">128707</span>,<span class="hljs-number">128780</span>,<span class="hljs-number">128780</span>,<span class="hljs-number">128853</span>,<span class="hljs-number">128926</span>,<span class="hljs-number">128999</span>,<span class="hljs-number">129073</span>,<span class="hljs-number">129146</span>,<span class="hljs-number">129219</span>,<span class="hljs-number">129292</span>,<span class="hljs-number">129365</span>,<span class="hljs-number">129365</span>,<span class="hljs-number">129439</span>,<span class="hljs-number">129512</span>,<span class="hljs-number">129585</span>,<span class="hljs-number">129658</span>,<span class="hljs-number">129731</span>,<span class="hljs-number">129804</span>,<span class="hljs-number">129878</span>,<span class="hljs-number">129951</span>,<span class="hljs-number">129951</span>,<span class="hljs-number">130024</span>,<span class="hljs-number">130097</span>,<span class="hljs-number">130170</span>,<span class="hljs-number">130243</span>,<span class="hljs-number">130243</span>,<span class="hljs-number">130317</span>,<span class="hljs-number">130390</span>,<span class="hljs-number">130463</span>,<span class="hljs-number">130536</span>,<span class="hljs-number">130536</span>,<span class="hljs-number">130682</span>,<span class="hljs-number">130756</span>,<span class="hljs-number">130829</span>,<span class="hljs-number">130829</span>,<span class="hljs-number">130829</span>,<span class="hljs-number">130975</span>,<span class="hljs-number">130975</span>,<span class="hljs-number">131121</span>,<span class="hljs-number">131195</span>,<span class="hljs-number">131268</span>,<span class="hljs-number">131341</span>,<span class="hljs-number">131560</span>,<span class="hljs-number">131707</span>,<span class="hljs-number">131707</span>,<span class="hljs-number">131780</span>,<span class="hljs-number">131853</span>,<span class="hljs-number">131926</span>,<span class="hljs-number">132146</span>,<span class="hljs-number">132292</span>,<span class="hljs-number">132365</span>,<span class="hljs-number">132439</span>,<span class="hljs-number">132512</span>,<span class="hljs-number">132731</span>,<span class="hljs-number">132878</span>,<span class="hljs-number">132878</span>,<span class="hljs-number">132951</span>,<span class="hljs-number">133024</span>,<span class="hljs-number">133097</span>,<span class="hljs-number">133463</span>,<span class="hljs-number">133463</span>,<span class="hljs-number">133756</span>,<span class="hljs-number">134048</span>,<span class="hljs-number">134048</span>,<span class="hljs-number">134048</span>,<span class="hljs-number">134341</span>,<span class="hljs-number">134634</span>,<span class="hljs-number">134634</span>,<span class="hljs-number">134926</span>,<span class="hljs-number">134926</span>,<span class="hljs-number">135219</span>,<span class="hljs-number">135219</span>,<span class="hljs-number">135219</span>,<span class="hljs-number">135512</span>,<span class="hljs-number">135512</span>,<span class="hljs-number">135658</span>,<span class="hljs-number">135658</span>,<span class="hljs-number">135804</span>,<span class="hljs-number">135804</span>,<span class="hljs-number">135951</span>,<span class="hljs-number">135951</span>,<span class="hljs-number">136097</span>,<span class="hljs-number">136097</span>,<span class="hljs-number">136243</span>,<span class="hljs-number">136243</span>,<span class="hljs-number">136390</span>,<span class="hljs-number">136390</span>,<span class="hljs-number">136536</span>,<span class="hljs-number">136536</span>,<span class="hljs-number">136609</span>,<span class="hljs-number">136682</span>,<span class="hljs-number">136682</span>,<span class="hljs-number">136829</span>,<span class="hljs-number">136829</span>,<span class="hljs-number">136902</span>,<span class="hljs-number">136975</span>,<span class="hljs-number">136975</span>,<span class="hljs-number">137121</span>,<span class="hljs-number">137121</span>,<span class="hljs-number">137268</span>,<span class="hljs-number">137268</span>,<span class="hljs-number">137414</span>,<span class="hljs-number">137414</span>,<span class="hljs-number">137560</span>,<span class="hljs-number">137560</span>,<span class="hljs-number">137707</span>,<span class="hljs-number">137707</span>,<span class="hljs-number">137780</span>,<span class="hljs-number">137853</span>,<span class="hljs-number">137926</span>,<span class="hljs-number">137999</span>,<span class="hljs-number">137999</span>,<span class="hljs-number">138073</span>,<span class="hljs-number">138146</span>,<span class="hljs-number">138146</span>,<span class="hljs-number">138219</span>,<span class="hljs-number">138292</span>,<span class="hljs-number">138365</span>,<span class="hljs-number">138439</span>,<span class="hljs-number">138439</span>,<span class="hljs-number">138512</span>,<span class="hljs-number">138585</span>,<span class="hljs-number">138658</span>,<span class="hljs-number">138731</span>,<span class="hljs-number">138731</span>,<span class="hljs-number">138804</span>,<span class="hljs-number">138878</span>,<span class="hljs-number">138951</span>,<span class="hljs-number">139024</span>,<span class="hljs-number">139024</span>,<span class="hljs-number">139097</span>,<span class="hljs-number">139170</span>,<span class="hljs-number">139243</span>,<span class="hljs-number">139317</span>,<span class="hljs-number">139317</span>,<span class="hljs-number">139463</span>,<span class="hljs-number">139463</span>,<span class="hljs-number">139609</span>,<span class="hljs-number">139609</span>,<span class="hljs-number">139756</span>,<span class="hljs-number">139756</span>,<span class="hljs-number">139902</span>,<span class="hljs-number">139902</span>,<span class="hljs-number">140195</span>,<span class="hljs-number">140195</span>,<span class="hljs-number">140195</span>,<span class="hljs-number">140195</span>]<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">var</span> d3mug = Module.findBaseAddress(<span class="hljs-string">&quot;libd3mug.so&quot;</span>);<br>    <span class="hljs-keyword">var</span> dm = <span class="hljs-built_in">parseInt</span>(d3mug, <span class="hljs-number">16</span>) + <span class="hljs-number">0x780</span>;<br>    <span class="hljs-keyword">var</span> update = <span class="hljs-keyword">new</span> NativePointer(dm);<br>    <span class="hljs-keyword">var</span> ddd = <span class="hljs-keyword">new</span> NativeFunction(update, <span class="hljs-string">&quot;pointer&quot;</span>, [<span class="hljs-string">&quot;char&quot;</span>]);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>;i&lt;numArray.length;i++)&#123;<br>        ddd(numArray[i]);<br>        <span class="hljs-built_in">console</span>.log(numArray[i]);<br>    &#125;<br>    <span class="hljs-keyword">var</span> get = <span class="hljs-keyword">new</span> NativeFunction(Module.findExportByName(<span class="hljs-string">&quot;libd3mug.so&quot;</span>, <span class="hljs-string">&quot;get&quot;</span>), <span class="hljs-string">&#x27;pointer&#x27;</span>, []);<br>    <span class="hljs-keyword">var</span> result = get();<br>    <span class="hljs-built_in">console</span>.log(result.readCString());<br>&#125;<br>setImmediate(main)<br></code></pre></td></tr></table></figure>
+
+<h2 id="d3thon"><a href="#d3thon" class="headerlink" title="d3thon"></a>d3thon</h2><p>当时就运行了一下，报错，IDA看了看，很难分析，就没再继续了。来复现一下。</p>
+<p>一个python实现的虚拟机，下载python3.10，运行程序,查看bcode文件。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316174112257.png" srcset="/img/loading.gif" lazyload alt="image-20220316174112257"></p>
+<p>发现每一行都有ZOAmcoLkGlAXXqf，应该是定义函数的，然后start是函数名，kZslMZYnvPBwgdCz是print。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316174220052.png" srcset="/img/loading.gif" lazyload alt="image-20220316174220052"></p>
+<p>看最后，猜测RDDDZUiIKbxCubJEN是调用函数的。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316175033261.png" srcset="/img/loading.gif" lazyload alt="image-20220316175033261"></p>
+<p>这一段应该是将flag的每个字符解析为二进制表达。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316175118890.png" srcset="/img/loading.gif" lazyload alt="image-20220316175118890"></p>
+<p>okokok是将二进制字符串转为十进制数据。</p>
+<p>okokokok就是进行一些运算。</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs llvm">IEKMEDdrPpzpdKy <span class="hljs-keyword">add</span><br>OcKUQCYqhwHXfAgGZH <span class="hljs-keyword">xor</span><br>FLNPsiCIvICFtzpUAR <span class="hljs-keyword">sub</span><br>kuhisCvwaXWfqCs not<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316175235138.png" srcset="/img/loading.gif" lazyload alt="image-20220316175235138"></p>
+<p>最后和一串数字进行比较。</p>
+<p>这样就有了解题思路，倒着运算，将加改为减，减改为加，异或和取反都不变，我们自己定义一个dcode.lbc，进行解析即可。</p>
+<p><img src="/2022/03/14/D3CTF-2022-wp/image-20220316175356055.png" srcset="/img/loading.gif" lazyload alt="image-20220316175356055"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> byte_analizer <span class="hljs-keyword">as</span> ba<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;decode.lbc&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> fi:<br>  statmts = fi.read().split(<span class="hljs-string">&quot;\n&quot;</span>)<br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> statmts:<br>    ba.analize(i)<br>flag = -<span class="hljs-built_in">int</span>(ba.Variables[<span class="hljs-string">&#x27;flag&#x27;</span>])<br><span class="hljs-built_in">print</span>(flag)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bytes</span>.fromhex(<span class="hljs-built_in">hex</span>(flag)[<span class="hljs-number">2</span>:]))<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/writeup/">writeup</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/28/%E8%99%8E%E7%AC%A62022%E9%80%86%E5%90%91%E9%83%A8%E5%88%86wp/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">虎符2022逆向部分wp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/07/SUSCTF-2022-wp/">
+                        <span class="hidden-mobile">SUSCTF-2022-wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

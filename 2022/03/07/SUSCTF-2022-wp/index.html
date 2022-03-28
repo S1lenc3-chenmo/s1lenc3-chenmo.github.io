@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="刻苦学习逆向的小菜鸡。">
+  <meta name="author" content="丨S1lenc3丨">
+  <meta name="keywords" content="">
+  
+  <title>SUSCTF-2022-wp - S1lenc3的辣鸡场</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.s1lenc3.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="S1lenc3的辣鸡场" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>S1lenc3</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SUSCTF-2022-wp">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-07 14:30" pubdate>
+        2022年3月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      905 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SUSCTF-2022-wp</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年3月7日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><h2 id="DigitalCircuits"><a href="#DigitalCircuits" class="headerlink" title="DigitalCircuits"></a>DigitalCircuits</h2><p>py文件编译的exe，使用pyinstxtractor.py反编译，找到DigitalCircuits，修改文件头，然后使用uncompyle6反编译pyc文件，得到源码。</p>
+<p>分析代码，，发现有与或非，左移右移，又根据f10的代码：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">def</span> f<span class="hljs-number">10</span>(v<span class="hljs-number">0</span>, v<span class="hljs-number">1</span>, k<span class="hljs-number">0</span>, k<span class="hljs-number">1</span>, k<span class="hljs-number">2</span>, k<span class="hljs-number">3</span>):<br>    <span class="hljs-attribute">s</span> = &#x27;<span class="hljs-number">00000000000000000000000000000000</span>&#x27;<br>    <span class="hljs-attribute">d</span> = &#x27;<span class="hljs-number">10011110001101110111100110111001</span>&#x27;<br>    <span class="hljs-attribute">for</span> i in range(<span class="hljs-number">32</span>):<br>        <span class="hljs-attribute">s</span> = f<span class="hljs-number">6</span>(s, d)<br>        <span class="hljs-attribute">v0</span> = f<span class="hljs-number">6</span>(v<span class="hljs-number">0</span>, f<span class="hljs-number">9</span>(f<span class="hljs-number">9</span>(f<span class="hljs-number">6</span>(f<span class="hljs-number">7</span>(v<span class="hljs-number">1</span>, <span class="hljs-number">4</span>), k<span class="hljs-number">0</span>), f<span class="hljs-number">6</span>(v<span class="hljs-number">1</span>, s)), f<span class="hljs-number">6</span>(f<span class="hljs-number">8</span>(v<span class="hljs-number">1</span>, <span class="hljs-number">5</span>), k<span class="hljs-number">1</span>)))<br>        <span class="hljs-attribute">v1</span> = f<span class="hljs-number">6</span>(v<span class="hljs-number">1</span>, f<span class="hljs-number">9</span>(f<span class="hljs-number">9</span>(f<span class="hljs-number">6</span>(f<span class="hljs-number">7</span>(v<span class="hljs-number">0</span>, <span class="hljs-number">4</span>), k<span class="hljs-number">2</span>), f<span class="hljs-number">6</span>(v<span class="hljs-number">0</span>, s)), f<span class="hljs-number">6</span>(f<span class="hljs-number">8</span>(v<span class="hljs-number">0</span>, <span class="hljs-number">5</span>), k<span class="hljs-number">3</span>)))<br><br>    <span class="hljs-attribute">return</span> v<span class="hljs-number">0</span> + v<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p>左移4位，右移5位，好熟悉，再将d转为16进制，0x9e3779b9。</p>
+<p>不出意外就是tea算法了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdint.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DecryptTEA</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> firstChunk, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> secondChunk, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>* key)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> y = firstChunk;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> z = secondChunk;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> delta = <span class="hljs-number">0x9e3779b9</span>;<br>    <span class="hljs-comment">//unsigned int delta = 0x73637466;</span><br>    sum = delta &lt;&lt; <span class="hljs-number">5</span>; <span class="hljs-comment">//32轮运算，所以是2的5次方；16轮运算，所以是2的4次方；8轮运算，所以是2的3次方</span><br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) <span class="hljs-comment">//8轮运算</span><br>        &#123;<br>        z -= ((y &lt;&lt; <span class="hljs-number">4</span>) + key[<span class="hljs-number">2</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="hljs-number">5</span>) + key[<span class="hljs-number">3</span>]);<br>        y -= ((z &lt;&lt; <span class="hljs-number">4</span>) + key[<span class="hljs-number">0</span>]) ^ (z + sum) ^ ((z &gt;&gt; <span class="hljs-number">5</span>) + key[<span class="hljs-number">1</span>]);<br>        sum -= delta;<br>        &#125;<br><br>    firstChunk = y;<br>    secondChunk = z;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">4</span>;j++)&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>, (firstChunk &gt;&gt; ((<span class="hljs-number">3</span>-j) * <span class="hljs-number">8</span>) &amp; <span class="hljs-number">0xff</span>));<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">4</span>;j++)&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>, (secondChunk &gt;&gt; ((<span class="hljs-number">3</span>-j) * <span class="hljs-number">8</span>) &amp; <span class="hljs-number">0xff</span>));<br>    &#125;<br>    <span class="hljs-comment">//    printf(&quot;%x\n&quot;, firstChunk);</span><br>    <span class="hljs-comment">//    printf(&quot;%x\n&quot;, secondChunk);</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EncryptTEA</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> firstChunk, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> secondChunk, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>* key)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> y = firstChunk;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> z = secondChunk;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> delta = <span class="hljs-number">0x73637466</span>;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++)<span class="hljs-comment">//8轮运算(需要对应下面的解密核心函数的轮数一样)</span><br>    &#123;<br>        sum += delta;<br>        y += ((z &lt;&lt; <span class="hljs-number">4</span>) + key[<span class="hljs-number">2</span>]) ^ (z + sum) ^ ((z &gt;&gt; <span class="hljs-number">5</span>) + key[<span class="hljs-number">3</span>]) ^ (sum + i);<br>        z += ((y &lt;&lt; <span class="hljs-number">4</span>) + key[<span class="hljs-number">0</span>]) ^ (y + sum) ^ ((y &gt;&gt; <span class="hljs-number">5</span>) + key[<span class="hljs-number">1</span>]) ^ (sum + i);<br><br>    &#125;<br><br>    firstChunk = y;<br>    secondChunk = z;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%x\n&quot;</span>, firstChunk);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%x\n&quot;</span>, secondChunk);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">//unsigned int key1[4] = &#123;0x636c6557, 0x5f656d6f, 0x735f6f74, 0x21667463&#125;;</span><br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> key2[<span class="hljs-number">4</span>] = &#123;<span class="hljs-number">0x4445</span>, <span class="hljs-number">0x4144</span>, <span class="hljs-number">0x4245</span>, <span class="hljs-number">0x4546</span>&#125;;<br>    <span class="hljs-comment">//unsigned int first = 0xf949cc4b;</span><br>    <span class="hljs-comment">//unsigned int second = 0xeba67fd9;</span><br><span class="hljs-comment">//    unsigned int first1 = 4220738518;</span><br><span class="hljs-comment">//    unsigned int second1 = 747149351;</span><br><span class="hljs-comment">//    unsigned int first2 = 2116178774;</span><br><span class="hljs-comment">//    unsigned int second2 = 3150771052;</span><br><span class="hljs-comment">//    unsigned int first3 = 1335065768;</span><br><span class="hljs-comment">//    unsigned int second3 = 382031369;</span><br><span class="hljs-comment">//    unsigned int first4 = 4149600313;</span><br><span class="hljs-comment">//    unsigned int second4 = 4127860735;</span><br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> first1 = <span class="hljs-number">0x3e8947cb</span>;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> second1 = <span class="hljs-number">0xcc944639</span>;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> first2 = <span class="hljs-number">0x31358388</span>;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> second2 = <span class="hljs-number">0x3b0b6893</span>;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> first3 = <span class="hljs-number">0xda627361</span>;<br>    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> second3 = <span class="hljs-number">0x3b2e6427</span>;<br><span class="hljs-comment">//    EncryptTEA(first, second, key1);</span><br>    DecryptTEA(first1, second1, key2);<br>    DecryptTEA(first2, second2, key2);<br>    DecryptTEA(first3, second3, key2);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>SUSCTF{XBvfaEdQvbcrxPBh8AOcJ6gA}</p>
+<h2 id="hell-world"><a href="#hell-world" class="headerlink" title="hell_world"></a>hell_world</h2><p>将输入转化为二进制，2是0，3是1，，，这题好像在哪见过类似的，，不知道是不是原题，也没找见。</p>
+<p>动态调试推测函数功能。</p>
+<p>case 9 是将输入转为二进制</p>
+<p>case 10将数组1转为二进制</p>
+<p>case 11将数组2转为二进制，并且与数组1和输入异或后的值进行比较，相等则计数加1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">arr1 = [<span class="hljs-number">0x00000056</span>, <span class="hljs-number">0x000000DA</span>, <span class="hljs-number">0x000000CD</span>, <span class="hljs-number">0x0000003A</span>, <span class="hljs-number">0x0000007E</span>, <span class="hljs-number">0x00000086</span>, <span class="hljs-number">0x00000013</span>, <span class="hljs-number">0x000000B5</span>, <span class="hljs-number">0x0000001D</span>, <span class="hljs-number">0x0000009D</span>, <span class="hljs-number">0x000000FC</span>, <span class="hljs-number">0x00000097</span>, <span class="hljs-number">0x0000008C</span>, <span class="hljs-number">0x00000031</span>, <span class="hljs-number">0x0000006B</span>, <span class="hljs-number">0x000000C9</span>, <span class="hljs-number">0x000000FB</span>, <span class="hljs-number">0x0000001A</span>, <span class="hljs-number">0x000000E2</span>, <span class="hljs-number">0x0000002D</span>, <span class="hljs-number">0x000000DC</span>, <span class="hljs-number">0x000000D3</span>, <span class="hljs-number">0x000000F1</span>, <span class="hljs-number">0x000000F4</span>, <span class="hljs-number">0x00000036</span>, <span class="hljs-number">0x00000009</span>, <span class="hljs-number">0x00000020</span>, <span class="hljs-number">0x00000042</span>, <span class="hljs-number">0x00000004</span>, <span class="hljs-number">0x0000006A</span>, <span class="hljs-number">0x00000071</span>, <span class="hljs-number">0x00000053</span>, <span class="hljs-number">0x00000078</span>, <span class="hljs-number">0x000000A4</span>, <span class="hljs-number">0x00000097</span>, <span class="hljs-number">0x0000008F</span>, <span class="hljs-number">0x0000007A</span>, <span class="hljs-number">0x00000072</span>, <span class="hljs-number">0x00000039</span>, <span class="hljs-number">0x000000E8</span>, <span class="hljs-number">0x0000003D</span>, <span class="hljs-number">0x000000FA</span>, <span class="hljs-number">0x00000040</span>, <span class="hljs-number">0x0000003D</span>]<br>arr2 = [<span class="hljs-number">0x00000005</span>, <span class="hljs-number">0x0000008F</span>, <span class="hljs-number">0x0000009E</span>, <span class="hljs-number">0x00000079</span>, <span class="hljs-number">0x0000002A</span>, <span class="hljs-number">0x000000C0</span>, <span class="hljs-number">0x00000068</span>, <span class="hljs-number">0x00000081</span>, <span class="hljs-number">0x0000002D</span>, <span class="hljs-number">0x000000FC</span>, <span class="hljs-number">0x000000CF</span>, <span class="hljs-number">0x000000A4</span>, <span class="hljs-number">0x000000B5</span>, <span class="hljs-number">0x00000055</span>, <span class="hljs-number">0x0000005F</span>, <span class="hljs-number">0x000000E4</span>, <span class="hljs-number">0x0000009D</span>, <span class="hljs-number">0x00000023</span>, <span class="hljs-number">0x000000D6</span>, <span class="hljs-number">0x0000001D</span>, <span class="hljs-number">0x000000F1</span>, <span class="hljs-number">0x000000E7</span>, <span class="hljs-number">0x00000097</span>, <span class="hljs-number">0x00000091</span>, <span class="hljs-number">0x00000006</span>, <span class="hljs-number">0x00000024</span>, <span class="hljs-number">0x00000042</span>, <span class="hljs-number">0x00000071</span>, <span class="hljs-number">0x0000003C</span>, <span class="hljs-number">0x00000058</span>, <span class="hljs-number">0x0000005C</span>, <span class="hljs-number">0x00000030</span>, <span class="hljs-number">0x00000019</span>, <span class="hljs-number">0x000000C6</span>, <span class="hljs-number">0x000000F5</span>, <span class="hljs-number">0x000000BC</span>, <span class="hljs-number">0x0000004B</span>, <span class="hljs-number">0x00000042</span>, <span class="hljs-number">0x0000005D</span>, <span class="hljs-number">0x000000DA</span>, <span class="hljs-number">0x00000058</span>, <span class="hljs-number">0x0000009B</span>, <span class="hljs-number">0x00000024</span>, <span class="hljs-number">0x00000040</span>]<br><br>flag = <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">44</span>):<br>    flag += <span class="hljs-built_in">chr</span>(arr1[i] ^ arr2[i])<br><span class="hljs-built_in">print</span>(flag)<br></code></pre></td></tr></table></figure>
+
+<p>SUSCTF{40a339d4-f940-4fe0-b382-cabb310d2ead}</p>
+<h2 id="dddart"><a href="#dddart" class="headerlink" title="dddart"></a>dddart</h2><p>刚开始看没解，就没看，最后只有Nep的大佬解了，赛后复现。</p>
+<h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><p>misc很多解，但是就是不会做，复现一下吧。</p>
+<h2 id="Tanner"><a href="#Tanner" class="headerlink" title="Tanner"></a>Tanner</h2><p>完全不懂，后来搜索Tanner，知道是Tanner，知道是校验矩阵，知道求码字，但是没搜到怎么求码字……..</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs tap">Tanner 图转矩阵：<br>		|1<span class="hljs-number"> 1 </span>1<span class="hljs-number"> 1 </span>0<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 0 </span>0 0|<br>		|1<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 1 </span>1<span class="hljs-number"> 0 </span>0 0|<br>H = |0<span class="hljs-number"> 1 </span>0<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 1 </span>1 0|<br>		|0<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 1 </span>0<span class="hljs-number"> 1 </span>0 1|<br>		|0<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 1 </span>0<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 0 </span>1 1| <br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF%E8%B5%9B%E9%A2%98writeup/">CTF赛题writeup</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CTF/">CTF</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/14/D3CTF-2022-wp/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">D3CTF-2022-wp</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/16/%E6%B9%96%E6%B9%98%E6%9D%AF-RE-Writeup/">
+                        <span class="hidden-mobile">湖湘杯-RE-Writeup</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
